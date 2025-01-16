@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
                 <li>ค่าใช้จ่ายในการย้าย</li>
                 <li>การปรับตัวกับที่ใหม่</li>
                 <li>ระยะเวลาที่ต้องเริ่มใหม่</li>
-                <li>โอกาสในอนาคต</li>
+                <li>โอกาสในอนาคต222</li>
               </ul>
             </div>
             <button 

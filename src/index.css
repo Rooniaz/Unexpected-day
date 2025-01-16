@@ -4,3 +4,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('/web-font/srinakharinwirot-regular.woff2') format('woff2'),
+        url('/web-font/srinakharinwirot-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }

@@ -17,8 +17,8 @@ const Welcome: React.FC = () => {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-lg">
-          <h2 className="text-2xl mb-8 text-center">ยินดีต้อนรับเข้าสู่บทของความหมาย</h2>
-          <p className="text-lg mb-4 text-center">ที่จะพาคุณผ่านจุดเกิดเหตุทั้งหลาย ๆ</p>
+          {/* <h2 className="text-2xl mb-8 text-center">ยินดีต้อนรับเข้าสู่บทของความหมาย</h2>
+          <p className="text-lg mb-4 text-center">ที่จะพาคุณผ่านจุดเกิดเหตุทั้งหลาย ๆ</p> */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm mb-2">ชื่อ</label>

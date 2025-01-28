@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{html,js,jsx,ts,tsx}",  // รวมไฟล์ทุกประเภทที่ใช้ Tailwind
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        custom: ['MyCustomFont', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

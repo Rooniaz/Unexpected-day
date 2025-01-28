@@ -1,18 +1,38 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 const Warning: React.FC = () => {
   const navigate = useNavigate();
 
+
+ // กำหนดค่าการทำงานของ fade transition
+const fadeVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 ,
+    transition: { duration: 1.5, ease: "easeInOut" }, 
+
+  },
+  exit: { opacity: 0 ,
+    transition: { duration: 1.5, ease: "easeInOut" }, 
+  },
+}; 
+
   return (
-    <div
+    <motion.div
       className="min-h-screen bg-white flex flex-col items-center justify-center p-4"
-      style={{
-        backgroundImage: 'url("/animebg.gif")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeVariants}
+      // style={{
+      //   backgroundImage: 'url("/animebg.gif")',
+      //   backgroundSize: 'cover',
+      //   backgroundPosition: 'center',
         
-      }}
+      // }}
+      
     >
       <div className="w-full max-w-lg text-center">
         <p className="text-lg mb-4">เป็นไปได้ที่นี่จะเต็มไปด้วยความหมาย</p>
@@ -25,7 +45,7 @@ const Warning: React.FC = () => {
           ถัดไป →
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Warning;

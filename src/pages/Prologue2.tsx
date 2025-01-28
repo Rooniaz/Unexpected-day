@@ -5,29 +5,29 @@ const Prologue2: React.FC = () => {
   const navigate = useNavigate();
 
   const choices = [
-    { text: "งานการบ้าน", path: "/story/homework" },
-    { text: "เอาไม่ได้ป่อยมันก่อน", path: "/story/procrastinate" },
-    { text: "ย่อยเวลาจากวันที่จะงานทั้งวัน", path: "/story/timemanagement" },
-    { text: "ตีตั๋วไปสวิตชาน", path: "/story/switch" },
-    { text: "ทำนั่งอยู่ส่วนหนาแหมงไปกลับ", path: "/story/routine" }
+    { text: "เรียน", path: "/story/homework" },
+    { text: "ทำงาน", path: "/story/procrastinate" },
+    { text: "กินข้าว", path: "/story/timemanagement" },
+    { text: "นั่งเล่น", path: "/story/switch" },
+    // { text: "ทำนั่งอยู่ส่วนหนาแหมงไปกลับ", path: "/story/routine" }
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 font-custom">
       <div className="w-full max-w-lg text-center">
-        <h2 className="text-2xl mb-4">ยินดีนำท่านเข้าสู่ทีนี่</h2>
+        <h2 className="text-2xl mb-4">คุณกำลังทำอะไรอยู่</h2>
         <div className="space-y-4">
           {choices.map((choice, index) => (
             <button 
               key={index}
               onClick={() => navigate(choice.path)}
-              className="w-full px-6 py-3 bg-gray-700 text-white rounded hover:bg-gray-600"
+              className="w-full px-6 py-3 bg-gray-700 text-white rounded-3xl hover:bg-gray-600 font-custom "
             >
               {choice.text}
             </button>
           ))}
         </div>
-        <div className="mt-16 text-6xl font-bold">
+        <div className="mt-16 text-6xl font-bold font-custom">
           12:12
         </div>
       </div>

@@ -1,11 +1,30 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 const Preface: React.FC = () => {
   const navigate = useNavigate();
 
+  // กำหนดค่าการทำงานของ fade transition
+const fadeVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 ,
+    transition: { duration: 1.5, ease: "easeInOut" }, 
+
+  },
+  exit: { opacity: 0 ,
+    transition: { duration: 1.5, ease: "easeInOut" }, 
+  },
+}; 
+
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center text-center p-4">
+    <motion.div
+    className="min-h-screen bg-white flex flex-col items-center justify-center text-center p-4"
+    initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeVariants}>
       <div className="w-full max-w-lg">
         <div className="bg-white relative">
           <div className="absolute top-0 left-0 w-16 h-20 bg-black transform -skew-x-12"></div>
@@ -25,7 +44,7 @@ const Preface: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

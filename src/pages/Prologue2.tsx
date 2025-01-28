@@ -6,6 +6,11 @@ const Prologue2: React.FC = () => {
 
   const choices = [
     { text: "เรียน", path: "/story/homework" },
+    { text: "ทำงาน", path: "/story/work" },
+    { text: "กินข้าว", path: "/story/canteen" },
+    { text: "นั่งเฉย ๆ", path: "/story/park" },
+    // { text: "ทำนั่งอยู่ส่วนหนาแหมงไปกลับ", path: "/story/routine" }
+    { text: "เรียน", path: "/story/homework" },
     { text: "ทำงาน", path: "/story/procrastinate" },
     { text: "กินข้าว", path: "/story/timemanagement" },
     { text: "นั่งเล่น", path: "/story/switch" },
@@ -15,6 +20,7 @@ const Prologue2: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 font-custom">
       <div className="w-full max-w-lg text-center">
+        <h2 className="text-2xl mb-4">คุณกำลังทำอะไรอยู่</h2>
         <h2 className="text-2xl mb-4">คุณกำลังทำอะไรอยู่</h2>
         <div className="space-y-4">
           {choices.map((choice, index) => (

@@ -1,0 +1,15 @@
+{
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "buildCommand": "bun run build",
+          "installCommand": "bun install",
+          "outputDirectory": "build",
+          "devCommand": "bun run dev"
+        }
+      }
+    ]
+  }
+  

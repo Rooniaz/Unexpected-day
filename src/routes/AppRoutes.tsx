@@ -14,6 +14,8 @@ import StoryCanteen2 from "../pages/stories2/StoryCanteen2";
 import StoryHomework2 from "../pages/stories2/StoryHomework2";
 import StoryWork2 from "../pages/stories2/StoryWork2";
 import StoryPark2 from "../pages/stories2/StoryPark2";
+import Explanation from "../pages/Explanation";
+
 
 const AppRoutes: React.FC = () => {
   return (
@@ -32,6 +34,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/story/work2" element={<StoryWork2 />} />
       <Route path="/story/park2" element={<StoryPark2 />} />
       <Route path="/story/canteen2" element={<StoryCanteen2 />} />
+      <Route path="/Explanation" element={<Explanation />} />
     </Routes>
   );
 };

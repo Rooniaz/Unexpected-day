@@ -10,11 +10,11 @@ const Warning: React.FC = () => {
       className="min-h-screen bg-white flex flex-col items-center justify-center p-4"
     >
       <div className="w-full max-w-lg text-center">
-        <p className="text-lg font-custom mb-4">เป็นไปได้ที่นี่จะเต็มไปด้วยความหมาย</p>
-        <p className="text-lg font-custom mb-4">ไม่อยากจะบอกความหมายของการนำไปของคุณก่อนนำเข้า</p>
-        <p className="text-lg font-custom mb-8">หากคุณมีเวลาพอที่จะเลือกสิ่งต่างๆ ในช่วงนี้</p>
+        <p className="text-lg font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
+        <p className="text-lg font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
+        <p className="text-lg font-custom mb-8">ขอให้ทุกคนได้รับทั้งความสุขและสาระความรู้จากการดำเนินเรื่อง ณ ที่นี้ด้วยนะคะ :)</p>
         <button 
-          onClick={() => navigate('/welcome')}
+          onClick={() => navigate('/Explanation')}
           className="mt-8 px-6 py-2 bg-black font-custom text-white rounded hover:bg-gray-800"
         >
           ถัดไป {'>>'}

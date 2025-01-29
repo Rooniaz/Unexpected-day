@@ -11,7 +11,8 @@ const Welcome: React.FC = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      navigate('/prologue2')
+      console.log("formdata:", formData);
+      navigate('/prologue2',);
     };
   
     return (

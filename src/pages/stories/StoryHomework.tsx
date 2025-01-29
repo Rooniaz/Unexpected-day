@@ -19,7 +19,7 @@ const StoryHomework: React.FC = () => {
         {/* Dialog text container */}
         <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
           <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <p className="text-lg text-white text-center">
+            <p className="text-lg text-white font-custom text-center">
               เจน : แกพรุ่งนี้วันหยุดไปเที่ยวที่นี่กันดีมั้ย คิดว่าแกน่าจะชอบนะ class
             </p>
           </div>

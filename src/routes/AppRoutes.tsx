@@ -15,7 +15,11 @@ import StoryHomework2 from "../pages/stories2/StoryHomework2";
 import StoryWork2 from "../pages/stories2/StoryWork2";
 import StoryPark2 from "../pages/stories2/StoryPark2";
 import Explanation from "../pages/Explanation";
-
+import BeFast from "../pages/BEFAST/BeFast";
+import DreamInput from "../pages/BeforeStory/DreamInput"; 
+import Prechapter from "../pages/BeforeStory/prechapter";
+import Prechapter1 from "../pages/BeforeStory/Prechapter1";
+import Prechapter2 from "../pages/BeforeStory/Prechapter2";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -35,6 +39,11 @@ const AppRoutes: React.FC = () => {
       <Route path="/story/park2" element={<StoryPark2 />} />
       <Route path="/story/canteen2" element={<StoryCanteen2 />} />
       <Route path="/Explanation" element={<Explanation />} />
+      <Route path="/BeFast" element={<BeFast />} />
+      <Route path="/DreamInput" element={<DreamInput />} />
+      <Route path="/Prechapter" element={<Prechapter />} />
+      <Route path="/Prechapter1" element={<Prechapter1 />} />
+      <Route path="/Prechapter2" element={<Prechapter2 />} />
     </Routes>
   );
 };

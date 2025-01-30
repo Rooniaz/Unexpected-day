@@ -12,7 +12,7 @@ const Welcome: React.FC = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log("formdata:", formData);
-      navigate('/prologue2',);
+      navigate('/Prechapter',);
     };
   
     return (

@@ -33,3 +33,8 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
     </motion.p>
     );
 };
+//import { AnimatedText } from "../../components/AnimatedText";  // นำเข้าคอมโพเนนต์ AnimatedText
+//<AnimatedText 
+//text="เจน : แกพรุ่งนี้วันหยุดไปเที่ยวที่นี่กันดีมั้ย คิดว่าแกน่าจะชอบนะ canteen" 
+//delay={50}  // ปรับ delay ได้ตามต้องการ
+///>

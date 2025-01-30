@@ -14,3 +14,10 @@ return {
     },
 };
 };
+//import { fadeInOut } from "../components/fadeInOut"; // นำเข้า fadeInOut
+//กำหนด motion.img  หรือต่างๆ  motion.div
+//initial="initial"
+//animate="animate"
+//exit="exit"
+//variants={fadeInOut(2, "easeInOut", 0)}
+//transition={{ duration: 2 }} // ระยะเวลาในการเฟดภาพพื้นหลัง

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
   
   const StoryCanteen2: React.FC = () => {
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
         {/* Dialog text container */}
         <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
           <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <p className="text-lg text-white text-center">
+            <p className="text-lg text-white font-custom text-center">
               เจน : แกพรุ่งนี้วันหยุดไปเที่ยวที่นี่กันดีมั้ย คิดว่าแกน่าจะชอบนะ canteen
             </p>
           </div>
@@ -28,9 +28,9 @@ import { useNavigate } from "react-router-dom";
         {/* Continue Button - Bottom right */}
         <div 
           onClick={() => navigate('/epilogue')}
-          className="absolute bottom-4 right-4 text-black/80 text-2xl cursor-pointer hover:text-black/100 z-20"
+          className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer font-custom hover:text-white/100 z-20"
         >
-          กดเพื่อไปต่อ {'>>'} 
+          {'>>'} 
         </div>
 
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { fadeInOut } from "../../components/fadeInOut";
+// import { fadeInOut } from "../../components/fadeInOut";
 
 const texts = [
     "ฉันกับเพื่อนคุยเรื่องราวอนาคต และ สิ่งต่างๆที่อยากจะทำ",
@@ -24,13 +24,13 @@ const Prechapter2: React.FC = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-black flex justify-center items-center">
+        <div className="w-full min-h-screen bg-white flex justify-center items-center">
         <motion.div 
             className="relative w-[390px] h-[844px] overflow-hidden"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={fadeInOut(4, "easeInOut", 0)}
+            // initial="initial"
+            // animate="animate"
+            // exit="exit"
+            // variants={fadeInOut(2, "easeInOut", 0)}
             onClick={nextText} // แตะหน้าจอเพื่อเปลี่ยนข้อความ
         >
             {/* รูปพื้นหลัง (GIF หรือภาพนิ่ง) */}

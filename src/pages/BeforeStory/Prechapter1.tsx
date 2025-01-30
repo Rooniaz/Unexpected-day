@@ -23,13 +23,13 @@ const Prechapter1: React.FC = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-black flex justify-center items-center">
+        <div className="w-full min-h-screen bg-white flex justify-center items-center">
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                variants={fadeInOut(4, "easeInOut", 0)}
+                variants={fadeInOut(2, "easeInOut", 0)}
                 onClick={nextText} // แตะหน้าจอเพื่อเปลี่ยนข้อความ
             >
                 {/* รูปภาพพื้นหลัง (GIF) */}

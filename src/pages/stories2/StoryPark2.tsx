@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 
         {/* Continue Button - Bottom right */}
         <div 
-          onClick={() => navigate('/epilogue')}
+          onClick={() => navigate('/StoryPark3')}
           className="absolute bottom-4 right-4 text-black/80 text-2xl cursor-pointer hover:text-black/100 z-20"
         >
           กดเพื่อไปต่อ {'>>'} 

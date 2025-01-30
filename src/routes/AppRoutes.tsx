@@ -17,9 +17,13 @@ import StoryPark2 from "../pages/stories2/StoryPark2";
 import Explanation from "../pages/Explanation";
 import BeFast from "../pages/BEFAST/BeFast";
 import DreamInput from "../pages/BeforeStory/DreamInput"; 
-import Prechapter from "../pages/BeforeStory/prechapter";
+import Prechapter from "../pages/BeforeStory/Prechapter";
 import Prechapter1 from "../pages/BeforeStory/Prechapter1";
 import Prechapter2 from "../pages/BeforeStory/Prechapter2";
+import StoryPark3 from "../pages/stories3/StoryPakr3";
+import StoryCanteen3 from "../pages/stories3/storycanteen3";
+import StoryHomework3 from "../pages/stories3/StoryHomework3";
+import StoryWork3 from "../pages/stories3/StoryWork3";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -44,6 +48,12 @@ const AppRoutes: React.FC = () => {
       <Route path="/Prechapter" element={<Prechapter />} />
       <Route path="/Prechapter1" element={<Prechapter1 />} />
       <Route path="/Prechapter2" element={<Prechapter2 />} />
+      <Route path="/StoryPark3" element={<StoryPark3 />} />
+      <Route path="/StoryCanteen3" element={<StoryCanteen3 />} />
+      <Route path="/StoryHomework3" element={<StoryHomework3 />} />
+      <Route path="/StoryWork3" element={<StoryWork3 />} />
+
+
     </Routes>
   );
 };

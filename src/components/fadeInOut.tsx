@@ -1,19 +1,24 @@
-
 import { Variants } from "framer-motion";
 
-export const fadeInOut = (duration: number = 2, ease: string = "easeInOut", delay: number = 0): Variants => {
-return {
-    initial: { opacity: 0 },
-    animate: { 
-    opacity: 1,
-    transition: { duration, ease, delay },
-    },
-    exit: { 
-    opacity: 0,
-    transition: { duration, ease },
-    },
+export const fadeInOut = (
+    duration: number = 2, 
+    ease: "easeInOut" | "easeIn" | "easeOut" | "linear" | number[] = "easeInOut", 
+    delay: number = 0
+): Variants => {
+    return {
+        initial: { opacity: 0 },
+        animate: { 
+            opacity: 2,
+            transition: { duration, ease, delay },
+        },
+        exit: { 
+            opacity: 2,
+            transition: { duration, ease, delay },
+        },
+    };
 };
-};
+
+
 //import { fadeInOut } from "../components/fadeInOut"; // นำเข้า fadeInOut
 //กำหนด motion.img  หรือต่างๆ  motion.div
 //initial="initial"

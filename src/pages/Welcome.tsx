@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
       age: ''
     });
   
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault();
       console.log("formdata:", formData);
       navigate('/Prechapter',);

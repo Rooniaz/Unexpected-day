@@ -47,6 +47,7 @@ import { AnimatedText } from "../../components/AnimatedText";
        animate="animate"
        exit="exit"
        variants={fadeInOut(2, "easeInOut", 0)}
+       onClick={nextText}
      >
        {/* Background Image */}
        <img
@@ -64,7 +65,6 @@ import { AnimatedText } from "../../components/AnimatedText";
 
        {/* Continue Button - Bottom right */}
        <div
-         onClick={nextText}
          className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20"
        >
          {'>>'}

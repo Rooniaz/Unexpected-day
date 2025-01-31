@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
-const StoryHomework: React.FC = () => {
+const StoryPark3: React.FC = () => {
   const navigate = useNavigate();
 
   // ดึงชื่อจาก localStorage ถ้ามีค่า
@@ -12,11 +12,8 @@ const StoryHomework: React.FC = () => {
 
   // ข้อความที่ต้องการแสดงในลำดับ (แทนที่ {ชื่อที่กรอก} ด้วยค่าจริง)
   const texts = [
-    `เจน : ${storedName} พรุ่งนี้วันหยุดไปเที่ยวกันไหมคิดว่าแกน่าจะชอบนะ`,
-    `${storedName} : ไม่อ่ะ ช่วงนี้ยุ่งๆอยู่ด้วย`,
-    "เจน : ไปเหอะ นานๆทีจะได้ไปด้วยกันนะ",
-    " . . . . . . . . . . . .",
-    "ฉันจึงกลับมาคิดเรื่องนี้หลังจากจบบทสนทนาลง"
+    `เจน : ${storedName}!!!`,
+    `เจน : ${storedName}!!!*&$`,
   ];
 
   // ตัวแปร state สำหรับเก็บตำแหน่งข้อความที่แสดง
@@ -27,12 +24,15 @@ const StoryHomework: React.FC = () => {
     setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
   };
 
-  // ใช้ useEffect สำหรับการเปลี่ยนหน้าเมื่อ index ถึงข้อความสุดท้าย
+  // ใช้ useEffect สำหรับการเปลี่ยนข้อความทุกๆ 3 วินาที
   useEffect(() => {
-    if (index === texts.length - 1) {
-      navigate('/story/homework2'); // นำไปหน้าอื่นหลังจากแสดงข้อความสุดท้าย
-    }
-  }, [index, navigate]); // useEffect นี้จะถูกเรียกเมื่อ index เปลี่ยนแปลง
+    const interval = setInterval(() => {
+      nextText(); // เปลี่ยนข้อความทุก 3 วินาที
+    }, 3000); // เปลี่ยนข้อความทุก 3 วินาที
+
+    // ล้าง interval เมื่อ component ถูก unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
@@ -43,13 +43,14 @@ const StoryHomework: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={nextText} // ทำให้ทั้งหน้าเป็นคลิกเพื่อเปลี่ยนข้อความ
       >
-        {/* Background Image */}
-        <img
-          src="/gif/15-17/class_15-17.gif"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover"
+        {/* Background Video */}
+        <video
+          src="/video/blurPark.mp4"
+          autoPlay
+          muted
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          onEnded={() => navigate('/epilogue')} // เมื่อวิดีโอจบ ให้ไปหน้าถัดไป
         />
 
         {/* Dialog text container */}
@@ -58,14 +59,8 @@ const StoryHomework: React.FC = () => {
             <AnimatedText key={index} text={texts[index]} />
           </div>
         </div>
-
-        {/* Continue Button - Bottom right */}
-        <div className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20">
-          {'>>'}
-        </div>
       </motion.div>
     </div>
   );
 };
-
-export default StoryHomework;
+export default StoryPark3;

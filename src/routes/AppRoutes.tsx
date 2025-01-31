@@ -19,7 +19,7 @@ import DreamInput from "../pages/BeforeStory/DreamInput";
 import Prechapter from "../pages/BeforeStory/Prechapter";
 import Prechapter1 from "../pages/BeforeStory/Prechapter1";
 import Prechapter2 from "../pages/BeforeStory/Prechapter2";
-import StoryPark3 from "../pages/stories3/StoryPakr3";
+import StoryPark3 from "../pages/stories3/StoryPark3";
 import StoryCanteen3 from "../pages/stories3/StoryCanteen3";
 import StoryHomework3 from "../pages/stories3/StoryHomework3";
 import StoryWork3 from "../pages/stories3/StoryWork3";

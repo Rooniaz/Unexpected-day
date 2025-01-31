@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
   
-  const StoryPark: React.FC = () => {
- const navigate = useNavigate();
+const StoryPark: React.FC = () => {
+  const navigate = useNavigate();
 
   // ดึงชื่อจาก localStorage ถ้ามีค่า
   const storedName = localStorage.getItem("userName") || "???";
@@ -43,6 +43,7 @@ import { AnimatedText } from "../../components/AnimatedText";
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
+        onClick={nextText} // ทำให้ทั้งหน้าเป็นคลิกเพื่อเปลี่ยนข้อความ
       >
         {/* Background Image */}
         <img
@@ -59,16 +60,12 @@ import { AnimatedText } from "../../components/AnimatedText";
         </div>
 
         {/* Continue Button - Bottom right */}
-        <div
-          onClick={nextText}
-          className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20"
-        >
+        <div className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20">
           {'>>'}
         </div>
       </motion.div>
     </div>
   );
 };
-
-    
-  export default StoryPark;
+  
+export default StoryPark;

@@ -34,7 +34,7 @@ const Prechapter1: React.FC = () => {
             >
                 {/* รูปภาพพื้นหลัง (GIF) */}
                 <img 
-                    src="/gif/canteen_15-17.gif" 
+                    src="/gif/3-6.gif" 
                     alt="Background" 
                     className="absolute inset-0 w-full h-full object-cover"
                 />

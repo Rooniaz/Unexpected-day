@@ -15,7 +15,8 @@ const navigate = useNavigate();
             autoPlay 
             loop 
             muted 
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            onEnded={() => navigate('/epilogue')} // เมื่อวิดีโอจบ ให้ไปหน้าถัดไป
             />
 
             {/* Dialog text container */}
@@ -26,15 +27,6 @@ const navigate = useNavigate();
                 </p>
             </div>
             </div>
-
-            {/* Continue Button - Bottom right */}
-            <div 
-            onClick={() => navigate('/epilogue')}
-            className="absolute bottom-4 right-4 text-black/80 text-2xl cursor-pointer hover:text-black/100 z-20"
-            >
-            กดเพื่อไปต่อ {'>>'}
-            </div>
-
         </div>
         </div>
     );

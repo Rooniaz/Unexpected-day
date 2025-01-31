@@ -7,10 +7,10 @@ const Prologue2: React.FC = () => {
   const navigate = useNavigate();
 
   const choices = [
-    { text: "เรียน", path: "/story/homework" },
-    { text: "ทำงาน", path: "/story/work" },
-    { text: "กินข้าว", path: "/story/canteen" },
-    { text: "นั่งเล่น", path: "/story/park" },
+    { text: "เรียน", path: "/Place/homework" },
+    { text: "ทำงาน", path: "/Place/work" },
+    { text: "กินข้าว", path: "/Place/canteen" },
+    { text: "นั่งเล่น", path: "/Place/park" },
   ];
 
   return (

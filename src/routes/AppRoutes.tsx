@@ -7,7 +7,6 @@ import Welcome from "../pages/Welcome";
 import StoryHomework from "../pages/stories/StoryHomework";
 import StoryPark from "../pages/stories/StoryPark";
 import StoryCanteen from "../pages/stories/StoryCanteen";
-import StoryRoutine from "../pages/stories/StoryRoutine";
 import Epilogue from "../pages/Epilogue";
 import StoryWork from "../pages/stories/StoryWork";
 import StoryCanteen2 from "../pages/stories2/StoryCanteen2";
@@ -25,6 +24,12 @@ import StoryCanteen3 from "../pages/stories3/StoryCanteen3";
 import StoryHomework3 from "../pages/stories3/StoryHomework3";
 import StoryWork3 from "../pages/stories3/StoryWork3";
 
+
+import PlacePark from "../pages/FirstPlace/PlacePark";
+import PlaceHomework from "../pages/FirstPlace/PlaceHomework";
+import PlaceWork from "../pages/FirstPlace/PlaceWork";
+import PlaceCanteen from "../pages/FirstPlace/PlaceCanteen";
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
@@ -36,7 +41,6 @@ const AppRoutes: React.FC = () => {
       <Route path="/story/work" element={<StoryWork />} />
       <Route path="/story/park" element={<StoryPark />} />
       <Route path="/story/canteen" element={<StoryCanteen />} />
-      <Route path="/story/routine" element={<StoryRoutine />} />
       <Route path="/epilogue" element={<Epilogue />} />
       <Route path="/story/homework2" element={<StoryHomework2 />} />
       <Route path="/story/work2" element={<StoryWork2 />} />
@@ -52,6 +56,11 @@ const AppRoutes: React.FC = () => {
       <Route path="/StoryCanteen3" element={<StoryCanteen3 />} />
       <Route path="/StoryHomework3" element={<StoryHomework3 />} />
       <Route path="/StoryWork3" element={<StoryWork3 />} />
+      
+      <Route path="/Place/homework" element={<PlaceHomework />} />
+      <Route path="/Place/work" element={<PlaceWork />} />
+      <Route path="/Place/park" element={<PlacePark />} />
+      <Route path="/Place/canteen" element={<PlaceCanteen />} />
 
 
     </Routes>

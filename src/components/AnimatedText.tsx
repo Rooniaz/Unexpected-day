@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 interface AnimatedTextProps {
     text: string;
+    onComplete?: () => void; // เพิ่ม prop นี้
 }
 
 export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {

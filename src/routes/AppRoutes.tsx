@@ -23,6 +23,8 @@ import StoryPark3 from "../pages/stories3/StoryPark3";
 import StoryCanteen3 from "../pages/stories3/StoryCanteen3";
 import StoryHomework3 from "../pages/stories3/StoryHomework3";
 import StoryWork3 from "../pages/stories3/StoryWork3";
+import AfterBefast from "../pages/BEFAST/AfterBefast";
+import TimeToCall from "../pages/BEFAST/TimeToCall";
 
 
 import PlacePark from "../pages/FirstPlace/PlacePark";
@@ -71,7 +73,8 @@ const AppRoutes: React.FC = () => {
       <Route path="/story/hospital2" element={<StoryHospital2 />} />
       <Route path="/Braindetail" element={<BrainDetail />} />
       <Route path="/FriendBrain" element={<Friendbrain />} />
-
+      <Route path="/AfterBefast" element={<AfterBefast />} />
+      <Route path="/TimeToCall" element={<TimeToCall />} />
     </Routes>
   );
 };

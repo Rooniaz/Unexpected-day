@@ -42,7 +42,7 @@ const Hospital2: React.FC = () => {
 
   const handleClick = () => {
     if (isClickable && index === texts.length - 1) {
-      navigate("/nextPage"); // เปลี่ยนหน้าไปยังหน้าถัดไป (แทนที่ "/nextPage" ด้วย URL ที่คุณต้องการ)
+      navigate("/Braindetail"); // เปลี่ยนหน้าไปยังหน้าถัดไป (แทนที่ "/nextPage" ด้วย URL ที่คุณต้องการ)
     }
   };
 

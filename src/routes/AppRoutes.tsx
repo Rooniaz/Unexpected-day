@@ -32,6 +32,8 @@ import PlaceCanteen from "../pages/FirstPlace/PlaceCanteen";
 
 import StoryHospital from "../pages/stories4/Hospital1";
 import StoryHospital2 from "../pages/stories4/Hospital2";
+import BrainDetail from "../pages/BEFAST/Braindetail";
+import Friendbrain from "../pages/BEFAST/FriendBrain";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -67,6 +69,8 @@ const AppRoutes: React.FC = () => {
 
       <Route path="/story/hospital" element={<StoryHospital />} />
       <Route path="/story/hospital2" element={<StoryHospital2 />} />
+      <Route path="/Braindetail" element={<BrainDetail />} />
+      <Route path="/FriendBrain" element={<Friendbrain />} />
 
     </Routes>
   );

@@ -30,6 +30,9 @@ import PlaceHomework from "../pages/FirstPlace/PlaceHomework";
 import PlaceWork from "../pages/FirstPlace/PlaceWork";
 import PlaceCanteen from "../pages/FirstPlace/PlaceCanteen";
 
+import StoryHospital from "../pages/stories4/Hospital1";
+import StoryHospital2 from "../pages/stories4/Hospital2";
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
@@ -62,6 +65,8 @@ const AppRoutes: React.FC = () => {
       <Route path="/Place/park" element={<PlacePark />} />
       <Route path="/Place/canteen" element={<PlaceCanteen />} />
 
+      <Route path="/story/hospital" element={<StoryHospital />} />
+      <Route path="/story/hospital2" element={<StoryHospital2 />} />
 
     </Routes>
   );

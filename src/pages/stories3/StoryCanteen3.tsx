@@ -1,53 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // ใช้สำหรับการเปลี่ยนหน้า
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const StoryCanteen3: React.FC = () => {
-  // ดึงชื่อจาก localStorage ถ้ามีค่า
+  const navigate = useNavigate(); // สร้าง instance ของ useNavigate
   const storedName = localStorage.getItem("userName") || "???";
 
-  // ข้อความที่ต้องการแสดงในลำดับ (แทนที่ {ชื่อที่กรอก} ด้วยค่าจริง)
   const texts = [
     `เจน : ${storedName}!!!`,
     `เจน : ${storedName}!!!*&$`,
   ];
 
-  // ตัวแปร state สำหรับเก็บตำแหน่งข้อความที่แสดง
   const [index, setIndex] = useState(0);
+  const [bgColor, setBgColor] = useState("transparent");
 
-  // ฟังก์ชันเปลี่ยนข้อความ
   const nextText = () => {
     setIndex((prevIndex) => {
       if (prevIndex < texts.length - 1) {
         return prevIndex + 1;
       } else {
-        // หยุดเมื่อถึงข้อความสุดท้าย
         return prevIndex;
       }
     });
   };
 
-  // ฟังก์ชันที่ใช้เมื่อวีดีโอจบ
-  const handleVideoEnd = () => {
-    nextText(); // เปลี่ยนข้อความเมื่อวีดีโอจบ
-  };
+  const handlePicEnd = useCallback(() => {
+    setBgColor("black"); // เปลี่ยนพื้นหลังเป็นสีดำ
+    nextText(); // เปลี่ยนข้อความ
 
-  // ใช้ useEffect สำหรับการเปลี่ยนข้อความทุกๆ 3 วินาที
+    // ตั้งเวลา 1 วินาทีหลังจากนั้นให้เปลี่ยนหน้า
+    setTimeout(() => {
+      navigate("/story/hospital"); // เปลี่ยนหน้าไปยังหน้าถัดไป (แทนที่ "/nextPage" ด้วย URL ที่คุณต้องการ)
+    }, 2000);
+  }, [navigate]);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      nextText(); // เปลี่ยนข้อความทุก 3 วินาที
+      nextText();
     }, 3000);
 
-    // ล้าง interval เมื่อ component ถูก unmount
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-black flex justify-center items-center">
+    <div className="w-full min-h-screen flex justify-center items-center bg-black">
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
+        style={{ backgroundColor: bgColor }}
         initial="initial"
         animate="animate"
         exit="exit"
@@ -58,7 +60,7 @@ const StoryCanteen3: React.FC = () => {
           src="/video/blurCanteen.mp4"
           autoPlay
           muted
-          onEnded={handleVideoEnd} // เพิ่ม event handler เมื่อวีดีโอจบ
+          onEnded={handlePicEnd}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 

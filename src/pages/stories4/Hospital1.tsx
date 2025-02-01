@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // ใช้สำหรับการเปลี่ยนหน้า
+import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
-const StoryPark3: React.FC = () => {
- const navigate = useNavigate(); // สร้าง instance ของ useNavigate
+const Hospital1: React.FC = () => {
+  const navigate = useNavigate();
   const storedName = localStorage.getItem("userName") || "???";
 
   const texts = [
-    `เจน : ${storedName}!!!`,
-    `เจน : ${storedName}!!!*&$`,
+    `${storedName} : นี่เราร่างกายรู้สึกไม่ดีเลย`,
+    `${storedName} : มันเกิดอะไรขึ้น ทำไมเราถึงเป็นแบบนี้`,
   ];
 
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
+  const [isClickable, setIsClickable] = useState(false); // State เพื่อควบคุมการคลิก
 
   const nextText = () => {
     setIndex((prevIndex) => {
@@ -26,15 +27,21 @@ const StoryPark3: React.FC = () => {
     });
   };
 
-  const handlePicEnd = useCallback(() => {
+  const handleVideoEnd = useCallback(() => {
     setBgColor("black"); // เปลี่ยนพื้นหลังเป็นสีดำ
     nextText(); // เปลี่ยนข้อความ
 
-    // ตั้งเวลา 1 วินาทีหลังจากนั้นให้เปลี่ยนหน้า
+    // ตั้งเวลา 1 วินาทีหลังจากนั้นให้เปิดให้คลิก
     setTimeout(() => {
-      navigate("/story/hospital"); // เปลี่ยนหน้าไปยังหน้าถัดไป (แทนที่ "/nextPage" ด้วย URL ที่คุณต้องการ)
-    }, 2000);
-  }, [navigate]);
+      setIsClickable(true); // เปิดให้คลิกได้หลังจากข้อความแสดงครบ
+    }, 2000); // รอ 1 วินาทีหลังจากแสดงข้อความ
+  }, []);
+
+  const handleClick = () => {
+    if (isClickable && index === texts.length - 1) {
+      navigate("/story/hospital2"); // เปลี่ยนหน้าไปยังหน้าถัดไป (แทนที่ "/nextPage" ด้วย URL ที่คุณต้องการ)
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,7 +52,7 @@ const StoryPark3: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black">
+    <div className="w-full min-h-screen flex justify-center items-center">
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
@@ -54,13 +61,14 @@ const StoryPark3: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
+        onClick={handleClick} // คลิกที่ container นี้เพื่อเปลี่ยนหน้า
       >
         {/* Background Video */}
         <video
-          src="/video/blurPark.mp4"
+          src="/gif/34-36/34-wakeup.mp4"
           autoPlay
           muted
-          onEnded={handlePicEnd}
+          onEnded={handleVideoEnd}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 
@@ -74,4 +82,5 @@ const StoryPark3: React.FC = () => {
     </div>
   );
 };
-export default StoryPark3;
+
+export default Hospital1;

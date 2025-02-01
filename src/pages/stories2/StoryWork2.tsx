@@ -5,10 +5,11 @@ import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
   
   const StoryCanteen: React.FC = () => {
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // ดึงชื่อจาก localStorage ถ้ามีค่า
   const storedName = localStorage.getItem("userName") || "???";
+  
 
   // ข้อความที่ต้องการแสดงในลำดับ (แทนที่ {ชื่อที่กรอก} ด้วยค่าจริง)
   const texts = [

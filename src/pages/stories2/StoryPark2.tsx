@@ -5,7 +5,7 @@ import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
   
   const StoryCanteen: React.FC = () => {
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // ดึงชื่อจาก localStorage ถ้ามีค่า
   const storedName = localStorage.getItem("userName") || "???";

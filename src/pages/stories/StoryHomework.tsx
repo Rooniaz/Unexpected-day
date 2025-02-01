@@ -43,6 +43,7 @@ const StoryHomework: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
+        onClick={nextText} // ทำให้ทั้งหน้าเป็นคลิกเพื่อเปลี่ยนข้อความ
       >
         {/* Background Image */}
         <img
@@ -59,10 +60,7 @@ const StoryHomework: React.FC = () => {
         </div>
 
         {/* Continue Button - Bottom right */}
-        <div
-          onClick={nextText}
-          className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20"
-        >
+        <div className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20">
           {'>>'}
         </div>
       </motion.div>

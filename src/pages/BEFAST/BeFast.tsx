@@ -5,7 +5,7 @@ const BeFast: React.FC = () => {
   const [showFirstDialog, setShowFirstDialog] = useState(false);
   const [showSecondDialog, setShowSecondDialog] = useState(false);
   const [popupMessage, setPopupMessage] = useState<{ text: string, image: string, description: string }>({ text: "", image: "", description: "" });
-  const [completed, setCompleted] = useState(false);
+  // const [completed, setCompleted] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState(0);
   const [showButton, setShowButton] = useState(false);
@@ -63,7 +63,7 @@ const BeFast: React.FC = () => {
 
   React.useEffect(() => {
     if (inputs.every((input) => input !== "")) {
-      setCompleted(true);
+      // setCompleted(true);
       setTimeout(() => {
         if (!showFirstDialog) {
           setShowSecondDialog(true);
@@ -87,7 +87,7 @@ const BeFast: React.FC = () => {
     setSliderValue(newValue);
 
     if (newValue >= maxSliderValue) {
-      setCompleted(true);
+      // setCompleted(true);
     }
   };
 

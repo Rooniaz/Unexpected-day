@@ -19,7 +19,7 @@ import DreamInput from "../pages/BeforeStory/DreamInput";
 import Prechapter from "../pages/BeforeStory/Prechapter";
 import Prechapter1 from "../pages/BeforeStory/Prechapter1";
 import Prechapter2 from "../pages/BeforeStory/Prechapter2";
-import StoryPark3 from "../pages/stories3/StoryPakr3";
+import StoryPark3 from "../pages/stories3/StoryPark3";
 import StoryCanteen3 from "../pages/stories3/StoryCanteen3";
 import StoryHomework3 from "../pages/stories3/StoryHomework3";
 import StoryWork3 from "../pages/stories3/StoryWork3";
@@ -29,6 +29,11 @@ import PlacePark from "../pages/FirstPlace/PlacePark";
 import PlaceHomework from "../pages/FirstPlace/PlaceHomework";
 import PlaceWork from "../pages/FirstPlace/PlaceWork";
 import PlaceCanteen from "../pages/FirstPlace/PlaceCanteen";
+
+import StoryHospital from "../pages/stories4/Hospital1";
+import StoryHospital2 from "../pages/stories4/Hospital2";
+import BrainDetail from "../pages/BEFAST/Braindetail";
+import Friendbrain from "../pages/BEFAST/FriendBrain";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -62,6 +67,10 @@ const AppRoutes: React.FC = () => {
       <Route path="/Place/park" element={<PlacePark />} />
       <Route path="/Place/canteen" element={<PlaceCanteen />} />
 
+      <Route path="/story/hospital" element={<StoryHospital />} />
+      <Route path="/story/hospital2" element={<StoryHospital2 />} />
+      <Route path="/Braindetail" element={<BrainDetail />} />
+      <Route path="/FriendBrain" element={<Friendbrain />} />
 
     </Routes>
   );

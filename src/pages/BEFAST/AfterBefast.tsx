@@ -6,7 +6,7 @@ const AfterBefast = () => {
   const [sliderValue, setSliderValue] = useState(0);
   const [showMessage, setShowMessage] = useState(false); // สถานะการแสดงข้อความ
   const maxSliderValue = 100;
-  const trackRef = useRef(null);
+  const trackRef = useRef<HTMLDivElement | null>(null); // กำหนดประเภทของ trackRef เป็น HTMLDivElement
   const [trackWidth, setTrackWidth] = useState(0);
   const navigate = useNavigate(); // ใช้ useNavigate เพื่อเปลี่ยนหน้า
 
@@ -14,7 +14,7 @@ const AfterBefast = () => {
     if (trackRef.current) {
       setTrackWidth(trackRef.current.offsetWidth);
     }
-  }, []);
+  }, [trackRef.current]); // ใช้ trackRef.current เป็น dependency เพื่ออัพเดตค่าเมื่อ DOM เปลี่ยนแปลง
 
   // ใช้ useEffect เพื่อตั้งเวลาเมื่อ sliderValue ถึง maxSliderValue
   useEffect(() => {
@@ -89,7 +89,6 @@ const AfterBefast = () => {
           />
         )}
 
-        {/* ข้อความ Time to Call 1669 ขึ้นตรงกลางหน้าจอ */}
         {sliderValue >= maxSliderValue && (
           <motion.div
             initial={{ opacity: 0 }}

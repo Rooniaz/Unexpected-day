@@ -6,11 +6,32 @@ const TimeToCall = () => {
   const [isTransitionDone, setIsTransitionDone] = useState(false);
   const navigate = useNavigate();  // ฟังก์ชันสำหรับการนำทาง
 
+  const text = "B E F A S T";
+
+  const container = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }, // ตั้งเวลาให้ตัวอักษรแอนิเมตทีละตัว
+    },
+  };
+
+  const letter = {
+    hidden: { opacity: 0, y: 10 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.1 }, // การแอนิเมตของตัวอักษร
+    },
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsTransitionDone(false);
-      navigate("/DoctorDetail"); 
-    }, 8000); 
+      setIsTransitionDone(true); // ทำให้ transition เสร็จสมบูรณ์
+      setTimeout(() => {
+        navigate("/DoctorDetail");  // นำทางไปยังหน้า DoctorDetail หลังจาก transition เสร็จ
+      }, 500); // ให้เวลาให้ transition เสร็จก่อนที่จะนำทาง
+    }, 8000);
 
     return () => clearTimeout(timer); 
   }, [navigate]);
@@ -19,18 +40,21 @@ const TimeToCall = () => {
     <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-b from-gray-300 to-white">
       {!isTransitionDone ? (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-        className="w-[390px] h-[844px] flex justify-center items-center bg-[#708090] text-[#B22222] text-6xl px-6 py-2 rounded-lg"
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          variants={container} // ใช้ container สำหรับการแอนิเมตตัวอักษร
+          className="w-[390px] h-[844px] flex justify-center font-custom items-center bg-[#DCDCDC] text-[#B22222] text-7xl px-6 py-2 rounded-lg"
         >
-        <div>
-            B E F A S T
+          <div>
+            {text.split("").map((char, index) => (
+              <motion.span key={index} variants={letter}>
+                {char}
+              </motion.span>
+            ))}
           </div>
         </motion.div>
       ) : (
-        // หลังจาก 3 วินาที จะถูกเปลี่ยนไปที่หน้า AfterBefast
         <div></div>
       )}
     </div>

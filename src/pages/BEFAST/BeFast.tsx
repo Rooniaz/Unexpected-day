@@ -62,7 +62,7 @@ const BeFast: React.FC = () => {
     if (buttonsClicked.size === buttonPositions.length) {
       setTimeout(() => {
         navigate("/SpreadScene");  // ไปยังหน้าถัดไปหลังจากการ fade-out
-      }, 3000); // ให้เวลาการ fade-out ทำงานเสร็จหลังจาก 3 วินาที
+      }, 5000); // ให้เวลาการ fade-out ทำงานเสร็จหลังจาก 3 วินาที
     }
   }, [buttonsClicked, navigate]);
 
@@ -117,24 +117,36 @@ const BeFast: React.FC = () => {
       {/* Dialog แรก */}
       {showFirstDialog && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="absolute inset-0 backdrop-blur-sm"></div>
-          
-          <div className="bg-[#DCDCDC] p-6 rounded-lg text-white text-xl w-[90%] md:w-[400px] flex flex-col items-center z-10">
-            <p className="text-center font-custom">{popupMessage.text}</p>
-            {popupMessage.image && <img src={popupMessage.image} alt="Popup Icon" className="w-60 h-40 mt-4" />}
-            {popupMessage.description && <p className="mt-4 text-center font-custom">{popupMessage.description}</p>}
-            {showButton && (
-              <div className="flex justify-center w-full mt-4">
-                <button
-                  onClick={handleCloseFirstDialog}
-                  className="px-4 py-2 rounded-lg font-custom "
-                >
-                  ตกลง
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+        <motion.div
+          className="absolute inset-0 backdrop-blur-lg"
+          initial={{ opacity: 0 }}  // เริ่มต้นด้วยความโปร่งใส 0
+          animate={{ opacity: 1 }}  // เปลี่ยนเป็นโปร่งใส 1 เมื่อแสดง
+          exit={{ opacity: 0 }}  // ลดความโปร่งใสลงเมื่อออก
+          transition={{ duration: 0.5 }}  // เวลาในการเปลี่ยนแปลง
+        />
+      
+        <motion.div
+          className="bg-[#DCDCDC] p-6 rounded-lg text-white text-xl w-[90%] md:w-[400px] flex flex-col items-center z-10"
+          initial={{ scale: 0 }}  // เริ่มต้นด้วยขนาด 0
+          animate={{ scale: 1 }}  // ขยายขนาดจนเต็มเมื่อแสดง
+          exit={{ scale: 0 }}  // ย่อลงขนาดเมื่อออก
+          transition={{ duration: 0.5, ease: "easeOut" }}  // เวลาในการขยายและย่อ
+        >
+          <p className="text-center font-custom">{popupMessage.text}</p>
+          {popupMessage.image && <img src={popupMessage.image} alt="Popup Icon" className="w-60 h-40 mt-4" />}
+          {popupMessage.description && <p className="mt-4 text-center font-custom">{popupMessage.description}</p>}
+          {showButton && (
+            <div className="flex justify-center w-full mt-4">
+              <button
+                onClick={handleCloseFirstDialog}
+                className="px-4 py-2 rounded-lg font-custom "
+              >
+                ตกลง
+              </button>
+            </div>
+          )}
+        </motion.div>
+      </div>
       )}
     </motion.div>
   );

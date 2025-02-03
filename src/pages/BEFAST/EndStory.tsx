@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '../../components/fadeInOut';
 
-const UnexpectedDayForm = () => {
+const UnexpectedDayForm: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',

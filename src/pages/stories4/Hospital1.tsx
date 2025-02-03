@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -7,6 +7,7 @@ import { AnimatedText } from "../../components/AnimatedText";
 const Hospital1: React.FC = () => {
   const navigate = useNavigate();
   const storedName = localStorage.getItem("userName") || "???";
+  const videoRef = useRef<HTMLVideoElement>(null); // ใช้ ref เพื่อควบคุมวิดีโอ
 
   const texts = [
     `${storedName} : นี่เราร่างกายรู้สึกไม่ดีเลย`,
@@ -15,31 +16,21 @@ const Hospital1: React.FC = () => {
 
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
-  const [isClickable, setIsClickable] = useState(false); // State เพื่อควบคุมการคลิก
 
   const nextText = () => {
-    setIndex((prevIndex) => {
-      if (prevIndex < texts.length - 1) {
-        return prevIndex + 1;
-      } else {
-        return prevIndex;
-      }
-    });
+    setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
   };
 
   const handleVideoEnd = useCallback(() => {
     setBgColor("black"); // เปลี่ยนพื้นหลังเป็นสีดำ
     nextText(); // เปลี่ยนข้อความ
+    setTimeout(() => navigate("/story/hospital2"), 1000); // เปลี่ยนหน้าไปยังหน้าถัดไป
+  }, [navigate]);
 
-    // ตั้งเวลา 1 วินาทีหลังจากนั้นให้เปิดให้คลิก
-    setTimeout(() => {
-      setIsClickable(true); // เปิดให้คลิกได้หลังจากข้อความแสดงครบ
-    }, 2000); // รอ 1 วินาทีหลังจากแสดงข้อความ
-  }, []);
-
-  const handleClick = () => {
-    if (isClickable && index === texts.length - 1) {
-      navigate("/story/hospital2"); // เปลี่ยนหน้าไปยังหน้าถัดไป (แทนที่ "/nextPage" ด้วย URL ที่คุณต้องการ)
+  // ฟังก์ชันเริ่มเล่นวิดีโอเมื่อผู้ใช้แตะหน้าจอ
+  const handleUserInteraction = () => {
+    if (videoRef.current && videoRef.current.paused) {
+      videoRef.current.play().catch((err) => console.error("เล่นวิดีโอไม่สำเร็จ:", err));
     }
   };
 
@@ -48,12 +39,17 @@ const Hospital1: React.FC = () => {
       nextText();
     }, 3000);
 
-    return () => clearInterval(interval);
+    // ฟัง Event การแตะหน้าจอ
+    window.addEventListener("touchstart", handleUserInteraction);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("touchstart", handleUserInteraction);
+    };
   }, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
@@ -61,18 +57,18 @@ const Hospital1: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={handleClick} // คลิกที่ container นี้เพื่อเปลี่ยนหน้า
       >
-        {/* Background Video */}
         <video
+          ref={videoRef} // อ้างอิงวิดีโอ
           src="/gif/34-36/34-wakeup.mp4"
           autoPlay
           muted
+          playsInline
+          preload="auto"
           onEnded={handleVideoEnd}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 
-        {/* Dialog text container */}
         <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
           <div className="px-6 py-4 bg-black/50 rounded-lg">
             <AnimatedText key={index} text={texts[index]} />

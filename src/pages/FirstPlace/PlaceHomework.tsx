@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -12,8 +12,27 @@ const PlaceHomework: React.FC = () => {
       navigate('/story/homework');
     };
   
+        // สร้าง ref สำหรับ audio element
+        const audioRef1 = useRef<HTMLAudioElement>(null);
+        // const audioRef2 = useRef<HTMLAudioElement>(null);
+        // const audioRef3 = useRef<HTMLAudioElement>(null);
+    
+        useEffect(() => {
+            // ตั้งค่า volume หลังจาก component mount
+            if (audioRef1.current) {
+                audioRef1.current.volume = 0.5;
+            }
+            // if (audioRef2.current) {
+            //     audioRef2.current.volume = 0.2;
+            // }
+            // if (audioRef3.current) {
+            //     audioRef3.current.volume = 0.2;
+            // }
+        }, []);
+
     return (
       <div className="w-full min-h-screen bg-black flex justify-center items-center">
+              <audio ref={audioRef1} src="/Sound/Scene Study/Auditorium Lecture Room Ambience Loop.mp3" autoPlay loop />
         <motion.div
           className="relative w-[390px] h-[844px] overflow-hidden"
           initial="initial"
@@ -28,10 +47,12 @@ const PlaceHomework: React.FC = () => {
             alt="Background"
             className="absolute inset-0 w-full h-full object-cover"
           />
-  
+
+  <div className="absolute inset-0 bg-black/20"></div>
+
           {/* Dialog text container */}
-          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-            <div className="px-6 py-4 bg-black/50 rounded-lg">
+          <div className="absolute inset-0 flex justify-center items-center z-10">
+          <div className="px-6 py-4 rounded-lg">
               <AnimatedText text="ตอนนี้ฉันกำลังกินข้าวอยู่กับเจน" />
             </div>
           </div>

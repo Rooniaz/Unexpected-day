@@ -36,6 +36,8 @@ const StoryWork: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
+                  {/* เพิ่มเพลงในหน้า */}
+                  <audio src="/Sound/Scene Working/Very Calm Office.mp3" autoPlay loop />
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -15,52 +15,83 @@ const Prechapter: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
     const [showNextPage, setShowNextPage] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null); // อ้างอิงไปยัง audio element
+
+    // สร้าง ref สำหรับ audio element
+    const audioRef1 = useRef<HTMLAudioElement>(null);
+    const audioRef2 = useRef<HTMLAudioElement>(null);
+    const audioRef3 = useRef<HTMLAudioElement>(null);
+
+    useEffect(() => {
+        // ตั้งค่า volume หลังจาก component mount
+        if (audioRef1.current) {
+            audioRef1.current.volume = 0.5;
+        }
+        if (audioRef2.current) {
+            audioRef2.current.volume = 0.2;
+        }
+        if (audioRef3.current) {
+            audioRef3.current.volume = 0.2;
+        }
+    }, []);
 
     const nextText = () => {
         if (index < texts.length - 1) {
             setIndex(index + 1);
         } else {
-            setShowNextPage(true);  // เริ่มแสดงหน้าถัดไปหลังจากข้อความสุดท้าย
+            setShowNextPage(true);  
         }
     };
 
-    // เงื่อนไขสำหรับสลับ GIF ตามข้อความ
     const backgroundGif = () => {
         switch (texts[index]) {
             case "ฉันกับเพื่อนคุยเรื่องราวอนาคต และ สิ่งต่างๆที่อยากจะทำ":
-                return "/gif/8.gif";  // ใช้ GIF แรก
+                return "/gif/8.gif";
             case "เจน : เรามีอะไรที่อยากจะทำเต็มไปหมดเลยเนอะ":
-                return "/gif/9.gif";  // ใช้ GIF ใหม่
+                return "/gif/9.gif";
             case "“เคยคิดไหมว่า ถ้าวันหนึ่งโอกาสในการทำสิ่งที่อยากทำหมดลงไป แกจะรู้สึกเสียดายไหม?”":
-                return "/gif/10.gif";  // GIF สำหรับคำพูดนี้
+                return "/gif/10.gif";
             default:
-                return "/gif/11-12.gif";  // ค่า default
+                return "/gif/11-12.gif";
         }
     };
 
-    // รอ 2 วินาทีแล้วไปหน้าใหม่หลังจากแสดง "วันต่อมา"
     useEffect(() => {
         if (showNextPage) {
             const timer = setTimeout(() => {
                 navigate("/Prologue2");
-            }, 2000);  // รอ 2 วินาที
+            }, 2000);
 
-            return () => clearTimeout(timer);  // เคลียร์ timer หากมีการเปลี่ยนหน้า
+            return () => clearTimeout(timer);
         }
     }, [showNextPage, navigate]);
 
+    useEffect(() => {
+        // เริ่มเล่นเสียงเมื่อหน้าโหลด
+        if (audioRef.current) {
+            audioRef.current.play().catch((error) => {
+                console.log("ไม่สามารถเล่นเสียงได้:", error);
+            });
+        }
+    }, []);
+
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
+          {/* เพิ่มเพลงในหน้า พร้อม ref สำหรับการตั้งค่า volume */}
+          <audio ref={audioRef1} src="/Sound/Scene Start/26365 Group of people walking on grass path loop-full.mp3" autoPlay loop />
+          <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
+          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"
                 animate="animate"
                 exit="exit"
                 variants={fadeInOut(2, "easeInOut", 0)}
-                onClick={showNextPage ? undefined : nextText} // ปรับให้ไม่สามารถคลิกได้เมื่อ showNextPage เป็น true
+                onClick={showNextPage ? undefined : nextText}
             >
+                <audio ref={audioRef} src="/Sound/Scene Start/Park Ambience.mp3" loop autoPlay /> {/* เพิ่มเสียง */}
+
                 {showNextPage ? (
-                    // หน้าจอ "วันต่อมา" หลังจากข้อความสุดท้าย
                     <motion.div 
                         className="absolute inset-0 flex justify-center items-center bg-gray-500"
                         initial={{ opacity: 0 }}
@@ -78,7 +109,7 @@ const Prechapter: React.FC = () => {
                     </motion.div>
                 ) : (
                     <img 
-                        src={backgroundGif()}  // เรียกใช้ฟังก์ชันเพื่อเลือก GIF ตามข้อความ
+                        src={backgroundGif()}
                         alt="Background" 
                         className="absolute inset-0 w-full h-full object-cover"
                     />
@@ -88,7 +119,6 @@ const Prechapter: React.FC = () => {
 
                 <div className="absolute inset-0 flex flex-col justify-center items-center z-10 px-4">
                     <AnimatePresence mode="wait">
-                        {/* ซ่อนข้อความที่แสดงเมื่อ showNextPage เป็น true */}
                         <motion.p
                             key={index}
                             className={`text-center break-words font-custom ${index === 5 ? 'text-2xl text-black font-bold' : 'text-lg text-white'}`}
@@ -96,7 +126,6 @@ const Prechapter: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.8 }}
-                            // ซ่อนข้อความเมื่อ showNextPage เป็น true
                             style={{ display: showNextPage ? 'none' : 'block' }}
                         >
                             {texts[index]}

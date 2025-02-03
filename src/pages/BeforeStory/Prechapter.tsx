@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -15,6 +15,26 @@ const Prechapter: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
     const [inputValue, setInputValue] = useState("");
+    
+    // สร้าง ref สำหรับ audio element
+    const audioRef1 = useRef<HTMLAudioElement>(null);
+    const audioRef2 = useRef<HTMLAudioElement>(null);
+    const audioRef3 = useRef<HTMLAudioElement>(null);
+
+    useEffect(() => {
+        // ตั้งค่า volume หลังจาก component mount
+        if (audioRef1.current) {
+            audioRef1.current.volume = 0.5;
+        }
+        if (audioRef2.current) {
+            audioRef2.current.volume = 0.2;
+        }
+        if (audioRef3.current) {
+            audioRef3.current.volume = 0.2;
+        }
+    }, []);
+
+    
 
     const nextText = () => {
         if (index < texts.length - 1) {
@@ -38,6 +58,11 @@ const Prechapter: React.FC = () => {
 
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
+          {/* เพิ่มเพลงในหน้า พร้อม ref สำหรับการตั้งค่า volume */}
+          {/* <audio ref={audioRef1} src="/Sound/Scene Start/26365 Group of people walking on grass path loop-full.mp3" autoPlay loop /> */}
+          <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
+          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
+          
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"

@@ -4,70 +4,102 @@ import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
-  
-  const StoryCanteen2: React.FC = () => {
+const StoryCanteen2: React.FC = () => {
   const navigate = useNavigate();
-
-// ดึงชื่อจาก localStorage ถ้ามีค่า
   const storedName = localStorage.getItem("userName") || "???";
+  const [showTextBox, setShowTextBox] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [isClickable] = useState(true);
+  const [isLocked, setIsLocked] = useState(false); // 🔒 ตัวแปรสำหรับล็อกไม่ให้คลิก
 
-  // ข้อความที่ต้องการแสดงในลำดับ (แทนที่ {ชื่อที่กรอก} ด้วยค่าจริง)
   const texts = [
-  `เจน : ${storedName}`,
-  `${storedName} : อ.. เอ่ออ`,
-  `เจน : ${storedName} แกคิดว่าไง`,
-    " . . . . . . . . . . . .",
-  `${storedName} : อะ อึกอ่วย อะ อดดิพ`,
-  "เจน : พูดอะไรอ่ะ",
-  "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
-  "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
-
+    `เจน : ${storedName}`,
+    `${storedName} : อ.. เอ่ออ`,
+    `เจน : ${storedName} แกคิดว่าไง`,
+    `${storedName} : อะ อึกอ่วย อะ อดดิพ`,
+    "เจน : พูดอะไรอ่ะ",
+    "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
+    "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
   ];
 
-  // ตัวแปร state สำหรับเก็บตำแหน่งข้อความที่แสดง
-  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    let interval: ReturnType<typeof setTimeout>;
+    if (isLocked && !showTextBox && index >= 3) {
+      // เริ่มแสดงข้อความอัตโนมัติหลังจาก index 3
+      interval = setInterval(() => {
+        setIndex((prev) => {
+          if (prev < texts.length - 1) {
+            return prev + 1;
+          } else {
+            clearInterval(interval);
+            navigate('/StoryCanteen3'); // ไปหน้าต่อไปเมื่อจบข้อความ
+            return prev;
+          }
+        });
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, [isLocked, index, showTextBox, navigate]);
 
-  // ฟังก์ชันเปลี่ยนข้อความ
-  const nextText = () => {
-    setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
+  const handleTextBoxClick = () => {
+    setShowTextBox(false);
+    setIsLocked(true); // 🔒 ล็อกไม่ให้คลิกหน้าจออีก
+    setIndex((prev) => prev + 1);
   };
 
-  // ใช้ useEffect สำหรับการเปลี่ยนหน้าเมื่อ index ถึงข้อความสุดท้าย
-  useEffect(() => {
-    if (index === texts.length - 1) {
-      navigate('/StoryCanteen3'); // นำไปหน้าอื่นหลังจากแสดงข้อความสุดท้าย
+  const nextText = () => {
+    if (!isClickable || showTextBox || isLocked) return; // ❌ ป้องกันการคลิกเมื่อถูกล็อก
+
+    if (index < texts.length - 1) {
+      if (index === 2) {
+        setShowTextBox(true); // แสดง textbox
+      } else {
+        setIndex((prev) => prev + 1);
+      }
+    } else {
+      navigate('/StoryHomework3');
     }
-  }, [index, navigate]); // useEffect นี้จะถูกเรียกเมื่อ index เปลี่ยนแปลง
+  };
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-      {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={nextText}
+        onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
-        {/* Background Image */}
         <img
           src="/gif/18-21/jane_canteen_18-21.gif"
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* Dialog text container */}
-        <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-          <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <AnimatedText key={index} text={texts[index]} />
+        {!showTextBox ? (
+          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+            <div className="px-6 py-4 bg-black/50 rounded-lg">
+              <AnimatedText key={index} text={texts[index]} />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] z-10">
+            <div 
+              className="bg-white rounded-lg p-4 cursor-pointer"
+              onClick={handleTextBoxClick}
+            >
+              <input
+                type="text"
+                value="พิมพ์เพื่อตอบ"
+                disabled
+                className="w-full text-center bg-transparent text-gray-500"
+              />
+            </div>
+          </div>
+        )}
 
-        {/* Continue Button - Bottom right */}
-        <div
-          className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20"
-        >
+        <div className="absolute bottom-4 right-4 text-white/80 text-2xl z-20">
           {'>>'}
         </div>
       </motion.div>
@@ -75,12 +107,4 @@ import { AnimatedText } from "../../components/AnimatedText";
   );
 };
 
-    
-  export default StoryCanteen2;
-
-
-  // `เจน : ${storedName}`,
-  // `${storedName} : อ.. เอ่ออ`,
-  // `เจน : ${storedName} พรุ่งนี้วันหยุดไปเที่ยวกันไหมคิดว่าแกน่าจะชอบนะ`,
-
-  // เจน : แกพรุ่งนี้วันหยุดไปเที่ยวที่นี่กันดีมั้ย คิดว่าแกน่าจะชอบนะ canteen
+export default StoryCanteen2;

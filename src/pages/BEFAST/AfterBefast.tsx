@@ -1,17 +1,41 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // เพิ่มการใช้งาน useNavigate
 
 const AfterBefast = () => {
   const [sliderValue, setSliderValue] = useState(0);
+  const [showMessage, setShowMessage] = useState(false); // สถานะการแสดงข้อความ
   const maxSliderValue = 100;
   const trackRef = useRef(null);
   const [trackWidth, setTrackWidth] = useState(0);
+  const navigate = useNavigate(); // ใช้ useNavigate เพื่อเปลี่ยนหน้า
 
   useLayoutEffect(() => {
     if (trackRef.current) {
       setTrackWidth(trackRef.current.offsetWidth);
     }
   }, []);
+
+  // ใช้ useEffect เพื่อตั้งเวลาเมื่อ sliderValue ถึง maxSliderValue
+  useEffect(() => {
+    if (sliderValue >= maxSliderValue) {
+      // ตั้งเวลาให้แสดงข้อความหลังจาก 3 วินาที
+      const timer = setTimeout(() => {
+        setShowMessage(true);
+        // ตั้งเวลาให้เปลี่ยนหน้าไปที่ /TimeToCall หลังจากแสดงข้อความครบ 3 วินาที
+        setTimeout(() => {
+          navigate("/TimeToCall"); // เปลี่ยนหน้า
+        }, 3000); // หน่วงเวลา 3 วินาที
+
+      }, 3000); // หน่วงเวลา 3 วินาที
+
+      // เคลียร์ timer เมื่อ component ถูก unmount หรือมีการเปลี่ยนแปลง
+      return () => clearTimeout(timer);
+    } else {
+      // ถ้า sliderValue ยังไม่ถึง maxSliderValue ให้ซ่อนข้อความ
+      setShowMessage(false);
+    }
+  }, [sliderValue, navigate]); // เพิ่ม navigate ใน dependency เพื่อให้แน่ใจว่าได้ใช้ค่าใหม่
 
   return (
     <motion.div
@@ -23,6 +47,20 @@ const AfterBefast = () => {
       {/* กล่องหลัก */}
       <motion.div className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">
         
+        {/* ข้อความที่แสดงขึ้นมาที่ด้านบนสุด */}
+        {showMessage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="absolute top-40 left-1/2 transform -translate-x-1/2 text-center"
+          >
+            <div className="bg-opacity-80 text-[#708090] font-custom text-2xl font-bold px-6 py-2 rounded-lg">
+              ส่งให้ทันภายใน 4.30 ชม.
+            </div>
+          </motion.div>
+        )}
+
         {/* เส้นทางที่รถวิ่ง (ชิดขอบซ้าย-ขวา) */}
         <div
           ref={trackRef}

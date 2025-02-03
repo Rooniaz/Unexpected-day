@@ -24,7 +24,7 @@ const UnexpectedDayForm: React.FC = () => {
   }, []);
 
   const goToNext = () => {
-    navigate('/next-page');
+    // navigate('/next-page');
   };
 
   return (

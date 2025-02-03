@@ -25,6 +25,7 @@ import StoryHomework3 from "../pages/stories3/StoryHomework3";
 import StoryWork3 from "../pages/stories3/StoryWork3";
 import AfterBefast from "../pages/BEFAST/AfterBefast";
 import TimeToCall from "../pages/BEFAST/TimeToCall";
+import SpreadScene from "../pages/BEFAST/SpreadScene";
 
 
 import PlacePark from "../pages/FirstPlace/PlacePark";
@@ -36,7 +37,10 @@ import StoryHospital from "../pages/stories4/Hospital1";
 import StoryHospital2 from "../pages/stories4/Hospital2";
 import BrainDetail from "../pages/BEFAST/Braindetail";
 import Friendbrain from "../pages/BEFAST/FriendBrain";
+import EndStory from "../pages/BEFAST/EndStory";
 
+import DoctorDetail from "../pages/stories5/DoctorDetail";
+import Afterdoctor from "../pages/stories5/AfterDoctor";
 
 import UnexpectedDayForm from "../pages/BEFAST/EndStory";
 
@@ -90,6 +94,14 @@ const AppRoutes: React.FC = () => {
       <Route path="/FriendBrain" element={<Friendbrain />} />
       <Route path="/AfterBefast" element={<AfterBefast />} />
       <Route path="/TimeToCall" element={<TimeToCall />} />
+      <Route path="/SpreadScene" element={<SpreadScene />} />
+
+      {/* Stories5 */}
+      <Route path="/DoctorDetail" element={<DoctorDetail/>} />
+      <Route path="/Afterdoctor" element={<Afterdoctor/>} />
+      <Route path="/EndStory" element={<EndStory/>} />
+
+
 
       <Route path="/UnexpectedDayForm" element={<UnexpectedDayForm />} />
     </Routes>

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -9,6 +9,8 @@ const StoryCanteen2: React.FC = () => {
   const storedName = localStorage.getItem("userName") || "???";
   const [showTextBox, setShowTextBox] = useState(false);
   const [index, setIndex] = useState(0);
+  const [isClickable] = useState(true);
+  const [isLocked, setIsLocked] = useState(false); // 🔒 ตัวแปรสำหรับล็อกไม่ให้คลิก
 
   const texts = [
     `เจน : ${storedName}`,
@@ -20,20 +22,42 @@ const StoryCanteen2: React.FC = () => {
     "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
   ];
 
+  useEffect(() => {
+    let interval: ReturnType<typeof setTimeout>;
+    if (isLocked && !showTextBox && index >= 3) {
+      // เริ่มแสดงข้อความอัตโนมัติหลังจาก index 3
+      interval = setInterval(() => {
+        setIndex((prev) => {
+          if (prev < texts.length - 1) {
+            return prev + 1;
+          } else {
+            clearInterval(interval);
+            navigate('/StoryCanteen3'); // ไปหน้าต่อไปเมื่อจบข้อความ
+            return prev;
+          }
+        });
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, [isLocked, index, showTextBox, navigate]);
+
   const handleTextBoxClick = () => {
-    setShowTextBox(false); // ซ่อน text box
-    setIndex(prev => prev + 1); // ไปข้อความถัดไป
+    setShowTextBox(false);
+    setIsLocked(true); // 🔒 ล็อกไม่ให้คลิกหน้าจออีก
+    setIndex((prev) => prev + 1);
   };
 
   const nextText = () => {
+    if (!isClickable || showTextBox || isLocked) return; // ❌ ป้องกันการคลิกเมื่อถูกล็อก
+
     if (index < texts.length - 1) {
-      if (index === 2) { // ถ้าเป็นข้อความ "แกคิดว่าไง"
-        setShowTextBox(true); // แสดง text box
+      if (index === 2) {
+        setShowTextBox(true); // แสดง textbox
       } else {
-        setIndex(prev => prev + 1);
+        setIndex((prev) => prev + 1);
       }
     } else {
-      navigate('/StoryCanteen3'); // ไปหน้าถัดไปเมื่อจบทุกข้อความ
+      navigate('/StoryHomework3');
     }
   };
 
@@ -45,16 +69,14 @@ const StoryCanteen2: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={!showTextBox ? nextText : undefined}
+        onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
-        {/* Background Image */}
         <img
           src="/gif/18-21/jane_canteen_18-21.gif"
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* Dialog text or Text box */}
         {!showTextBox ? (
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
@@ -71,14 +93,12 @@ const StoryCanteen2: React.FC = () => {
                 type="text"
                 value="พิมพ์เพื่อตอบ"
                 disabled
-                className="w-full text-center bg-transparent cursor-pointer text-gray-500"
-                onClick={handleTextBoxClick}
+                className="w-full text-center bg-transparent text-gray-500"
               />
             </div>
           </div>
         )}
 
-        {/* Continue Button */}
         <div className="absolute bottom-4 right-4 text-white/80 text-2xl z-20">
           {'>>'}
         </div>

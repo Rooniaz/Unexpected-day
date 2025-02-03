@@ -47,39 +47,49 @@ const AppRoutes: React.FC = () => {
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/warning" element={<Warning />} />
       <Route path="/prologue2" element={<Prologue2 />} />
+      <Route path="/epilogue" element={<Epilogue />} />
+
+      {/* Stories */}
       <Route path="/story/homework" element={<StoryHomework />} />
       <Route path="/story/work" element={<StoryWork />} />
       <Route path="/story/park" element={<StoryPark />} />
       <Route path="/story/canteen" element={<StoryCanteen />} />
-      <Route path="/epilogue" element={<Epilogue />} />
+
+      {/* Stories2 */}
       <Route path="/story/homework2" element={<StoryHomework2 />} />
       <Route path="/story/work2" element={<StoryWork2 />} />
       <Route path="/story/park2" element={<StoryPark2 />} />
       <Route path="/story/canteen2" element={<StoryCanteen2 />} />
+
+      {/* BeforeStory */}
       <Route path="/Explanation" element={<Explanation />} />
       <Route path="/BeFast" element={<BeFast />} />
       <Route path="/DreamInput" element={<DreamInput />} />
       <Route path="/Prechapter" element={<Prechapter />} />
       <Route path="/Prechapter1" element={<Prechapter1 />} />
       <Route path="/Prechapter2" element={<Prechapter2 />} />
+
+      {/* Stories3 */}
       <Route path="/StoryPark3" element={<StoryPark3 />} />
       <Route path="/StoryCanteen3" element={<StoryCanteen3 />} />
       <Route path="/StoryHomework3" element={<StoryHomework3 />} />
       <Route path="/StoryWork3" element={<StoryWork3 />} />
       
+      {/* FirstPlace */}
       <Route path="/Place/homework" element={<PlaceHomework />} />
       <Route path="/Place/work" element={<PlaceWork />} />
       <Route path="/Place/park" element={<PlacePark />} />
       <Route path="/Place/canteen" element={<PlaceCanteen />} />
 
+      {/* Stories4 */}
       <Route path="/story/hospital" element={<StoryHospital />} />
       <Route path="/story/hospital2" element={<StoryHospital2 />} />
+
+      {/* BEFAST */}
       <Route path="/Braindetail" element={<BrainDetail />} />
       <Route path="/FriendBrain" element={<Friendbrain />} />
       <Route path="/AfterBefast" element={<AfterBefast />} />
       <Route path="/TimeToCall" element={<TimeToCall />} />
-
-
 
       <Route path="/UnexpectedDayForm" element={<UnexpectedDayForm />} />
     </Routes>

@@ -31,7 +31,7 @@ const TimeToCall = () => {
       setTimeout(() => {
         navigate("/DoctorDetail");  // นำทางไปยังหน้า DoctorDetail หลังจาก transition เสร็จ
       }, 500); // ให้เวลาให้ transition เสร็จก่อนที่จะนำทาง
-    }, 8000);
+    }, 6000);
 
     return () => clearTimeout(timer); 
   }, [navigate]);

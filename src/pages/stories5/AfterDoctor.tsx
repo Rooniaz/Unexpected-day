@@ -24,9 +24,9 @@ const AfterDoctor: React.FC = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-white flex justify-center items-center">
+        <div className="w-full min-h-screen bg-[#000000] flex justify-center items-center">
             <motion.div 
-                className="relative w-[390px] h-[844px] overflow-hidden bg-gray-500" // เปลี่ยนเป็นสีเทา
+                className="relative w-[390px] h-[844px] overflow-hidden bg-[#D3D3D3]" // เปลี่ยนเป็นสีเทา
                 initial="initial"
                 animate="animate"
                 exit="exit"
@@ -43,7 +43,7 @@ const AfterDoctor: React.FC = () => {
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
-                            className="text-lg font-custom text-white text-center break-words"
+                            className="text-xl font-custom text-white text-center break-words"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}

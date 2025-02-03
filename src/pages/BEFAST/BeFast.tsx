@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // นำเข้าจาก framer-motion
+import { motion } from "framer-motion";
 
 const BeFast: React.FC = () => {
-  const [inputs, setInputs] = useState(["", "", "", "", "" , ""]);
+  const [inputs, setInputs] = useState(["", "", "", "", "", ""]);
   const [showFirstDialog, setShowFirstDialog] = useState(false);
   const [popupMessage, setPopupMessage] = useState<{ text: string, image: string, description: string }>({ text: "", image: "", description: "" });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [buttonsClicked, setButtonsClicked] = useState(new Set<number>());
+  const [isContentComplete, setIsContentComplete] = useState(false); // เพิ่ม state นี้
+
   const characters = ["B", "E", "F", "A", "S"];
 
   const buttonPositions = [
@@ -22,12 +24,12 @@ const BeFast: React.FC = () => {
   const buttonMessages = [
     { text: "B(Balance)", image: "/image/balance.png", description: "เดินเซ ทรงตัวไม่ได้ เวียนศีรษะ บ้านหมุน" },
     { text: "E(Eye)", image: "/image/eye with bg.png", description: "ตามัว,มองไม่เห็น, เห็นภาพซ้อนเฉียบพลัน" },
-    { text: "F(Face)", image: "/image/face.png", description: "นี่คือคำอธิบายสำหรับปุ่ม 3" },
+    { text: "F(Face)", image: "/image/face.png", description: "ใบหน้าเบี้ยว มุมปากตก" },
     { text: "A(Arm)", image: "/image/arm.png", description: "แขน ขาอ่อนแรงครึ่งซีก" },
     { text: "S(Speech)", image: "/image/speech.png", description: "พูดไม่ชัด พูดไม่เป็นคำ" },
   ];
 
-  const navigate = useNavigate();  // ใช้ navigate เพื่อไปยังหน้าถัดไป
+  const navigate = useNavigate();
 
   const handleButtonClick = (index: number) => {
     if (isDialogOpen || buttonsClicked.has(index)) return;
@@ -44,6 +46,7 @@ const BeFast: React.FC = () => {
     setPopupMessage({ text: message.text, image: "", description: "" });
     setShowFirstDialog(true);
     setIsDialogOpen(true);
+    setIsContentComplete(false); // ตั้งค่าเป็น false เมื่อเริ่มแสดงเนื้อหาใหม่
 
     setTimeout(() => {
       setPopupMessage((prevState) => ({ ...prevState, image: message.image }));
@@ -54,30 +57,32 @@ const BeFast: React.FC = () => {
     }, 2000);
 
     setTimeout(() => {
-      setShowButton(true);
+      setIsContentComplete(true); // ตั้งค่าเป็น true เมื่อเนื้อหาแสดงครบถ้วน
+      setShowButton(true); // แสดงปุ่ม "ตกลง"
     }, 3000);
   };
 
   useEffect(() => {
     if (buttonsClicked.size === buttonPositions.length) {
       setTimeout(() => {
-        navigate("/SpreadScene");  // ไปยังหน้าถัดไปหลังจากการ fade-out
-      }, 3000); // ให้เวลาการ fade-out ทำงานเสร็จหลังจาก 3 วินาที
+        navigate("/SpreadScene");
+      }, 6000);
     }
   }, [buttonsClicked, navigate]);
 
   const handleCloseFirstDialog = () => {
     setShowFirstDialog(false);
     setIsDialogOpen(false);
+    setShowButton(false); // ซ่อนปุ่ม "ตกลง" เมื่อปิด dialog
   };
 
   return (
     <motion.div 
       className="min-h-screen bg-white text-white flex flex-col items-center justify-center p-4 relative"
-      initial={{ opacity: 0 }}  // เริ่มต้นด้วย opacity 0
-      animate={{ opacity: 1 }}  // ทำให้ opacity เป็น 1
-      exit={{ opacity: 1 }} // เมื่อออกจากหน้านี้ให้ fade-out
-      transition={{ duration: 3 }}  // กำหนดเวลาในการ fade-in และ fade-out
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 3 }}
     >
       <div
         className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center"
@@ -117,23 +122,45 @@ const BeFast: React.FC = () => {
       {/* Dialog แรก */}
       {showFirstDialog && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="absolute inset-0 backdrop-blur-sm"></div>
-          
-          <div className="bg-[#DCDCDC] p-6 rounded-lg text-white text-xl w-[90%] md:w-[400px] flex flex-col items-center z-10">
-            <p className="text-center font-custom">{popupMessage.text}</p>
-            {popupMessage.image && <img src={popupMessage.image} alt="Popup Icon" className="w-60 h-40 mt-4" />}
-            {popupMessage.description && <p className="mt-4 text-center font-custom">{popupMessage.description}</p>}
-            {showButton && (
-              <div className="flex justify-center w-full mt-4">
+          <motion.div
+            className="absolute inset-0 backdrop-blur-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        
+          <motion.div
+            className="bg-[#FFFFFF] p-6 rounded-lg text-white text-xl w-[320px] md:w-[400px] flex flex-col items-center z-10"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <p className="text-center font-custom text-[#CD5C5C] text-4xl">{popupMessage.text}</p>
+            {popupMessage.image && (
+              <div className="w-full h-[160px] overflow-hidden rounded-lg"> {/* Container สำหรับรูปภาพ */}
+                <img
+                  src={popupMessage.image}
+                  alt="Popup Icon"
+                  className="w-full h-full object-cover" // ปรับให้รูปภาพเต็มกรอบ
+                />
+              </div>
+            )}
+            {popupMessage.description && (
+              <p className="text-center text-[#F08080] font-custom mt-4">{popupMessage.description}</p>
+            )}
+            {isContentComplete && ( // ตรวจสอบว่าเนื้อหาแสดงครบถ้วนแล้ว
+              <div className="flex justify-center w-full">
                 <button
                   onClick={handleCloseFirstDialog}
-                  className="px-4 py-2 rounded-lg font-custom "
+                  className="px-4 py-2 rounded font-custom text-[#000000]"
                 >
                   ตกลง
                 </button>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       )}
     </motion.div>

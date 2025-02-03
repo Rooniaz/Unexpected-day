@@ -51,7 +51,7 @@ const UnexpectedDayForm: React.FC = () => {
 
             {/* Dream Section */}
             <div className="bg-[#E6F3FF] p-3 border-b-2 border-blue-500 font-custom">
-              <div className="text-lg text-center">ความฝันของ {formData.name}</div>
+              <div className="text-lg text-center">ความฝันของคุณ</div>
             </div>
 
             {/* Dream Content */}

@@ -27,7 +27,7 @@ const AfterBefast = () => {
           navigate("/TimeToCall"); // เปลี่ยนหน้า
         }, 3000); // หน่วงเวลา 3 วินาที
 
-      }, 2500); // หน่วงเวลา 3 วินาที
+      }, 3000); // หน่วงเวลา 3 วินาที
 
       // เคลียร์ timer เมื่อ component ถูก unmount หรือมีการเปลี่ยนแปลง
       return () => clearTimeout(timer);
@@ -53,9 +53,9 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-40 left-1/2 transform -translate-x-1/2 text-center"
+            className="absolute top-[40%] left-1/2 transform -translate-x-1/2 text-center" //ใส่ shadowให้ ส่งให้ทัน
           >
-            <div className="bg-opacity-80 text-[#708090] font-custom text-2xl font-bold px-6 py-2 rounded-lg">
+            <div className="bg-opacity-80 text-[#FFFFFF] font-custom text-4xl font-bold px-6 py-2 rounded-lg"> 
               ส่งให้ทันภายใน 4.30 ชม.
             </div>
           </motion.div>
@@ -78,9 +78,9 @@ const AfterBefast = () => {
             onDrag={(event, info) => {
               if (trackRef.current) {
                 const offsetX = info.point.x - trackRef.current.offsetLeft;
-                // คำนวณเปอร์เซ็นต์จากตำแหน่งที่ลาก โดยการใช้ 450px เป็นจุดที่ต้องการให้ sliderValue = 100
+                // คำนวณเปอร์เซ็นต์จากตำแหน่งที่ลาก โดยการใช้ 500px เป็นจุดที่ต้องการให้ sliderValue = 100
                 const percent = Math.min(
-                  Math.max((offsetX / (450 - 100)) * maxSliderValue, 0),
+                  Math.max((offsetX / (500 - 100)) * maxSliderValue, 0),
                   maxSliderValue
                 );
                 setSliderValue(percent); // อัพเดตค่า sliderValue ตามตำแหน่งที่ลาก
@@ -90,7 +90,7 @@ const AfterBefast = () => {
           />
         )}
 
-        {/* แสดงข้อความเมื่อ sliderValue ถึง 450px (แสดงเมื่อ sliderValue = 100) */}
+        {/* แสดงข้อความเมื่อ sliderValue ถึง 500px (แสดงเมื่อ sliderValue = 100) */}
         {sliderValue >= 100 && (
           <motion.div
             initial={{ opacity: 0 }}

@@ -37,6 +37,9 @@ import StoryHospital2 from "../pages/stories4/Hospital2";
 import BrainDetail from "../pages/BEFAST/Braindetail";
 import Friendbrain from "../pages/BEFAST/FriendBrain";
 
+
+import UnexpectedDayForm from "../pages/BEFAST/EndStory";
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
@@ -75,6 +78,10 @@ const AppRoutes: React.FC = () => {
       <Route path="/FriendBrain" element={<Friendbrain />} />
       <Route path="/AfterBefast" element={<AfterBefast />} />
       <Route path="/TimeToCall" element={<TimeToCall />} />
+
+
+
+      <Route path="/UnexpectedDayForm" element={<UnexpectedDayForm />} />
     </Routes>
   );
 };

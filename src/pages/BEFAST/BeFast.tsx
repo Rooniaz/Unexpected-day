@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // นำเข้าจาก framer-motion
 
 const BeFast: React.FC = () => {
   const [inputs, setInputs] = useState(["", "", "", "", "" , ""]);
@@ -60,8 +61,8 @@ const BeFast: React.FC = () => {
   useEffect(() => {
     if (buttonsClicked.size === buttonPositions.length) {
       setTimeout(() => {
-        navigate("/SpreadScene");  
-      }, 5000);
+        navigate("/SpreadScene");  // ไปยังหน้าถัดไปหลังจากการ fade-out
+      }, 3000); // ให้เวลาการ fade-out ทำงานเสร็จหลังจาก 3 วินาที
     }
   }, [buttonsClicked, navigate]);
 
@@ -71,7 +72,13 @@ const BeFast: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative">
+    <motion.div 
+      className="min-h-screen bg-white text-white flex flex-col items-center justify-center p-4 relative"
+      initial={{ opacity: 0 }}  // เริ่มต้นด้วย opacity 0
+      animate={{ opacity: 1 }}  // ทำให้ opacity เป็น 1
+      exit={{ opacity: 1 }} // เมื่อออกจากหน้านี้ให้ fade-out
+      transition={{ duration: 3 }}  // กำหนดเวลาในการ fade-in และ fade-out
+    >
       <div
         className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center"
         style={{ backgroundImage: "url('/image/body-Befast.png')" }}
@@ -113,11 +120,11 @@ const BeFast: React.FC = () => {
           <div className="absolute inset-0 backdrop-blur-sm"></div>
           
           <div className="bg-[#DCDCDC] p-6 rounded-lg text-white text-xl w-[90%] md:w-[400px] flex flex-col items-center z-10">
-            <p className="text-center font-custom animate-fadeIn delay-1000">{popupMessage.text}</p>
-            {popupMessage.image && <img src={popupMessage.image} alt="Popup Icon" className="w-60 h-40 mt-4 animate-fadeIn delay-2000" />}
-            {popupMessage.description && <p className="mt-4 text-center font-custom animate-fadeIn delay-3000">{popupMessage.description}</p>}
+            <p className="text-center font-custom">{popupMessage.text}</p>
+            {popupMessage.image && <img src={popupMessage.image} alt="Popup Icon" className="w-60 h-40 mt-4" />}
+            {popupMessage.description && <p className="mt-4 text-center font-custom">{popupMessage.description}</p>}
             {showButton && (
-              <div className="flex justify-center w-full mt-4 animate-fadeIn delay-4000">
+              <div className="flex justify-center w-full mt-4">
                 <button
                   onClick={handleCloseFirstDialog}
                   className="px-4 py-2 rounded-lg font-custom "
@@ -129,7 +136,7 @@ const BeFast: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

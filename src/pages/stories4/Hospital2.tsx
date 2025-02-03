@@ -61,7 +61,7 @@ const Hospital2: React.FC = () => {
   }, [index, handleVideoEnd]);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center">
+    <div className="w-full min-h-screen flex justify-center items-center bg-black">
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

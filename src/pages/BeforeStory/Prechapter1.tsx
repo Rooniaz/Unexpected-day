@@ -1,74 +1,111 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 
-
 const texts = [
-    "ใช้ชีวิตตามปกติอย่างทุกๆวัน",
-    "ไปเที่ยว เรียน สังสรรค์ ทำงาน",
-    // "หรือว่าเรากำลังฝันอยู่?"
+    "ฉันกับเพื่อนคุยเรื่องราวอนาคต และ สิ่งต่างๆที่อยากจะทำ",
+    "เจน : เรามีอะไรที่อยากจะทำเต็มไปหมดเลยเนอะ",
+    "“เคยคิดไหมว่า ถ้าวันหนึ่งโอกาสในการทำสิ่งที่อยากทำหมดลงไป แกจะรู้สึกเสียดายไหม?”",
+    " . . . . . . . . . . . .",
+    "ฉันจึงกลับมาคิดเรื่องนี้หลังจากจบบทสนทนาลง"
 ];
 
-const Prechapter1: React.FC = () => {
+const Prechapter: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
+    const [showNextPage, setShowNextPage] = useState(false);
 
     const nextText = () => {
         if (index < texts.length - 1) {
             setIndex(index + 1);
         } else {
-            navigate('/Prechapter2');
+            setShowNextPage(true);  // เริ่มแสดงหน้าถัดไปหลังจากข้อความสุดท้าย
         }
     };
 
+    // เงื่อนไขสำหรับสลับ GIF ตามข้อความ
+    const backgroundGif = () => {
+        switch (texts[index]) {
+            case "ฉันกับเพื่อนคุยเรื่องราวอนาคต และ สิ่งต่างๆที่อยากจะทำ":
+                return "/gif/8.gif";  // ใช้ GIF แรก
+            case "เจน : เรามีอะไรที่อยากจะทำเต็มไปหมดเลยเนอะ":
+                return "/gif/9.gif";  // ใช้ GIF ใหม่
+            case "“เคยคิดไหมว่า ถ้าวันหนึ่งโอกาสในการทำสิ่งที่อยากทำหมดลงไป แกจะรู้สึกเสียดายไหม?”":
+                return "/gif/10.gif";  // GIF สำหรับคำพูดนี้
+            default:
+                return "/gif/11-12.gif";  // ค่า default
+        }
+    };
+
+    // รอ 2 วินาทีแล้วไปหน้าใหม่หลังจากแสดง "วันต่อมา"
+    useEffect(() => {
+        if (showNextPage) {
+            const timer = setTimeout(() => {
+                navigate("/Prologue2");
+            }, 2000);  // รอ 2 วินาที
+
+            return () => clearTimeout(timer);  // เคลียร์ timer หากมีการเปลี่ยนหน้า
+        }
+    }, [showNextPage, navigate]);
+
     return (
-        <div className="w-full min-h-screen bg-white flex justify-center items-center">
+        <div className="w-full min-h-screen bg-black flex justify-center items-center">
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"
                 animate="animate"
                 exit="exit"
                 variants={fadeInOut(2, "easeInOut", 0)}
-                onClick={nextText} // แตะหน้าจอเพื่อเปลี่ยนข้อความ
+                onClick={showNextPage ? undefined : nextText} // ปรับให้ไม่สามารถคลิกได้เมื่อ showNextPage เป็น true
             >
-                {/* รูปภาพพื้นหลัง (GIF) */}
-                <img 
-                    src="/gif/3-6.gif" 
-                    alt="Background" 
-                    className="absolute inset-0 w-full h-full object-cover"
-                />
+                {showNextPage ? (
+                    // หน้าจอ "วันต่อมา" หลังจากข้อความสุดท้าย
+                    <motion.div 
+                        className="absolute inset-0 flex justify-center items-center bg-gray-500"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <motion.p
+                            className="text-2xl text-white font-bold"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            วันต่อมา
+                        </motion.p>
+                    </motion.div>
+                ) : (
+                    <img 
+                        src={backgroundGif()}  // เรียกใช้ฟังก์ชันเพื่อเลือก GIF ตามข้อความ
+                        alt="Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+                )}
 
-                {/* Overlay เพื่อให้ข้อความอ่านได้ง่ายขึ้น */}
                 <div className="absolute inset-0 bg-black/50"></div>
 
-                {/* กล่องข้อความ */}
-                <div className="absolute inset-0 flex justify-center items-center z-10 px-4">
+                <div className="absolute inset-0 flex flex-col justify-center items-center z-10 px-4">
                     <AnimatePresence mode="wait">
+                        {/* ซ่อนข้อความที่แสดงเมื่อ showNextPage เป็น true */}
                         <motion.p
                             key={index}
-                            className="text-lg font-custom text-white text-center break-words"
+                            className={`text-center break-words font-custom ${index === 5 ? 'text-2xl text-black font-bold' : 'text-lg text-white'}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.8 }}
+                            // ซ่อนข้อความเมื่อ showNextPage เป็น true
+                            style={{ display: showNextPage ? 'none' : 'block' }}
                         >
                             {texts[index]}
                         </motion.p>
                     </AnimatePresence>
                 </div>
-
-                {/* ไกด์ให้ผู้ใช้รู้ว่าต้องแตะหน้าจอ */}
-                <motion.p 
-                    className="absolute bottom-5 text-gray-500 text-sm"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                >
-                </motion.p>
             </motion.div>
         </div>
     );
 };
 
-export default Prechapter1;
+export default Prechapter;

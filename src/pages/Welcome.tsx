@@ -39,7 +39,7 @@ const Welcome: React.FC = () => {
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
-              className="w-full p-2 border rounded-3xl"
+              className="w-full p-2 border mb-8 rounded-3xl"
               required
             />
           </div>

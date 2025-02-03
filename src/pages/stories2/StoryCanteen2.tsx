@@ -60,6 +60,15 @@ const StoryCanteen2: React.FC = () => {
       navigate('/StoryHomework3');
     }
   };
+  
+    // เปลี่ยน GIF เมื่อถึงข้อความ "เจน : พูดอะไรอ่ะ"
+    const backgroundGif = () => {
+      if (index >= 4) {
+        return "/gif/26-27/canteen.gif";  // ใช้ GIF นี้ค้างไว้
+      }
+      return "/gif/18-21/jane_canteen_18-21.gif";  // ค่า default
+    };
+  
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
@@ -71,8 +80,8 @@ const StoryCanteen2: React.FC = () => {
         variants={fadeInOut(2, "easeInOut", 0)}
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
-        <img
-          src="/gif/18-21/jane_canteen_18-21.gif"
+    <img
+          src={backgroundGif()}  // ใช้ฟังก์ชันเปลี่ยน GIF
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />

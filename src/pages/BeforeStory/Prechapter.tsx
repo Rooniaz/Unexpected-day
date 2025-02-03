@@ -3,50 +3,62 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 
-
 const texts = [
     "ชีวิตของวัยหนุ่มสาว ",
-    "มีความฝันมากมายที่อยากจะทำ?"
+    "มีความฝันมากมายที่อยากจะทำ?",
+    "แล้วความฝันของคุณคืออะไร?",
+    "ใช้ชีวิตตามปกติอย่างทุกๆวัน",
+    "ไปเที่ยว เรียน สังสรรค์ ทำงาน" // ข้อความสุดท้าย
 ];
 
 const Prechapter: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
+    const [inputValue, setInputValue] = useState("");
 
     const nextText = () => {
         if (index < texts.length - 1) {
             setIndex(index + 1);
         } else {
-            navigate('/DreamInput');
+            navigate("/Prechapter1");
+        }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (inputValue.trim() !== "") {
+            localStorage.setItem("userDream", inputValue);
+            nextText();
         }
     };
 
     return (
-        <div className="w-full min-h-screen bg-white flex justify-center items-center">
+        <div className="w-full min-h-screen bg-black flex justify-center items-center">
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"
                 animate="animate"
                 exit="exit"
                 variants={fadeInOut(2, "easeInOut", 0)}
-                onClick={nextText} // แตะหน้าจอเพื่อเปลี่ยนข้อความ
+                onClick={index === 2 ? undefined : nextText}
             >
-                {/* รูปภาพพื้นหลัง (GIF) */}
                 <img 
                     src="/gif/3-6.gif" 
                     alt="Background" 
                     className="absolute inset-0 w-full h-full object-cover"
                 />
 
-                {/* Overlay เพื่อให้ข้อความอ่านได้ง่ายขึ้น */}
                 <div className="absolute inset-0 bg-black/50"></div>
 
-                {/* กล่องข้อความ */}
-                <div className="absolute inset-0 flex justify-center items-center z-10 px-4">
+                <div className="absolute inset-0 flex flex-col justify-center items-center z-10 px-4">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
-                            className="text-lg font-custom text-white text-center break-words"
+                            className={`text-center break-words font-custom ${index === 2 ? 'text-2xl text-white font-bold' : 'text-lg text-white'}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
@@ -55,16 +67,30 @@ const Prechapter: React.FC = () => {
                             {texts[index]}
                         </motion.p>
                     </AnimatePresence>
-                </div>
 
-                {/* ไกด์ให้ผู้ใช้รู้ว่าต้องแตะหน้าจอ */}
-                <motion.p 
-                    className="absolute bottom-5 text-gray-500 text-sm"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                >
-                </motion.p>
+                    {index === 2 && (
+                        <form onSubmit={handleSubmit} className="space-y-6 py-2">
+                            <div className="flex justify-center items-center">
+                                <input
+                                    type="text"
+                                    value={inputValue}
+                                    onChange={handleInputChange}
+                                    className="w-80 h-40 p-2 border rounded-3xl text-center font-custom text-lg"
+                                    placeholder="พิมพ์เพื่อตอบ"
+                                    required
+                                />
+                            </div>
+                            <div className="flex justify-center items-center">
+                                <button 
+                                    type="submit"
+                                    className="w-auto px-4 py-1 font-bold text-xl font-custom text-black bg-grey-500 rounded border-2 border-grey-500"
+                                >
+                                    ตกลง
+                                </button>
+                            </div>
+                        </form>
+                    )}
+                </div>
             </motion.div>
         </div>
     );

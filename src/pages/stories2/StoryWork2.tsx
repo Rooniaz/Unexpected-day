@@ -61,6 +61,14 @@ const StoryWork2: React.FC = () => {
     }
   };
 
+      // เปลี่ยน GIF เมื่อถึงข้อความ "เจน : พูดอะไรอ่ะ"
+      const backgroundGif = () => {
+        if (index >= 4) {
+          return "/gif/26-27/office.gif";  // ใช้ GIF นี้ค้างไว้
+        }
+        return "/gif/18-21/jane_office_18-21.gif";  // ค่า default
+      };
+    
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       <motion.div
@@ -72,11 +80,10 @@ const StoryWork2: React.FC = () => {
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
         <img
-          src="/gif/18-21/jane_office_18-21.gif"
+          src={backgroundGif()}  // ใช้ฟังก์ชันเปลี่ยน GIF
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
-
         {!showTextBox ? (
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">

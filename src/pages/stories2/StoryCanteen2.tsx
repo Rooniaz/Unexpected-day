@@ -72,6 +72,8 @@ const StoryCanteen2: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
+    {/* เพิ่มเพลงในหน้า */}
+    <audio src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"

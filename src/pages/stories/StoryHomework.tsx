@@ -36,6 +36,9 @@ const StoryHomework: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
+      {/* เพิ่มเพลงในหน้า */}
+      <audio src="/Sound/Scene Study/Auditorium Lecture Room Ambience Loop.mp3" autoPlay loop />
+      
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

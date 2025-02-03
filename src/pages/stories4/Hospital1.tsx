@@ -50,6 +50,8 @@ const Hospital1: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
+                                  {/* เพิ่มเพลงในหน้า */}
+                                  <audio src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop />
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}

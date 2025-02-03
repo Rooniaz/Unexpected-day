@@ -9,6 +9,8 @@ const Warning: React.FC = () => {
     <div
         className="min-h-screen bg-white flex flex-col items-center justify-center p-4"
     >
+                                    {/* เพิ่มเพลงในหน้า */}
+                                    <audio src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
     <div className="w-full max-w-lg text-center">
         <p className="text-lg font-custom mb-8 font-bold">คำชี้แจง </p>
         <p className="text-lg font-custom mb-2">ผลงานชิ้นนี้เกิดขึ้นเพื่อให้ผู้เล่นทุกคนได้เรียนรู้ </p>

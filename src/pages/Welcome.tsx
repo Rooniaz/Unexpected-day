@@ -31,6 +31,8 @@ const Welcome: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+                                  {/* เพิ่มเพลงในหน้า */}
+                                  <audio src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
       <div className="w-full max-w-lg">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

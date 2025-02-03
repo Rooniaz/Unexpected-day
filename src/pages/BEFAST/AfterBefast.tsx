@@ -1,73 +1,73 @@
-import { useState } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
-import { fadeInOut } from "../../components/fadeInOut";
 
 const AfterBefast = () => {
-//   const navigate = useNavigate();
-  const [sliderValue, setSliderValue] = useState(0); // ค่าของ Slider
+  const [sliderValue, setSliderValue] = useState(0);
   const maxSliderValue = 100;
+  const trackRef = useRef(null);
+  const [trackWidth, setTrackWidth] = useState(0);
 
-  const handleClick = () => {
-    // navigate("/Friendbrain");
-  };
-
-  const handleCloseSecondDialog = () => {
-    console.log("Dialog closed");
-  };
+  useLayoutEffect(() => {
+    if (trackRef.current) {
+      setTrackWidth(trackRef.current.offsetWidth);
+    }
+  }, []);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-b from-gray-300 to-white">
+    <motion.div
+      initial={{ opacity: 0 }}  // เริ่มต้นที่ความทึบ (ไม่เห็น)
+      animate={{ opacity: 1 }}  // เปลี่ยนไปที่ความทึบ 100% (แสดงผล)
+      transition={{ duration: 3 }}  // ระยะเวลาในการทำ fade in
+      className="w-full min-h-screen flex justify-center items-center bg-gradient-to-b from-gray-300 to-white"
+    >
       {/* กล่องหลัก */}
-      <motion.div
-        className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden" // ใช้ bg-gray-300 แทนภาพพื้นหลัง
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={handleClick}
-      >
-        {/* รถพยาบาลเคลื่อนที่ */}
-        <motion.img
-          src="/image/hostpitalcar.png"
-          alt="ambulance"
-          className="absolute bottom-40"
-          style={{
-            left: `${sliderValue}%`,
-            width: "100px",
-            height: "auto",
-          }}
-          animate={{ x: sliderValue * 3 }}
-          transition={{ type: "spring", stiffness: 50 }}
-        />
+      <motion.div className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">
+        
+        {/* เส้นทางที่รถวิ่ง (ชิดขอบซ้าย-ขวา) */}
+        <div
+          ref={trackRef}
+          className="absolute top-[60%] w-full h-12 bg-[#708090] rounded"
+        ></div>
 
-        {/* Slider Bar ที่ดูเหมือนถนน */}
-        <div className="absolute bottom-40 w-3/4 left-1/2 -translate-x-1/2 flex items-center">
-          <input
-            type="range"
-            value={sliderValue}
-            onChange={(e) => setSliderValue(Number(e.target.value))}
-            min={0}
-            max={100}
-            step={1}
-            className="w-full slider" // เพิ่ม class สำหรับการตกแต่ง
+        {/* รถพยาบาลลากได้ */}
+        {trackWidth > 0 && (
+          <motion.img
+            src="/image/hostpitalcar.png"
+            alt="ambulance"
+            className="absolute top-[57%] cursor-pointer"
+            drag="x" // ให้ผู้ใช้ลากรถตามแนวแกน X
+            dragConstraints={{ left: 0, right: trackWidth - 100 }} // ขอบเขตการลาก
+            onDrag={(event, info) => {
+              if (trackRef.current) {
+                const offsetX = info.point.x - trackRef.current.offsetLeft;
+                const percent = Math.min(
+                  Math.max((offsetX / (trackWidth - 100)) * maxSliderValue, 0),
+                  maxSliderValue
+                );
+                setSliderValue(percent); // อัพเดตค่า sliderValue ตามตำแหน่งที่ลาก
+              }
+            }}
+            style={{ width: "100px", height: "auto", left: 0 }}
           />
-        </div>
+        )}
 
-        {/* แสดงข้อความ */}
-        <div className="mt-2 text-lg font-semibold">
-          {sliderValue === maxSliderValue ? "✅ Complete" : `${sliderValue}%`}
-        </div>
-
-        {/* ปุ่ม ตกลง */}
-        <button
-          onClick={handleCloseSecondDialog}
-          className="mt-4 px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600"
-        >
-          ตกลง
-        </button>
+        {/* ข้อความ Time to Call 1669 ขึ้นตรงกลางหน้าจอ */}
+        {sliderValue >= maxSliderValue && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="absolute top-[63%] left-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+          >
+            <div className="bg-opacity-50 text-white font-custom text-4xl font-bold px-6 py-2 rounded-lg">
+              <span className="text-red-500">T</span>ime to Call{" "}
+              <span className="text-red-500">1669</span>
+            </div>
+          </motion.div>
+        )}
+        
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

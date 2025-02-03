@@ -60,7 +60,7 @@ const BeFast: React.FC = () => {
   useEffect(() => {
     if (buttonsClicked.size === buttonPositions.length) {
       setTimeout(() => {
-        navigate("/AfterBefast");  // เปลี่ยน path เป็นหน้าถัดไปที่ต้องการ
+        navigate("/SpreadScene");  
       }, 5000);
     }
   }, [buttonsClicked, navigate]);

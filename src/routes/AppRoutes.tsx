@@ -25,6 +25,7 @@ import StoryHomework3 from "../pages/stories3/StoryHomework3";
 import StoryWork3 from "../pages/stories3/StoryWork3";
 import AfterBefast from "../pages/BEFAST/AfterBefast";
 import TimeToCall from "../pages/BEFAST/TimeToCall";
+import SpreadScene from "../pages/BEFAST/SpreadScene";
 
 
 import PlacePark from "../pages/FirstPlace/PlacePark";
@@ -75,6 +76,8 @@ const AppRoutes: React.FC = () => {
       <Route path="/FriendBrain" element={<Friendbrain />} />
       <Route path="/AfterBefast" element={<AfterBefast />} />
       <Route path="/TimeToCall" element={<TimeToCall />} />
+      <Route path="/SpreadScene" element={<SpreadScene />} />
+
     </Routes>
   );
 };

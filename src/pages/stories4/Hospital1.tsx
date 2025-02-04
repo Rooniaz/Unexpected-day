@@ -24,7 +24,7 @@ const Hospital1: React.FC = () => {
   const handleVideoEnd = useCallback(() => {
     setBgColor("black"); // เปลี่ยนพื้นหลังเป็นสีดำ
     nextText(); // เปลี่ยนข้อความ
-    setTimeout(() => navigate("/story/hospital2"), 1000); // เปลี่ยนหน้าไปยังหน้าถัดไป
+    setTimeout(() => navigate("/story/hospital2"), 6000); // เปลี่ยนหน้าไปยังหน้าถัดไป
   }, [navigate]);
 
   // ฟังก์ชันเริ่มเล่นวิดีโอเมื่อผู้ใช้แตะหน้าจอ
@@ -56,10 +56,10 @@ const Hospital1: React.FC = () => {
       useEffect(() => {
           // ตั้งค่า volume หลังจาก component mount
           if (audioRef1.current) {
-              audioRef1.current.volume = 0.5;
+              audioRef1.current.volume = 0.8
           }
           if (audioRef2.current) {
-              audioRef2.current.volume = 0.5;
+              audioRef2.current.volume = 0;
           }
           // if (audioRef3.current) {
           //     audioRef3.current.volume = 0.2;

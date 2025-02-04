@@ -8,7 +8,7 @@ const PlacePark: React.FC = () => {
   const navigate = useNavigate();
 
    // ฟังก์ชันนำทางไปหน้าถัดไป
-   const goToNext = () => {
+const goToNext = () => {
     navigate('/story/park');
   };
 

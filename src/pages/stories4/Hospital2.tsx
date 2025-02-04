@@ -68,10 +68,10 @@ const Hospital2: React.FC = () => {
       useEffect(() => {
           // ตั้งค่า volume หลังจาก component mount
           if (audioRef1.current) {
-              audioRef1.current.volume = 0.5;
+              audioRef1.current.volume = 0.8;
           }
           if (audioRef2.current) {
-              audioRef2.current.volume = 0.5;
+              audioRef2.current.volume = 0;
           }
           // if (audioRef3.current) {
           //     audioRef3.current.volume = 0.2;

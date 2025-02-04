@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-// import { fadeInOut } from "../../components/fadeInOut";
+import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const Hospital2: React.FC = () => {
@@ -84,13 +84,13 @@ const Hospital2: React.FC = () => {
       <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop />
   <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
   {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
-      <div
+      <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
-        // initial="initial"
-        // animate="animate"
-        // exit="exit"
-        // variants={fadeInOut(2, "easeInOut", 0)}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={fadeInOut(2, "easeInOut", 0)}
         onClick={handleClick} // คลิกที่ container นี้เพื่อเปลี่ยนหน้า
       >
 
@@ -107,7 +107,7 @@ const Hospital2: React.FC = () => {
             <AnimatedText key={index} text={texts[index]} />
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

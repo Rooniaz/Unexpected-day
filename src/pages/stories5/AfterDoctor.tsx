@@ -6,7 +6,8 @@ import { fadeInOut } from "../../components/fadeInOut";
 const texts = [
     "ไม่ว่าจะเป็นเช่นไร",
     "โรคหลอดเลือดสมองนั้นเป็นได้เฉียบพลัน",
-    "ขึ้นอยู่กับคุณว่าจะรู้วิธีการสังเกตแบบ BEFAST และขอความช่วยเหลือได้ทัน",
+    "ขึ้นอยู่กับคุณว่าจะรู้วิธีการสังเกตแบบ BEFAST ",
+    "และขอความช่วยเหลือได้ทัน",
     "สุดท้ายนี้",
     "เราอยากให้คุณรู้ว่า",
 ];
@@ -67,7 +68,7 @@ const AfterDoctor: React.FC = () => {
       <AnimatePresence mode="wait">
         <motion.p
           key={index}
-          className="text-xl font-custom text-black text-center break-words"
+          className="text-2xl font-custom text-black text-center break-words"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}

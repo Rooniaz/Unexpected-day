@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { fadeInOut } from "../../components/fadeInOut";
+// import { motion } from "framer-motion";
+// import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const StoryWork2: React.FC = () => {
@@ -73,12 +73,12 @@ const StoryWork2: React.FC = () => {
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
                         {/* เพิ่มเพลงในหน้า */}
                         <audio src="/Sound/Scene Working/Very Calm Office.mp3" autoPlay loop />
-      <motion.div
+      <div
         className="relative w-[390px] h-[844px] overflow-hidden"
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={fadeInOut(2, "easeInOut", 0)}
+        // initial="initial"
+        // animate="animate"
+        // exit="exit"
+        // variants={fadeInOut(2, "easeInOut", 0)}
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
         <img
@@ -111,7 +111,7 @@ const StoryWork2: React.FC = () => {
         <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
           {/* {'>>'} */}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

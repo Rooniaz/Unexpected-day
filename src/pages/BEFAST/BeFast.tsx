@@ -3,16 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const BeFast: React.FC = () => {
-  const [inputs, setInputs] = useState(["", "", "", "", "", ""]);
+  const [inputs, setInputs] = useState(["", "", "", "", "",""]);
   const [showFirstDialog, setShowFirstDialog] = useState(false);
   const [popupMessage, setPopupMessage] = useState<{ text: string, image: string, description: string }>({ text: "", image: "", description: "" });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [, setShowButton] = useState(false);
   const [buttonsClicked, setButtonsClicked] = useState(new Set<number>());
-  const [isContentComplete, setIsContentComplete] = useState(false); // เพิ่ม state นี้
+  const [isContentComplete, setIsContentComplete] = useState(false);
+
+  const audioRef2 = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (audioRef2.current) {
+      audioRef2.current.volume = 0.5;
+    }
+  }, []);
 
   const characters = ["B", "E", "F", "A", "S"];
-
   const buttonPositions = [
     { top: "64%", left: "42%" },
     { top: "18%", left: "62%" },
@@ -35,7 +42,6 @@ const BeFast: React.FC = () => {
     if (isDialogOpen || buttonsClicked.has(index)) return;
 
     setButtonsClicked((prevClicked) => new Set(prevClicked).add(index));
-
     setInputs((prev) => {
       const newInputs = [...prev];
       newInputs[index] = characters[index];
@@ -46,7 +52,7 @@ const BeFast: React.FC = () => {
     setPopupMessage({ text: message.text, image: "", description: "" });
     setShowFirstDialog(true);
     setIsDialogOpen(true);
-    setIsContentComplete(false); // ตั้งค่าเป็น false เมื่อเริ่มแสดงเนื้อหาใหม่
+    setIsContentComplete(false);
 
     setTimeout(() => {
       setPopupMessage((prevState) => ({ ...prevState, image: message.image }));
@@ -57,8 +63,8 @@ const BeFast: React.FC = () => {
     }, 2000);
 
     setTimeout(() => {
-      setIsContentComplete(true); // ตั้งค่าเป็น true เมื่อเนื้อหาแสดงครบถ้วน
-      setShowButton(true); // แสดงปุ่ม "ตกลง"
+      setIsContentComplete(true);
+      setShowButton(true);
     }, 3000);
   };
 
@@ -72,43 +78,23 @@ const BeFast: React.FC = () => {
 
   const handleCloseFirstDialog = () => {
     setShowFirstDialog(false);
-    setIsDialogOpen(false);
-    setShowButton(false); // ซ่อนปุ่ม "ตกลง" เมื่อปิด dialog
+    setTimeout(() => {
+      setIsDialogOpen(false);
+    }, 300);
   };
 
-      // สร้าง ref สำหรับ audio element
-      // const audioRef1 = useRef<HTMLAudioElement>(null);
-      const audioRef2 = useRef<HTMLAudioElement>(null);
-      // const audioRef3 = useRef<HTMLAudioElement>(null);
-  
-      useEffect(() => {
-          // ตั้งค่า volume หลังจาก component mount
-          // if (audioRef1.current) {
-          //     audioRef1.current.volume = 0.5;
-          // }
-          if (audioRef2.current) {
-              audioRef2.current.volume = 0.5;
-          }
-          // if (audioRef3.current) {
-          //     audioRef3.current.volume = 0.2;
-          // }
-      }, []);
-
   return (
-    <motion.div 
+    <div 
       className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 1 }}
-      transition={{ duration: 3 }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 1 }}
+      // transition={{ duration: 3 }}
     >
-              {/* <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
-              <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
-  {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
-      <div
-        className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: "url('/image/body-Befast.png')" }}
-      >
+      {/* เสียงพื้นหลัง */}
+      <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
+
+      <div className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/image/body-Befast.png')" }}>
         {buttonPositions.map((pos, index) => (
           !buttonsClicked.has(index) && (
             <button
@@ -133,9 +119,8 @@ const BeFast: React.FC = () => {
 
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-3 text-xl font-bold">
           {inputs.map((char, index) => (
-            <div key={index} className="w-12 h-12 flex items-center justify-center bg-white text-black rounded shadow-xl">
+            <div key={index} className="w-12 h-12 flex items-center justify-center font-custom text-4xl bg-white text-[#FF0000] rounded shadow-xl">
               {char}
-              
             </div>
           ))}
         </div>
@@ -143,17 +128,11 @@ const BeFast: React.FC = () => {
 
       {/* Dialog แรก */}
       {showFirstDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-lg transition-opacity duration-500" />
+
           <motion.div
-            className="absolute inset-0 backdrop-blur-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          />
-        
-          <motion.div
-            className="bg-[#FFFFFF] p-6 rounded-lg text-white text-xl w-[320px] md:w-[400px] flex flex-col items-center z-10"
+            className="bg-[#FFFFFF] p-6 rounded-lg text-black text-xl w-[320px] md:w-[400px] flex flex-col items-center z-10"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
@@ -161,31 +140,27 @@ const BeFast: React.FC = () => {
           >
             <p className="text-center font-custom text-[#CD5C5C] text-4xl">{popupMessage.text}</p>
             {popupMessage.image && (
-              <div className="w-full h-[260px] overflow-hidden rounded-lg"> {/* Container สำหรับรูปภาพ */}
-                <img
-                  src={popupMessage.image}
-                  alt="Popup Icon"
-                  className="w-full h-full object-cover" // ปรับให้รูปภาพเต็มกรอบ
-                />
+              <div className="w-full h-[260px] overflow-hidden rounded-lg">
+                <img src={popupMessage.image} alt="Popup Icon" className="w-full h-full object-cover" />
               </div>
             )}
             {popupMessage.description && (
               <p className="text-center text-[#F08080] font-custom mt-4">{popupMessage.description}</p>
             )}
-            {isContentComplete && ( // ตรวจสอบว่าเนื้อหาแสดงครบถ้วนแล้ว
+            {isContentComplete && (
               <div className="flex justify-center w-full">
                 <button
                   onClick={handleCloseFirstDialog}
                   className="px-4 py-2 rounded font-custom text-[#000000]"
                 >
-                  ตกลง
+                  เข้าใจแล้ว
                 </button>
               </div>
             )}
           </motion.div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

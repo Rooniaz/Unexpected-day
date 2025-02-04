@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { fadeInOut } from "../../components/fadeInOut";
+// import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const StoryWork3: React.FC = () => {
@@ -73,13 +73,13 @@ const StoryWork3: React.FC = () => {
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
                       {/* เพิ่มเพลงในหน้า */}
                       <audio ref={audioRef2} src="/Sound/Sound fx/Heartbeat.mp3" autoPlay loop />
-      <motion.div
+      <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={fadeInOut(2, "easeInOut", 0)}
+        // initial="initial"
+        // animate="animate"
+        // exit="exit"
+        // variants={fadeInOut(2, "easeInOut", 0)}
       >
         <video
           ref={videoRef} // อ้างอิงวิดีโอ
@@ -97,7 +97,7 @@ const StoryWork3: React.FC = () => {
             <AnimatedText key={index} text={texts[index]} />
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

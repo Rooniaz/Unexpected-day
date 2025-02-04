@@ -37,14 +37,14 @@ const TimeToCall = () => {
   }, [navigate]);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-b from-gray-300 to-white">
+    <div className="w-full min-h-screen flex justify-center items-center bg-black">
       {!isTransitionDone ? (
         <motion.div
           initial="hidden"
           animate="show"
           exit="hidden"
           variants={container} // ใช้ container สำหรับการแอนิเมตตัวอักษร
-          className="w-[390px] h-[844px] flex justify-center font-custom items-center bg-[#DCDCDC] text-[#B22222] text-7xl px-6 py-2 rounded-lg"
+          className="w-[390px] h-[844px] flex justify-center font-custom items-center bg-[#DCDCDC] text-[#B22222] text-7xl px-6 py-2 "
         >
           <div>
             {text.split("").map((char, index) => (

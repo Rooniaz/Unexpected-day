@@ -42,7 +42,7 @@ const AfterBefast = () => {
       initial={{ opacity: 0 }}  // เริ่มต้นที่ความทึบ (ไม่เห็น)
       animate={{ opacity: 1 }}  // เปลี่ยนไปที่ความทึบ 100% (แสดงผล)
       transition={{ duration: 3 }}  // ระยะเวลาในการทำ fade in
-      className="w-full min-h-screen flex justify-center items-center bg-gradient-to-b from-gray-300 to-white"
+      className="w-full min-h-screen flex justify-center items-center bg-black"
     >
       {/* กล่องหลัก (ขนาดยังคงเดิม) */}
       <motion.div className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">

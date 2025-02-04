@@ -12,7 +12,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
     hidden: { opacity: 1 },
     show: {
         opacity: 1,
-        transition: { staggerChildren: 0.05 },
+        transition: { staggerChildren: 0.08 },
     },
     };
 
@@ -42,7 +42,7 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
         hidden: { opacity: 1 },
         show: {
             opacity: 1,
-            transition: { staggerChildren: 0.05 },
+            transition: { staggerChildren: 0.08 },
         },
     };
 

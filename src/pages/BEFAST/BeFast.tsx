@@ -160,7 +160,7 @@ const BeFast: React.FC = () => {
           >
             <p className="text-center font-custom text-[#CD5C5C] text-4xl">{popupMessage.text}</p>
             {popupMessage.image && (
-              <div className="w-full h-[160px] overflow-hidden rounded-lg"> {/* Container สำหรับรูปภาพ */}
+              <div className="w-full h-[260px] overflow-hidden rounded-lg"> {/* Container สำหรับรูปภาพ */}
                 <img
                   src={popupMessage.image}
                   alt="Popup Icon"

@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText2 } from "../../components/AnimatedText";
+import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
+
 
 const FriendBrain: React.FC = () => {
   const navigate = useNavigate();
@@ -48,29 +50,17 @@ const FriendBrain: React.FC = () => {
     return () => clearInterval(interval);
   }, [visibleTexts.length, showNextText, handleVideoEnd]);
 
-        // สร้าง ref สำหรับ audio element
-        // const audioRef1 = useRef<HTMLAudioElement>(null);
-        const audioRef2 = useRef<HTMLAudioElement>(null);
-        // const audioRef3 = useRef<HTMLAudioElement>(null);
-    
-        useEffect(() => {
-            // ตั้งค่า volume หลังจาก component mount
-            // if (audioRef1.current) {
-            //     audioRef1.current.volume = 0.5;
-            // }
-            if (audioRef2.current) {
-                audioRef2.current.volume = 0.5;
-            }
-            // if (audioRef3.current) {
-            //     audioRef3.current.volume = 0.2;
-            // }
-        }, []);
+
+    const { playAudio, pauseAudio } = useAudio();
+  
+    useEffect(() => {
+      playAudio(); // เล่นเพลงต่อจากหน้า Warning
+      return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
+    }, []);
+  
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-              {/* <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
-              <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
-  {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}

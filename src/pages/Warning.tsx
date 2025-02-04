@@ -1,34 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAudio } from "../contexts/AudioProvider";
 
 const Warning: React.FC = () => {
   const navigate = useNavigate();
+  const { playAudio, pauseAudio } = useAudio();
 
-    // สร้าง ref สำหรับ audio element
-    const audioRef1 = useRef<HTMLAudioElement>(null);
-    const audioRef2 = useRef<HTMLAudioElement>(null);
-    const audioRef3 = useRef<HTMLAudioElement>(null);
-
-    useEffect(() => {
-        // ตั้งค่า volume หลังจาก component mount
-        if (audioRef1.current) {
-            audioRef1.current.volume = 0.5;
-        }
-        if (audioRef2.current) {
-            audioRef2.current.volume = 0.5;
-        }
-        if (audioRef3.current) {
-            audioRef3.current.volume = 0.2;
-        }
-    }, []);
+  useEffect(() => {
+    playAudio(); // เล่นเพลงเมื่อเข้าสู่หน้า Warning
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
+  }, []);
 
   return (
-    <div
-      className="min-h-screen bg-white flex flex-col items-center justify-center p-4"
-    >
-    {/* <audio ref={audioRef1} src="/Sound/Scene Start/26365 Group of people walking on grass path loop-full.mp3" autoPlay loop /> */}
-    <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
-          {/* <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop /> */}
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-lg text-center">
         <p className="text-lg font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
         <p className="text-lg font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
@@ -43,4 +27,5 @@ const Warning: React.FC = () => {
     </div>
   );
 };
+
 export default Warning;

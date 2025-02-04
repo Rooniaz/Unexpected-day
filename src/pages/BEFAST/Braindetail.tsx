@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
 
 const Braindetail = () => {
   const navigate = useNavigate();
@@ -37,14 +38,13 @@ const Braindetail = () => {
     })
   };
 
-  // สร้าง ref สำหรับ audio element
-  const audioRef2 = useRef<HTMLAudioElement>(null);
+  const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    if (audioRef2.current) {
-      audioRef2.current.volume = 0.5;
-    }
+    playAudio(); // เล่นเพลงต่อจากหน้า Warning
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
   }, []);
+
 
   // เริ่มนับถอยหลังหลังจากแอนิเมชันเสร็จสิ้น
   useEffect(() => {
@@ -59,7 +59,6 @@ const Braindetail = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
 
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

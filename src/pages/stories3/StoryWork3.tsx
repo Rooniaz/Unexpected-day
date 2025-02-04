@@ -66,7 +66,7 @@ const StoryWork3: React.FC = () => {
         if (audioRef2.current) {
           audioRef2.current.playbackRate = 3;
         }
-      }, 6000);
+      }, 4000);
     }
 
   return (

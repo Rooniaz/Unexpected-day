@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeInOut } from '../components/fadeInOut';
 
 const Welcome: React.FC = () => {
   const navigate = useNavigate();
@@ -50,7 +52,11 @@ const Welcome: React.FC = () => {
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       {/* เพิ่มพื้นหลังเป็น GIF */}
-      <div 
+      <motion.div 
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={fadeInOut(2, "easeInOut", 0)}
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{
           backgroundImage: "url('/image/bgbefast.png')",
@@ -91,7 +97,7 @@ const Welcome: React.FC = () => {
             </form>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -25,16 +25,16 @@ const AfterDoctor: React.FC = () => {
     };
           // สร้าง ref สำหรับ audio element
           // const audioRef1 = useRef<HTMLAudioElement>(null);
-          const audioRef2 = useRef<HTMLAudioElement>(null);
+    const audioRef2 = useRef<HTMLAudioElement>(null);
           // const audioRef3 = useRef<HTMLAudioElement>(null);
-      
-          useEffect(() => {
+    
+    useEffect(() => {
               // ตั้งค่า volume หลังจาก component mount
               // if (audioRef1.current) {
               //     audioRef1.current.volume = 0.5;
               // }
-              if (audioRef2.current) {
-                  audioRef2.current.volume = 0.5;
+            if (audioRef2.current) {
+                audioRef2.current.volume = 0.5;
                 }
               // if (audioRef3.current) {
               //     audioRef3.current.volume = 0.2;
@@ -56,7 +56,7 @@ const AfterDoctor: React.FC = () => {
     >
     {/* Background Image */}
     <div
-      className="absolute inset-0 w-full h-full bg-cover bg-center"
+    className="absolute inset-0 w-full h-full bg-cover bg-center"
       style={{ backgroundImage: 'url(/image/bgbefast.png)' }} // ใส่ path ของภาพที่ต้องการเป็นพื้นหลัง
     ></div>
 

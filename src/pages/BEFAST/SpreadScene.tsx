@@ -40,7 +40,7 @@ const SpreadScene = () => {
     const timer = setTimeout(() => {
       setIsTransitionDone(true);
       setTimeout(() => {
-        navigate("/AfterBefast");
+        // navigate("/AfterBefast");
       },); // 2 วินาทีก่อนเปลี่ยนหน้า
     }, 6000);
 
@@ -48,7 +48,7 @@ const SpreadScene = () => {
   }, [navigate]);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-b from-gray-300 to-white">
+    <div className="w-full min-h-screen flex justify-center items-center bg-black">
       <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
 
       {!isTransitionDone ? (
@@ -57,10 +57,10 @@ const SpreadScene = () => {
           animate="show"
           exit="hidden"
           variants={container}
-          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-[#000000] text-white text-3xl font-custom px-6 py-2"
+          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-gradient-to-b from-gray-500 via-white to-gray-500 text-white text-3xl font-custom px-6 py-2"
         >
           {/* บรรทัดแรก */}
-          <div className="flex flex-row justify-center items-center text-center">
+          <div className="flex flex-row text-[#696969] justify-center items-center text-center text-shadow-2xl">
             {text.split("").map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}

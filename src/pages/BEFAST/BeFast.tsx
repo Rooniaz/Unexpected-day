@@ -72,7 +72,7 @@ const BeFast: React.FC = () => {
     if (buttonsClicked.size === buttonPositions.length) {
       setTimeout(() => {
         navigate("/SpreadScene");
-      }, 6000);
+      }, 7000);
     }
   }, [buttonsClicked, navigate]);
 

@@ -8,36 +8,6 @@ const Braindetail = () => {
   const navigate = useNavigate();
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  const titleStyle = {
-    color: '#FF4500',
-    fontFamily: 'Thai Sans Neue, Arial, sans-serif',
-    fontSize: '2.8rem',
-    textAlign: 'left' as const,
-    marginBottom: '0.2rem',
-    lineHeight: '1.2',
-  };
-
-  const subtitleStyle = {
-    color: '#fdfefe',
-    fontFamily: 'Thai Sans Neue, Arial, sans-serif',
-    fontSize: '1.2rem',
-    textAlign: 'left' as const,
-    lineHeight: '1.5',
-    marginTop: '2rem'
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 1,
-        duration: 0.5
-      }
-    })
-  };
-
   const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
@@ -45,21 +15,43 @@ const Braindetail = () => {
     return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
   }, []);
 
-
   // เริ่มนับถอยหลังหลังจากแอนิเมชันเสร็จสิ้น
   useEffect(() => {
     if (animationComplete) {
       const timer = setTimeout(() => {
         navigate("/Friendbrain");
-      }, 5000); // 3 วินาทีหลังจากข้อความแสดงเสร็จ
+      }, 5000); // 5 วินาทีหลังจากข้อความแสดงเสร็จ
 
       return () => clearTimeout(timer);
     }
   }, [animationComplete, navigate]);
 
+  const titleVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.5,  // ให้ข้อความตัวแดงขึ้นก่อน
+        duration: 0.8,
+      },
+    },
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 1,  // ให้ข้อความสีขาวขึ้นหลังจากตัวแดง
+        duration: 0.8,
+      },
+    },
+  };
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: 'black' }}
@@ -74,19 +66,25 @@ const Braindetail = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80%] z-20"
           initial="hidden"
           animate="visible"
           onAnimationComplete={() => setAnimationComplete(true)} // ตรวจจับเมื่อแอนิเมชันจบ
         >
-          <motion.h1 style={titleStyle} variants={titleVariants} custom={3}>
-            โรค<br/>
-            หลอดเลือดสมอง<br/>
+          <motion.h1
+            className="font-custom text-[#FF4500] text-4xl text-left mb-1.5"
+            variants={titleVariants}
+          >
+            โรค<br />
+            หลอดเลือดสมอง<br />
             เฉียบพลัน
           </motion.h1>
 
-          <motion.p style={subtitleStyle} variants={titleVariants} custom={4}>
+          <motion.p
+            className="font-custom text-white text-lg text-left mt-8"
+            variants={subtitleVariants}
+          >
             คือ ภาวะที่เกิดจากการที่สมองขาด
             เลือดหรือออกชิเจนอย่างเฉียบพลัน
           </motion.p>

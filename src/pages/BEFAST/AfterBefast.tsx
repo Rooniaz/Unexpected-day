@@ -75,7 +75,7 @@ const AfterBefast = () => {
             className="absolute top-[57%] cursor-pointer"
             drag="x" // ให้ผู้ใช้ลากรถตามแนวแกน X
             dragConstraints={{ left: 0, right: trackWidth - 100 }} // ขอบเขตการลาก
-            onDrag={(event, info) => {
+            onDrag={(_event, info) => {
               if (trackRef.current) {
                 const offsetX = info.point.x - trackRef.current.offsetLeft;
                 // คำนวณเปอร์เซ็นต์จากตำแหน่งที่ลาก โดยการใช้ 450px เป็นจุดที่ต้องการให้ sliderValue = 100

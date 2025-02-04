@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -69,11 +69,32 @@ const StoryCanteen2: React.FC = () => {
       return "/gif/18-21/jane_canteen_18-21.gif";  // ค่า default
     };
   
+    const audioRef2 = useRef<HTMLAudioElement>(null); // heartbeat audio ref
+  
+    if (audioRef2.current) {
+        audioRef2.current.volume = 0.5;
+        audioRef2.current.playbackRate = 1; // เริ่มด้วยความเร็วปกติ
+  
+        // หลัง 3 วินาที เพิ่มความเร็วเป็น 2 เท่า
+        setTimeout(() => {
+          if (audioRef2.current) {
+            audioRef2.current.playbackRate = 2;
+          }
+        }, 3000);
+  
+        // หลังจากนั้นอีก 3 วินาที (รวม 6 วินาที) เพิ่มเป็น 3 เท่า
+        setTimeout(() => {
+          if (audioRef2.current) {
+            audioRef2.current.playbackRate = 3;
+          }
+        }, 6000);
+      }
+  
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
     {/* เพิ่มเพลงในหน้า */}
-    <audio src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
+    <audio ref={audioRef2} src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"

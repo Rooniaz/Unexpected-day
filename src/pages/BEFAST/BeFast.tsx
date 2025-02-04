@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -7,7 +7,7 @@ const BeFast: React.FC = () => {
   const [showFirstDialog, setShowFirstDialog] = useState(false);
   const [popupMessage, setPopupMessage] = useState<{ text: string, image: string, description: string }>({ text: "", image: "", description: "" });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [showButton, setShowButton] = useState(false);
+  const [, setShowButton] = useState(false);
   const [buttonsClicked, setButtonsClicked] = useState(new Set<number>());
   const [isContentComplete, setIsContentComplete] = useState(false); // เพิ่ม state นี้
 
@@ -76,6 +76,24 @@ const BeFast: React.FC = () => {
     setShowButton(false); // ซ่อนปุ่ม "ตกลง" เมื่อปิด dialog
   };
 
+      // สร้าง ref สำหรับ audio element
+      // const audioRef1 = useRef<HTMLAudioElement>(null);
+      const audioRef2 = useRef<HTMLAudioElement>(null);
+      // const audioRef3 = useRef<HTMLAudioElement>(null);
+  
+      useEffect(() => {
+          // ตั้งค่า volume หลังจาก component mount
+          // if (audioRef1.current) {
+          //     audioRef1.current.volume = 0.5;
+          // }
+          if (audioRef2.current) {
+              audioRef2.current.volume = 0.5;
+          }
+          // if (audioRef3.current) {
+          //     audioRef3.current.volume = 0.2;
+          // }
+      }, []);
+
   return (
     <motion.div 
       className="min-h-screen bg-white text-white flex flex-col items-center justify-center p-4 relative"
@@ -84,6 +102,9 @@ const BeFast: React.FC = () => {
       exit={{ opacity: 1 }}
       transition={{ duration: 3 }}
     >
+              {/* <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
+              <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
+  {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
       <div
         className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center"
         style={{ backgroundImage: "url('/image/body-Befast.png')" }}

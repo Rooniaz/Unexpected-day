@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -23,8 +23,29 @@ const AfterDoctor: React.FC = () => {
         }
     };
 
+          // สร้าง ref สำหรับ audio element
+          // const audioRef1 = useRef<HTMLAudioElement>(null);
+          const audioRef2 = useRef<HTMLAudioElement>(null);
+          // const audioRef3 = useRef<HTMLAudioElement>(null);
+      
+          useEffect(() => {
+              // ตั้งค่า volume หลังจาก component mount
+              // if (audioRef1.current) {
+              //     audioRef1.current.volume = 0.5;
+              // }
+              if (audioRef2.current) {
+                  audioRef2.current.volume = 0.5;
+              }
+              // if (audioRef3.current) {
+              //     audioRef3.current.volume = 0.2;
+              // }
+          }, []);
+
     return (
         <div className="w-full min-h-screen bg-[#000000] flex justify-center items-center">
+                          {/* <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
+                          <audio ref={audioRef2} src="/Sound/Sound End/Peaceful_Ambient_Piano_full.mp3" autoPlay loop />
+  {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden bg-[#D3D3D3]" // เปลี่ยนเป็นสีเทา
                 initial="initial"

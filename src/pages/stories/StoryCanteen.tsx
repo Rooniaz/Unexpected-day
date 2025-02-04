@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -27,6 +27,24 @@ const StoryCanteen: React.FC = () => {
     setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
   };
 
+      // สร้าง ref สำหรับ audio element
+      const audioRef1 = useRef<HTMLAudioElement>(null);
+      // const audioRef2 = useRef<HTMLAudioElement>(null);
+      // const audioRef3 = useRef<HTMLAudioElement>(null);
+  
+      useEffect(() => {
+          // ตั้งค่า volume หลังจาก component mount
+          if (audioRef1.current) {
+              audioRef1.current.volume = 0.5;
+          }
+          // if (audioRef2.current) {
+          //     audioRef2.current.volume = 0.2;
+          // }
+          // if (audioRef3.current) {
+          //     audioRef3.current.volume = 0.2;
+          // }
+      }, []);
+
   // ใช้ useEffect สำหรับการเปลี่ยนหน้าเมื่อ index ถึงข้อความสุดท้าย
   useEffect(() => {
     if (index === texts.length - 1) {
@@ -37,7 +55,7 @@ const StoryCanteen: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       {/* เพิ่มเพลงในหน้า */}
-      <audio src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
+      <audio ref={audioRef1} src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

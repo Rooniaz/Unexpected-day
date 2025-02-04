@@ -7,7 +7,7 @@ import { AnimatedText } from "../../components/AnimatedText";
 const StoryCanteen3: React.FC = () => {
   const navigate = useNavigate();
   const storedName = localStorage.getItem("userName") || "???";
-  const videoRef = useRef<HTMLVideoElement>(null); // ใช้ ref เพื่อควบคุมวิดีโอ
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const texts = [
     `เจน : ${storedName}!!!`,
@@ -27,20 +27,39 @@ const StoryCanteen3: React.FC = () => {
     setTimeout(() => navigate("/story/hospital"), 1000);
   }, [navigate]);
 
-  // ฟังก์ชันเริ่มเล่นวิดีโอเมื่อผู้ใช้แตะหน้าจอ
   const handleUserInteraction = () => {
     if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play().catch((err) => console.error("เล่นวิดีโอไม่สำเร็จ:", err));
     }
   };
 
+  const audioRef2 = useRef<HTMLAudioElement>(null); // heartbeat audio ref
+
   useEffect(() => {
     const interval = setInterval(() => {
       nextText();
     }, 3000);
 
-    // ฟัง Event การแตะหน้าจอ
     window.addEventListener("touchstart", handleUserInteraction);
+
+    if (audioRef2.current) {
+      audioRef2.current.volume = 0.5;
+      audioRef2.current.playbackRate = 1; // เริ่มด้วยความเร็วปกติ
+
+      // หลัง 3 วินาที เพิ่มความเร็วเป็น 2 เท่า
+      setTimeout(() => {
+        if (audioRef2.current) {
+          audioRef2.current.playbackRate = 2;
+        }
+      }, 3000);
+
+      // หลังจากนั้นอีก 3 วินาที (รวม 6 วินาที) เพิ่มเป็น 3 เท่า
+      setTimeout(() => {
+        if (audioRef2.current) {
+          audioRef2.current.playbackRate = 3;
+        }
+      }, 6000);
+    }
 
     return () => {
       clearInterval(interval);
@@ -50,8 +69,8 @@ const StoryCanteen3: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-                        {/* เพิ่มเพลงในหน้า */}
-                        <audio src="/Sound/Sound fx/Heartbeat.mp3" autoPlay loop />
+      <audio ref={audioRef2} src="/Sound/Sound fx/Heartbeat.mp3" autoPlay loop />
+
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
@@ -61,7 +80,7 @@ const StoryCanteen3: React.FC = () => {
         variants={fadeInOut(2, "easeInOut", 0)}
       >
         <video
-          ref={videoRef} // อ้างอิงวิดีโอ
+          ref={videoRef}
           src="/video/blurCanteen.mp4"
           autoPlay
           muted

@@ -32,7 +32,7 @@ const StoryPark2: React.FC = () => {
             return prev + 1;
           } else {
             clearInterval(interval);
-            navigate('/StoryHomework3'); // ไปหน้าต่อไปเมื่อจบข้อความ
+            navigate('/StoryPark3'); // ไปหน้าต่อไปเมื่อจบข้อความ
             return prev;
           }
         });
@@ -110,8 +110,8 @@ const StoryPark2: React.FC = () => {
           </div>
         )}
 
-        <div className="absolute bottom-4 right-4 text-white/80 text-2xl z-20">
-          {'>>'}
+        <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
+          {/* {'>>'} */}
         </div>
       </motion.div>
     </div>

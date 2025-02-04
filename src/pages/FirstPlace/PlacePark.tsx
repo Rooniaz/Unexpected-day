@@ -53,12 +53,12 @@ const PlacePark: React.FC = () => {
         {/* Dialog text container */}
         <div className="absolute inset-0 flex justify-center items-center z-10">
         <div className="px-6 py-4 rounded-lg">
-            <AnimatedText text="ตอนนี้ฉันกำลังกินข้าวอยู่กับเจน" />
+            <AnimatedText text="ตอนนี้ฉันกำลังนั่งเล่นอยู่กับเจน" />
           </div>
         </div>
 
         {/* Continue Button - แสดง UI แต่ไม่ต้องคลิก */}
-        <div className="absolute bottom-4 right-4 text-white/80 text-2xl z-20">
+        <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
           {'>>'}
         </div>
       </motion.div>

@@ -53,7 +53,7 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
 
     return (
         <motion.p
-            className="text-lg font-custom text-center"
+            className="text-2xl font-custom text-center "
             variants={container}
             initial="hidden"
             animate="show"

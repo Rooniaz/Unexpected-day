@@ -96,7 +96,7 @@ const BeFast: React.FC = () => {
 
   return (
     <motion.div 
-      className="min-h-screen bg-white text-white flex flex-col items-center justify-center p-4 relative"
+      className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
@@ -133,8 +133,9 @@ const BeFast: React.FC = () => {
 
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-3 text-xl font-bold">
           {inputs.map((char, index) => (
-            <div key={index} className="w-12 h-12 flex items-center justify-center bg-white text-black rounded">
+            <div key={index} className="w-12 h-12 flex items-center justify-center bg-white text-black rounded shadow-xl">
               {char}
+              
             </div>
           ))}
         </div>

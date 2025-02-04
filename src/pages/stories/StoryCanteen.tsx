@@ -80,7 +80,7 @@ const StoryCanteen: React.FC = () => {
         </div>
 
         {/* Continue Button - Bottom right */}
-        <div className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20">
+        <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20">
           {'>>'}
         </div>
       </motion.div>

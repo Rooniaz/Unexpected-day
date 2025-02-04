@@ -25,10 +25,10 @@ const Prechapter: React.FC = () => {
     useEffect(() => {
         // ตั้งค่า volume หลังจาก component mount
         if (audioRef1.current) {
-            audioRef1.current.volume = 0.5;
+            audioRef1.current.volume = 0.2;
         }
         if (audioRef2.current) {
-            audioRef2.current.volume = 0.2;
+            audioRef2.current.volume = 0;
         }
         if (audioRef3.current) {
             audioRef3.current.volume = 0.2;
@@ -121,7 +121,7 @@ const Prechapter: React.FC = () => {
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
-                            className={`text-center break-words font-custom ${index === 5 ? 'text-2xl text-black font-bold' : 'text-lg text-white'}`}
+                            className={`text-center break-words font-custom ${index === 5 ? 'text-2xl text-black font-bold' : 'text-xl text-white'}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}

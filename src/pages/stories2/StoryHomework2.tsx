@@ -110,8 +110,8 @@ const StoryHomeWork2: React.FC = () => {
           </div>
         )}
 
-        <div className="absolute bottom-4 right-4 text-white/80 text-2xl z-20">
-          {'>>'}
+        <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
+          {/* {'>>'} */}
         </div>
       </motion.div>
     </div>

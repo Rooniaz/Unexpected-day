@@ -9,10 +9,10 @@ const Braindetail = () => {
   const titleStyle = {
     color: '#FF4500',
     fontFamily: 'Thai Sans Neue, Arial, sans-serif',
-    fontSize: '3rem',
+    fontSize: '2.8rem',
     textAlign: 'left' as const,
     marginBottom: '0.2rem',
-    lineHeight: '1.2'
+    lineHeight: '1.2',
   };
 
   const subtitleStyle = {
@@ -21,7 +21,7 @@ const Braindetail = () => {
     fontSize: '1.2rem',
     textAlign: 'left' as const,
     lineHeight: '1.5',
-    marginTop: '1rem'
+    marginTop: '2rem'
   };
 
   const titleVariants = {
@@ -84,30 +84,19 @@ const Braindetail = () => {
           animate="visible"
         >
           <motion.h1 
-            style={titleStyle}
-            variants={titleVariants}
-            custom={0}
-          >
-            โรค
-          </motion.h1>
-          <motion.h1 
-            style={titleStyle}
-            variants={titleVariants}
-            custom={1}
-          >
-            หลอดเลือดสมอง
-          </motion.h1>
-          <motion.h1 
-            style={titleStyle}
-            variants={titleVariants}
-            custom={2}
-          >
-            เฉียบพลัน
-          </motion.h1>
+          style={titleStyle}
+          variants={titleVariants}
+          custom={3}
+        >
+          โรค<br/>
+          หลอดเลือดสมอง<br/>
+          เฉียบพลัน
+        </motion.h1>
+
           <motion.p 
             style={subtitleStyle}
             variants={titleVariants}
-            custom={3}
+            custom={4}
           >
             คือ ภาวะที่เกิดจากการที่สมองขาด
             เลือดหรือออกชิเจนอย่างเฉียบพลัน

@@ -83,7 +83,7 @@ const Prechapter: React.FC = () => {
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
-                            className={`text-center break-words font-custom ${index === 2 ? 'text-2xl text-white font-bold' : 'text-lg text-white'}`}
+                            className={`text-center break-words font-custom ${index === 2 ? 'text-2xl text-white ' : 'text-xl text-white'}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}

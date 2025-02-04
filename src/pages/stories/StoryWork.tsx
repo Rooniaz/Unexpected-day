@@ -81,7 +81,7 @@ const StoryWork: React.FC = () => {
 
         {/* Continue Button - Bottom right */}
         <div
-          className="absolute bottom-4 right-4 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20"
+          className="absolute bottom-[8%] right-6 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20"
         >
           {'>>'}
         </div>

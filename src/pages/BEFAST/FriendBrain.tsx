@@ -86,10 +86,10 @@ const FriendBrain: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
+        <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
           <div className="rounded-lg flex flex-col items-center space-y-6">
             {visibleTexts.map((text, index) => (
-              <div key={index}> {/* เพิ่ม key ที่นี่ */}
+              <div key={index} > {/* เพิ่ม key ที่นี่ */}
                 <AnimatedText2 text={text}  />
               </div>
             ))}

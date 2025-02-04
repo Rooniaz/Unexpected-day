@@ -61,40 +61,39 @@ const StoryCanteen2: React.FC = () => {
     }
   };
   
-    // เปลี่ยน GIF เมื่อถึงข้อความ "เจน : พูดอะไรอ่ะ"
-    const backgroundGif = () => {
-      if (index >= 4) {
-        return "/gif/26-27/canteen.gif";  // ใช้ GIF นี้ค้างไว้
-      }
-      return "/gif/18-21/jane_canteen_18-21.gif";  // ค่า default
-    };
+  // เปลี่ยน GIF เมื่อถึงข้อความ "เจน : พูดอะไรอ่ะ"
+  const backgroundGif = () => {
+    if (index >= 4) {
+      return "/gif/26-27/canteen.gif";  // ใช้ GIF นี้ค้างไว้
+    }
+    return "/gif/18-21/jane_canteen_18-21.gif";  // ค่า default
+  };
   
-    const audioRef2 = useRef<HTMLAudioElement>(null); // heartbeat audio ref
+  const audioRef2 = useRef<HTMLAudioElement>(null); // heartbeat audio ref
   
-    if (audioRef2.current) {
-        audioRef2.current.volume = 0.5;
-        audioRef2.current.playbackRate = 1; // เริ่มด้วยความเร็วปกติ
+  if (audioRef2.current) {
+      audioRef2.current.volume = 0.5;
+      audioRef2.current.playbackRate = 1; // เริ่มด้วยความเร็วปกติ
   
-        // หลัง 3 วินาที เพิ่มความเร็วเป็น 2 เท่า
-        setTimeout(() => {
-          if (audioRef2.current) {
-            audioRef2.current.playbackRate = 2;
-          }
-        }, 3000);
+      // หลัง 3 วินาที เพิ่มความเร็วเป็น 2 เท่า
+      setTimeout(() => {
+        if (audioRef2.current) {
+          audioRef2.current.playbackRate = 2;
+        }
+      }, 3000);
   
-        // หลังจากนั้นอีก 3 วินาที (รวม 6 วินาที) เพิ่มเป็น 3 เท่า
-        setTimeout(() => {
-          if (audioRef2.current) {
-            audioRef2.current.playbackRate = 3;
-          }
-        }, 6000);
-      }
-  
+      // หลังจากนั้นอีก 3 วินาที (รวม 6 วินาที) เพิ่มเป็น 3 เท่า
+      setTimeout(() => {
+        if (audioRef2.current) {
+          audioRef2.current.playbackRate = 3;
+        }
+      }, 6000);
+    }
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-    {/* เพิ่มเพลงในหน้า */}
-    <audio ref={audioRef2} src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
+      {/* เพิ่มเพลงในหน้า */}
+      <audio ref={audioRef2} src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3" autoPlay loop />
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"
@@ -103,7 +102,7 @@ const StoryCanteen2: React.FC = () => {
         variants={fadeInOut(2, "easeInOut", 0)}
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
-    <img
+        <img
           src={backgroundGif()}  // ใช้ฟังก์ชันเปลี่ยน GIF
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
@@ -131,7 +130,14 @@ const StoryCanteen2: React.FC = () => {
           </div>
         )}
 
-        <div className="absolute bottom-[6%] right-5 text-white/80 text-4xl z-20">
+        <div className="absolute bottom-[9%] right-6 text-white/80 text-4xl z-20">
+          {/* เพิ่มข้อความหรือปุ่มที่ต้องการที่มุมขวาล่าง */}
+          <button 
+            onClick={nextText} 
+            className="text-2xl  rounded text-white "
+          >
+            {/* {'>>'} */}
+          </button>
         </div>
       </motion.div>
     </div>

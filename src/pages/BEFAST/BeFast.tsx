@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
 
 const BeFast: React.FC = () => {
   const [inputs, setInputs] = useState(["", "", "", "", "",""]);
@@ -83,6 +84,13 @@ const BeFast: React.FC = () => {
     }, 300);
   };
 
+  const { playAudio, pauseAudio } = useAudio();
+
+  useEffect(() => {
+    playAudio(); // เล่นเพลงต่อจากหน้า Warning
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
+  }, []);
+
   return (
     <div 
       className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative"
@@ -91,8 +99,6 @@ const BeFast: React.FC = () => {
       // exit={{ opacity: 1 }}
       // transition={{ duration: 3 }}
     >
-      {/* เสียงพื้นหลัง */}
-      <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
 
       <div className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/image/body-Befast.png')" }}>
         {buttonPositions.map((pos, index) => (

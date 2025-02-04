@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from '../components/fadeInOut';
+import { useAudio } from "../contexts/AudioProvider"; // นำเข้า useAudio
 
 const Welcome: React.FC = () => {
   const navigate = useNavigate();
@@ -31,23 +32,13 @@ const Welcome: React.FC = () => {
     navigate('/Prechapter');
   };
 
-  // สร้าง ref สำหรับ audio element
-  const audioRef1 = useRef<HTMLAudioElement>(null);
-  const audioRef2 = useRef<HTMLAudioElement>(null);
-  const audioRef3 = useRef<HTMLAudioElement>(null);
+  const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    // ตั้งค่า volume หลังจาก component mount
-    if (audioRef1.current) {
-      audioRef1.current.volume = 0.5;
-    }
-    if (audioRef2.current) {
-      audioRef2.current.volume = 0.5;
-    }
-    if (audioRef3.current) {
-      audioRef3.current.volume = 0.2;
-    }
+    playAudio(); // เล่นเพลงต่อจากหน้า Warning
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
   }, []);
+
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
@@ -64,7 +55,6 @@ const Welcome: React.FC = () => {
           backgroundPosition: 'center',
         }}
       >
-        <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg ">
             <form onSubmit={handleSubmit} className="space-y-6">

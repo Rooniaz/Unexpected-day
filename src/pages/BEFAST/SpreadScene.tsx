@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import AfterBefast from "./AfterBefast";
+import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
 
 const SpreadScene = () => {
   const [isTransitionDone, setIsTransitionDone] = useState(false);
@@ -27,15 +28,6 @@ const SpreadScene = () => {
     },
   };
 
-  // ประกาศ useRef สำหรับ audio
-  const audioRef2 = useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    if (audioRef2.current) {
-      audioRef2.current.volume = 0.5; // ตั้งค่า volume ของ audio
-    }
-  }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsTransitionDone(true);
@@ -47,9 +39,15 @@ const SpreadScene = () => {
     return () => clearTimeout(timer);
   }, [navigate]);
 
+  const { playAudio, pauseAudio } = useAudio();
+
+  useEffect(() => {
+    playAudio(); // เล่นเพลงต่อจากหน้า Warning
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
+  }, []);
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
 
       {!isTransitionDone ? (
         <motion.div

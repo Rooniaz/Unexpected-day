@@ -40,7 +40,7 @@ const SpreadScene = () => {
     const timer = setTimeout(() => {
       setIsTransitionDone(true);
       setTimeout(() => {
-        // navigate("/AfterBefast");
+        navigate("/AfterBefast");
       },); // 2 วินาทีก่อนเปลี่ยนหน้า
     }, 6000);
 

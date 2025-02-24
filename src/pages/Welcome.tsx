@@ -59,17 +59,25 @@ const Welcome: React.FC = () => {
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg ">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-2xl text-orange-500 mb-2 font-custom">ชื่อเล่น</label>
+              <label className="block text-2xl text-[#fa4901] mb-2 ">
+                ชื่อเล่น
+                <span className="text-sm text-black"> (ภาษาไทย,ไม่ใช้เครื่องหมาย)</span>
+              </label>
                 <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full p-2 border mb-8 rounded-3xl"
-                  required
-                />
+                type="text"
+                value={formData.name}
+                onChange={(e) => {
+                  const thaiRegex = /^[ก-๙\s]+$/; // อนุญาตเฉพาะอักษรไทยและช่องว่าง
+                  if (e.target.value === "" || thaiRegex.test(e.target.value)) {
+                    setFormData({ ...formData, name: e.target.value });
+                  }
+                }}
+                className="w-full p-2 border mb-8 rounded-3xl"
+                required
+              />
               </div>
               <div>
-                <label className="block text-2xl text-orange-500 mb-2 font-custom">อายุ</label>
+                <label className="block text-2xl text-[#fa4901] mb-2 ">อายุ</label>
                 <input
                   type="number"
                   value={formData.age}
@@ -80,9 +88,10 @@ const Welcome: React.FC = () => {
               </div>
               <button 
                 type="submit"
-                className="w-full px-6 py-2 font-bold text-xl font-custom text-orange-500 underline rounded"
+                className="w-full px-6 py-2 font-bold text-xl text-[#817c7c] rounded 
+                          transition duration-300 ease-in-out hover:drop-shadow-lg"
               >
-                กดเพื่อไปต่อ →
+                กดเพื่อไปต่อ
               </button>
             </form>
           </div>

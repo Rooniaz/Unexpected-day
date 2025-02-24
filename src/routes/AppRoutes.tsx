@@ -45,7 +45,8 @@ import Afterdoctor from "../pages/stories5/AfterDoctor";
 
 import UnexpectedDayForm from "../pages/BEFAST/EndStory";
 
-import Aboutme from "../pages/credit/aboutme";
+import Aboutme from "../pages/credit/Aboutme";
+import Credit from "../pages/credit/Credit";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -107,7 +108,7 @@ const AppRoutes: React.FC = () => {
 
       {/*credit */}
       <Route path="/Aboutme" element={<Aboutme />} />
-      <Route path="/epilogue" element={<Epilogue />} />
+      <Route path="/Credit" element={<Credit />} />
 
       <Route path="/UnexpectedDayForm" element={<UnexpectedDayForm />} />
     </Routes>

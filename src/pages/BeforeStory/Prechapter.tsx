@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 
 const texts = [
-    "ชีวิตของวัยหนุ่มสาว ",
-    "มีความฝันมากมายที่อยากจะทำ?",
+    "“ชีวิตของวัยหนุ่มสาวมีความฝัน\nมากมายที่อยากจะทำ”",
     "แล้วความฝันของคุณคืออะไร?",
     "ใช้ชีวิตตามปกติอย่างทุกๆวัน",
     "ไปเที่ยว เรียน สังสรรค์ ทำงาน" // ข้อความสุดท้าย
@@ -84,6 +83,7 @@ const Prechapter: React.FC = () => {
                         <motion.p
                             key={index}
                             className={`text-center break-words font-custom ${index === 2 ? 'text-2xl text-white ' : 'text-xl text-white'}`}
+                            style={{ whiteSpace: "pre-line" }} // เพิ่มบรรทัดนี้
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}

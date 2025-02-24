@@ -28,6 +28,7 @@ import TimeToCall from "../pages/BEFAST/TimeToCall";
 import SpreadScene from "../pages/BEFAST/SpreadScene";
 
 
+
 import PlacePark from "../pages/FirstPlace/PlacePark";
 import PlaceHomework from "../pages/FirstPlace/PlaceHomework";
 import PlaceWork from "../pages/FirstPlace/PlaceWork";
@@ -44,9 +45,12 @@ import Afterdoctor from "../pages/stories5/AfterDoctor";
 
 import UnexpectedDayForm from "../pages/BEFAST/EndStory";
 
+import Aboutme from "../pages/credit/aboutme";
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
+
       <Route path="/" element={<Preface />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/warning" element={<Warning />} />
@@ -101,7 +105,9 @@ const AppRoutes: React.FC = () => {
       <Route path="/Afterdoctor" element={<Afterdoctor/>} />
       <Route path="/EndStory" element={<EndStory/>} />
 
-
+      {/*credit */}
+      <Route path="/Aboutme" element={<Aboutme />} />
+      <Route path="/epilogue" element={<Epilogue />} />
 
       <Route path="/UnexpectedDayForm" element={<UnexpectedDayForm />} />
     </Routes>

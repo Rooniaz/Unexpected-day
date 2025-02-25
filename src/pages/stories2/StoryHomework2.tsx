@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { motion } from "framer-motion";
-// import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
-const StoryHomeWork2: React.FC = () => {
+const StoryHomework2: React.FC = () => {
   const navigate = useNavigate();
   const storedName = localStorage.getItem("userName") || "???";
   const [showTextBox, setShowTextBox] = useState(false);
   const [index, setIndex] = useState(0);
   const [isClickable] = useState(true);
-  const [isLocked, setIsLocked] = useState(false); // 🔒 ตัวแปรสำหรับล็อกไม่ให้คลิก
+  const [isLocked, setIsLocked] = useState(false); 
+  const [userReply, setUserReply] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false); // 🔒 กันกดซ้ำ
 
   const texts = [
     `เจน : ${storedName}`,
     `${storedName} : อ.. เอ่ออ`,
     `เจน : ${storedName} แกคิดว่าไง`,
-    `${storedName} : อะ อึกอ่วย อะ อดดิพ`,
+    `${storedName} : : อ..อะ %^&8#`,
     "เจน : พูดอะไรอ่ะ",
     "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
     "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
@@ -25,14 +25,13 @@ const StoryHomeWork2: React.FC = () => {
   useEffect(() => {
     let interval: ReturnType<typeof setTimeout>;
     if (isLocked && !showTextBox && index >= 3) {
-      // เริ่มแสดงข้อความอัตโนมัติหลังจาก index 3
       interval = setInterval(() => {
         setIndex((prev) => {
           if (prev < texts.length - 1) {
             return prev + 1;
           } else {
             clearInterval(interval);
-            navigate('/StoryHomework3'); // ไปหน้าต่อไปเมื่อจบข้อความ
+            navigate('/StoryHomework3');
             return prev;
           }
         });
@@ -41,25 +40,39 @@ const StoryHomeWork2: React.FC = () => {
     return () => clearInterval(interval);
   }, [isLocked, index, showTextBox, navigate]);
 
-  const handleTextBoxClick = () => {
-    setShowTextBox(false);
-    setIsLocked(true); // 🔒 ล็อกไม่ให้คลิกหน้าจออีก
-    setIndex((prev) => prev + 1);
-  };
+  useEffect(() => {
+    if (!userReply.trim()) return; 
+    
+    setIsProcessing(true); 
+    const timer = setTimeout(() => {
+      setShowTextBox(false);
+      setIsLocked(true);
+      setIndex((prev) => prev + 1);
+      setIsProcessing(false); 
+    }, 500);
+
+    return () => clearTimeout(timer); // 🔄 เคลียร์เมื่อเปลี่ยนข้อความ
+  }, [userReply]);
 
   const nextText = () => {
-    if (!isClickable || showTextBox || isLocked) return; // ❌ ป้องกันการคลิกเมื่อถูกล็อก
-
+    if (!isClickable || showTextBox || isLocked || isProcessing) return; // ป้องกันกดซ้ำ
+  
+    setIsProcessing(true); // 🔒 ล็อกปุ่ม
     if (index < texts.length - 1) {
       if (index === 2) {
-        setShowTextBox(true); // แสดง textbox
+        setShowTextBox(true);
       } else {
         setIndex((prev) => prev + 1);
       }
     } else {
       navigate('/StoryHomework3');
     }
+  
+    setTimeout(() => {
+      setIsProcessing(false); // 🔓 ปลดล็อกหลังจากดีเลย์
+    }, 500);
   };
+  
 
   // เปลี่ยน GIF เมื่อถึงข้อความ "เจน : พูดอะไรอ่ะ"
   const backgroundGif = () => {
@@ -68,26 +81,19 @@ const StoryHomeWork2: React.FC = () => {
     }
     return "/gif/18-21/jane_class_18-21.gif";  // ค่า default
   };
-
+    
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-      {/* เพิ่มเพลงในหน้า */}
-      <audio src="/Sound/Scene Study/Auditorium Lecture Room Ambience Loop.mp3" autoPlay loop />
-      {/* Mobile-sized container */}
+      <audio src="/Sound/Scene Working/Very Calm Office.mp3" autoPlay loop />
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
-        // initial="initial"
-        // animate="animate"
-        // exit="exit"
-        // variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
+        onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} 
       >
         <img
-          src={backgroundGif()}  // ใช้ฟังก์ชันเปลี่ยน GIF
+          src={backgroundGif()}  
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
-
         {!showTextBox ? (
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
@@ -96,15 +102,13 @@ const StoryHomeWork2: React.FC = () => {
           </div>
         ) : (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] z-10">
-            <div 
-              className="bg-white rounded-lg p-4 cursor-pointer"
-              onClick={handleTextBoxClick}
-            >
+            <div className="bg-white rounded-lg p-4 cursor-pointer">
               <input
                 type="text"
-                value="พิมพ์เพื่อตอบ"
-                disabled
-                className="w-full text-center bg-transparent text-gray-500"
+                value={userReply}
+                placeholder="พิมพ์เพื่อตอบ..."
+                className="w-full text-center bg-transparent text-black text-xl outline-none border-none py-10"
+                onChange={(e) => setUserReply(e.target.value)}
               />
             </div>
           </div>
@@ -118,4 +122,4 @@ const StoryHomeWork2: React.FC = () => {
   );
 };
 
-export default StoryHomeWork2;
+export default StoryHomework2;

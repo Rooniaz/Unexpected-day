@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import { motion } from "framer-motion";
+// import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const StoryPark2: React.FC = () => {
@@ -8,15 +10,13 @@ const StoryPark2: React.FC = () => {
   const [showTextBox, setShowTextBox] = useState(false);
   const [index, setIndex] = useState(0);
   const [isClickable] = useState(true);
-  const [isLocked, setIsLocked] = useState(false); 
-  const [userReply, setUserReply] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false); // 🔒 กันกดซ้ำ
+  const [isLocked, setIsLocked] = useState(false); // 🔒 ตัวแปรสำหรับล็อกไม่ให้คลิก
 
   const texts = [
     `เจน : ${storedName}`,
     `${storedName} : อ.. เอ่ออ`,
-    `เจน : ${storedName} แกคิดว่าไง`,
-    `${storedName} : : อ..อะ %^&8#`,
+    `เจน : ${storedName} ไปกันเลยไหม`,
+    `${storedName} : อะ อึกอ่วย อะ อดดิพ`,
     "เจน : พูดอะไรอ่ะ",
     "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
     "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
@@ -25,13 +25,14 @@ const StoryPark2: React.FC = () => {
   useEffect(() => {
     let interval: ReturnType<typeof setTimeout>;
     if (isLocked && !showTextBox && index >= 3) {
+      // เริ่มแสดงข้อความอัตโนมัติหลังจาก index 3
       interval = setInterval(() => {
         setIndex((prev) => {
           if (prev < texts.length - 1) {
             return prev + 1;
           } else {
             clearInterval(interval);
-            navigate('/StoryPark3');
+            navigate('/StoryPark3'); // ไปหน้าต่อไปเมื่อจบข้อความ
             return prev;
           }
         });
@@ -40,59 +41,53 @@ const StoryPark2: React.FC = () => {
     return () => clearInterval(interval);
   }, [isLocked, index, showTextBox, navigate]);
 
-  useEffect(() => {
-    if (!userReply.trim()) return; 
-    
-    setIsProcessing(true); 
-    const timer = setTimeout(() => {
-      setShowTextBox(false);
-      setIsLocked(true);
-      setIndex((prev) => prev + 1);
-      setIsProcessing(false); 
-    }, 500);
-
-    return () => clearTimeout(timer); // 🔄 เคลียร์เมื่อเปลี่ยนข้อความ
-  }, [userReply]);
+  const handleTextBoxClick = () => {
+    setShowTextBox(false);
+    setIsLocked(true); // 🔒 ล็อกไม่ให้คลิกหน้าจออีก
+    setIndex((prev) => prev + 1);
+  };
 
   const nextText = () => {
-    if (!isClickable || showTextBox || isLocked || isProcessing) return; // ป้องกันกดซ้ำ
-  
-    setIsProcessing(true); // 🔒 ล็อกปุ่ม
+    if (!isClickable || showTextBox || isLocked) return; // ❌ ป้องกันการคลิกเมื่อถูกล็อก
+
     if (index < texts.length - 1) {
       if (index === 2) {
-        setShowTextBox(true);
+        setShowTextBox(true); // แสดง textbox
       } else {
         setIndex((prev) => prev + 1);
       }
     } else {
       navigate('/StoryPark3');
     }
-  
-    setTimeout(() => {
-      setIsProcessing(false); // 🔓 ปลดล็อกหลังจากดีเลย์
-    }, 500);
   };
-  
 
-  const backgroundGif = () => {
-    if (index >= 4) {
-      return "/gif/26-27/park.gif";  // ใช้ GIF นี้ค้างไว้
-    }
-    return "/gif/18-21/jane_park_18-21.gif";  // ค่า default
-  };
+      // เปลี่ยน GIF เมื่อถึงข้อความ "เจน : พูดอะไรอ่ะ"
+      const backgroundGif = () => {
+        if (index >= 4) {
+          return "/gif/26-27/park.gif";  // ใช้ GIF นี้ค้างไว้
+        }
+        return "/gif/18-21/jane_park_18-21.gif";  // ค่า default
+      };
     
+
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-      <audio src="/Sound/Scene Working/Very Calm Office.mp3" autoPlay loop />
+                  {/* เพิ่มเพลงในหน้า */}
+                  <audio src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
-        onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} 
+        // initial="initial"
+        // animate="animate"
+        // exit="exit"
+        // variants={fadeInOut(2, "easeInOut", 0)}
+        onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined} // 👈 ตรวจสอบการล็อก
       >
         <img
-          src={backgroundGif()}  
+          src={backgroundGif()}  // ใช้ฟังก์ชันเปลี่ยน GIF
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
+      
         {!showTextBox ? (
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
@@ -101,13 +96,15 @@ const StoryPark2: React.FC = () => {
           </div>
         ) : (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] z-10">
-            <div className="bg-white rounded-lg p-4 cursor-pointer">
+            <div 
+              className="bg-white rounded-lg p-4 cursor-pointer"
+              onClick={handleTextBoxClick}
+            >
               <input
                 type="text"
-                value={userReply}
-                placeholder="พิมพ์เพื่อตอบ..."
-                className="w-full text-center bg-transparent text-black text-xl outline-none border-none py-10"
-                onChange={(e) => setUserReply(e.target.value)}
+                value="พิมพ์เพื่อตอบ"
+                disabled
+                className="w-full text-center bg-transparent text-gray-500"
               />
             </div>
           </div>

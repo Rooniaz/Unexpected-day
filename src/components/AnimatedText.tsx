@@ -9,31 +9,31 @@ interface AnimatedTextProps {
 
 export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
     const container = {
-    hidden: { opacity: 1 },
-    show: {
-        opacity: 1,
-        transition: { staggerChildren: 0.08 },
-    },
+        hidden: { opacity: 1 },
+        show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.08 },
+        },
     };
 
     const letter = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.1 } },
+        hidden: { opacity: 0, y: 10 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.1 } },
     };
 
     return (
-    <motion.p
-        className="text-lg text-white font-custom text-center"
-        variants={container}
-        initial="hidden"
-        animate="show"
-    >
-        {text.split("").map((char, index) => (
-        <motion.span key={index} variants={letter}>
-            {char}
-        </motion.span>
-        ))}
-    </motion.p>
+        <motion.p
+            className="text-lg text-white font-custom text-center"
+            variants={container}
+            initial="hidden"
+            animate="show"
+        >
+            {text.split("").map((char, index) => (
+                <motion.span key={index} variants={letter}>
+                    {char}
+                </motion.span>
+            ))}
+        </motion.p>
     );
 };
 
@@ -53,7 +53,7 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
 
     return (
         <motion.p
-            className="text-2xl font-custom text-center "
+            className="text-lg text-white font-custom text-center"
             variants={container}
             initial="hidden"
             animate="show"
@@ -62,7 +62,7 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
                 <motion.span 
                     key={index} 
                     variants={letter} 
-                    style={{ color }} // ใช้สีที่ส่งมาใน prop
+                    style={{ color: char === "canteen" ? 'yellow' : color }} // ใช้สีเหลืองเมื่อพบคำว่า "canteen"
                 >
                     {char}
                 </motion.span>
@@ -70,9 +70,3 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
         </motion.p>
     );
 };
-
-//import { AnimatedText } from "../../components/AnimatedText";  // นำเข้าคอมโพเนนต์ AnimatedText
-//<AnimatedText 
-//text="เจน : แกพรุ่งนี้วันหยุดไปเที่ยวที่นี่กันดีมั้ย คิดว่าแกน่าจะชอบนะ canteen" 
-//delay={50}  // ปรับ delay ได้ตามต้องการ
-///>

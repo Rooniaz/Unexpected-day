@@ -12,17 +12,17 @@ const Warning: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+    <div
+      className="min-h-screen bg-white flex flex-col items-center justify-center p-4 cursor-pointer"
+      onClick={() => navigate('/welcome')} // คลิกที่ทั้งหน้าเพื่อไปต่อ
+    >
       <div className="w-full max-w-lg text-center">
+
+        <p className="text-4xl font-custom mb-4 bg-yellow-300 text-black p-2">Trigger Warning!</p>
         <p className="text-lg font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
         <p className="text-lg font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
-        <p className="text-lg font-custom mb-8">ขอให้ทุกคนได้รับทั้งความสุขและสาระความรู้จากการดำเนินเรื่อง ณ ที่นี้ด้วยนะคะ :)</p>
-        <button 
-          onClick={() => navigate('/Explanation')}
-          className="mt-8 px-6 py-2 bg-black font-custom text-white rounded hover:bg-gray-800"
-        >
-          ถัดไป {'>>'}
-        </button>
+        <p className="text-lg font-custom mb-8">ขอให้<span className="text-orange-500">ทุกคนโชคดีและมีสุขภาพที่แข็งแรงนะคะ</span> :)</p>
+
       </div>
     </div>
   );

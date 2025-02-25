@@ -1,3 +1,6 @@
+
+// ไม่ได้ใช้แล้ว
+
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../contexts/AudioProvider";

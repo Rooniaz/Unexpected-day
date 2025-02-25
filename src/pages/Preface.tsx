@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../contexts/AudioProvider";
@@ -34,19 +35,20 @@ const Preface: React.FC = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="absolute top-16 left-4 bg-gray-800 text-white rounded-lg shadow-lg p-4 w-40"
+            className="absolute top-16 left-4 bg-gray-800  bg-opacity-80 text-white rounded-lg shadow-lg p-4 w-40 z-10"
               initial={{ opacity: 0, x: -50 }} // เริ่มจากความโปร่งใส 0 และขยับมาจากซ้าย
               animate={{ opacity: 1, x: 0 }} // แสดงเมนูด้วย fade-in และ slide-in
               exit={{ opacity: 0, x: -50 }} // ซ่อนเมนูกลับไปทางซ้าย
               transition={{ duration: 0.3 }} // ตั้งเวลาการเปลี่ยนแปลง
             >
-              <ul>
+              <ul className="text-left">
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>
                   เกี่ยวกับ
                 </li>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit")}>
                   เครดิต
                 </li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit1")}>เครดิต1</li>
               </ul>
             </motion.div>
           )}

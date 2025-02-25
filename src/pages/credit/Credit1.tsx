@@ -4,7 +4,7 @@ import { FiMenu, FiX } from "react-icons/fi"; // ไอคอน
 import { motion, AnimatePresence } from "framer-motion"; // เพิ่ม animation
 
 
-const Credit: React.FC = () => {
+const Credit1: React.FC = () => {
 const navigate = useNavigate();
 const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิด-ปิดเมนู
 
@@ -31,7 +31,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิ
           backgroundPosition: 'center',
         }}
       >
-                      {/* ✅ ปุ่ม Hamburger Menu */}
+                              {/* ✅ ปุ่ม Hamburger Menu */}
       <motion.button
         className="absolute top-4 left-4 text-black text-3xl z-10"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -55,13 +55,13 @@ const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิ
             <ul>
               <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/")}>หน้าหลัก</li>
               <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>เกี่ยวกับ</li>
-              <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit1")}>เครดิต1</li>
+              <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit")}>เครดิต</li>
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-          <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg ">
+        <div className="absolute top-0 left-0 w-full h-full flex items-start justify-center ">
+          <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg  mt-10">
             <form onSubmit={handleSubmit} className="space-y-6">
             <img 
               src="/icon.svg" 
@@ -71,62 +71,34 @@ const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิ
               className="absolute top-6 right-6"
             />
 
-              <div>
-              <h2 className="text-4xl font-bold mb-3 text-[#fa4901]">เครดิต</h2>
-            <p className="text-base mt-3">โปรเจกต์นี้เป็นผลงานนวัตกรรมสื่อสารนิพนธ์ ของ</p>
-            <p className="text-base">ชญานิน สุรขจร, ปัทมาพร ประทุมถิ่น, ฐปนัท</p>
-            <p className="text-base">เดชประมวลพล และ วรัญญา ตันติเฉลิม นิสิตจาก</p>
-            <p className="text-base">วิทยาลัยนวัตกรรมสื่อสารสังคม เอกการสื่อสารเพื่อ</p>
-            <p className="text-base">สุขภาพ มหาวิทยาลัยศรีนครินทรวิโรฒ </p>
-
-
-            <div className="grid grid-cols-2 gap-4 mt-6">
-                <div>
-                  <p className="font-bold text-[#fa4901]">โครงเรื่อง</p>
-                  <p className="font-bold text-[#fa4901]">บทบรรยาย</p>
-                  <p className="font-bold text-[#fa4901]">ภาพประกอบ</p>
-                </div>
-                <div>
-                    <p >ชญานิน สุรขจร</p>
-                    <p>ปัทมาพร ประทุมถิ่น</p>
-                    <p>ฐปนัท เดชประมวลพล</p>
-                    <p>วรัญญา ตันติเฉลิม</p>
-                </div>
-                </div>
-
-            <div className="grid grid-cols-2 gap-4 mt-4">
-                <p className="font-bold text-[#fa4901]">เสียงประกอบ</p>
-                <p>วรัญญา ตันติเฉลิม</p>
+            <div>
+            <h2 className="text-4xl mb-3">หัวข้อ</h2>
+            <p className="text-base mt-6 mb-4">อายุน้อยก็เป็นได้</p>
+            <div className="w-full flex justify-center">
+            <iframe
+                width="350"
+                height="200"
+                src="https://www.youtube.com/embed/l-2hOKIrIyI"
+                title="YouTube video player"
+                className="rounded-lg"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+            ></iframe>
             </div>
+            <p className="text-base mt-8">เนื้อหาคลิป</p>
+            {/* <p className="text-base mt-3">อายุน้อยก็เป็นได้อายุน้อยก็เป็นได้อายุน้อยก็เป็นได้</p>
+            <p className="text-base mt-3">อายุน้อยก็เป็นได้</p> */}
 
 
-              <p className=" text-sm">
-                (ขอบคุณเสียงประกอบจาก envato.co )
-              </p>
 
-              <div className="grid grid-cols-2 gap-4 mt-4">
-                <div>
-                    <p className="font-bold text-[#fa4901]">พัฒนา</p>
-                </div>
-                <div>
-                    <p>จุลดิษฐ์ อุ่มวงศ์</p>
-                    <p>ดลฤทธิ์ อิทธิโชติ</p>
-                </div>
-            </div>
-
-
-              <p className="text-sm font-bold text-[#fa4901] mt-6">
-                ขอบคุณทีมงานทุกคนที่มีส่วนร่วมในผลงานนี้
-              </p>
-
-              <p className="text-xs mt-4 text-[#ffffff] drop-shadow-lg">
+              <p className="absolute bottom-[10%] text-xs mt-4 text-[#ffffff] drop-shadow-lg">
                 Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน
               </p>
 
               </div>
               <button 
                 type="submit"
-                className="absolute bottom-[3%] right-6 font-bold text-xl text-orange-500 underline rounded"
+                className="absolute bottom-[3%] right-6 text-xl underline rounded"
               >
                 กดเพื่อไปต่อ →
               </button>
@@ -138,4 +110,4 @@ const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิ
   );
 };
 
-export default Credit;
+export default Credit1;

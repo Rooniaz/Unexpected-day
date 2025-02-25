@@ -14,28 +14,29 @@ const Prologue2: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 font-custom">
-      <motion.div className="w-full max-w-lg text-center"
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={fadeInOut(2, "easeInOut", 0)}>
-        <h2 className="text-2xl mb-4">คุณกำลังทำอะไรอยู่</h2>
-        <div className="space-y-4">
-          {choices.map((choice, index) => (
-            <button 
-              key={index}
-              onClick={() => navigate(choice.path)}
-              className="w-full px-6 py-3 bg-gray-700 text-white rounded-3xl hover:bg-gray-600 font-custom "
-            >
-              {choice.text}
-            </button>
-          ))}
-        </div>
-        {/* <div className="mt-16 text-6xl font-bold font-custom">
-          12:12
-        </div> */}
-      </motion.div>
+    <div className="flex items-center justify-center min-h-screen bg-black">
+<div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "#817c7c" }}>        
+  <motion.div
+          className="w-full max-w-lg text-center"
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={fadeInOut(2, "easeInOut", 0)}
+        >
+          <h2 className="text-2xl mb-4 text-white mb-8">คุณกำลังทำอะไรอยู่</h2>
+          <div className="space-y-4">
+            {choices.map((choice, index) => (
+              <button
+                key={index}
+                onClick={() => navigate(choice.path)}
+                className="w-3/4 px-6 py-2 bg-white text-lg text-black rounded-3xl hover:bg-[#c9c5c4] "
+              >
+                {choice.text}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

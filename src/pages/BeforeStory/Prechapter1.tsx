@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 
 const texts = [
-    "ฉันกับเพื่อนคุยเรื่องราวอนาคต และ สิ่งต่างๆที่อยากจะทำ",
-    "เจน : เรามีอะไรที่อยากจะทำเต็มไปหมดเลยเนอะ",
-    "“เคยคิดไหมว่า ถ้าวันหนึ่งโอกาสในการทำสิ่งที่อยากทำหมดลงไป แกจะรู้สึกเสียดายไหม?”",
-    " . . . . . . . . . . . .",
-    "ฉันจึงกลับมาคิดเรื่องนี้หลังจากจบบทสนทนาลง"
+    "คุณกับเพื่อนคุยเรื่องราวอนาคต\nและสิ่งต่างๆที่อยากจะทำ",
+    "เจน : เรามีอะไรที่อยากจะทำเต็ม\nไปหมดเลยเนอะ",
+    "เจน : เคยคิดไหมว่า ถ้าวันหนึ่งโอกาส\nในการทำสิ่งที่อยากทำหมดลงไป\nแกจะรู้สึกเสียดายไหม?",
+    "คุณ :  . . . . . . . . . . . .",
+    "ฉันจึงกลับมาคิดเรื่องนี้\nหลังจากจบบทสนทนาลง"
 ];
 
 const Prechapter: React.FC = () => {
@@ -45,11 +45,11 @@ const Prechapter: React.FC = () => {
 
     const backgroundGif = () => {
         switch (texts[index]) {
-            case "ฉันกับเพื่อนคุยเรื่องราวอนาคต และ สิ่งต่างๆที่อยากจะทำ":
+            case "คุณกับเพื่อนคุยเรื่องราวอนาคต\nและสิ่งต่างๆที่อยากจะทำ":
                 return "/gif/8.gif";
-            case "เจน : เรามีอะไรที่อยากจะทำเต็มไปหมดเลยเนอะ":
+            case "เจน : เรามีอะไรที่อยากจะทำเต็ม\nไปหมดเลยเนอะ":
                 return "/gif/9.gif";
-            case "“เคยคิดไหมว่า ถ้าวันหนึ่งโอกาสในการทำสิ่งที่อยากทำหมดลงไป แกจะรู้สึกเสียดายไหม?”":
+            case "เจน : เคยคิดไหมว่า ถ้าวันหนึ่งโอกาส\nในการทำสิ่งที่อยากทำหมดลงไป\nแกจะรู้สึกเสียดายไหม?":
                 return "/gif/10.gif";
             default:
                 return "/gif/11-12.gif";
@@ -99,7 +99,7 @@ const Prechapter: React.FC = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <motion.p
-                            className="text-2xl text-white font-custom font-bold"
+                            className="text-2xl text-[#fa4901] font-bold"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8 }}
@@ -115,19 +115,18 @@ const Prechapter: React.FC = () => {
                     />
                 )}
 
-                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="absolute inset-0 bg-black/30"></div>
 
-                <div className="absolute inset-0 flex flex-col justify-center items-center z-10 px-4">
+                <div className="absolute inset-0 flex flex-col justify-start items-center z-10 px-4 pt-36 ">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
-                            className={`text-center break-words font-custom ${index === 5 ? 'text-2xl text-black font-bold' : 'text-xl text-white'}`}
+                            className={`text-center break-words ${index === 5 ? 'text-2xl text-black font-bold' : 'text-xl '}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.8 }}
-                            style={{ display: showNextPage ? 'none' : 'block' }}
-                        >
+                            style={{ display: showNextPage ? 'none' : 'block', whiteSpace: 'pre-line' }}                        >
                             {texts[index]}
                         </motion.p>
                     </AnimatePresence>

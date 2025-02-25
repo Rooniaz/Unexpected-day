@@ -82,12 +82,21 @@ const Braindetail = () => {
           </motion.h1>
 
           <motion.p
-            className="font-custom text-white text-lg text-left mt-8"
-            variants={subtitleVariants}
-          >
-            คือ ภาวะที่เกิดจากการที่สมองขาด
-            เลือดหรือออกชิเจนอย่างเฉียบพลัน
-          </motion.p>
+          className="font-custom text-white text-lg text-left mt-8"
+          variants={subtitleVariants}
+        >
+          คือ ภาวะที่เกิดจากการที่สมองขาดเลือด <br />
+          หรือออกซิเจนอย่างเฉียบพลัน <br /> <br />
+
+          ประเทศไทยมีจำนวนผู้ป่วยโรคหลอด
+          เลือดสมองมากขึ้นทุกปี และคร่าชีวิต
+          ประชากรไทยมากถึง 50,000 คนต่อปี
+          หรือเฉลี่ยชั่วโมงละ 6 คน<br /><br />
+
+          เป็นสาเหตุหลักของการเสียชีวิตอันดับ
+          ต้นๆ ในประเทศไทย
+        </motion.p>
+
         </motion.div>
       </motion.div>
     </div>

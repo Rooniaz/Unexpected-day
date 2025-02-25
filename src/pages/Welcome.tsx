@@ -32,6 +32,13 @@ const Welcome: React.FC = () => {
     navigate('/Prechapter');
   };
 
+    // เคลียร์ค่าทุกครั้งที่เข้าหน้านี้ใหม่
+    useEffect(() => {
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userAge");
+      setFormData({ name: "", age: "" });
+    }, []);
+
   const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {

@@ -15,7 +15,7 @@ const StoryCanteen2: React.FC = () => {
   const texts = [
     `เจน : ${storedName}`,
     `${storedName} : อ.. เอ่ออ`,
-    `เจน : ${storedName} แกคิดว่าไง`,
+    `เจน : ${storedName} จะไปหรือยัง`,
     `${storedName} : อะ อึกอ่วย อะ อดดิพ`,
     "เจน : พูดอะไรอ่ะ",
     "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",

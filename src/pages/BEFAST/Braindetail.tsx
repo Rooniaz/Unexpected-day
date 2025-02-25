@@ -82,7 +82,7 @@ const Braindetail = () => {
           </motion.h1>
 
           <motion.p
-          className="font-custom text-white text-lg text-left mt-8"
+          className="font-light text-white text-lg text-left mt-8"
           variants={subtitleVariants}
         >
           คือ ภาวะที่เกิดจากการที่สมองขาดเลือด <br />

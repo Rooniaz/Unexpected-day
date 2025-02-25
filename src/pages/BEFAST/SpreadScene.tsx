@@ -55,10 +55,9 @@ const SpreadScene = () => {
           animate="show"
           exit="hidden"
           variants={container}
-          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-gradient-to-b from-gray-500 via-white to-gray-500 text-white text-3xl px-6 py-2"
-        >
+          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-gradient-to-b from-gray-500 via-white to-gray-500 text-white text-2xl px-6 py-2"        >
           {/* บรรทัดแรก */}
-          <div className="flex flex-row text-[#696969] justify-center items-center text-center text-shadow-2xl">
+          <div className="flex flex-row text-[#696969] text-2xl justify-center items-center text-center text-shadow-2xl">
             {text.split("").map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}
@@ -67,7 +66,7 @@ const SpreadScene = () => {
           </div>
 
           {/* บรรทัดที่สอง (สีแดง) */}
-          <motion.div className="mt-2 text-red-500 text-4xl font-bold" variants={letter}>
+          <motion.div className="mt-2 text-red-500 text-2xl font-bold" variants={letter}>
             {redText}
           </motion.div>
         </motion.div>

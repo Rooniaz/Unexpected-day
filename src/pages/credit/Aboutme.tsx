@@ -54,17 +54,16 @@ const navigate = useNavigate();
             <p className="text-base ">ประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง</p>
             <p className="text-base ">ด้วยกันนะคะ</p>
 
-
             <p className="text-base mt-14 text-[#ffffff] drop-shadow-md">ดูผลงานของเราเพิ่มเติมได้ที่</p>
             <div className="flex space-x-4 mt-4">
               <a href="https://www.youtube.com/channel/yourchannel" target="_blank" rel="noopener noreferrer">
-                <img src="/youtube-icon.svg" alt="YouTube Icon" width="30" height="30" />
+                <img src="/image/icons/icon_ins.png" alt="YouTube Icon" width="30" height="30" />
               </a>
               <a href="https://www.youtube.com/channel/yourchannel" target="_blank" rel="noopener noreferrer">
-                <img src="/youtube-icon.svg" alt="YouTube Icon" width="30" height="30" />
+                <img src="/image/icons/icon_fb.png" alt="YouTube Icon" width="30" height="30" />
               </a>
               <a href="https://www.youtube.com/channel/yourchannel" target="_blank" rel="noopener noreferrer">
-                <img src="/youtube-icon.svg" alt="YouTube Icon" width="30" height="30" />
+                <img src="/image/icons/icon_youtube.png" alt="YouTube Icon" width="30" height="30" />
               </a>
             </div>
             <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
@@ -72,7 +71,7 @@ const navigate = useNavigate();
               </div>
               <button 
                 type="submit"
-                className="absolute bottom-[3%] right-6 font-bold text-xl font-custom text-orange-500 underline rounded"
+                className="absolute bottom-[3%] right-6 font-bold text-xl text-orange-500 underline rounded"
               >
                 กดเพื่อไปต่อ →
               </button>

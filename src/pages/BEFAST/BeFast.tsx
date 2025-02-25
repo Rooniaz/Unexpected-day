@@ -144,20 +144,20 @@ const BeFast: React.FC = () => {
             exit={{ scale: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <p className="text-center font-custom text-[#CD5C5C] text-4xl">{popupMessage.text}</p>
+            <p className="text-center text-[#CD5C5C] text-4xl">{popupMessage.text}</p>
             {popupMessage.image && (
               <div className="w-full h-[260px] overflow-hidden rounded-lg">
                 <img src={popupMessage.image} alt="Popup Icon" className="w-full h-full object-cover" />
               </div>
             )}
             {popupMessage.description && (
-              <p className="text-center text-[#F08080] font-custom mt-4">{popupMessage.description}</p>
+              <p className="text-center text-[#F08080]  mt-4">{popupMessage.description}</p>
             )}
             {isContentComplete && (
               <div className="flex justify-center w-full">
                 <button
                   onClick={handleCloseFirstDialog}
-                  className="px-4 py-2 rounded font-custom text-[#000000]"
+                  className="px-4 py-2 rounded text-[#000000]"
                 >
                   เข้าใจแล้ว
                 </button>

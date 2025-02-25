@@ -50,7 +50,7 @@ const Prechapter2: React.FC = () => {
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
-                            className="text-lg text-white font-custom text-center break-words"
+                            className="text-lg text-white text-center break-words"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}

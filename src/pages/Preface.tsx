@@ -53,10 +53,10 @@ const Preface: React.FC = () => {
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-          <h1 className="text-5xl font-bold mb-4 text-[#fa4901]">Unexpected</h1>
-          <p className="text-5xl font-bold mb-4 text-[#fa4901]">Day</p>
-          <p className="text-2xl mt-14 text-white">การเผชิญกับโรคหลอด</p>
-          <p className="text-2xl mb-8 text-white">เลือดสมองแบบเฉียบพลัน</p>
+          <h1 className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Unexpected</h1>
+          <p className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Day</p>
+          <p className="text-2xl mt-14 text-white font-custom">การเผชิญกับโรคหลอด</p>
+          <p className="text-2xl mb-8 text-white font-custom" >เลือดสมองแบบเฉียบพลัน</p>
           <button
             onClick={() => navigate("/warning")}
             className="mt-8 px-6 py-2 bg-black text-white rounded hover:bg-gray-800 font-custom"

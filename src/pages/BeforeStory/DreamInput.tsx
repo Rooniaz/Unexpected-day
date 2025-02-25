@@ -21,7 +21,7 @@ const DreamInput: React.FC = () => {
     return (
         <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
             <div className="w-full max-w-lg">
-                <div className="flex justify-center items-center font-custom mb-5">
+                <div className="flex justify-center items-center mb-5">
                     <p>แล้วความฝันของคุณคืออะไร?</p>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -30,7 +30,7 @@ const DreamInput: React.FC = () => {
                             type="text"
                             value={formData.dream}
                             onChange={(e) => setFormData({ ...formData, dream: e.target.value })}
-                            className="w-full p-2 border rounded-3xl w-80 h-40 text-center font-custom text-lg"
+                            className="w-full p-2 border rounded-3xl w-80 h-40 text-center text-lg"
                             placeholder="พิมพ์เพื่อตอบ"
                             required
                         />
@@ -38,7 +38,7 @@ const DreamInput: React.FC = () => {
                     <div className="flex justify-center items-center">
                         <button 
                             type="submit"
-                            className="w-auto px-4 py-1 font-bold text-xl font-custom text-black bg-grey-500 rounded border-2 border-grey-500"
+                            className="w-auto px-4 py-1 font-bold text-xl text-black bg-grey-500 rounded border-2 border-grey-500"
                         >
                             ตกลง
                         </button>

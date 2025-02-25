@@ -61,7 +61,7 @@ const UnexpectedDayForm: React.FC = () => {
         <div className="w-full h-full flex justify-center items-center p-6 bg-[#FFF8E7]">
           <div className="w-full border-2 border-blue-500">
             {/* Header */}
-            <div className="bg-[#E6F3FF] p-4 text-center border-b-2 border-blue-500 font-custom">
+            <div className="bg-[#E6F3FF] p-4 text-center border-b-2 border-blue-500 ">
               <h1 className="text-2xl font-bold mb-1">
                 Unexpected Day
               </h1>
@@ -71,17 +71,17 @@ const UnexpectedDayForm: React.FC = () => {
             </div>
 
             {/* Dream Section */}
-            <div className="bg-[#E6F3FF] p-3 border-b-2 border-blue-500 font-custom">
+            <div className="bg-[#E6F3FF] p-3 border-b-2 border-blue-500 ">
               <div className="text-lg text-center">ความฝันของคุณ</div>
             </div>
 
             {/* Dream Content */}
-            <div className="bg-white p-4 min-h-[120px] border-b-2 border-blue-500 font-custom">
+            <div className="bg-white p-4 min-h-[120px] border-b-2 border-blue-500 ">
               {formData.dream}
             </div>
 
             {/* Name and Age */}
-            <div className="grid grid-cols-2 border-b-2 border-blue-500 font-custom">
+            <div className="grid grid-cols-2 border-b-2 border-blue-500 ">
               <div className="p-3 bg-[#E6F3FF] border-r-2 border-blue-500">
                 <span className="text-lg">คุณ : </span>
                 <span>{formData.name}</span>
@@ -93,7 +93,7 @@ const UnexpectedDayForm: React.FC = () => {
             </div>
 
             {/* Bottom Message */}
-            <div className="bg-white p-4 text-center font-custom">
+            <div className="bg-white p-4 text-center">
               <p>อายุเท่านี้</p>
               <p>ก็สามารถเป็น</p>
               <p>โรคหลอดเลือดสมองเฉียบพลันได้!</p>
@@ -101,7 +101,7 @@ const UnexpectedDayForm: React.FC = () => {
             </div>
 
             {/* Footer */}
-            <div className="bg-white text-center p-2 text-sm font-custom">
+            <div className="bg-white text-center p-2 text-sm ">
               หากพบอาการผิดปกติโทร 1669
             </div>
           </div>

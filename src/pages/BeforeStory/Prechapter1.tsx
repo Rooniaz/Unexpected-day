@@ -99,7 +99,7 @@ const Prechapter: React.FC = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <motion.p
-                            className="text-2xl text-[#fa4901] font-bold"
+                            className="text-2xl text-[#fa4901] "
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8 }}

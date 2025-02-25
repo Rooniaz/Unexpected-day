@@ -55,7 +55,7 @@ const AfterBefast = () => {
             transition={{ duration: 0.5 }}
             className="absolute top-[40%] left-1/2 transform -translate-x-1/2 text-center" //ใส่ shadowให้ ส่งให้ทัน
           >
-            <div className="bg-opacity-80 text-[#FFFFFF] font-custom text-4xl font-bold px-6 py-2 rounded-lg" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+            <div className="bg-opacity-80 text-[#FFFFFF] text-4xl font-bold px-6 py-2 rounded-lg" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
             ส่งให้ทันภายใน 4.30 ชม.
             </div>
 
@@ -99,7 +99,7 @@ const AfterBefast = () => {
             transition={{ duration: 0.5 }}
             className="absolute top-[63%] left-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           >
-            <div className="bg-opacity-50 text-white font-custom text-4xl font-bold px-6 py-2 rounded-lg">
+            <div className="bg-opacity-50 text-white text-4xl font-bold px-6 py-2 rounded-lg">
               <span className="text-red-500">T</span>ime to Call{" "}
               <span className="text-red-500">1669</span>
             </div>

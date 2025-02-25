@@ -73,7 +73,7 @@ const Braindetail = () => {
           onAnimationComplete={() => setAnimationComplete(true)} // ตรวจจับเมื่อแอนิเมชันจบ
         >
           <motion.h1
-            className="font-custom text-[#FF4500] text-4xl text-left mb-1.5"
+            className=" text-[#FF4500] text-4xl text-left mb-1.5"
             variants={titleVariants}
           >
             โรค<br />
@@ -82,7 +82,7 @@ const Braindetail = () => {
           </motion.h1>
 
           <motion.p
-            className="font-custom text-white text-lg text-left mt-8"
+            className=" text-white text-lg text-left mt-8"
             variants={subtitleVariants}
           >
             คือ ภาวะที่เกิดจากการที่สมองขาด

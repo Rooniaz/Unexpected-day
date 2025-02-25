@@ -94,7 +94,7 @@ const navigate = useNavigate();
               </div>
               <button 
                 type="submit"
-                className="absolute bottom-[3%] right-6 font-bold text-xl font-custom text-orange-500 underline rounded"
+                className="absolute bottom-[3%] right-6 font-bold text-xl text-orange-500 underline rounded"
               >
                 กดเพื่อไปต่อ →
               </button>

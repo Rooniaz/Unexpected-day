@@ -55,7 +55,7 @@ const SpreadScene = () => {
           animate="show"
           exit="hidden"
           variants={container}
-          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-gradient-to-b from-gray-500 via-white to-gray-500 text-white text-3xl font-custom px-6 py-2"
+          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-gradient-to-b from-gray-500 via-white to-gray-500 text-white text-3xl px-6 py-2"
         >
           {/* บรรทัดแรก */}
           <div className="flex flex-row text-[#696969] justify-center items-center text-center text-shadow-2xl">

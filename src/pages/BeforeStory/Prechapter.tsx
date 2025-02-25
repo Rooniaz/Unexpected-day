@@ -111,7 +111,7 @@ const Prechapter: React.FC = () => {
                                             type="text"
                                             value={inputValue}
                                             onChange={handleInputChange}
-                                            className="w-80 h-40 p-2 border rounded-3xl text-center font-custom text-lg"
+                                            className="w-80 h-40 p-2 border rounded-3xl text-center text-lg"
                                             placeholder="พิมพ์เพื่อตอบ"
                                             required
                                         />

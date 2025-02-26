@@ -94,14 +94,14 @@ const BeFast: React.FC = () => {
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <img src="/image/icon_eye_befast.gif" alt="Befast Icon" className="w-14 h-14 transition-opacity hover:opacity-80 active:opacity-60" />
+              <img src="/image/icon_eye_befast.gif" alt="Befast Icon" className="w-16 h-16 transition-opacity hover:opacity-80 active:opacity-60" />
             </button>
           )
         ))}
 
         <div className="absolute bottom-36 left-1/2 transform -translate-x-1/2 flex gap-3 text-xl font-bold">
           {inputs.map((char, index) => (
-            <div key={index} className="w-12 h-12 flex items-center justify-center font-custom text-4xl bg-white text-[#FF0000] rounded shadow-xl">
+            <div key={index} className="w-12 h-14 flex items-center justify-center font-custom text-5xl bg-white text-[#fa4901] rounded shadow-xl">
               {char}
             </div>
           ))}

@@ -24,3 +24,13 @@
 body {
   font-family: 'MyCustomFont', sans-serif;
 }
+
+/* ซ่อน scrollbar เฉพาะบน Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ซ่อน scrollbar บน Firefox */
+html {
+  scrollbar-width: none;
+}

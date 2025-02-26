@@ -10,7 +10,7 @@ const StoryHomework2: React.FC = () => {
   const [isClickable] = useState(true);
   const [isLocked, setIsLocked] = useState(false);
   const [inputValue, setInputValue] = useState(""); // เก็บค่าที่พิมพ์
-  const [typingTimeout, setTypingTimeout] = useState<number | null>(null); // ใช้ number แทน NodeJS.Timeout
+  const [typingTimeout, setTypingTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const texts = [
     `เจน : ${storedName}`,

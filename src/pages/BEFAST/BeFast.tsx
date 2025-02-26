@@ -30,7 +30,7 @@ const BeFast: React.FC = () => {
   ];
 
   const buttonMessages = [
-    { text: "B=Balance", image: "/image/B.gif", description: "เวียนหัว เดินเซ ทรงตัวไม่ได้" },
+    { text: "B=Balance", image: "/image/befast/A.gif", description: "เวียนหัว เดินเซ ทรงตัวไม่ได้" },
     { text: "E=Eye", image: "/image/eye with bg.png", description: "ตามัว มองไม่เห็นเฉียบพลัน" },
     { text: "F=Face", image: "/image/face.png", description: "ปากเบี้ยว มุมปากตก" },
     { text: "A=Arm", image: "/image/befast/A.gif", description: "แขนขาอ่อนแรงครึ่งซีก" },

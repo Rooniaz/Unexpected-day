@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText2 } from "../../components/AnimatedText";
 import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
 
@@ -33,7 +31,7 @@ const FriendBrain: React.FC = () => {
 
   const handleClick = () => {
     if (isClickable && visibleTexts.length === texts.length) {
-      navigate("/BeFast");
+      navigate("/GuideBefast");
     }
   };
 
@@ -61,17 +59,13 @@ const FriendBrain: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <motion.div
+      <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={fadeInOut(2, "easeInOut", 0)}
         onClick={handleClick}
       >
         <img
-          src="/gif/43-45/45.png"
+          src="/image/befast/body-befast-shadow.png"
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -85,7 +79,7 @@ const FriendBrain: React.FC = () => {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

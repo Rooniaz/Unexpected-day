@@ -26,7 +26,7 @@ import StoryWork3 from "../pages/stories3/StoryWork3";
 import AfterBefast from "../pages/BEFAST/AfterBefast";
 import TimeToCall from "../pages/BEFAST/TimeToCall";
 import SpreadScene from "../pages/BEFAST/SpreadScene";
-
+import GuideBefast from "../pages/BEFAST/GuideBefast";
 
 
 import PlacePark from "../pages/FirstPlace/PlacePark";
@@ -104,6 +104,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/AfterBefast" element={<AfterBefast />} />
       <Route path="/TimeToCall" element={<TimeToCall />} />
       <Route path="/SpreadScene" element={<SpreadScene />} />
+      <Route path="/GuideBefast" element={<GuideBefast />} />
 
       {/* Stories5 */}
       <Route path="/DoctorDetail" element={<DoctorDetail/>} />

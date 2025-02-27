@@ -32,12 +32,12 @@ const Welcome: React.FC = () => {
     navigate('/Prechapter');
   };
 
-    // เคลียร์ค่าทุกครั้งที่เข้าหน้านี้ใหม่
-    useEffect(() => {
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userAge");
-      setFormData({ name: "", age: "" });
-    }, []);
+  // เคลียร์ค่าทุกครั้งที่เข้าหน้านี้ใหม่
+  useEffect(() => {
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userAge");
+    setFormData({ name: "", age: "" });
+  }, []);
 
   const { playAudio, pauseAudio } = useAudio();
 
@@ -45,7 +45,6 @@ const Welcome: React.FC = () => {
     playAudio(); // เล่นเพลงต่อจากหน้า Warning
     return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
   }, []);
-
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
@@ -66,29 +65,43 @@ const Welcome: React.FC = () => {
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg ">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-              <label className="block text-2xl text-[#fa4901] mb-2 ">
-                ชื่อเล่น
-                <span className="text-sm text-black"> (ภาษาไทย,ไม่ใช้เครื่องหมาย)</span>
-              </label>
+                <label className="block text-2xl text-[#fa4901] mb-2 ">
+                  ชื่อเล่น
+                  <span className="text-sm text-black"> (ภาษาไทย,ไม่ใช้เครื่องหมาย)</span>
+                </label>
                 <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => {
-                  const thaiRegex = /^[ก-๙\s]+$/; // อนุญาตเฉพาะอักษรไทยและช่องว่าง
-                  if (e.target.value === "" || thaiRegex.test(e.target.value)) {
-                    setFormData({ ...formData, name: e.target.value });
-                  }
-                }}
-                className="w-full p-2 border mb-8 rounded-3xl"
-                required
-              />
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => {
+                    const thaiRegex = /^[ก-๙\s]+$/; // อนุญาตเฉพาะอักษรไทยและช่องว่าง
+                    if (e.target.value === "" || thaiRegex.test(e.target.value)) {
+                      setFormData({ ...formData, name: e.target.value });
+                    }
+                  }}
+                  className="w-full p-2 border mb-8 rounded-3xl"
+                  required
+                />
               </div>
               <div>
                 <label className="block text-2xl text-[#fa4901] mb-2 ">อายุ</label>
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric" // กำหนดแป้นพิมพ์ให้รองรับเฉพาะตัวเลข
+                  pattern="[0-9]*"  // กรองค่าให้เป็นตัวเลขเท่านั้น
                   value={formData.age}
-                  onChange={(e) => setFormData({...formData, age: e.target.value})}
+                  onChange={(e) => {
+                    let value = e.target.value.replace(/[^0-9]/g, ""); // กรองเฉพาะตัวเลข
+
+                    // ตรวจสอบว่าเลขแรกไม่เป็น 0 และมีความยาวไม่เกิน 3 หลัก
+                    if (value.length === 1 && value === "0") {
+                      value = ""; // ถ้าเลขแรกเป็น 0 ให้ลบออก
+                    }
+                    if (value.length > 3) {
+                      value = value.slice(0, 3); // จำกัดจำนวนหลักสูงสุดที่ 3 หลัก
+                    }
+
+                    setFormData({ ...formData, age: value });
+                  }}
                   className="w-full p-2 border mb-8 rounded-3xl"
                   required
                 />

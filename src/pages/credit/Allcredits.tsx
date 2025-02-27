@@ -48,7 +48,7 @@ const Allcredit: React.FC = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="absolute top-16 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-40 z-10"
+              className="absolute top-12 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-41 z-10"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
@@ -56,8 +56,7 @@ const Allcredit: React.FC = () => {
             >
               <ul>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/")}>หน้าหลัก</li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit")}>เครดิต</li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit1")}>เครดิต1</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>เกี่ยวกับงาน & เครดิต</li>
               </ul>
             </motion.div>
           )}

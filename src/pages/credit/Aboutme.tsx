@@ -7,6 +7,11 @@ const Aboutme: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const text = `ผลงานชิ้นนี้เกิดขึ้นเพื่อให้ผู้เล่นทุกคนได้เรียนรู้และตระหนักถึงภัยเงียบที่ไม่อาจคาดคิดโดยเป็นเรื่องราวเกี่ยวกับโรคหลอดเลือดสมองที่สามารถเกิดได้กับทุกคนแม้แต่ในคนอายุน้อยแต่หากได้ทราบวิธีสังเกตอาการของโรคนี้ก็จะเป็นประโยชน์ทั้งต่อตัวเองและคนรอบข้าง
+
+ทั้งนี้พวกเราขอขอบคุณผู้เล่นทุกคนที่เข้ามาเล่นเกมเว็บไซต์ของพวกเรา ขอให้ผู้เล่นได้ใช้เวลาในการเล่นเกมเว็บไซต์นี้ให้คุ้มค่า เพื่อรับประโยชน์ผ่านประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง`;
+
+
   const socialLinks = [
     { href: "https://www.instagram.com", img: "/image/icons/iconig.png" },
     { href: "https://www.facebook.com", img: "/image/icons/iconfb.png" },
@@ -38,16 +43,15 @@ const Aboutme: React.FC = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="absolute top-16 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-40 z-10"
-              initial={{ opacity: 0, x: -50 }}
+            className="absolute top-12 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-41 z-10"
+            initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
             >
               <ul>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/")}>หน้าหลัก</li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>เครดิตss</li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit1")}>เครดิต1</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>ดูผลงานอื่นๆเพิ่มเติม</li>
               </ul>
             </motion.div>
           )}
@@ -56,20 +60,14 @@ const Aboutme: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-auto flex flex-col items-center justify-center p-6 space-y-6">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-100 rounded-lg">
             <img src="/icon.svg" alt="SVG Icon" width="30" height="30" className="absolute top-7 right-6" />
-            <h2 className="text-4xl font-bold mb-3 mt-10 text-[#fa4901] drop-shadow-xl">เกี่ยวกับงาน</h2>
-            <p className="text-base mt-5">ผลงานชิ้นนี้เกิดขึ้นเพื่อให้ผู้เล่นทุกคนได้เรียนรู้</p>
-            <p className="text-base">และตระหนักถึงภัยเงียบที่ไม่อาจคาดคิด</p>
-            <p className="text-base">โดยเป็นเรื่องราวเกี่ยวกับโรคหลอดเลือดสมอง</p>
-            <p className="text-base">ที่สามารถเกิดได้กับทุกคนแม้แต่ในคนอายุน้อย</p>
-            <p className="text-base">แต่หากได้ทราบวิธีสังเกตอาการของโรคนี้</p>
-            <p className="text-base">ก็จะเป็นประโยชน์ทั้งต่อตัวเองและคนรอบข้าง</p>
-            <p className="text-base mt-5">ทั้งนี้พวกเราขอขอบคุณผู้เล่นทุกคนที่เข้ามาเล่นเกม</p>
-            <p className="text-base">เว็บไซต์ของพวกเรา ขอให้ผู้เล่นได้ใช้เวลาในการเล่น</p>
-            <p className="text-base">เกมเว็บไซต์นี้ให้คุ้มค่า เพื่อรับประโยชน์ผ่าน</p>
-            <p className="text-base">ประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง</p>
+            <h2 className="text-3xl mb-3 mt-16 text-[#fa4901] drop-shadow-xl">เกี่ยวกับงาน</h2>
+            <p
+              className="text-base mt-5 font-light"
+              dangerouslySetInnerHTML={{ __html: text.replaceAll("\n", "<br />") }}
+            ></p>
 
-            <p className="text-base mt-14 text-[#fa4901] drop-shadow-xl">ดูผลงานของเราเพิ่มเติมได้ที่</p>
-            <div className="flex justify-start mt-4">
+            <p className="text-base mt-10 text-[#fa4901] ">ดูผลงานของเราเพิ่มเติมได้ที่</p>
+            <div className="flex justify-start mt-2 ">
               {socialLinks.map((link, index) => (
                 <a key={index} href={link.href} target="_blank" rel="noopener noreferrer">
                   <img src={link.img} alt="Social Icon" width="60" height="30" />
@@ -77,21 +75,40 @@ const Aboutme: React.FC = () => {
               ))}
             </div>
             <div>
-              <h2 className="text-4xl font-bold mb-3 text-[#fa4901] mt-10">เครดิต</h2>
-            <p className="text-base mt-3">โปรเจกต์นี้เป็นผลงานนวัตกรรมสื่อสารนิพนธ์ ของ</p>
-            <p className="text-base">ชญานิน สุรขจร, ปัทมาพร ประทุมถิ่น, ฐปนัท</p>
-            <p className="text-base">เดชประมวลพล และ วรัญญา ตันติเฉลิม นิสิตจาก</p>
-            <p className="text-base">วิทยาลัยนวัตกรรมสื่อสารสังคม เอกการสื่อสารเพื่อ</p>
-            <p className="text-base">สุขภาพ มหาวิทยาลัยศรีนครินทรวิโรฒ </p>
+              <h2 className="text-3xl mb-3 text-[#fa4901] mt-6">เครดิต</h2>
+            <p className="text-lg mt-3 ">ผลงานนวัตกรรมสื่อสารนิพนธ์ของ</p>
+
+            <div className="mt-1 text-left text-base">
+            <div className="flex">
+              <p className="w-1/4 text-left text-base">ชญานิน</p>
+              <p className="w-1/2 text-left pl-8">สุรขจร</p>
+            </div>
+            <div className="flex">
+              <p className="w-1/4 text-left text-base ">ปัทมาพร</p>
+              <p className="w-1/2 text-left pl-8">ประทุมถิ่น</p>
+            </div>
+            <div className="flex">
+              <p className="w-1/4 text-left text-base">ฐปนัท</p>
+              <p className="w-1/2 text-left pl-8">เดชประมวลพล</p>
+            </div>
+            <div className="flex">
+              <p className="w-1/4 text-left text-base">วรัญญา</p>
+              <p className="w-1/2 text-left pl-8">ตันติเฉลิม</p>
+            </div>
+          </div>
+
+            <p className="text-base mt-2">นิสิตจาก</p>
+            <p className="text-base">วิทยาลัยนวัตกรรมสื่อสารสังคม </p>
+            <p className="text-base">เอกการสื่อสารเพื่อสุขภาพ มหาวิทยาลัยศรีนครินทรวิโรฒ </p>
 
 
             <div className="grid grid-cols-2 gap-4 mt-6">
                 <div>
-                  <p className="font-bold text-[#fa4901]">โครงเรื่อง</p>
-                  <p className="font-bold text-[#fa4901]">บทบรรยาย</p>
-                  <p className="font-bold text-[#fa4901]">ภาพประกอบ</p>
+                  <p className=" text-[#fa4901]">โครงเรื่อง</p>
+                  <p className=" text-[#fa4901]">บทบรรยาย</p>
+                  <p className=" text-[#fa4901]">ภาพประกอบ</p>
                 </div>
-                <div>
+                <div className="text-sm">
                     <p >ชญานิน สุรขจร</p>
                     <p>ปัทมาพร ประทุมถิ่น</p>
                     <p>ฐปนัท เดชประมวลพล</p>
@@ -100,7 +117,7 @@ const Aboutme: React.FC = () => {
                 </div>
 
             <div className="grid grid-cols-2 gap-4 mt-4">
-                <p className="font-bold text-[#fa4901]">เสียงประกอบ</p>
+                <p className=" text-[#fa4901]">เสียงประกอบ</p>
                 <p>วรัญญา ตันติเฉลิม</p>
             </div>
 
@@ -111,7 +128,7 @@ const Aboutme: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div>
-                    <p className="font-bold text-[#fa4901]">พัฒนา</p>
+                    <p className=" text-[#fa4901]">พัฒนา</p>
                 </div>
                 <div>
                     <p>จุลดิษฐ์ อุ่มวงศ์</p>
@@ -120,11 +137,11 @@ const Aboutme: React.FC = () => {
             </div>
 
 
-              <p className="text-sm font-bold text-[#fa4901] mt-6">
+              <p className="text-sm  text-[#fa4901] mt-6">
                 ขอบคุณทีมงานทุกคนที่มีส่วนร่วมในผลงานนี้
               </p>
 
-              <p className="text-xs mt-4 text-[#ffffff] drop-shadow-lg">
+              <p className="text-[0.68rem] mt-4 text-[#ffffff] drop-shadow-lg">
                 Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน
               </p>
 

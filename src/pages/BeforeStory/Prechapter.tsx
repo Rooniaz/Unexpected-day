@@ -107,11 +107,16 @@ const Prechapter: React.FC = () => {
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.8 }}
                                 >
-                                    <div className="flex justify-center items-center pt-36 ">
+                                    <div className="flex justify-center items-center pt-36">
                                         <input
                                             type="text"
                                             value={inputValue}
                                             onChange={handleInputChange}
+                                            onInput={(e) => {
+                                                const input = e.target as HTMLInputElement;
+                                                // อนุญาตเฉพาะภาษาไทยและช่องว่าง
+                                                input.value = input.value.replace(/[^ก-๙\s]/g, '');
+                                            }}
                                             className="w-80 h-40 p-2 border rounded-3xl text-center text-lg"
                                             placeholder="พิมพ์เพื่อตอบ"
                                             required

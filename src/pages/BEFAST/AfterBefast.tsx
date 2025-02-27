@@ -7,6 +7,7 @@ const AfterBefast = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
   const [showGif, setShowGif] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const maxSliderValue = 100;
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [trackWidth, setTrackWidth] = useState(0);
@@ -46,12 +47,12 @@ const AfterBefast = () => {
   }, [timeLeft, sliderValue]);
 
   useEffect(() => {
-    if (timeLeft <= 3) {
+    if (timeLeft <= 3 && sliderValue < maxSliderValue) {
       setShowGif(true);
     } else {
       setShowGif(false);
     }
-  }, [timeLeft]);
+  }, [timeLeft, sliderValue]);
 
   useEffect(() => {
     if (sliderValue >= maxSliderValue) {
@@ -69,14 +70,12 @@ const AfterBefast = () => {
   }, [sliderValue, navigate]);
 
   const handleDragEnd = () => {
+    setIsDragging(false);
+
     if (sliderValue < maxSliderValue) {
-      setSliderValue(0); // หรือ setSliderValue ไปที่ตำแหน่งก่อนหน้า
+      setSliderValue(0);
     }
   };
-
-  // คำนวณความยาวของเส้น path สำหรับวงกลม
-  const circleLength = 2 * Math.PI * 50; // เส้นรอบวงของวงกลม (รัศมี 50)
-  const offset = circleLength * (1 - timeLeft / 10); // คำนวณ offset ตามเวลาที่เหลือ
 
   return (
     <motion.div
@@ -120,6 +119,7 @@ const AfterBefast = () => {
             className="absolute top-[55%] cursor-pointer"
             drag="x"
             dragConstraints={{ left: 0, right: trackWidth - 100 }}
+            onDragStart={() => setIsDragging(true)}
             onDrag={(_event, info) => {
               if (trackRef.current) {
                 const offsetX = info.point.x - trackRef.current.offsetLeft;
@@ -131,19 +131,26 @@ const AfterBefast = () => {
               }
             }}
             onDragEnd={handleDragEnd}
-            animate={{ x: (sliderValue / maxSliderValue) * (trackWidth - 100) }}
+            animate={{
+              x:
+                sliderValue >= maxSliderValue
+                  ? (maxSliderValue / maxSliderValue) * (trackWidth - 100)
+                  : isDragging
+                  ? (sliderValue / maxSliderValue) * (trackWidth - 100)
+                  : 0,
+            }}
             transition={{ duration: 0.5, ease: "linear" }}
             style={{ width: "140px", height: "auto", left: 0 }}
           />
         )}
 
-        {sliderValue >= 100 && (
+        {sliderValue >= maxSliderValue && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="absolute top-[63%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
-            >
+          >
             <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg">
               <span className="text-red-500">T</span>ime to Call{" "}
               <span className="text-red-500">1669</span>
@@ -152,45 +159,8 @@ const AfterBefast = () => {
         )}
 
         {sliderValue < maxSliderValue && (
-          <div className="absolute top-[20%] flex justify-center items-center">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-              {/* วงกลมพื้นหลัง */}
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                stroke="#FFFFFF"
-                strokeWidth="10"
-                fill="transparent"
-                strokeOpacity="0.2"
-              />
-              {/* วงกลม Progress ที่เติมเต็มจากด้านล่าง */}
-              <motion.circle
-                cx="60"
-                cy="60"
-                r="50"
-                stroke={timeLeft <= 3 ? "#FF0000" : "#FFFFFF"} // เปลี่ยนสีเป็นแดงเมื่อเวลาน้อยกว่า 3 วินาที
-                strokeWidth="10"
-                fill="transparent"
-                strokeDasharray={circleLength}
-                animate={{ strokeDashoffset: offset }} // ใช้ animate เพื่อให้สมูท
-                transition={{ duration: 1, ease: "easeInOut" }} // ปรับการเคลื่อนไหวให้นุ่มนวล
-                transform="rotate(-90 60 60)" // หมุนวงกลมเพื่อเริ่มจากด้านล่าง
-              />
-
-              {/* ตัวเลขวินาทีที่เหลือ */}
-              <text
-                x="50%"
-                y="50%"
-                textAnchor="middle"
-                dy=".3em"
-                fill={timeLeft <= 3 ? "#FF0000" : "#FFFFFF"} // เปลี่ยนสีตัวเลขเป็นแดงเมื่อเวลาน้อยกว่า 3 วินาที
-                fontSize="24"
-                fontWeight="bold"
-              >
-                {timeLeft}
-              </text>
-            </svg>
+          <div className="absolute top-[20%] text-white text-4xl font-bold">
+            {timeLeft} วินาที
           </div>
         )}
 

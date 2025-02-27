@@ -16,7 +16,7 @@ const Preface: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex justify-center items-center p-4 relative">
+    <div className="min-h-screen bg-white flex justify-center items-center p-4 relative">
       
       {/* ✅ เนื้อหาหลัก */}
       <div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "black" }}>
@@ -35,20 +35,19 @@ const Preface: React.FC = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-            className="absolute top-16 left-4 bg-gray-800  bg-opacity-80 text-white rounded-lg shadow-lg p-4 w-40 z-10"
-              initial={{ opacity: 0, x: -50 }} // เริ่มจากความโปร่งใส 0 และขยับมาจากซ้าย
+            className="absolute top-12 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-41 z-10"
+            initial={{ opacity: 0, x: -50 }} // เริ่มจากความโปร่งใส 0 และขยับมาจากซ้าย
               animate={{ opacity: 1, x: 0 }} // แสดงเมนูด้วย fade-in และ slide-in
               exit={{ opacity: 0, x: -50 }} // ซ่อนเมนูกลับไปทางซ้าย
               transition={{ duration: 0.3 }} // ตั้งเวลาการเปลี่ยนแปลง
             >
               <ul className="text-left">
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>
-                  เกี่ยวกับ
+                  เกี่ยวกับงาน & เครดิต
                 </li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit")}>
-                  เครดิต
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>
+                ดูผลงานอื่นๆเพิ่มเติม
                 </li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit1")}>เครดิต1</li>
               </ul>
             </motion.div>
           )}

@@ -30,9 +30,9 @@ const BeFast: React.FC = () => {
   ];
 
   const buttonMessages = [
-    { text: "B=Balance", image: "/image/befast/A.gif", description: "เวียนหัว เดินเซ ทรงตัวไม่ได้" },
-    { text: "E=Eye", image: "/image/eye with bg.png", description: "ตามัว มองไม่เห็นเฉียบพลัน" },
-    { text: "F=Face", image: "/image/face.png", description: "ปากเบี้ยว มุมปากตก" },
+    { text: "B=Balance", image: "/image/befast/B.gif", description: "เวียนหัว เดินเซ ทรงตัวไม่ได้" },
+    { text: "E=Eye", image: "/image/befast/E.gif", description: "ตามัว มองไม่เห็นเฉียบพลัน" },
+    { text: "F=Face", image: "/image/befast/F.gif", description: "ปากเบี้ยว มุมปากตก" },
     { text: "A=Arm", image: "/image/befast/A.gif", description: "แขนขาอ่อนแรงครึ่งซีก" },
     { text: "S=Speech", image: "/image/befast/S.gif", description: "พูดไม่ชัด พูดไม่ออก สื่อสารไม่ได้" },
   ];

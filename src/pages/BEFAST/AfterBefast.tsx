@@ -38,7 +38,7 @@ const AfterBefast = () => {
             clearInterval(autoMove);
             return maxSliderValue;
           }
-          return prevValue + 50;
+          return prevValue + 70;
         });
       }, 300);
       return () => clearInterval(autoMove);
@@ -67,6 +67,16 @@ const AfterBefast = () => {
       setShowMessage(false);
     }
   }, [sliderValue, navigate]);
+
+  const handleDragEnd = () => {
+    if (sliderValue < maxSliderValue) {
+      setSliderValue(0); // หรือ setSliderValue ไปที่ตำแหน่งก่อนหน้า
+    }
+  };
+
+  // คำนวณความยาวของเส้น path สำหรับวงกลม
+  const circleLength = 2 * Math.PI * 50; // เส้นรอบวงของวงกลม (รัศมี 50)
+  const offset = circleLength * (1 - timeLeft / 10); // คำนวณ offset ตามเวลาที่เหลือ
 
   return (
     <motion.div
@@ -101,7 +111,7 @@ const AfterBefast = () => {
           />
         )}
 
-        <div ref={trackRef} className="absolute top-[60%] w-full h-12 bg-[#708090] rounded"></div>
+        <div ref={trackRef} className="absolute top-[60%] w-[480px] h-12 bg-[#708090] rounded"></div>
 
         {trackWidth > 0 && (
           <motion.img
@@ -120,6 +130,7 @@ const AfterBefast = () => {
                 setSliderValue(percent);
               }
             }}
+            onDragEnd={handleDragEnd}
             animate={{ x: (sliderValue / maxSliderValue) * (trackWidth - 100) }}
             transition={{ duration: 0.5, ease: "linear" }}
             style={{ width: "140px", height: "auto", left: 0 }}
@@ -131,9 +142,9 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[63%] left-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
-          >
-            <div className="bg-opacity-50 text-white text-4xl font-bold px-6 py-2 rounded-lg">
+            className="absolute top-[63%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            >
+            <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg">
               <span className="text-red-500">T</span>ime to Call{" "}
               <span className="text-red-500">1669</span>
             </div>
@@ -141,8 +152,45 @@ const AfterBefast = () => {
         )}
 
         {sliderValue < maxSliderValue && (
-          <div className="absolute top-[20%] text-white text-4xl font-bold">
-            {timeLeft} วินาที
+          <div className="absolute top-[20%] flex justify-center items-center">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              {/* วงกลมพื้นหลัง */}
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                stroke="#FFFFFF"
+                strokeWidth="10"
+                fill="transparent"
+                strokeOpacity="0.2"
+              />
+              {/* วงกลม Progress ที่เติมเต็มจากด้านล่าง */}
+              <motion.circle
+                cx="60"
+                cy="60"
+                r="50"
+                stroke={timeLeft <= 3 ? "#FF0000" : "#FFFFFF"} // เปลี่ยนสีเป็นแดงเมื่อเวลาน้อยกว่า 3 วินาที
+                strokeWidth="10"
+                fill="transparent"
+                strokeDasharray={circleLength}
+                animate={{ strokeDashoffset: offset }} // ใช้ animate เพื่อให้สมูท
+                transition={{ duration: 1, ease: "easeInOut" }} // ปรับการเคลื่อนไหวให้นุ่มนวล
+                transform="rotate(-90 60 60)" // หมุนวงกลมเพื่อเริ่มจากด้านล่าง
+              />
+
+              {/* ตัวเลขวินาทีที่เหลือ */}
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dy=".3em"
+                fill={timeLeft <= 3 ? "#FF0000" : "#FFFFFF"} // เปลี่ยนสีตัวเลขเป็นแดงเมื่อเวลาน้อยกว่า 3 วินาที
+                fontSize="24"
+                fontWeight="bold"
+              >
+                {timeLeft}
+              </text>
+            </svg>
           </div>
         )}
 

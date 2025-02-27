@@ -68,7 +68,7 @@ const Welcome: React.FC = () => {
               <div>
               <label className="block text-2xl text-[#fa4901] mb-2 ">
                 ชื่อเล่น
-                <span className="text-sm text-black"> (ภาษาไทย,ไม่ใช้เครื่องหมาย)</span>
+                <span className="text-xs text-black"> (กรุณากรอกชื่อเป็นภาษาไทย ห้ามเว้นวรรค หรือใส่สัญลักษณ์)</span>
               </label>
                 <input
                 type="text"
@@ -79,7 +79,7 @@ const Welcome: React.FC = () => {
                     setFormData({ ...formData, name: e.target.value });
                   }
                 }}
-                className="w-full p-2 border mb-8 rounded-3xl"
+                className="w-full p-2 border mb-5 rounded-3xl"
                 required
               />
               </div>

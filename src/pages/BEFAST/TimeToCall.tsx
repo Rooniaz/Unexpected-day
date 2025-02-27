@@ -44,7 +44,7 @@ const TimeToCall = () => {
           animate="show"
           exit="hidden"
           variants={container} // ใช้ container สำหรับการแอนิเมตตัวอักษร
-          className="w-[390px] h-[844px] flex justify-center items-center bg-[#DCDCDC] text-[#B22222] text-7xl px-6 py-2 "
+          className="w-[390px] h-[844px] flex justify-center font-bold items-center bg-[#DCDCDC] text-[#B22222] text-6xl px-6 py-2 "
         >
           <div>
             {text.split("").map((char, index) => (

@@ -8,14 +8,14 @@
 /* นำเข้าฟอนต์ของคุณ */
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('web-font/Sarabun-Regular.ttf') format('truetype');
+  src: url('/web-font/Sarabun-Regular.woff') format('woff');
+
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
     font-family: 'MyCustomFont';
-    src: url('web-font/Sarabun-Light.ttf') format('truetype');
+    src: url('web-font/Sarabun-Light.woff') format('woff');
     font-weight: 300; /* font-light ใน Tailwind ใช้ weight 300 */
     font-style: normal;
   }

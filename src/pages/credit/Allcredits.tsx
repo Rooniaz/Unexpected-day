@@ -26,13 +26,14 @@ const Allcredit: React.FC = () => {
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative">
       <div 
-        className="relative w-[390px] h-[844px] max-h-screen overflow-y-auto bg-black no-scrollbar"
+        className="relative w-[390px] h-[844px] max-h-screen overflow-y-auto bg-black no-scrollbar brightness-25 opacity-80"
         style={{
           backgroundImage: "url('/image/bgbefast.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
+
         {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
           className="absolute top-4 left-4 text-black text-3xl z-10"

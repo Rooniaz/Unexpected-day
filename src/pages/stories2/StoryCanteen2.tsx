@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { AnimatedText } from "../../components/AnimatedText";
+import { AnimatedText, AnimatedText2 } from "../../components/AnimatedText";
 
 const StoryCanteen2: React.FC = () => {
   const navigate = useNavigate();
@@ -14,9 +14,9 @@ const StoryCanteen2: React.FC = () => {
 
   const texts = [
     `เจน : ${storedName}`,
-    `${storedName} : อ.. เอ่ออ`,
-    `เจน : ${storedName} จะไปหรือยัง`,
-    `${storedName} :  อ..อะ %^&8#`,
+    `${storedName} : อ.. เอ่ออ`, // สีเหลือง
+    `เจน : ${storedName} จะไปหรือยัง`, // Show TextBox หลังจากนี้
+    `${storedName} : อ..อะ %^&8#`, // สีเหลือง
     "เจน : พูดอะไรอ่ะ",
     "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
     "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
@@ -35,7 +35,7 @@ const StoryCanteen2: React.FC = () => {
             return prev;
           }
         });
-      }, 3000);
+      }, 5000);
     }
     return () => clearInterval(interval);
   }, [isLocked, index, showTextBox, navigate]);
@@ -57,10 +57,10 @@ const StoryCanteen2: React.FC = () => {
 
   const nextText = () => {
     if (!isClickable || showTextBox || isLocked) return;
-
+  
     if (index < texts.length - 1) {
       if (index === 2) {
-        setShowTextBox(true);
+        setShowTextBox(true);  // ตั้งค่าให้แสดง TextBox เมื่อ index = 2
       } else {
         setIndex((prev) => prev + 1);
       }
@@ -68,7 +68,7 @@ const StoryCanteen2: React.FC = () => {
       navigate("/StoryCanteen3");
     }
   };
-
+  
   const backgroundGif = () => {
     if (index >= 4) {
       return "/gif/26-27/canteen.gif";
@@ -113,24 +113,32 @@ const StoryCanteen2: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {!showTextBox ? (
+        {!showTextBox ? (index === 1 || index === 3 ? (
+          // แสดงข้อความที่เป็นสีเหลือง
+          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+            <div className="px-6 py-4 bg-black/50 rounded-lg">
+              <AnimatedText2 key={index} text={texts[index]} color="yellow" />
+            </div>
+          </div>
+        ) : (
+          // แสดงข้อความปกติ
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
               <AnimatedText key={index} text={texts[index]} />
             </div>
           </div>
-        ) : (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
-          <div className="bg-white rounded-lg p-4 cursor-pointer shadow-lg w-full">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="พิมพ์ข้อความ..."
-              className="w-full py-10 px-4 text-center text-xl bg-transparent text-black border-none outline-none"
-            />
+        )) : (
+          // แสดง TextBox
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
+            <div className="bg-white rounded-lg p-4 cursor-pointer shadow-lg w-full">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="พิมพ์ข้อความ..."
+                className="w-full py-10 px-4 text-center text-xl bg-transparent text-black border-none outline-none"/>
+            </div>
           </div>
-        </div>
         )}
 
         <div className="absolute bottom-[9%] right-6 text-white/80 text-4xl z-20">

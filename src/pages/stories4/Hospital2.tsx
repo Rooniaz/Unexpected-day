@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
-import { AnimatedText } from "../../components/AnimatedText";
+import { AnimatedText, AnimatedText2 } from "../../components/AnimatedText";
 
 const Hospital2: React.FC = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Hospital2: React.FC = () => {
 
   const texts = [
     `หมอ : สวัสดีคุณ${storedName}ตอนนี้เป็นยังไงบ้างครับ`,
-    `${storedName} : !!?`,
+    `${storedName} : .....เอ่อ`,
     `หมอ : คุณโชคดีที่เห็นถึงอาการผิดปกติ`,
     `หมอ : ที่คุณล้มลงหมดสติไป`,
     `หมอ : อาการเหล่านี้ ล้วนเป็นอาการของ`,
@@ -103,10 +103,22 @@ const Hospital2: React.FC = () => {
 
         {/* Dialog text container */}
         <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-          <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <AnimatedText key={index} text={texts[index]} />
-          </div>
-        </div>
+  <div className="px-6 py-4 bg-black/50 rounded-lg">
+    {index === 1 ? ( 
+      <AnimatedText2  
+        key={index} 
+        text={texts[index]} 
+        color="yellow" // ข้อความของผู้เล่น (index 1) เป็นสีเหลือง
+      />
+    ) : (
+      <AnimatedText 
+        key={index} 
+        text={texts[index]} 
+      />
+    )}
+  </div>
+</div>
+
       </motion.div>
     </div>
   );

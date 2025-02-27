@@ -73,7 +73,7 @@ const Braindetail = () => {
           onAnimationComplete={() => setAnimationComplete(true)} // ตรวจจับเมื่อแอนิเมชันจบ
         >
           <motion.h1
-            className="font-custom text-[#FF4500] text-4xl text-left mb-1.5"
+            className="font-custom font-bold text-[#FF4500] text-4xl text-left mb-1.5"
             variants={titleVariants}
           >
             โรค<br />
@@ -82,21 +82,32 @@ const Braindetail = () => {
           </motion.h1>
 
           <motion.p
-          className="font-light text-white text-lg text-left mt-8"
-          variants={subtitleVariants}
-        >
-          คือ ภาวะที่เกิดจากการที่สมองขาดเลือด <br />
-          หรือออกซิเจนอย่างเฉียบพลัน <br /> <br />
+            className="font-light text-white text-lg text-left mt-8"
+            variants={subtitleVariants}
+          >
+            <div className="flex flex-col-reverse ...">
+              <span className="font-bold">
+                คือ ภาวะที่เกิดจากการที่สมองขาดเลือด <br />
+                หรือออกซิเจนอย่างเฉียบพลัน
+              </span>
+            </div>
 
-          ประเทศไทยมีจำนวนผู้ป่วยโรคหลอด
-          เลือดสมองมากขึ้นทุกปี และคร่าชีวิต
-          ประชากรไทยมากถึง 50,000 คนต่อปี
-          หรือเฉลี่ยชั่วโมงละ 6 คน<br /><br />
+            {/* ใช้ flex และ align-items: stretch เพื่อให้เส้นยาวเท่ากับข้อความ */}
+            <div className="flex pt-3">
+              <div className="border-l-4 border-[#FF4500] mr-3"></div>
+              <div>
+                ประเทศไทยมีจำนวนผู้ป่วยโรคหลอด
+                เลือดสมองมากขึ้นทุกปี และคร่าชีวิต
+                ประชากรไทยมากถึง 50,000 คนต่อปี
+                หรือเฉลี่ยชั่วโมงละ 6 คน
+              </div>
+            </div>
 
-          เป็นสาเหตุหลักของการเสียชีวิตอันดับ
-          ต้นๆ ในประเทศไทย
-        </motion.p>
-
+            <div className="pt-3">
+              เป็นสาเหตุหลักของการเสียชีวิตอันดับ
+              ต้นๆ ในประเทศไทย
+            </div>
+          </motion.p>
         </motion.div>
       </motion.div>
     </div>

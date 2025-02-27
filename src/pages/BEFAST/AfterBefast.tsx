@@ -98,10 +98,9 @@ const AfterBefast = () => {
             </div>
           </motion.div>
         )}
-
         {showGif && (
           <motion.img
-            src="/image/redframer.gif"
+            src="/image/befast/redframe2.gif"
             alt="Warning"
             className="absolute top-0 left-0 w-full h-full object-cover"
             initial={{ opacity: 0 }}

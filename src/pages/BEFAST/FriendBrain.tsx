@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { AnimatedText2 } from "../../components/AnimatedText";
-import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
-
+import { AnimatedText, AnimatedText3 } from "../../components/AnimatedText";
+import { useAudio } from "../../contexts/AudioProvider";
 
 const FriendBrain: React.FC = () => {
   const navigate = useNavigate();
 
   const texts = [
-    `ซึ่งเพื่อนคุณสังเกตอาการของ`,
-    `โรคหลอดเลือดสมองจาก...`,
+    `ซึ่งเพื่อนคุณสังเกตอาการ`,
+    `ของโรคหลอดเลือดสมองจาก...`,
   ];
 
   const [visibleTexts, setVisibleTexts] = useState<string[]>([]);
@@ -18,9 +17,23 @@ const FriendBrain: React.FC = () => {
 
   const showNextText = useCallback(() => {
     if (visibleTexts.length < texts.length) {
-      setVisibleTexts(prev => [...prev, texts[prev.length]]);
+      setTimeout(() => {
+        setVisibleTexts((prev) => [...prev, texts[prev.length]]);
+      }, 500 * visibleTexts.length);
     }
   }, [visibleTexts.length, texts]);
+
+  // แยกข้อความปกติและข้อความที่ต้องเน้น
+  const splitText = (text: string) => {
+    const parts = text.split(/(สังเกตอาการ|โรคหลอดเลือด)/g); // แยกคำที่ต้องการเน้น
+    return parts.map((part, index) =>
+      part.match(/สังเกตอาการ|โรคหลอดเลือด/) ? (
+        <AnimatedText3 key={index} text={part} />
+      ) : (
+        <AnimatedText key={index} text={part} />
+      )
+    );
+  };
 
   const handleVideoEnd = useCallback(() => {
     setBgColor("black");
@@ -48,14 +61,12 @@ const FriendBrain: React.FC = () => {
     return () => clearInterval(interval);
   }, [visibleTexts.length, showNextText, handleVideoEnd]);
 
+  const { playAudio, pauseAudio } = useAudio();
 
-    const { playAudio, pauseAudio } = useAudio();
-  
-    useEffect(() => {
-      playAudio(); // เล่นเพลงต่อจากหน้า Warning
-      return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-    }, []);
-  
+  useEffect(() => {
+    playAudio();
+    return () => pauseAudio();
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
@@ -73,8 +84,8 @@ const FriendBrain: React.FC = () => {
         <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
           <div className="rounded-lg flex flex-col items-center space-y-6">
             {visibleTexts.map((text, index) => (
-              <div key={index} > {/* เพิ่ม key ที่นี่ */}
-                <AnimatedText2 text={text}  />
+              <div key={index} className="flex flex-wrap justify-center">
+                {splitText(text)}
               </div>
             ))}
           </div>

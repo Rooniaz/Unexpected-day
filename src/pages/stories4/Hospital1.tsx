@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
-import { AnimatedText } from "../../components/AnimatedText";
+import { AnimatedText2 } from "../../components/AnimatedText";
 
 const Hospital1: React.FC = () => {
   const navigate = useNavigate();
@@ -94,7 +94,7 @@ const Hospital1: React.FC = () => {
 
         <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
           <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <AnimatedText key={index} text={texts[index]} />
+            <AnimatedText2 key={index} text={texts[index]} color="yellow"/>
           </div>
         </div>
       </motion.div>

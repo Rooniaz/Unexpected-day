@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { AnimatedText } from "../../components/AnimatedText";
+import { AnimatedText, AnimatedText2 } from "../../components/AnimatedText";
 
 const StoryHomework2: React.FC = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const StoryHomework2: React.FC = () => {
             return prev;
           }
         });
-      }, 3000);
+      }, 5000);
     }
     return () => clearInterval(interval);
   }, [isLocked, index, showTextBox, navigate]);
@@ -114,25 +114,33 @@ const StoryHomework2: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {!showTextBox ? (
-          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-            <div className="px-6 py-4 bg-black/50 rounded-lg">
-              <AnimatedText key={index} text={texts[index]} />
-            </div>
-          </div>
-        ) : (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
-          <div className="bg-white rounded-lg p-4 cursor-pointer shadow-lg w-full">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="พิมพ์ข้อความ..."
-              className="w-full py-10 px-4 text-center text-xl bg-transparent text-black border-none outline-none"
-            />
-          </div>
-        </div>
-        )}
+         {!showTextBox ? (index === 1 || index === 3 ? (
+                 // แสดงข้อความที่เป็นสีเหลือง
+                 <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+                   <div className="px-6 py-4 bg-black/50 rounded-lg">
+                     <AnimatedText2 key={index} text={texts[index]} color="yellow" />
+                   </div>
+                 </div>
+               ) : (
+                 // แสดงข้อความปกติ
+                 <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+                   <div className="px-6 py-4 bg-black/50 rounded-lg">
+                     <AnimatedText key={index} text={texts[index]} />
+                   </div>
+                 </div>
+               )) : (
+                 // แสดง TextBox
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
+                   <div className="bg-white rounded-lg p-4 cursor-pointer shadow-lg w-full">
+                     <input
+                       type="text"
+                       value={inputValue}
+                       onChange={handleInputChange}
+                       placeholder="พิมพ์ข้อความ..."
+                       className="w-full py-10 px-4 text-center text-xl bg-transparent text-black border-none outline-none"/>
+                   </div>
+                 </div>
+               )}
 
         <div className="absolute bottom-[9%] right-6 text-white/80 text-4xl z-20">
           <button onClick={nextText} className="text-2xl rounded text-white">

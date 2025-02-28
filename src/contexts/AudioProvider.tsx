@@ -11,7 +11,7 @@ interface AudioContextType {
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const audioRef = useRef<HTMLAudioElement>(new Audio('/Sound/Scene Start/For Education - Full.mp3'));
+  const audioRef = useRef<HTMLAudioElement>(new Audio('/Sound/Scene Start/Start & End.mp3'));
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 

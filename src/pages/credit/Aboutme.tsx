@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAudio } from "./../../contexts/AudioProvider";
 
 const Aboutme: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { playAudio, pauseAudio } = useAudio();
+  useEffect(() => {
+     playAudio();
+     return () => pauseAudio();
+   }, []);
+ 
 
   const text = `ผลงานชิ้นนี้เกิดขึ้นเพื่อให้ผู้เล่นทุกคนได้เรียนรู้และตระหนักถึงภัยเงียบที่ไม่อาจคาดคิดโดยเป็นเรื่องราวเกี่ยวกับโรคหลอดเลือดสมองที่สามารถเกิดได้กับทุกคนแม้แต่ในคนอายุน้อยแต่หากได้ทราบวิธีสังเกตอาการของโรคนี้ก็จะเป็นประโยชน์ทั้งต่อตัวเองและคนรอบข้าง
 

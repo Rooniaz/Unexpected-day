@@ -69,7 +69,7 @@ const StoryCanteen3: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <audio ref={audioRef2} src="/Sound/Sound fx/Heartbeat.mp3" autoPlay loop />
+      <audio ref={audioRef2} src="/Sound/Sound fx/heart-beat-fast.mp3" autoPlay loop />
 
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

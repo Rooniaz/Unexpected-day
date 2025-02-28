@@ -48,14 +48,14 @@ const StoryWork: React.FC = () => {
   useEffect(() => {
     // ตั้งค่า volume หลังจาก component mount
     if (audioRef1.current) {
-      audioRef1.current.volume = 0.5;
+      audioRef1.current.volume = 1.0;
     }
   }, []);
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       {/* เพิ่มเพลงในหน้า */}
-      <audio ref={audioRef1} src="/Sound/Scene Working/Very Calm Office.mp3" autoPlay loop />
+      <audio ref={audioRef1} src="/Sound/Scene Working/Scene Working.mp3" autoPlay loop />
       
       {/* Mobile-sized container */}
       <motion.div

@@ -50,7 +50,7 @@ const StoryPark: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
             {/* เพิ่มเพลงในหน้า */}
-            <audio ref={audioRef1} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
+            <audio ref={audioRef1} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

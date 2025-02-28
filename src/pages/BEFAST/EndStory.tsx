@@ -54,7 +54,7 @@ const UnexpectedDayForm: React.FC = () => {
     if (!canvasRef.current || !receiptImageRef.current) return;
   
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
   
     const scale = 1;
@@ -63,8 +63,8 @@ const UnexpectedDayForm: React.FC = () => {
   
     ctx.drawImage(receiptImageRef.current, 0, 0, canvas.width, canvas.height);
   
-    ctx.font = '300 36px Sarabun-Light';
-    ctx.fillStyle = 'black';
+    ctx.font = "300 36px Sarabun-Light";
+    ctx.fillStyle = "black";
   
     const nameX = 375;
     const nameY = 625;
@@ -74,45 +74,62 @@ const UnexpectedDayForm: React.FC = () => {
     const ageY = 625;
     ctx.fillText(formData.age, ageX, ageY);
   
-    const dream = `“${formData.dream}”`;
-    const maxWidth = 400; // ความกว้างของกรอบที่ข้อความจะพอดี
-    const lineHeight = 36; // ความสูงของบรรทัดข้อความ
-    let y = 850;
-  
-    // วาดกรอบสำหรับข้อความความฝัน
     const dreamBoxX = 220;
     const dreamBoxY = 675;
     const dreamBoxWidth = 645;
-    const dreamBoxHeight = 232; // ความสูงของกรอบ
-    ctx.strokeStyle = '#FA4901';
+    const dreamBoxHeight = 232;
+  
+    ctx.strokeStyle = "#FA4901";
     ctx.lineWidth = 3;
     ctx.strokeRect(dreamBoxX, dreamBoxY, dreamBoxWidth, dreamBoxHeight);
   
-    // คำนวณขนาดฟอนต์ที่เหมาะสม
-    const dreamFontSize = getFontSize(formData.dream);
-    ctx.fillStyle = '#FA4901';
-    ctx.font = `300 ${dreamFontSize} Sarabun-Light`;
+    let fontSize = parseInt(getFontSize(formData.dream));
+    ctx.fillStyle = "#FA4901";
   
-    const words = dream.split(' ');
-    let line = '';
-    
-    // วาดข้อความความฝันภายในกรอบ
-    for (let n = 0; n < words.length; n++) {
-      const testLine = line + words[n] + ' ';
-      const metrics = ctx.measureText(testLine);
-      const testWidth = metrics.width;
+    let lines: string[] = [];
+    let currentLine = "";
+    const words = formData.dream.split(" ");
+    const maxWidth = dreamBoxWidth - 20;
+    const lineHeight = fontSize * 1.2;
+    let y = dreamBoxY + fontSize + 10;
   
-      // ถ้าความกว้างเกินขอบกรอบ ให้เริ่มบรรทัดใหม่
-      if (testWidth > maxWidth && n > 0) {
-        ctx.fillText(line, dreamBoxX + 10, y); // ขยับข้อความให้ห่างจากขอบกรอบ
-        line = words[n] + ' ';
-        y += lineHeight;
-      } else {
-        line = testLine;
+    do {
+      ctx.font = `300 ${fontSize}px Sarabun-Light`;
+      lines = [];
+      currentLine = "";
+  
+      // การจัดการตัดคำและการเพิ่มบรรทัดใหม่
+      for (let i = 0; i < words.length; i++) {
+        const testLine = currentLine + words[i] + " ";
+        const testWidth = ctx.measureText(testLine).width;
+  
+        if (testWidth > maxWidth && currentLine !== "") {
+          lines.push(currentLine);
+          currentLine = words[i] + " ";
+        } else {
+          currentLine = testLine;
+        }
       }
+      lines.push(currentLine);
+  
+      // ตรวจสอบขนาดฟอนต์เพื่อให้พอดีกับกรอบ
+      if (lines.length * lineHeight > dreamBoxHeight - 20) {
+        fontSize -= 2;
+      } else {
+        break;
+      }
+    } while (fontSize > 10); // ลดขนาดฟอนต์จนกว่าจะพอดี
+  
+    y = dreamBoxY + fontSize + 10;
+  
+    // วาดข้อความในแต่ละบรรทัด
+    for (const line of lines) {
+      ctx.fillText(line, dreamBoxX + 10, y);
+      y += lineHeight;
     }
-    ctx.fillText(line, dreamBoxX + 10, y); // ขยับข้อความให้ห่างจากขอบกรอบ
   };
+  
+  
   
   
   

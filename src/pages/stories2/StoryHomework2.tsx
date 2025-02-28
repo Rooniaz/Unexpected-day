@@ -78,6 +78,7 @@ const StoryHomework2: React.FC = () => {
   };
 
   const audioRef2 = useRef<HTMLAudioElement>(null);
+  const audioRef3 = useRef<HTMLAudioElement>(null);
 
   if (audioRef2.current) {
     audioRef2.current.volume = 0.5;
@@ -94,16 +95,20 @@ const StoryHomework2: React.FC = () => {
         audioRef2.current.playbackRate = 3;
       }
     }, 6000);
+    if (audioRef3.current) {
+      audioRef3.current.volume = 0.5;
+    }
   }
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       <audio
         ref={audioRef2}
-        src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3"
+        src="/Sound/Scene Study/Scene Studying.mp3"
         autoPlay
         loop
       />
+      <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined}

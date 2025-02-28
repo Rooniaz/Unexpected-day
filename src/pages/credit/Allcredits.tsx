@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { Pagination, Navigation } from "swiper/modules";
+import { useAudio } from "./../../contexts/AudioProvider";
 
 const Allcredit: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { playAudio, pauseAudio } = useAudio();
+  useEffect(() => {
+     playAudio();
+     return () => pauseAudio();
+   }, []);
+ 
 
   const socialLinks = [
     { href: "https://www.instagram.com", img: "/image/icons/iconig.png" ,description: "instagram" },

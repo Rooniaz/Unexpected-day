@@ -18,20 +18,20 @@ const Prechapter: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement>(null); // อ้างอิงไปยัง audio element
 
     // สร้าง ref สำหรับ audio element
-    const audioRef1 = useRef<HTMLAudioElement>(null);
+    // const audioRef1 = useRef<HTMLAudioElement>(null);
     const audioRef2 = useRef<HTMLAudioElement>(null);
     const audioRef3 = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
         // ตั้งค่า volume หลังจาก component mount
-        if (audioRef1.current) {
-            audioRef1.current.volume = 0.2;
-        }
+        // if (audioRef1.current) {
+        //     audioRef1.current.volume = 0.2;
+        // }
         if (audioRef2.current) {
-            audioRef2.current.volume = 0;
+            audioRef2.current.volume = 1.0;
         }
         if (audioRef3.current) {
-            audioRef3.current.volume = 0.2;
+            audioRef3.current.volume = 1.0;
         }
     }, []);
 
@@ -78,9 +78,9 @@ const Prechapter: React.FC = () => {
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
           {/* เพิ่มเพลงในหน้า พร้อม ref สำหรับการตั้งค่า volume */}
-          <audio ref={audioRef1} src="/Sound/Scene Start/26365 Group of people walking on grass path loop-full.mp3" autoPlay loop />
-          <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
-          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
+          {/* <audio ref={audioRef1} src="/Sound/Scene Start/Group of People walking.mp3" autoPlay loop /> */}
+          <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
+          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"
@@ -89,7 +89,7 @@ const Prechapter: React.FC = () => {
                 variants={fadeInOut(2, "easeInOut", 0)}
                 onClick={showNextPage ? undefined : nextText}
             >
-                <audio ref={audioRef} src="/Sound/Scene Start/Park Ambience.mp3" loop autoPlay /> {/* เพิ่มเสียง */}
+                {/* <audio ref={audioRef} src="/Sound/Scene Start/Park Ambience.mp3" loop autoPlay />  */}
 
                 {showNextPage ? (
                     <motion.div 

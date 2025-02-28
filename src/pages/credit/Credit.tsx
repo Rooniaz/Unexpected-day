@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi"; // ไอคอน
 import { motion, AnimatePresence } from "framer-motion"; // เพิ่ม animation
+import { useAudio } from "./../../contexts/AudioProvider";
 
 
 const Credit: React.FC = () => {
 const navigate = useNavigate();
+const { playAudio, pauseAudio } = useAudio();
 const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิด-ปิดเมนู
 
+ useEffect(() => {
+    playAudio();
+    return () => pauseAudio();
+  }, []);
 
 
 

@@ -76,10 +76,14 @@ const StoryWork2: React.FC = () => {
     return "/gif/18-21/jane_office_18-21.gif";  // ค่า default
   };
 
+  // Refs สำหรับเสียง
   const audioRef2 = useRef<HTMLAudioElement>(null);
+  const audioRef3 = useRef<HTMLAudioElement>(null);
+  const audioRef4 = useRef<HTMLAudioElement>(null);  // เพิ่มใหม่สำหรับเพลงใหม่
 
+  // กำหนดการตั้งค่าเสียงเมื่อโหลด
   if (audioRef2.current) {
-    audioRef2.current.volume = 0.5;
+    audioRef2.current.volume = 1.0;
     audioRef2.current.playbackRate = 1;
 
     setTimeout(() => {
@@ -93,16 +97,52 @@ const StoryWork2: React.FC = () => {
         audioRef2.current.playbackRate = 3;
       }
     }, 6000);
+
+    if (audioRef3.current) {
+      audioRef3.current.volume = 0.5;
+    }
   }
+
+  // การเล่นเพลงใหม่เมื่อถึงข้อความที่ต้องการ
+  useEffect(() => {
+    if (index === 0) {
+      // หยุดเสียง 4 ทันทีที่เริ่มข้อความแรก
+      if (audioRef4.current) {
+        audioRef4.current.pause();
+        audioRef4.current.currentTime = 0; // รีเซ็ตเสียงกลับไปจุดเริ่มต้น
+      }
+    }
+  
+    if (index === 5) { // เมื่อถึงข้อความ "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!"
+      if (audioRef2.current) {
+        audioRef2.current.pause();
+      }
+      if (audioRef3.current) {
+        audioRef3.current.pause();
+      }
+  
+      // เล่นเสียงใหม่
+      if (audioRef4.current) {
+        audioRef4.current.play().catch((error) => {
+          console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
+        });
+      }
+    }
+  }, [index]);
+  
+  
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       <audio
         ref={audioRef2}
-        src="/Sound/Scene Eating/17061 crowded bar restaurant ambience loop-full.mp3"
+        src="/Sound/Scene Working/Scene Working.mp3"
         autoPlay
         loop
       />
+      <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
+      <audio ref={audioRef4} src="/Sound/Sound fx/Effect jane_and_friend.mp3" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
+
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined}

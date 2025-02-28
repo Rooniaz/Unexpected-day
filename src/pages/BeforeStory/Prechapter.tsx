@@ -19,10 +19,12 @@ const Prechapter: React.FC = () => {
     const [showInput, setShowInput] = useState(false);
     const [textMoveUp, setTextMoveUp] = useState(false);
 
+    const audioRef1 = useRef<HTMLAudioElement>(null);
     const audioRef2 = useRef<HTMLAudioElement>(null);
     const audioRef3 = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
+        if (audioRef1.current) audioRef1.current.volume = 0.2;
         if (audioRef2.current) audioRef2.current.volume = 0.2;
         if (audioRef3.current) audioRef3.current.volume = 0.2;
     }, []);
@@ -63,9 +65,10 @@ const Prechapter: React.FC = () => {
 
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
-            <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
-            <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
 
+          <audio ref={audioRef1} src="/Sound/Scene Start/Group of People walking.mp3" autoPlay loop />
+          <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
+          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"

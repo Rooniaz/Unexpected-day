@@ -28,7 +28,7 @@ const PlaceWork: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-            <audio ref={audioRef1} src="/Sound/Scene Working/Very Calm Office.mp3" autoPlay loop />
+            <audio ref={audioRef1} src="/Sound/Scene Working/Scene Working.mp3" autoPlay loop />
             <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"

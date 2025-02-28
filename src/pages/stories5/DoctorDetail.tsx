@@ -12,7 +12,7 @@ const DoctorDetail: React.FC = () => {
   const [isLocked, setIsLocked] = useState(false);
 
   const texts = [
-    `หมอ : หากคุณมาโรงพยาบาลได้ทันเวลา
+    `หากคุณมาโรงพยาบาลได้ทันเวลา
       จะสามารถช่วยลดความรุนแรงและเพิ่มโอกาสรอดชีวิต`,
   ];
 
@@ -92,9 +92,9 @@ const DoctorDetail: React.FC = () => {
         />
 
         {!showTextBox ? (
-          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-            <div className="px-6 py-4 bg-black/50 rounded-lg">
-              <AnimatedText key={index} text={texts[index]} />
+          <div className="absolute bottom-80 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+            <div className="px-6 py-4 rounded-lg">
+              <AnimatedText key={index} text={texts[index]}  />
             </div>
           </div>
         ) : (

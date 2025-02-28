@@ -161,8 +161,12 @@ const AfterBefast = () => {
             </div>
           </motion.div>
         )}
-        <div className="bg-opacity-80 absolute top-[68%] text-[#FFFFFF] text-xl font-bold px-6 py-2 rounded-lg flex items-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-          เลื่อนรถพยาบาลให้ทัน
+        <div className="bg-opacity-80 absolute top-[67%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center" >
+        เร็วเข้า!
+          {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
+        </div>
+        <div className="bg-opacity-80 absolute top-[71%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center" >
+        รีบเลื่อนรถเพื่อส่งโรงพยาบาล!
           {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
         </div>
         {sliderValue < maxSliderValue && (

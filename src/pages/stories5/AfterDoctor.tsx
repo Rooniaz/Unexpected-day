@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
+import { useAudio } from "../../contexts/AudioProvider";
 
 const texts = [
     "ไม่ว่าจะเป็นเช่นไร",
@@ -15,6 +16,13 @@ const texts = [
 const AfterDoctor: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
+    const { playAudio, pauseAudio } = useAudio();
+
+
+    useEffect(() => {
+      playAudio();
+      return () => pauseAudio();
+    }, []);
 
     const nextText = () => {
         if (index < texts.length - 1) {
@@ -25,26 +33,26 @@ const AfterDoctor: React.FC = () => {
     };
           // สร้าง ref สำหรับ audio element
           // const audioRef1 = useRef<HTMLAudioElement>(null);
-    const audioRef2 = useRef<HTMLAudioElement>(null);
+    // const audioRef2 = useRef<HTMLAudioElement>(null);
           // const audioRef3 = useRef<HTMLAudioElement>(null);
     
-    useEffect(() => {
-              // ตั้งค่า volume หลังจาก component mount
-              // if (audioRef1.current) {
-              //     audioRef1.current.volume = 0.5;
-              // }
-            if (audioRef2.current) {
-                audioRef2.current.volume = 0.5;
-                }
-              // if (audioRef3.current) {
-              //     audioRef3.current.volume = 0.2;
-              // }
-            }, []);
+    // useEffect(() => {
+    //           // ตั้งค่า volume หลังจาก component mount
+    //           // if (audioRef1.current) {
+    //           //     audioRef1.current.volume = 0.5;
+    //           // }
+    //         if (audioRef2.current) {
+    //             audioRef2.current.volume = 0.5;
+    //             }
+    //           // if (audioRef3.current) {
+    //           //     audioRef3.current.volume = 0.2;
+    //           // }
+    //         }, []);
 
     return (
         <div className="w-full min-h-screen bg-[#000000] flex justify-center items-center">
   {/* เพิ่มเพลงในหน้า */}
-    <audio ref={audioRef2} src="/Sound/Sound End/Peaceful_Ambient_Piano_full.mp3" autoPlay loop />
+    {/* <audio ref={audioRef2} src="/Sound/Sound End/Peaceful_Ambient_Piano_full.mp3" autoPlay loop /> */}
 
     <motion.div
     className="relative w-[390px] h-[844px] overflow-hidden " // เปลี่ยนเป็นสีเทา

@@ -78,6 +78,16 @@ const AfterBefast = () => {
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (timeLeft / 10) * circumference;
 
+  const audioRef1 = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    // ตั้งค่า volume หลังจาก component mount
+    if (audioRef1.current) {
+        audioRef1.current.volume = 1  //รอเพลง BassImpactLowDrum
+    }
+
+}, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -85,6 +95,7 @@ const AfterBefast = () => {
       transition={{ duration: 3 }}
       className="w-full min-h-screen flex justify-center items-center bg-black"
     >
+        <audio ref={audioRef1} src="/Sound/Sound fx/Effect Rush-Time-BEFAST.mp3" autoPlay loop />
       <motion.div className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">
         
         {showMessage && (

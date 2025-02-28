@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
+// import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
 
 const BeFast: React.FC = () => {
   const [inputs, setInputs] = useState(["", "", "", "", "",""]);
@@ -78,15 +78,26 @@ const handleImageLoad = () => {
     }, 300);
   };
 
-  const { playAudio, pauseAudio } = useAudio();
+  // const { playAudio, pauseAudio } = useAudio();
+
+  // useEffect(() => {
+  //   playAudio(); // เล่นเพลงต่อจากหน้า Warning
+  //   return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
+  // }, []);
+
+  const audioRef1 = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    playAudio(); // เล่นเพลงต่อจากหน้า Warning
-    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-  }, []);
+    // ตั้งค่า volume หลังจาก component mount
+    if (audioRef1.current) {
+        audioRef1.current.volume = 1
+    }
+
+}, []);
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative">
+        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
       <div className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/image/body_befast.png')" }}>
         {buttonPositions.map((pos, index) => (
           !buttonsClicked.has(index) && (

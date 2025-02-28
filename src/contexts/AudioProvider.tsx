@@ -17,7 +17,7 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   useEffect(() => {
     const audio = audioRef.current;
-    audio.volume = 0.5;
+    audio.volume = 0.2;
     audio.loop = true;
 
     const handlePlay = () => setIsPlaying(true);

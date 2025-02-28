@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatedText, AnimatedText3 } from "../../components/AnimatedText";
-import { useAudio } from "../../contexts/AudioProvider";
+// import { useAudio } from "../../contexts/AudioProvider";
 
 const FriendBrain: React.FC = () => {
   const navigate = useNavigate();
@@ -61,15 +61,26 @@ const FriendBrain: React.FC = () => {
     return () => clearInterval(interval);
   }, [visibleTexts.length, showNextText, handleVideoEnd]);
 
-  const { playAudio, pauseAudio } = useAudio();
+  // const { playAudio, pauseAudio } = useAudio();
+
+  // useEffect(() => {
+  //   playAudio();
+  //   return () => pauseAudio();
+  // }, []);
+
+  const audioRef1 = useRef<HTMLAudioElement>(null);
+
 
   useEffect(() => {
-    playAudio();
-    return () => pauseAudio();
-  }, []);
+    // ตั้งค่า volume หลังจาก component mount
+    if (audioRef1.current) {
+        audioRef1.current.volume = 1
+    }
+}, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
+        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}

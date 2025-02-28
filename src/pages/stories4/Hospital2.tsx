@@ -68,10 +68,10 @@ const Hospital2: React.FC = () => {
       useEffect(() => {
           // ตั้งค่า volume หลังจาก component mount
           if (audioRef1.current) {
-              audioRef1.current.volume = 0.8;
+              audioRef1.current.volume = 1;
           }
           if (audioRef2.current) {
-              audioRef2.current.volume = 0;
+              audioRef2.current.volume = 1;
           }
           // if (audioRef3.current) {
           //     audioRef3.current.volume = 0.2;
@@ -81,8 +81,8 @@ const Hospital2: React.FC = () => {
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
       {/* Mobile-sized container */}
-      <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop />
-  <audio ref={audioRef2} src="/Sound/Scene Start/For Education - Full.mp3" autoPlay loop />
+      <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Ambience.mp3" autoPlay loop />
+      <audio ref={audioRef2} src="/Sound/Hospital Sound/Sound Bg Hospital.mp3" autoPlay loop />
   {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"

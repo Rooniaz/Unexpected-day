@@ -24,8 +24,15 @@ const StoryCanteen3: React.FC = () => {
   const handlePicEnd = useCallback(() => {
     setBgColor("black");
     nextText();
+    
+    // ✅ สั่นมือถือเมื่อวิดีโอจบ
+    if ("vibrate" in navigator) {
+      navigator.vibrate([200, 100, 200]); // สั่น 200ms หยุด 100ms สั่น 200ms
+    }
+  
     setTimeout(() => navigate("/story/hospital"), 1000);
   }, [navigate]);
+  
 
   const handleUserInteraction = () => {
     if (videoRef.current && videoRef.current.paused) {

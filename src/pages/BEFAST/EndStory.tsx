@@ -29,7 +29,7 @@ const UnexpectedDayForm: React.FC = () => {
 
     // โหลดรูปภาพของใบเสร็จ
     const receiptImage = new Image();
-    receiptImage.src = 'build/image/EndStory/card-unexpectedday2.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
+    receiptImage.src = 'image/Endstory/card-unexpectedday.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
     receiptImage.onload = () => {
       receiptImageRef.current = receiptImage;
       setIsImageReady(true);
@@ -132,34 +132,27 @@ const UnexpectedDayForm: React.FC = () => {
   
   // แชร์รูปภาพ
   const handleShare = async () => {
-    if (canvasRef.current && navigator.share) {
-      try {
-        canvasRef.current.toBlob(async (blob) => {
-          if (blob) {
-            const file = new File([blob], 'ใบเสร็จของฉัน.png', { type: 'image/png' });
-            await navigator.share({
-              title: 'ใบเสร็จของฉัน',
-              text: 'การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน',
-              files: [file],
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            }).catch(_error => {
-              // Fallback for browsers that support share but not file sharing
-              navigator.share({
-                title: 'ใบเสร็จของฉัน',
-                text: 'การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน',
-                url: document.location.href,
-              });
-            });
-          }
-        }, 'image/png');
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        alert('ไม่สามารถแชร์ได้ กรุณาลองอีกครั้ง');
-      }
-    } else {
+    if (!canvasRef.current || !navigator.canShare) {
       alert('อุปกรณ์ของคุณไม่รองรับการแชร์');
+      return;
+    }
+    try {
+      const blob = await new Promise<Blob | null>((resolve) =>
+        canvasRef.current!.toBlob(resolve, 'image/png')
+      );
+      if (blob) {
+        const file = new File([blob], 'ใบเสร็จของฉัน.png', { type: 'image/png' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'ใบเสร็จของฉัน' });
+        } else {
+          alert('อุปกรณ์ของคุณไม่รองรับการแชร์ไฟล์');
+        }
+      }
+    } catch {
+      alert('ไม่สามารถแชร์ได้ กรุณาลองอีกครั้ง');
     }
   };
+  
   
   // const goToNext = () => {
   //   // navigate('/');
@@ -188,7 +181,8 @@ const UnexpectedDayForm: React.FC = () => {
         variants={fadeInOut(2, "easeInOut", 0)}
         // onClick={goToNext}
       >
-        <div className="w-full h-full flex flex-col justify-center items-center p-6 bg-gradient-to-b from-orange-500 via-orange-400 to-blue-300 relative">
+<div className="w-full min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/image/Endstory/bg-card.png')" }}>
+
           {/* Canvas สำหรับแสดงรูปภาพและข้อมูล */}
           <div className="w-full flex justify-center mb-32">
             <canvas

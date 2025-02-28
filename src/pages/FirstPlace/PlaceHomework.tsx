@@ -1,69 +1,87 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const PlaceHomework: React.FC = () => {
   const navigate = useNavigate();
+  const [showNextScene, setShowNextScene] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const audioRef1 = useRef<HTMLAudioElement>(null);
 
-    // ฟังก์ชันนำทางไปหน้าถัดไป
-    const goToNext = () => {
-      navigate('/story/homework');
-    };
-  
-        // สร้าง ref สำหรับ audio element
-        const audioRef1 = useRef<HTMLAudioElement>(null);
-        // const audioRef2 = useRef<HTMLAudioElement>(null);
-        // const audioRef3 = useRef<HTMLAudioElement>(null);
-    
-        useEffect(() => {
-            // ตั้งค่า volume หลังจาก component mount
-            if (audioRef1.current) {
-                audioRef1.current.volume = 0.5;
-            }
-            // if (audioRef2.current) {
-            //     audioRef2.current.volume = 0.2;
-            // }
-            // if (audioRef3.current) {
-            //     audioRef3.current.volume = 0.2;
-            // }
-        }, []);
+  useEffect(() => {
+    if (audioRef1.current) {
+      audioRef1.current.volume = 0.5;
+    }
+  }, []);
+
+  const goToNext = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setShowNextScene(true);
+
+    setTimeout(() => {
+      navigate("/story/homework");
+    }, 2000); // ปรับให้พอดีกับ GIF
+  };
 
     return (
       <div className="w-full min-h-screen bg-black flex justify-center items-center">
               <audio ref={audioRef1} src="/Sound/Scene Study/Auditorium Lecture Room Ambience Loop.mp3" autoPlay loop />
-        <motion.div
-          className="relative w-[390px] h-[844px] overflow-hidden"
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={fadeInOut(2, "easeInOut", 0)}
-          onClick={goToNext} // คลิกที่ไหนก็ไปต่อได้
-        >
-          {/* Background Image */}
-          <img
-            src="/gif/Place/class.png"
-            alt="Background"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+              <motion.div
+        className="relative w-[390px] h-[844px] overflow-hidden"
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={fadeInOut(2, "easeInOut", 0)}
+        onClick={goToNext}
+      >
+        <AnimatePresence mode="wait">
+          {showNextScene ? (
+            // GIF Transition (ซ้อนทับแบบ smooth)
+            <motion.img
+              key="gif"
+              src="/gif/22-25/Class-blink.gif"
+              alt="Transition"
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+            />
+          ) : (
+            <>
+              <motion.img
+                key="background"
+                src="/gif/Place/class.png"
+                alt="Background"
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+              <div className="absolute inset-0 bg-black/20"></div>
 
-  <div className="absolute inset-0 bg-black/20"></div>
+              <div className="absolute inset-0 flex justify-center items-center z-10">
+                <div className="px-6 py-4 rounded-lg">
+                  <AnimatedText text="ตอนนี้ฉันกำลังกินข้าวอยู่กับเจน" />
+                </div>
+              </div>
+            </>
+          )}
+        </AnimatePresence>
 
-          {/* Dialog text container */}
-          <div className="absolute inset-0 flex justify-center items-center z-10">
-          <div className="px-6 py-4 rounded-lg">
-              <AnimatedText text="ตอนนี้ฉันกำลังเรียนอยู่กับเจน" />
-            </div>
-          </div>
-  
-          {/* Continue Button - แสดง UI แต่ไม่ต้องคลิก */}
+        {/* ป้องกันการคลิกซ้ำระหว่าง transition */}
+        {!showNextScene && (
           <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
             {/* {'>>'} */}
           </div>
-        </motion.div>
-      </div>
-    );
-  };
+        )}
+      </motion.div>
+    </div>
+  );
+};
 
 export default PlaceHomework;

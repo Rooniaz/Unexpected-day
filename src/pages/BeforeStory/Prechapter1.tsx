@@ -93,7 +93,7 @@ const Prechapter: React.FC = () => {
 
                 {showNextPage ? (
                     <motion.div 
-                        className="absolute inset-0 flex justify-center items-center bg-gray-500"
+                        className="absolute inset-0 flex justify-center items-center bg-gradient-to-b from-gray-300 to-white"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8 }}

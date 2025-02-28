@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '../../components/fadeInOut';
 import { FaDownload, FaYoutube, FaShare } from 'react-icons/fa';
 
 const UnexpectedDayForm: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -44,6 +44,12 @@ const UnexpectedDayForm: React.FC = () => {
   }, [isImageReady, formData]);
   
 
+  const getFontSize = (text: string) => {
+    if (text.length <= 9) return "110px";
+    if (text.length <= 50) return "30px";
+    return "20px";
+  };
+
   const renderCanvas = () => {
     if (!canvasRef.current || !receiptImageRef.current) return;
   
@@ -51,57 +57,65 @@ const UnexpectedDayForm: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
   
-    // กำหนดขนาด Canvas ให้ใหญ่ขึ้น
-    const scale = 1; // ปรับขนาด Canvas เป็น 1 เท่า (ไม่ปรับขนาด)
+    const scale = 1;
     canvas.width = receiptImageRef.current.width * scale;
     canvas.height = receiptImageRef.current.height * scale;
   
-    // วาดรูปภาพพื้นหลัง
     ctx.drawImage(receiptImageRef.current, 0, 0, canvas.width, canvas.height);
   
-    // กำหนดรูปแบบข้อความ
-    ctx.font = '300 36px Sarabun-Light'; // ใช้ฟอนต์ Sarabun-Light และ weight 300
+    ctx.font = '300 36px Sarabun-Light';
     ctx.fillStyle = 'black';
   
-    // ตำแหน่งสำหรับชื่อ (ปรับตามตำแหน่งจริงในรูปภาพ)
-    const nameX = 375;  // ปรับตำแหน่ง X ของชื่อ
-    const nameY = 625;  // ปรับตำแหน่ง Y ของชื่อ
+    const nameX = 375;
+    const nameY = 625;
     ctx.fillText(formData.name, nameX, nameY);
   
-    // ตำแหน่งสำหรับอายุ (ปรับตามตำแหน่งจริงในรูปภาพ)
-    const ageX = 700;   // ปรับตำแหน่ง X ของอายุ
-    const ageY = 625;   // ปรับตำแหน่ง Y ของอายุ
+    const ageX = 700;
+    const ageY = 625;
     ctx.fillText(formData.age, ageX, ageY);
   
-    // สำหรับความฝัน
-    const dream = `“${formData.dream}”`; // เพิ่มปีกกา (quotation marks) รอบข้อความ
-    const maxWidth = 400; // ความกว้างสูงสุดของข้อความ
-    const lineHeight = 96; // ความสูงของแต่ละบรรทัด
-    let y = 850; // ตำแหน่งเริ่มต้นของความฝัน
+    const dream = `“${formData.dream}”`;
+    const maxWidth = 400; // ความกว้างของกรอบที่ข้อความจะพอดี
+    const lineHeight = 36; // ความสูงของบรรทัดข้อความ
+    let y = 850;
   
-    // เปลี่ยนฟอนต์และสีของข้อความ
-    ctx.fillStyle = '#FA4901'; // สีส้ม
-    ctx.font = '300 110px Sarabun-Light'; // ใช้ฟอนต์ Sarabun-Light และ weight 300
+    // วาดกรอบสำหรับข้อความความฝัน
+    const dreamBoxX = 220;
+    const dreamBoxY = 675;
+    const dreamBoxWidth = 645;
+    const dreamBoxHeight = 232; // ความสูงของกรอบ
+    ctx.strokeStyle = '#FA4901';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(dreamBoxX, dreamBoxY, dreamBoxWidth, dreamBoxHeight);
   
-    // แบ่งข้อความเป็นบรรทัด
+    // คำนวณขนาดฟอนต์ที่เหมาะสม
+    const dreamFontSize = getFontSize(formData.dream);
+    ctx.fillStyle = '#FA4901';
+    ctx.font = `300 ${dreamFontSize} Sarabun-Light`;
+  
     const words = dream.split(' ');
     let line = '';
-  
+    
+    // วาดข้อความความฝันภายในกรอบ
     for (let n = 0; n < words.length; n++) {
       const testLine = line + words[n] + ' ';
       const metrics = ctx.measureText(testLine);
       const testWidth = metrics.width;
   
+      // ถ้าความกว้างเกินขอบกรอบ ให้เริ่มบรรทัดใหม่
       if (testWidth > maxWidth && n > 0) {
-        ctx.fillText(line, 160, y); // ปรับตำแหน่ง X ของข้อความความฝัน
+        ctx.fillText(line, dreamBoxX + 10, y); // ขยับข้อความให้ห่างจากขอบกรอบ
         line = words[n] + ' ';
         y += lineHeight;
       } else {
         line = testLine;
       }
     }
-    ctx.fillText(line, 400, y); // ปรับตำแหน่งสุดท้ายของข้อความความฝัน
+    ctx.fillText(line, dreamBoxX + 10, y); // ขยับข้อความให้ห่างจากขอบกรอบ
   };
+  
+  
+  
   
 
   // ดาวน์โหลดรูปภาพ
@@ -147,9 +161,9 @@ const UnexpectedDayForm: React.FC = () => {
     }
   };
   
-  const goToNext = () => {
-    navigate('/');
-  };
+  // const goToNext = () => {
+  //   // navigate('/');
+  // };
   
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -172,7 +186,7 @@ const UnexpectedDayForm: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={goToNext}
+        // onClick={goToNext}
       >
         <div className="w-full h-full flex flex-col justify-center items-center p-6 bg-gradient-to-b from-orange-500 via-orange-400 to-blue-300 relative">
           {/* Canvas สำหรับแสดงรูปภาพและข้อมูล */}

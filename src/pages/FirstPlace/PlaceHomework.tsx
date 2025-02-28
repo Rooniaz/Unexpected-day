@@ -59,7 +59,7 @@ const PlaceHomework: React.FC = () => {
   
           {/* Continue Button - แสดง UI แต่ไม่ต้องคลิก */}
           <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
-            {'>>'}
+            {/* {'>>'} */}
           </div>
         </motion.div>
       </div>

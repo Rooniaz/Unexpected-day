@@ -1,3 +1,7 @@
+
+//ไม่ได้ใช้แล้ว
+
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +11,7 @@ const Epilogue: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-lg text-center space-y-6">
-        <h2 className="text-3xl font-bold">จุดสิ้นสุดของเรื่องราว</h2>
+        <h2 className="text-3xl font-bold">BeFast</h2>
         <p className="text-lg">ทุกการตัดสินใจล้วนมีผลต่อเส้นทางของเรา</p>
         <div className="bg-gray-800 p-6 rounded-lg">
           <p className="text-xl mb-4">สิ่งที่คุณได้เรียนรู้</p>

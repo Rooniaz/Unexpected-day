@@ -4,10 +4,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* นำเข้าฟอนต์ของคุณ */
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/web-font/Sarabun-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 @font-face {
     font-family: 'MyCustomFont';
-    src: url('/web-font/srinakharinwirot-regular.woff2') format('woff2'),
-        url('/web-font/srinakharinwirot-regular.woff') format('woff');
-    font-weight: normal;
+    src: url('web-font/Sarabun-Light.woff') format('woff');
+    font-weight: 300; /* font-light ใน Tailwind ใช้ weight 300 */
     font-style: normal;
-    }
+  }
+
+/* กำหนดฟอนต์ให้กับทุกหน้า */
+body {
+  font-family: 'MyCustomFont', sans-serif;
+}
+
+/* ซ่อน scrollbar เฉพาะบน Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ซ่อน scrollbar บน Firefox */
+html {
+  scrollbar-width: none;
+}

@@ -74,6 +74,10 @@ const AfterBefast = () => {
     }
   }, [sliderValue, navigate]);
 
+  const radius = 50;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (timeLeft / 10) * circumference;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -88,7 +92,7 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[40%] left-1/2 transform -translate-x-1/2 text-center"
+            className="absolute top-[30%] left-1/2 transform -translate-x-1/2 text-center"
           >
             <div className="bg-opacity-80 text-[#FFFFFF] text-4xl font-bold px-6 py-2 rounded-lg" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
               ส่งให้ทันภายใน 4.30 ชม.
@@ -149,18 +153,51 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[63%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            className="absolute top-[62.5%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           >
             <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg">
-              <span className="text-red-500">T</span>ime to Call{" "}
-              <span className="text-red-500">1669</span>
+              <span className="text-[#fa4901]">T</span>ime to Call{" "}
+              <span className="text-[#fa4901]">1669</span>
             </div>
           </motion.div>
         )}
-
+        <div className="bg-opacity-80 absolute top-[68%] text-[#FFFFFF] text-xl font-bold px-6 py-2 rounded-lg flex items-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+          เลื่อนรถพยาบาลให้ทัน
+          {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
+        </div>
         {sliderValue < maxSliderValue && (
           <div className="absolute top-[20%] text-white text-4xl font-bold">
-            {timeLeft} วินาที
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle
+                cx="60"
+                cy="60"
+                r={radius}
+                fill="transparent"
+                stroke={timeLeft <= 3 ? "url(#red-gradient)" : "#ffffff"}
+                strokeWidth="10"
+                strokeDasharray={circumference}
+                strokeDashoffset={strokeDashoffset}
+                transform="rotate(-90 60 60)"
+                style={{ transition: "stroke-dashoffset 0.5s ease, stroke 0.5s ease" }}
+              />
+              <defs>
+                <linearGradient id="red-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{ stopColor: "#ff0000", stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: "#ff0000", stopOpacity: 1 }} />
+                </linearGradient>
+              </defs>
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dy=".3em"
+                fill={timeLeft <= 3 ? "#ff0000" : "#ffffff"}
+                fontSize="30"
+                style={{ transition: "fill 0.5s ease" }}
+              >
+                {timeLeft}
+              </text>
+            </svg>
           </div>
         )}
       </motion.div>

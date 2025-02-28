@@ -7,11 +7,16 @@ const AfterBefast = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
   const [showGif, setShowGif] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
   const maxSliderValue = 100;
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [trackWidth, setTrackWidth] = useState(0);
   const navigate = useNavigate();
+
+  const handleDragEnd = () => {
+    if (sliderValue < maxSliderValue) {
+      setSliderValue(0);
+    }
+  };
 
   useLayoutEffect(() => {
     if (trackRef.current) {
@@ -39,20 +44,20 @@ const AfterBefast = () => {
             clearInterval(autoMove);
             return maxSliderValue;
           }
-          return prevValue + 70;
+          return prevValue + 5; // เปลี่ยนจาก 100 เป็น 5 เพื่อให้เลื่อนช้าลง
         });
-      }, 300);
+      }, 100); // ลดเวลาระหว่างแต่ละครั้งเพื่อให้การเคลื่อนที่ดูราบรื่น
       return () => clearInterval(autoMove);
     }
   }, [timeLeft, sliderValue]);
 
   useEffect(() => {
-    if (timeLeft <= 3 && sliderValue < maxSliderValue) {
+    if (timeLeft <= 3) {
       setShowGif(true);
     } else {
       setShowGif(false);
     }
-  }, [timeLeft, sliderValue]);
+  }, [timeLeft]);
 
   useEffect(() => {
     if (sliderValue >= maxSliderValue) {
@@ -68,14 +73,6 @@ const AfterBefast = () => {
       setShowMessage(false);
     }
   }, [sliderValue, navigate]);
-
-  const handleDragEnd = () => {
-    setIsDragging(false);
-
-    if (sliderValue < maxSliderValue) {
-      setSliderValue(0);
-    }
-  };
 
   return (
     <motion.div
@@ -98,7 +95,8 @@ const AfterBefast = () => {
             </div>
           </motion.div>
         )}
-        {showGif && (
+        
+        {showGif && sliderValue < maxSliderValue && (
           <motion.img
             src="/image/befast/redframe2.gif"
             alt="Warning"
@@ -109,41 +107,44 @@ const AfterBefast = () => {
           />
         )}
 
-        <div ref={trackRef} className="absolute top-[60%] w-[480px] h-12 bg-[#708090] rounded"></div>
+        {/* เพิ่มความกว้างของ track จาก 450px เป็น 550px */}
+        <div ref={trackRef} className="absolute top-[60%] w-[550px] h-12 bg-[#708090] rounded"></div>
 
         {trackWidth > 0 && (
           <motion.img
             src="/image/hostpitalcar.gif"
             alt="ambulance"
-            className="absolute top-[55%] cursor-pointer"
+            className="absolute top-[55%] cursor-pointer z-10"             
             drag="x"
             dragConstraints={{ left: 0, right: trackWidth - 100 }}
-            onDragStart={() => setIsDragging(true)}
             onDrag={(_event, info) => {
               if (trackRef.current) {
-                const offsetX = info.point.x - trackRef.current.offsetLeft;
+                // แก้วิธีการคำนวณ slider value ให้มีความละเอียดมากขึ้น
+                const trackRect = trackRef.current.getBoundingClientRect();
+                const position = info.point.x - trackRect.left;
+                
+                // คำนวณเป็นเปอร์เซ็นต์โดยคำนึงถึงขนาดของรถพยาบาล
+                const carWidth = 140; // ขนาดความกว้างของรูปรถพยาบาล
+                const availableTrackWidth = trackWidth - carWidth;
+                
+                // คำนวณค่า sliderValue ที่มีความแม่นยำมากขึ้น
                 const percent = Math.min(
-                  Math.max((offsetX / (trackWidth - 10)) * maxSliderValue, 0),
+                  Math.max((position / availableTrackWidth) * maxSliderValue, 0),
                   maxSliderValue
                 );
-                setSliderValue(percent);
+                
+                // ปรับ sliderValue ให้เพิ่มขึ้นทีละน้อยเพื่อให้การเลื่อนราบรื่น
+                setSliderValue(Math.round(percent));
               }
             }}
             onDragEnd={handleDragEnd}
-            animate={{
-              x:
-                sliderValue >= maxSliderValue
-                  ? (maxSliderValue / maxSliderValue) * (trackWidth - 100)
-                  : isDragging
-                  ? (sliderValue / maxSliderValue) * (trackWidth - 100)
-                  : 0,
-            }}
+            animate={{ x: (sliderValue / maxSliderValue) * (trackWidth - 140) }} // ปรับให้ใช้ขนาดจริงของรถพยาบาล
             transition={{ duration: 0.5, ease: "linear" }}
             style={{ width: "140px", height: "auto", left: 0 }}
           />
         )}
 
-        {sliderValue >= maxSliderValue && (
+        {sliderValue >= 100 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -162,7 +163,6 @@ const AfterBefast = () => {
             {timeLeft} วินาที
           </div>
         )}
-
       </motion.div>
     </motion.div>
   );

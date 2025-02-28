@@ -37,27 +37,33 @@ const BeFast: React.FC = () => {
     { text: "S=Speech", image: "/image/befast/S.gif", description: "พูดไม่ชัด พูดไม่ออก สื่อสารไม่ได้" },
   ];
 
-  const handleButtonClick = (index: number) => {
-    if (isDialogOpen || buttonsClicked.has(index)) return;
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-    setButtonsClicked((prevClicked) => new Set(prevClicked).add(index));
-    setInputs((prev) => {
-      const newInputs = [...prev];
-      newInputs[index] = characters[index];
-      return newInputs;
-    });
+const handleButtonClick = (index: number) => {
+  if (isDialogOpen || buttonsClicked.has(index)) return;
 
-    const message = buttonMessages[index];
-    setPopupMessage({ text: message.text, image: "", description: "" });
-    setShowFirstDialog(true);
-    setIsDialogOpen(true);
-    setIsContentComplete(false);
+  setButtonsClicked((prevClicked) => new Set(prevClicked).add(index));
+  setInputs((prev) => {
+    const newInputs = [...prev];
+    newInputs[index] = characters[index];
+    return newInputs;
+  });
 
-    setTimeout(() => setPopupMessage((prev) => ({ ...prev, image: message.image })), 1000);
-    setTimeout(() => setPopupMessage((prev) => ({ ...prev, description: message.description })), 2000);
-    setTimeout(() => setIsContentComplete(true), 3000);
-  };
+  const message = buttonMessages[index];
+  setPopupMessage({ text: message.text, image: "", description: "" });
+  setShowFirstDialog(true);
+  setIsDialogOpen(true);
+  setIsContentComplete(false);
+  setIsImageLoaded(false); // รีเซ็ตสถานะการโหลดภาพ
 
+  setTimeout(() => setPopupMessage((prev) => ({ ...prev, image: message.image })), 1000);
+};
+
+const handleImageLoad = () => {
+  setIsImageLoaded(true);
+  setTimeout(() => setPopupMessage((prev) => ({ ...prev, description: buttonMessages[buttonsClicked.size - 1].description })), 2000);
+  setTimeout(() => setIsContentComplete(true), 5000);
+};
   const handleCloseFirstDialog = () => {
     setShowFirstDialog(false);
     setTimeout(() => {
@@ -108,37 +114,41 @@ const BeFast: React.FC = () => {
         </div>
       </div>
 
-      {/* Dialog แรก */}
       {showFirstDialog && (
-        <div className="fixed inset-0 flex justify-center items-center z-50">
-          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-lg transition-opacity duration-500" />
+      <div className="fixed inset-0 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-lg transition-opacity duration-500" />
 
-          <motion.div
-            className="bg-[#FFFFFF] p-6 text-black rounded text-xl w-[350px] md:w-[400px] flex flex-col items-center z-10"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <p className="text-center text-white bg-[#fa4901] rounded p-2 pt-1 mb-4 text-4xl">{popupMessage.text}</p>
-            {popupMessage.image && (
-              <div className="w-full h-[250px] overflow-hidden bg-white">
-                <img src={popupMessage.image} alt="Popup Icon" className="w-full h-full object-cover" />
-              </div>
-            )}
-            {popupMessage.description && (
-              <p className="text-center text-[#000000] mb-2 mt-4">{popupMessage.description}</p>
-            )}
-            {isContentComplete && (
-              <div className="flex justify-center w-full">
-                <button onClick={handleCloseFirstDialog} className="px-2 py-1 rounded mt-2 text-lg text-[#ffffff] bg-[#fa4901]">
-                  เข้าใจแล้ว
-                </button>
-              </div>
-            )}
-          </motion.div>
-        </div>
-      )}
+        <motion.div
+          className="bg-[#FFFFFF] p-6 text-black rounded text-xl w-[350px] md:w-[400px] flex flex-col items-center z-10"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <p className="text-center text-white bg-[#fa4901] rounded p-2 pt-1 mb-4 text-4xl">{popupMessage.text}</p>
+          {popupMessage.image && (
+            <div className="w-full h-[250px] overflow-hidden bg-white">
+              <img 
+                src={popupMessage.image} 
+                alt="Popup Icon" 
+                className="w-full h-full object-cover" 
+                onLoad={handleImageLoad} // เรียก handleImageLoad เมื่อภาพโหลดเสร็จ
+              />
+            </div>
+          )}
+          {isImageLoaded && popupMessage.description && (
+            <p className="text-center text-[#000000] mb-2 mt-4">{popupMessage.description}</p>
+          )}
+          {isContentComplete && (
+            <div className="flex justify-center w-full">
+              <button onClick={handleCloseFirstDialog} className="px-2 py-1 rounded mt-2 text-lg text-[#ffffff] bg-[#fa4901]">
+                เข้าใจแล้ว
+              </button>
+            </div>
+          )}
+        </motion.div>
+      </div>
+    )}
     </div>
   );
 };

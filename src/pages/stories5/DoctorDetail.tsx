@@ -114,7 +114,7 @@ const DoctorDetail: React.FC = () => {
         )}
 
         <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
-          {'>>'}
+          {/* {'>>'} */}
         </div>
       </motion.div>
     </div>

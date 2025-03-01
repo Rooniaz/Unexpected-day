@@ -20,8 +20,14 @@ const Warning: React.FC = () => {
       onClick={() => navigate("/welcome")} // ✅ กดที่หน้าจอเพื่อไปต่อ
     >
       {/* ✅ เนื้อหาหลัก */}
-      <div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4 bg-white">
-        {/* ✅ ปุ่ม Hamburger Menu */}
+      <div
+          className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4"
+            style={{
+              backgroundImage: "url('/image/bgbefast.png')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >        {/* ✅ ปุ่ม Hamburger Menu */}
         {/* <motion.button
           className="absolute top-4 left-4 text-black text-3xl"
           onClick={(e) => {
@@ -60,15 +66,27 @@ const Warning: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence> */}
-
+      <div className="absolute top-6  right-6">
+        <img 
+          src="/image/LOGO .png" // เปลี่ยนเป็น path ของโลโก้ของคุณ
+          className="w-14 h-18" // ปรับขนาดตามต้องการ
+        />
+      </div>
         {/* ✅ คำเตือนและข้อมูล */}
         <div className="w-full max-w-lg">
-          <p className="text-2xl font-custom mb-4 bg-yellow-300 text-black p-2">Trigger Warning!</p>
-          <p className="text-lg font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
-          <p className="text-lg font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
-          <p className="text-lg font-custom mb-8">
+        <div className="w-full flex justify-center">
+          <p className="text-2xl font-custom mb-4 bg-yellow-300 text-black p-2 rounded-2xl w-64 text-center">
+            Trigger Warning!
+          </p>
+        </div>
+          <p className="text-base font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
+          <p className="text-base font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
+          <p className="text-base font-custom mb-8">
             ขอให้<span className="text-orange-500">ทุกคนโชคดีและมีสุขภาพที่แข็งแรงนะคะ</span> :)
           </p>
+          <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">
+          <div className="text-[#817c7c] text-xl animate-pulse">กดเพื่อไปต่อ</div>
+        </div>
         </div>
       </div>
     </div>

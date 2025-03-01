@@ -86,7 +86,7 @@ const Prechapter: React.FC = () => {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                variants={fadeInOut(2, "easeInOut", 0)}
+                variants={fadeInOut(3, "easeInOut", 0)}
                 onClick={showNextPage ? undefined : nextText}
             >
                 {/* <audio ref={audioRef} src="/Sound/Scene Start/Park Ambience.mp3" loop autoPlay />  */}

@@ -23,19 +23,28 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
 
     return (
         <motion.p
-            className="text-lg text-white font-custom text-center"
+            className="text-lg text-white text-center"
             variants={container}
             initial="hidden"
             animate="show"
         >
-            {text.split("").map((char, index) => (
-                <motion.span key={index} variants={letter}>
-                    {char}
-                </motion.span>
+            {text.split(/(โอกาสรอดชีวิต)/).map((char, index) => (
+                char === "โอกาสรอดชีวิต" ? (
+                    <motion.span key={index} className="text-red-500" variants={letter}>
+                        {char}
+                    </motion.span>
+                ) : (
+                    char.split("").map((c, i) => (
+                        <motion.span key={`${index}-${i}`} variants={letter}>
+                            {c}
+                        </motion.span>
+                    ))
+                )
             ))}
         </motion.p>
     );
 };
+
 
 export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4901' }) => {
     const container = {
@@ -100,3 +109,4 @@ export const AnimatedText3: React.FC<AnimatedTextProps> = ({ text }) => {
         </motion.p>
     );
 };
+

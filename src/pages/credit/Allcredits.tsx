@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import { Pagination, Navigation } from "swiper/modules";
+// import { Pagination, Navigation } from "swiper/modules";
 import { useAudio } from "./../../contexts/AudioProvider";
 
 const Allcredit: React.FC = () => {
@@ -18,17 +18,17 @@ const Allcredit: React.FC = () => {
    }, []);
  
 
-  const socialLinks = [
-    { href: "https://www.instagram.com", img: "/image/icons/iconig.png" ,description: "instagram" },
-    { href: "https://www.facebook.com", img: "/image/icons/iconfb.png" ,description: "facebook"},
-    { href: "https://www.youtube.com", img: "/image/icons/iconyt.png" ,description: "youtube"},
-  ];
-  const imageSlides = [
-    "/image/Slidimg/tiger.jpg",
-    "/image/Slidimg/bird.jpg",
-    "/image/Slidimg/tiger.jpg",
-    "/image/Slidimg/bird.jpg",
-  ];
+  // const socialLinks = [
+  //   { href: "https://www.instagram.com", img: "/image/icons/iconig.png" ,description: "instagram" },
+  //   { href: "https://www.facebook.com", img: "/image/icons/iconfb.png" ,description: "facebook"},
+  //   { href: "https://www.youtube.com", img: "/image/icons/iconyt.png" ,description: "youtube"},
+  // ];
+  // const imageSlides = [
+  //   "/image/Slidimg/tiger.jpg",
+  //   "/image/Slidimg/bird.jpg",
+  //   "/image/Slidimg/tiger.jpg",
+  //   "/image/Slidimg/bird.jpg",
+  // ];
   
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative">
@@ -72,9 +72,9 @@ const Allcredit: React.FC = () => {
 
         <div className="absolute top-0 left-0 w-full h-auto flex flex-col items-center justify-center p-6 space-y-6">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg">
-            <img src="/icon.svg" alt="SVG Icon" width="30" height="30" className="absolute top-7 right-6" />
-            <h2 className="text-4xl font-bold mb-3 mt-10 text-[#ed3fb0] drop-shadow-xl">Lab Stroke</h2>
-            <p className="text-xl mt-5 text-[#ed3fb0] mb-5">อายุน้อยก็เป็นได้</p>
+          <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" />
+          <h2 className="text-4xl font-bold mb-3 mt-10 text-[#fa4901] drop-shadow-xl">Lab Stroke</h2>
+            <p className="text-xl mt-5 text-[#fa4901] mb-5">อายุน้อยก็เป็นได้</p>
             <div className="w-full flex justify-center">
             <iframe
                 width="350"
@@ -86,19 +86,25 @@ const Allcredit: React.FC = () => {
                 allowFullScreen
             ></iframe>
             </div>
-            <p className="text-sm mt-5 ">อีกสื่อ Motion Graphic ที่ถ่ายทอดข้อมูลเกี่ยวกับ </p>
-            <p className="text-sm mb-4">“โรคหลอดเลือดสมอง” และ “อายุน้อยก็เป็นได้”</p>
-            <p className="text-sm">โดยเป็นเรื่องราวเกี่ยวกับโรคหลอดเลือดสมอง</p>
-            <p className="text-sm">ที่สามารถเกิดได้กับทุกคนแม้แต่ในคนอายุน้อย</p>
-            <p className="text-sm">แต่หากได้ทราบวิธีสังเกตอาการของโรคนี้</p>
-            <p className="text-sm">ก็จะเป็นประโยชน์ทั้งต่อตัวเองและคนรอบข้าง</p>
-            <p className="text-sm mt-5">ทั้งนี้พวกเราขอขอบคุณผู้เล่นทุกคนที่เข้ามาเล่นเกม</p>
+            <div className="text-center">
+              <p className="text-sm mt-5 text-[#fa4901]">
+                อีกสื่อ Motion Graphic ที่ถ่ายทอดข้อมูลเกี่ยวกับ 
+              </p>
+              <p className="text-sm mb-4 text-[#fa4901]">
+                “โรคหลอดเลือดสมอง” และ “อายุน้อยก็เป็นได้”
+              </p>
+            </div>
+            <p className="text-sm pl-4">เป็นเรื่องราวของหนุ่มออฟฟิศที่ต้องมาพบเข้ากับ</p>
+            <p className="text-sm">เหตุการณ์แปลกประหลาดเมื่อจู่ๆ ก็มีเสียงปริศนาจาก</p>
+            <p className="text-sm">ของใครคนหนึ่งที่จะพาเขาไปพบความจริงบางอย่าง</p>
+            <p className="text-sm">ใน “Lab Stroke”ห้องทดลองที่จะเล่าข้อเท็จจริงเกี่ยวกับโรคหลอดเลือดสมองพร้อมภาพจำลองอนาคตที่ทำให้ชายหนุ่มต้องกลับมาตระหนักถึงการใช้ชีวิตของเขาในปัจจุบัน</p>
+            {/* <p className="text-sm mt-5">ทั้งนี้พวกเราขอขอบคุณผู้เล่นทุกคนที่เข้ามาเล่นเกม</p>
             <p className="text-sm">เว็บไซต์ของพวกเรา ขอให้ผู้เล่นได้ใช้เวลาในการเล่น</p>
             <p className="text-sm">เกมเว็บไซต์นี้ให้คุ้มค่า เพื่อรับประโยชน์ผ่าน</p>
-            <p className="text-sm">ประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง</p>
+            <p className="text-sm">ประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง</p> */}
 
             {/* ✅ เพิ่ม Swiper สำหรับเลื่อนรูปภาพ */}
-            <Swiper
+            {/* <Swiper
               modules={[Pagination, Navigation]}
               pagination={{ clickable: true }}
               navigation
@@ -110,32 +116,16 @@ const Allcredit: React.FC = () => {
                   <img src={src} alt={`Slide ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </Swiper> */}
 
-            <p className="text-base mt-8 text-[#fa4901] drop-shadow-xl">ดูผลงานของเราเพิ่มเติมได้ที่</p>
-            <div className="flex justify-start mt-4 space-x-4">
-            {socialLinks.map((link, index) => (
-                <div key={index} className="flex flex-col items-center">
-                <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    <img src={link.img} alt={link.description} width="60" height="30" />
-                </a>
-                {/* <span className="text-sm mt-1">{link.description}</span> */}
-                </div>
-            ))}
-            </div>
+            {/* <p className="text-base mt-8 text-[#fa4901] drop-shadow-xl">ดูผลงานของเราเพิ่มเติมได้ที่</p> */}
+            {/* <div className="flex justify-start mt-4 space-x-4">
 
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }} >Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
-            <p className="text-xs mt-4 text-[#ffffff] drop-shadow-md">Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน</p>
+            </div> */}
 
+            <footer className="text-[0.67rem] mt-8 text-[#ffffff] drop-shadow-md" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}>
+            Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน
+          </footer>          
           </div>
         </div>
       </div>

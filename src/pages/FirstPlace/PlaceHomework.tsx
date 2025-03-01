@@ -66,7 +66,7 @@ const PlaceHomework: React.FC = () => {
 
               <div className="absolute inset-0 flex justify-center items-center z-10">
                 <div className="px-6 py-4 rounded-lg">
-                  <AnimatedText text="ตอนนี้ฉันกำลังกินข้าวอยู่กับเจน" />
+                  <AnimatedText text="ตอนนี้คุณกำลังเรียนอยู่กับเจน" />
                 </div>
               </div>
             </>
@@ -75,10 +75,15 @@ const PlaceHomework: React.FC = () => {
 
         {/* ป้องกันการคลิกซ้ำระหว่าง transition */}
         {!showNextScene && (
-          <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
-            {/* {'>>'} */}
-          </div>
-        )}
+        <motion.div
+            className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 3 }} // หน่วงเวลา 1.5 วินาทีก่อนขึ้น
+          >
+            <div className="text-white text-xl animate-pulse">กดเพื่อไปต่อ</div>
+          </motion.div>
+          )}
       </motion.div>
     </div>
   );

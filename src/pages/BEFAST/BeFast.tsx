@@ -61,7 +61,14 @@ const handleButtonClick = (index: number) => {
 
 const handleImageLoad = () => {
   setIsImageLoaded(true);
-  setTimeout(() => setPopupMessage((prev) => ({ ...prev, description: buttonMessages[buttonsClicked.size - 1].description })), 2000);
+  
+  // ใช้ index ล่าสุดที่ถูกคลิกเพื่อดึง description ที่ถูกต้อง
+  const lastClickedIndex = Array.from(buttonsClicked).pop();
+  if (lastClickedIndex !== undefined) {
+    const message = buttonMessages[lastClickedIndex];
+    setPopupMessage((prev) => ({ ...prev, description: message.description }));
+  }
+
   setTimeout(() => setIsContentComplete(true), 5000);
 };
   const handleCloseFirstDialog = () => {

@@ -16,13 +16,19 @@ const Preface: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex justify-center items-center p-4 relative">
+    <div className="min-h-screen bg-black flex justify-center items-center p-4 relative">
       
       {/* ✅ เนื้อหาหลัก */}
-      <div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "black" }}>
-        {/* ✅ ปุ่ม Hamburger Menu */}
+      <div
+        className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4"
+        style={{
+          backgroundImage: "url('/image/start.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >        {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
-          className="absolute top-4 left-4 text-white text-3xl"
+          className="absolute top-4 left-4 text-black text-3xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           whileTap={{ scale: 0.9 }} // คลิกแล้วมีเอฟเฟกต์หดลงเล็กน้อย
           animate={{ rotate: isMenuOpen ? 90 : 0 }} // หมุนตอนเปลี่ยนไอคอน
@@ -54,15 +60,14 @@ const Preface: React.FC = () => {
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-          <h1 className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Unexpected</h1>
+          {/* <h1 className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Unexpected</h1>
           <p className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Day</p>
           <p className="text-2xl mt-14 text-white font-custom">การเผชิญกับโรคหลอด</p>
-          <p className="text-2xl mb-8 text-white font-custom" >เลือดสมองแบบเฉียบพลัน</p>
+          <p className="text-2xl mb-8 text-white font-custom" >เลือดสมองแบบเฉียบพลัน</p> */}
           <button
             onClick={() => navigate("/warning")}
-            className="mt-8 px-6 py-2 bg-black text-white rounded hover:bg-gray-800 font-custom"
-          >
-            ถัดไป {'>>'}
+            className="absolute bottom-36 inset-x-0 w-28 mx-auto px-6 py-2 bg-[#b21f13] text-white rounded-2xl hover:bg-gray-800"            >
+            เริ่มต้น
           </button>
         </div>
       </div>

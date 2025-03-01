@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,6 +17,7 @@ const Prechapter: React.FC = () => {
     const [inputValue, setInputValue] = useState("");
     const [showInput, setShowInput] = useState(false);
     const [textMoveUp, setTextMoveUp] = useState(false);
+    const [showWhiteBg, setShowWhiteBg] = useState(false);
 
     const audioRef1 = useRef<HTMLAudioElement>(null);
     const audioRef2 = useRef<HTMLAudioElement>(null);
@@ -47,7 +47,7 @@ const Prechapter: React.FC = () => {
         if (index < texts.length - 1) {
             setIndex(index + 1);
         } else {
-            navigate("/Prechapter1");
+            setShowWhiteBg(true); // แสดงพื้นหลังสีขาวเมื่อถึงข้อความสุดท้าย
         }
     };
 
@@ -63,40 +63,49 @@ const Prechapter: React.FC = () => {
         }
     };
 
+    const handleContinue = () => {
+        navigate("/Prechapter1"); // นำทางไปยังหน้าถัดไป
+    };
+
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
-
-          <audio ref={audioRef1} src="/Sound/Scene Start/Group of People walking.mp3" autoPlay loop />
-          <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
-          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
+            <audio ref={audioRef1} src="/Sound/Scene Start/Group of People walking.mp3" autoPlay loop />
+            <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
+            <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"
                 initial="initial"
                 animate="animate"
                 exit="exit"
                 variants={fadeInOut(2, "easeInOut", 0)}
-                onClick={index === 1 ? undefined : nextText}
+                onClick={index === 1 ? undefined : nextText} // คลิกเพื่อเปลี่ยนข้อความ
             >
-                <img 
-                    src="/gif/3-6.gif" 
-                    alt="Background" 
-                    className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20"></div>
+                {!showWhiteBg && (
+                    <>
+                        <img 
+                            src="/gif/3-6.gif" 
+                            alt="Background" 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/20"></div>
+                    </>
+                )}
 
-                <div className="absolute inset-0 flex flex-col justify-start items-center z-10 px-4 pt-36 ">
-                <AnimatePresence mode="wait">
-                        <motion.p
-                            key={index}
-                            className="text-center break-words text-xl "
-                            style={{ whiteSpace: "pre-line" }}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: textMoveUp ? -0 : 0 }} // เลื่อนขึ้นเมื่อ textMoveUp เป็น true
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            {texts[index]}
-                        </motion.p>
+                <div className="absolute inset-0 flex flex-col justify-start items-center z-10 px-4 pt-36">
+                    <AnimatePresence mode="wait">
+                        {!showWhiteBg && (
+                            <motion.p
+                                key={index}
+                                className="text-center break-words text-xl"
+                                style={{ whiteSpace: "pre-line" }}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: textMoveUp ? -0 : 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.8 }}
+                            >
+                                {texts[index]}
+                            </motion.p>
+                        )}
                     </AnimatePresence>
 
                     {index === 1 && (
@@ -117,7 +126,6 @@ const Prechapter: React.FC = () => {
                                             onChange={handleInputChange}
                                             onInput={(e) => {
                                                 const input = e.target as HTMLInputElement;
-                                                // อนุญาตเฉพาะภาษาไทยและช่องว่าง
                                                 input.value = input.value.replace(/[^ก-๙\s]/g, '');
                                             }}
                                             className="w-80 h-40 p-2 border rounded-3xl text-center text-lg"
@@ -128,7 +136,7 @@ const Prechapter: React.FC = () => {
                                     <div className="flex justify-center items-center">
                                         <button 
                                             type="submit"
-                                            className="w-full px-6 py-2 font-bold text-xl text-[#f6edeb] rounded 
+                                            className="w-full px-6 py-2 text-xl text-[#817c7c] rounded 
                                             transition duration-300 ease-in-out hover:drop-shadow-lg pt-16"
                                         >
                                             กดเพื่อไปต่อ
@@ -138,6 +146,23 @@ const Prechapter: React.FC = () => {
                             )}
                         </AnimatePresence>
                     )}
+
+                    <AnimatePresence>
+                        {showWhiteBg && (
+                            <motion.div
+                                className="absolute inset-0 bg-white flex justify-center items-center cursor-pointer"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1 }}
+                                onClick={handleContinue} // คลิกที่ใดก็ได้บนพื้นหลังสีขาวเพื่อไปต่อ
+                            >
+                                <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">
+                                    <div className="text-[#817c7c] text-xl animate-pulse">กดเพื่อไปต่อ</div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </motion.div>
         </div>

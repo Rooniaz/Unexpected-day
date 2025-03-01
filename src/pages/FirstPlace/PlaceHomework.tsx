@@ -66,7 +66,7 @@ const PlaceHomework: React.FC = () => {
 
               <div className="absolute inset-0 flex justify-center items-center z-10">
                 <div className="px-6 py-4 rounded-lg">
-                  <AnimatedText text="ตอนนี้คุณกำลังเรียนอยู่กับเจน" />
+                  <AnimatedText text="ตอนนี้คุณกำลังเรียนอยู่กับเจน" className="text-white "/>
                 </div>
               </div>
             </>

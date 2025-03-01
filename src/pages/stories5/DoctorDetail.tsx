@@ -94,7 +94,7 @@ const DoctorDetail: React.FC = () => {
         {!showTextBox ? (
           <div className="absolute bottom-80 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 rounded-lg">
-              <AnimatedText key={index} text={texts[index]}  />
+              <AnimatedText key={index} text={texts[index]} className="text-black" />
             </div>
           </div>
         ) : (

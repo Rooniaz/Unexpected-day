@@ -6,12 +6,12 @@ import { AnimatedText2 } from "../../components/AnimatedText";
 
 const Hospital1: React.FC = () => {
   const navigate = useNavigate();
-  const storedName = localStorage.getItem("userName") || "???";
+  // const storedName = localStorage.getItem("userName") || "???";
   const videoRef = useRef<HTMLVideoElement>(null); // ใช้ ref เพื่อควบคุมวิดีโอ
 
   const texts = [
-    `${storedName} : นี่เราร่างกายรู้สึกไม่ดีเลย`,
-    `${storedName} : มันเกิดอะไรขึ้น ทำไมเราถึงเป็นแบบนี้`,
+    `ตอนนี้คุณอยู่ที่โรงพยาบาล`,
+    `"คุณสัมผัสได้ถึงความผิดปกติในร่างกายของตัวเอง”`,
   ];
 
   const [index, setIndex] = useState(0);
@@ -92,9 +92,9 @@ const Hospital1: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 
-        <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-          <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <AnimatedText2 key={index} text={texts[index]} color="yellow"/>
+        <div className="absolute top-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+          <div className="px-6 py-4 rounded-lg">
+            <AnimatedText2 key={index} text={texts[index]} color="black"/>
           </div>
         </div>
       </motion.div>

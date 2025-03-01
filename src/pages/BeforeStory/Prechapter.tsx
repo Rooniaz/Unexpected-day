@@ -154,7 +154,7 @@ const Prechapter: React.FC = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                transition={{ duration: 1 }}
+                                transition={{ duration: 2 }}
                                 onClick={handleContinue} // คลิกที่ใดก็ได้บนพื้นหลังสีขาวเพื่อไปต่อ
                             >
                                 <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">

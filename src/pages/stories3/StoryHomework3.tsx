@@ -93,7 +93,7 @@ const StoryHomework3: React.FC = () => {
         {bgColor !== "black" && (
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
-              <AnimatedText key={index} text={texts[index]} />
+              <AnimatedText key={index} text={texts[index]} className="text-white"/>
             </div>
           </div>
         )}

@@ -15,7 +15,7 @@ const Prologue2: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
-<div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "#817c7c" }}>        
+<div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "#000000" }}>        
   <motion.div
           className="w-full max-w-lg text-center"
           initial="initial"
@@ -23,7 +23,7 @@ const Prologue2: React.FC = () => {
           exit="exit"
           variants={fadeInOut(2, "easeInOut", 0)}
         >
-          <h2 className="text-2xl mb-4 text-white mb-8">คุณกำลังทำอะไรอยู่</h2>
+          <h2 className="text-2xl mb-4 text-[#fa4901] mb-8">คุณกำลังทำอะไรอยู่</h2>
           <div className="space-y-4">
             {choices.map((choice, index) => (
               <button

@@ -75,6 +75,8 @@ const StoryPark: React.FC = () => {
               <AnimatedText 
                 key={index} 
                 text={texts[index]} 
+                className="text-white "
+
               />
             ) : (
               <AnimatedText2 

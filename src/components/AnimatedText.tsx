@@ -7,7 +7,7 @@ interface AnimatedTextProps {
     className?: string;
 }
 
-export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
+export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = "" }) => {
     const container = {
         hidden: { opacity: 1 },
         show: {
@@ -23,14 +23,14 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
 
     return (
         <motion.p
-            className="text-lg text-white text-center"
+            className={`text-lg text-center ${className}`} // 👈 ใช้ className ที่รับมา
             variants={container}
             initial="hidden"
             animate="show"
         >
             {text.split(/(โอกาสรอดชีวิต)/).map((char, index) => (
                 char === "โอกาสรอดชีวิต" ? (
-                    <motion.span key={index} className="text-red-500" variants={letter}>
+                    <motion.span key={index} className="text-[#fa4901]" variants={letter}>
                         {char}
                     </motion.span>
                 ) : (

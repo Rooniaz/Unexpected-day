@@ -185,7 +185,7 @@ const UnexpectedDayForm: React.FC = () => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.5;
+      audioRef.current.volume = 0.2;
     }
   }, []);
 

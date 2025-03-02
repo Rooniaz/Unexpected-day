@@ -19,7 +19,7 @@ const StoryCanteen2: React.FC = () => {
     `${storedName} : อ..อะ %^&8#`, // สีเหลือง
     "เจน : พูดอะไรอ่ะ",
     "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
-    "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
+    `${storedName} : อ..อะ อั่ก เหิกก..`,
   ];
 
   useEffect(() => {
@@ -101,6 +101,10 @@ const StoryCanteen2: React.FC = () => {
     if (audioRef3.current) {
       audioRef3.current.volume = 0.5;
     }
+
+    if (audioRef4.current) {
+      audioRef4.current.volume = 0.5;
+    }
   }
 
     // การเล่นเพลงใหม่เมื่อถึงข้อความที่ต้องการ
@@ -140,7 +144,7 @@ const StoryCanteen2: React.FC = () => {
         loop
       />
       <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
-      <audio ref={audioRef4} src="/Sound/Sound fx/Effect jane_and_friend.mp3" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
+      <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined}

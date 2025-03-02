@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText2 } from "../../components/AnimatedText";
+import { useAudio } from "../../contexts/AudioProvider"; 
 
 const Hospital1: React.FC = () => {
   const navigate = useNavigate();
@@ -66,11 +67,18 @@ const Hospital1: React.FC = () => {
           // }
       }, []);
 
+  const { playAudio, pauseAudio } = useAudio();
+
+  useEffect(() => {
+    playAudio("/Sound/Hospital Sound/Sound Bg Hospital.mp3", 1); // กำหนด volume ที่ 50%
+    return () => pauseAudio();
+  }, []);
+  
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
                                   {/* เพิ่มเพลงในหน้า */}
   <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Ambience.mp3" autoPlay loop />
-  <audio ref={audioRef2} src="/Sound/Hospital Sound/Sound Bg Hospital.mp3" autoPlay loop />
+  {/* <audio ref={audioRef2} src="/Sound/Hospital Sound/Sound Bg Hospital.mp3" autoPlay loop /> */}
   {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
                                   
       <motion.div

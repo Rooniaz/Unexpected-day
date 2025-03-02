@@ -1,68 +1,30 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
-import { useEffect, useState, useRef } from "react";
-// import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
+import { useEffect, useState } from "react";
+import { useAudio } from "../../contexts/AudioProvider"; // ใช้ AudioProvider2
 
 const Braindetail = () => {
   const navigate = useNavigate();
   const [animationComplete, setAnimationComplete] = useState(false);
+  const { playAudio, pauseAudio } = useAudio();
 
-  // const { playAudio, pauseAudio } = useAudio();
+  useEffect(() => {
+    playAudio("/Sound/Sound fx/Scene BEFAST.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+  }, []);
 
-  // useEffect(() => {
-  //   playAudio(); // เล่นเพลงต่อจากหน้า Warning
-  //   return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-  // }, []);
-
-  // เริ่มนับถอยหลังหลังจากแอนิเมชันเสร็จสิ้น
   useEffect(() => {
     if (animationComplete) {
       const timer = setTimeout(() => {
         navigate("/Friendbrain");
-      }, 5000); // 5 วินาทีหลังจากข้อความแสดงเสร็จ
-
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [animationComplete, navigate]);
 
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.5,  // ให้ข้อความตัวแดงขึ้นก่อน
-        duration: 0.8,
-      },
-    },
-  };
-
-  const subtitleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1,  // ให้ข้อความสีขาวขึ้นหลังจากตัวแดง
-        duration: 0.8,
-      },
-    },
-  };
-
-  // สร้าง ref สำหรับ audio element
-  const audioRef1 = useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    // ตั้งค่า volume หลังจาก component mount
-    if (audioRef1.current) {
-        audioRef1.current.volume = 1
-    }
-}, []);
-
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: 'black' }}
@@ -81,11 +43,11 @@ const Braindetail = () => {
           className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80%] z-20"
           initial="hidden"
           animate="visible"
-          onAnimationComplete={() => setAnimationComplete(true)} // ตรวจจับเมื่อแอนิเมชันจบ
+          onAnimationComplete={() => setAnimationComplete(true)}
         >
           <motion.h1
             className="font-custom font-bold text-[#FF4500] text-4xl text-left mb-1.5"
-            variants={titleVariants}
+            variants={fadeInOut(0.5, "easeInOut", 0)}
           >
             โรค<br />
             หลอดเลือดสมอง<br />
@@ -94,16 +56,15 @@ const Braindetail = () => {
 
           <motion.p
             className="font-light text-white text-lg text-left mt-8"
-            variants={subtitleVariants}
+            variants={fadeInOut(1, "easeInOut", 0.5)}
           >
-            <div className="flex flex-col-reverse ...">
+            <div className="flex flex-col-reverse">
               <span className="font-bold">
                 คือ ภาวะที่เกิดจากการที่สมองขาดเลือด <br />
                 หรือออกซิเจนอย่างเฉียบพลัน
               </span>
             </div>
 
-            {/* ใช้ flex และ align-items: stretch เพื่อให้เส้นยาวเท่ากับข้อความ */}
             <div className="flex pt-3">
               <div className="border-l-4 border-[#FF4500] mr-3"></div>
               <div>

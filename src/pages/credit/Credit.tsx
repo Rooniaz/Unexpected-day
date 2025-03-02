@@ -10,11 +10,11 @@ const navigate = useNavigate();
 const { playAudio, pauseAudio } = useAudio();
 const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิด-ปิดเมนู
 
- useEffect(() => {
-    playAudio();
-    return () => pauseAudio();
-  }, []);
 
+useEffect(() => {
+  playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+  return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+}, []);
 
 
   const handleSubmit = (e: React.FormEvent) => {

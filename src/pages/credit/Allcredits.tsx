@@ -11,12 +11,13 @@ const Allcredit: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { playAudio, pauseAudio } = useAudio();
-  useEffect(() => {
-     playAudio();
-     return () => pauseAudio();
-   }, []);
- 
+
+   const { playAudio, pauseAudio } = useAudio();
+
+useEffect(() => {
+  playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+  return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+}, []);
 
   // const socialLinks = [
   //   { href: "https://www.instagram.com", img: "/image/icons/iconig.png" ,description: "instagram" },

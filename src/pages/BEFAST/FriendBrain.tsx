@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatedText, AnimatedText3 } from "../../components/AnimatedText";
-// import { useAudio } from "../../contexts/AudioProvider";
+import { useAudio } from "../../contexts/AudioProvider";
 
 const FriendBrain: React.FC = () => {
   const navigate = useNavigate();
@@ -61,26 +61,27 @@ const FriendBrain: React.FC = () => {
     return () => clearInterval(interval);
   }, [visibleTexts.length, showNextText, handleVideoEnd]);
 
-  // const { playAudio, pauseAudio } = useAudio();
-
-  // useEffect(() => {
-  //   playAudio();
-  //   return () => pauseAudio();
-  // }, []);
-
-  const audioRef1 = useRef<HTMLAudioElement>(null);
-
+  const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    // ตั้งค่า volume หลังจาก component mount
-    if (audioRef1.current) {
-        audioRef1.current.volume = 1
-    }
-}, []);
+    playAudio("/Sound/Sound fx/Scene BEFAST.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+  }, []);
+
+
+  // const audioRef1 = useRef<HTMLAudioElement>(null);
+
+
+//   useEffect(() => {
+//     // ตั้งค่า volume หลังจาก component mount
+//     if (audioRef1.current) {
+//         audioRef1.current.volume = 0.5
+//     }
+// }, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
+        {/* <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop /> */}
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
@@ -95,7 +96,7 @@ const FriendBrain: React.FC = () => {
         <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
           <div className="rounded-lg flex flex-col items-center space-y-6">
             {visibleTexts.map((text, index) => (
-              <div key={index} className="flex flex-wrap justify-center">
+              <div key={index} className="flex flex-wrap justify-center text-white">
                 {splitText(text)}
               </div>
             ))}

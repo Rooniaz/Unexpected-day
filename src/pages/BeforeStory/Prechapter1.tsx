@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
+import { useAudio } from "../../contexts/AudioProvider"; // ใช้ AudioProvider2
 
 const texts = [
     "คุณกับเพื่อนคุยเรื่องราวอนาคต\nและสิ่งต่างๆที่อยากจะทำ",
@@ -28,10 +29,10 @@ const Prechapter: React.FC = () => {
         //     audioRef1.current.volume = 0.2;
         // }
         if (audioRef2.current) {
-            audioRef2.current.volume = 1.0;
+            audioRef2.current.volume = 0.5;
         }
         if (audioRef3.current) {
-            audioRef3.current.volume = 1.0;
+            audioRef3.current.volume = 0.3;
         }
     }, []);
 
@@ -75,11 +76,18 @@ const Prechapter: React.FC = () => {
         }
     }, []);
 
+        const { playAudio, pauseAudio } = useAudio();
+    
+    useEffect(() => {
+      playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+      return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+    }, []);
+
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
           {/* เพิ่มเพลงในหน้า พร้อม ref สำหรับการตั้งค่า volume */}
           {/* <audio ref={audioRef1} src="/Sound/Scene Start/Group of People walking.mp3" autoPlay loop /> */}
-          <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
+          {/* <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop /> */}
           <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"

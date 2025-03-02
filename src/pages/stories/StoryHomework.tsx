@@ -24,7 +24,7 @@ const StoryHomework: React.FC = () => {
 
   useEffect(() => {
     if (audioRef1.current) {
-      audioRef1.current.volume = 0.5;
+      audioRef1.current.volume = 0.3;
     }
   }, []);
 

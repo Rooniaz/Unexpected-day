@@ -73,7 +73,7 @@ const PlaceHomework: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* ป้องกันการคลิกซ้ำระหว่าง transition */}
+        {/* ป้องกันการคลิกซ้ำระหว่าง transitions*/}
         {!showNextScene && (
         <motion.div
             className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4"

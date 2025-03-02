@@ -85,16 +85,19 @@ const StoryHomework3: React.FC = () => {
         style={{ backgroundColor: bgColor }}
         onClick={handleContinue} // ฟังก์ชันเมื่อผู้ใช้คลิกหรือแตะหน้าจอ
       >
-        <video
-          ref={videoRef}
-          src="/video/blurStudy.mp4"
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          onEnded={handlePicEnd}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        />
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        onEnded={handlePicEnd}
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      >
+        <source src="/video/blurStudy.webm" type="video/webm" />
+        <source src="/video/blurStudy.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
         {/* ซ่อนข้อความเมื่อ bgColor เป็น "black" */}
         {bgColor !== "black" && (

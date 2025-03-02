@@ -159,7 +159,7 @@ const handleImageLoad = () => {
           )}
           {isContentComplete && (
             <div className="flex justify-center w-full">
-              <button onClick={handleCloseFirstDialog} className="px-2 py-1 rounded mt-2 text-lg text-[#ffffff] bg-[#fa4901]">
+              <button onClick={handleCloseFirstDialog} className="px-2 py-1 rounded-xl mt-2 text-lg text-[#ffffff] bg-[#fa4901] border-2 border-[#ffffff] hover:bg-[#e26432] bg-opacity-80">
                 เข้าใจแล้ว
               </button>
             </div>

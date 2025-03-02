@@ -30,7 +30,7 @@ const FriendBrain: React.FC = () => {
       part.match(/สังเกตอาการ|โรคหลอดเลือด/) ? (
         <AnimatedText3 key={index} text={part} />
       ) : (
-        <AnimatedText key={index} text={part} />
+        <AnimatedText key={index} text={part} className="text-white" />
       )
     );
   };

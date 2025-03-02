@@ -22,7 +22,7 @@ const Preface: React.FC = () => {
       <div
         className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4"
         style={{
-          backgroundImage: "url('/image/start.png')",
+          backgroundImage: "url('/image/start-1.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -64,11 +64,12 @@ const Preface: React.FC = () => {
           <p className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Day</p>
           <p className="text-2xl mt-14 text-white font-custom">การเผชิญกับโรคหลอด</p>
           <p className="text-2xl mb-8 text-white font-custom" >เลือดสมองแบบเฉียบพลัน</p> */}
-          <button
+          <img 
+            src="/image/button/Start_button.png"
+            alt="เริ่มต้น"
             onClick={() => navigate("/warning")}
-            className="absolute bottom-36 inset-x-0 w-28 mx-auto px-6 py-2 bg-[#b21f13] text-white rounded-2xl hover:bg-gray-800"            >
-            เริ่มต้น
-          </button>
+            className="absolute bottom-2 inset-x-0 w-84  mx-auto cursor-pointer hover:opacity-350"
+          />
         </div>
       </div>
     </div>

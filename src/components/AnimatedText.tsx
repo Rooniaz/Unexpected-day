@@ -28,11 +28,22 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
             initial="hidden"
             animate="show"
         >
-            {text.split(/(โอกาสรอดชีวิต)/).map((char, index) => (
-                char === "โอกาสรอดชีวิต" ? (
-                    <motion.span key={index} className="text-[#fa4901]" variants={letter}>
-                        {char}
-                    </motion.span>
+            {text.split(/(เพิ่มโอกาสรอดชีวิต)/).map((char, index) => (
+                char === "เพิ่มโอกาสรอดชีวิต" ? (
+                    <>
+                        <br /> {/* 👈 ขึ้นบรรทัดใหม่ก่อนแสดงข้อความ */}
+                        <motion.span 
+                            key={index} 
+                            className="text-[#e7d700] " 
+                            variants={letter} 
+                            style={{ textShadow: "1px 0px 0px black" ,
+                                     filter: "drop-shadow(2px 1px 1px rgba(0, 0, 0, 0.75))" // ✅ เพิ่ม drop-shadow หนา
+
+                            }}
+                        >
+                            {char}
+                        </motion.span>
+                    </>
                 ) : (
                     char.split("").map((c, i) => (
                         <motion.span key={`${index}-${i}`} variants={letter}>
@@ -44,6 +55,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
         </motion.p>
     );
 };
+
 
 
 export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4901' }) => {

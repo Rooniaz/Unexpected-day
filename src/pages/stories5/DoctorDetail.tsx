@@ -13,7 +13,8 @@ const DoctorDetail: React.FC = () => {
 
   const texts = [
     `หากคุณมาโรงพยาบาลได้ทันเวลา
-      จะสามารถช่วยลดความรุนแรงและเพิ่มโอกาสรอดชีวิต`,
+      จะสามารถช่วยลดความรุนแรงและ
+      เพิ่มโอกาสรอดชีวิต`,
   ];
 
   useEffect(() => {
@@ -94,7 +95,7 @@ const DoctorDetail: React.FC = () => {
         {!showTextBox ? (
           <div className="absolute bottom-80 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 rounded-lg">
-              <AnimatedText key={index} text={texts[index]} className="text-black" />
+              <AnimatedText key={index} text={texts[index]} className="text-black drop-shadow-[0_8px_8px_rgba(255,255,255,1)]" />
             </div>
           </div>
         ) : (

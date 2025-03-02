@@ -98,6 +98,7 @@ const StoryCanteen3: React.FC = () => {
       >
         <source src="/video/blurCanteen.webm" type="video/webm" />
         <source src="/video/blurCanteen.mp4" type="video/mp4" />
+        <source src="/video/blurCanteen.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
 

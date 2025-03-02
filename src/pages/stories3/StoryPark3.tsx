@@ -97,6 +97,7 @@ const StoryPark3: React.FC = () => {
       >
         <source src="/video/blurPark.webm" type="video/webm" />
         <source src="/video/blurPark.mp4" type="video/mp4" />
+        <source src="/video/blurPark.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
 

@@ -96,6 +96,7 @@ const StoryHomework3: React.FC = () => {
       >
         <source src="/video/blurStudy.webm" type="video/webm" />
         <source src="/video/blurStudy.mp4" type="video/mp4" />
+        <source src="/video/blurStudy.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
 

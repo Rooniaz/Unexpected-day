@@ -97,6 +97,7 @@ const StoryWork3: React.FC = () => {
       >
         <source src="/video/blurWork.webm" type="video/webm" />
         <source src="/video/blurWork.mp4" type="video/mp4" />
+        <source src="/video/blurWork.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
 

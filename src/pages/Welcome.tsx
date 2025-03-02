@@ -41,10 +41,10 @@ const Welcome: React.FC = () => {
 
   const { playAudio, pauseAudio } = useAudio();
 
-  useEffect(() => {
-    playAudio(); // เล่นเพลงต่อจากหน้า Warning
-    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-  }, []);
+useEffect(() => {
+  playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+  return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+}, []);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">

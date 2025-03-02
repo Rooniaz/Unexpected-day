@@ -19,10 +19,10 @@ const AfterDoctor: React.FC = () => {
     const { playAudio, pauseAudio } = useAudio();
 
 
-    useEffect(() => {
-      playAudio();
-      return () => pauseAudio();
-    }, []);
+useEffect(() => {
+  playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+  return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+}, []);
 
     const nextText = () => {
         if (index < texts.length - 1) {

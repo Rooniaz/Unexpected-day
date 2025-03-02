@@ -101,7 +101,7 @@ const Hospital1: React.FC = () => {
         />
 
         <div className="absolute top-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-          <div className="px-6 py-4 rounded-lg">
+          <div className="px-6 py-4 rounded-lg break-words" >
             <AnimatedText2 key={index} text={texts[index]} color="black"/>
           </div>
         </div>

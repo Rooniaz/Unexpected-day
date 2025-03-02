@@ -31,7 +31,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
             {text.split(/(เพิ่มโอกาสรอดชีวิต)/).map((char, index) => (
                 char === "เพิ่มโอกาสรอดชีวิต" ? (
                     <>
-                        <br /> {/* 👈 ขึ้นบรรทัดใหม่ก่อนแสดงข้อความ */}
+                        <br /> 
                         <motion.span 
                             key={index} 
                             className="text-[#e7d700] " 

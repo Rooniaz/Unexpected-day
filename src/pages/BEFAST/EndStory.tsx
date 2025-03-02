@@ -221,21 +221,23 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
           
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-40 left-0 flex flex-col items-center space-y-6">
-            <div className="flex justify-center items-center space-x-4 ">
+          <div className="absolute w-full bottom-44 left-0 flex flex-col items-center space-y-6">
+            <div className="flex justify-center items-center space-x-4">
               <button 
                 onClick={(event) => { handleButtonClick(event); handleDownload(); }} 
-                className="w-10 h-10 bg-orange-400 text-white rounded-xl flex items-center justify-center shadow-md hover:bg-orange-500 transition-colors"
+                className="relative w-10 h-10 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[##aeb6bf] transition-colors translate-y-[-4px]"
                 aria-label="Download"
               >
+                <span className="absolute inset- bg-red-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span> 
                 <FaDownload size={20} />
               </button>
-              
+
               <button 
                 onClick={(event) => { handleButtonClick(event); handleShare(); }} 
-                className="w-10 h-10 bg-blue-500 text-white rounded-xl flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
+                className="relative w-10 h-10 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[##aeb6bf] transition-colors translate-y-[-4px]"
                 aria-label="Share"
               >
+                <span className="absolute inset- bg-red-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span> 
                 <FaShare size={18} />
               </button>
             </div>

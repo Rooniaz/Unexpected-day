@@ -66,12 +66,12 @@ const Warning: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence> */}
-      <div className="absolute top-6  right-6">
+      {/* <div className="absolute top-6  right-6">
         <img 
           src="/image/LOGO .png" // เปลี่ยนเป็น path ของโลโก้ของคุณ
           className="w-14 h-18" // ปรับขนาดตามต้องการ
         />
-      </div>
+      </div> */}
         {/* ✅ คำเตือนและข้อมูล */}
         <div className="w-full max-w-lg">
         <div className="w-full flex justify-center">

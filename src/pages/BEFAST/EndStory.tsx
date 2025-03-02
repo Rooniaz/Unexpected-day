@@ -29,7 +29,7 @@ const UnexpectedDayForm: React.FC = () => {
 
     // โหลดรูปภาพของใบเสร็จ
     const receiptImage = new Image();
-    receiptImage.src = 'image/Endstory/Card_Endstory.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
+    receiptImage.src = 'image/Endstory/End_Story.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
     receiptImage.onload = () => {
       receiptImageRef.current = receiptImage;
       setIsImageReady(true);

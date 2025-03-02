@@ -68,7 +68,7 @@ const Aboutme: React.FC = () => {
 
         <div className="absolute top-0 left-0 w-full h-auto flex flex-col items-center justify-center p-6 space-y-6">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-100 rounded-lg">
-            <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" />
+            {/* <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" /> */}
             <h2 className="text-3xl mb-3 mt-16 text-[#fa4901] drop-shadow-xl">เกี่ยวกับงาน</h2>
             <p
               className="text-base mt-5 font-light"

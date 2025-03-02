@@ -73,7 +73,7 @@ useEffect(() => {
 
         <div className="absolute top-0 left-0 w-full h-auto flex flex-col items-center justify-center p-6 space-y-6">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg">
-          <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" />
+          {/* <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" /> */}
           <h2 className="text-4xl font-bold mb-3 mt-10 text-[#fa4901] drop-shadow-xl">Lab Stroke</h2>
             <p className="text-xl mt-5 text-[#fa4901] mb-5">อายุน้อยก็เป็นได้</p>
             <div className="w-full flex justify-center">

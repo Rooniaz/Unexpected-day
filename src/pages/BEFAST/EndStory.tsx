@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '../../components/fadeInOut';
-import { FaDownload, FaYoutube, FaShare } from 'react-icons/fa';
+import { FaDownload, FaShare } from 'react-icons/fa';
 
 const UnexpectedDayForm: React.FC = () => {
   // const navigate = useNavigate();
@@ -222,37 +222,37 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
           
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-48 left-0 flex flex-col items-center space-y-6">
-            <div className="flex justify-center items-center space-x-4 ">
+          <div className="absolute w-full bottom-20 left-0 flex flex-col items-center space-y-6">
+            <div className="flex justify-center items-center space-x-4">
               <button 
                 onClick={(event) => { handleButtonClick(event); handleDownload(); }} 
-                className="w-10 h-10 bg-orange-400 text-white rounded-xl flex items-center justify-center shadow-md hover:bg-orange-500 transition-colors"
+                className="relative w-12 h-12 bg-red-500 text-white rounded-lg flex items-center justify-center shadow-md hover:bg-red-600 transition-colors translate-y-[-4px]"
                 aria-label="Download"
               >
+                <span className="absolute inset- bg-red-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span> 
                 <FaDownload size={20} />
               </button>
               
               <button 
                 onClick={(event) => { handleButtonClick(event); handleShare(); }} 
-                className="w-10 h-10 bg-blue-500 text-white rounded-xl flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
+                className="relative w-12 h-12 bg-red-500 text-white rounded-lg flex items-center justify-center shadow-md hover:bg-red-600 transition-colors translate-y-[-4px]"
                 aria-label="Share"
               >
+                <span className="absolute inset- bg-red-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span> 
                 <FaShare size={18} />
               </button>
             </div>
+
+
             
-            <div className="w-cover text-center bg-[#b5b4b4] pr-4 pl-4 flex justify-center items-center rounded-xl">
-              <p className="text-black mr-2 inline-block text-xs ">
-                อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิ๊ก
-              </p>
+            <div className="w-full text-center pt-2 pb-4 flex justify-center items-center">
               <a
+                className="text-white mr-2 inline-block cursor-pointer hover:text-blue-200"
                 href="https://www.youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-3xl text-red-600 hover:text-red-700 transition-colors"
-                onClick={(event) => handleButtonClick(event)}
               >
-                <FaYoutube />
+                อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิ๊ก
               </a>
             </div>
           </div>

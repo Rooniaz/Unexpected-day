@@ -95,7 +95,7 @@ const FriendBrain: React.FC = () => {
         <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
           <div className="rounded-lg flex flex-col items-center space-y-6">
             {visibleTexts.map((text, index) => (
-              <div key={index} className="flex flex-wrap justify-center">
+              <div key={index} className="flex flex-wrap justify-center text-white">
                 {splitText(text)}
               </div>
             ))}

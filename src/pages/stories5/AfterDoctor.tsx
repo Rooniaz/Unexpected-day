@@ -65,7 +65,7 @@ useEffect(() => {
     {/* Background Image */}
     <div
     className="absolute inset-0 w-full h-full bg-cover bg-center"
-      style={{ backgroundImage: 'url(/image/bgbefast.png)' }} // ใส่ path ของภาพที่ต้องการเป็นพื้นหลัง
+      style={{ backgroundImage: 'url(/image/bg-lastfinal.png)' }} // ใส่ path ของภาพที่ต้องการเป็นพื้นหลัง
     ></div>
 
     {/* Overlay เพื่อให้ข้อความอ่านได้ง่ายขึ้น */}

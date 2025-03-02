@@ -37,7 +37,7 @@ const Prechapter: React.FC = () => {
                 setTimeout(() => {
                     setShowInput(true);
                 }, 800); // กล่องข้อความมาหลังจากข้อความเลื่อนขึ้น
-            }, 1500);
+            }, 3000);
         } else {
             setTextMoveUp(false);
             setShowInput(false);

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-// import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
+import { useAudio } from "../../contexts/AudioProvider";
 
 const BeFast: React.FC = () => {
   const [inputs, setInputs] = useState(["", "", "", "", "",""]);
@@ -12,13 +12,13 @@ const BeFast: React.FC = () => {
   const [isContentComplete, setIsContentComplete] = useState(false);
 
   const navigate = useNavigate();
-  const audioRef2 = useRef<HTMLAudioElement>(null);
+  // const audioRef2 = useRef<HTMLAudioElement>(null);
 
-  useEffect(() => {
-    if (audioRef2.current) {
-      audioRef2.current.volume = 0.5;
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (audioRef2.current) {
+  //     audioRef2.current.volume = 0.5;
+  //   }
+  // }, []);
 
   const characters = ["B", "E", "F", "A", "S"];
   const buttonPositions = [
@@ -85,26 +85,26 @@ const handleImageLoad = () => {
     }, 300);
   };
 
-  // const { playAudio, pauseAudio } = useAudio();
-
-  // useEffect(() => {
-  //   playAudio(); // เล่นเพลงต่อจากหน้า Warning
-  //   return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-  // }, []);
-
-  const audioRef1 = useRef<HTMLAudioElement>(null);
+  const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    // ตั้งค่า volume หลังจาก component mount
-    if (audioRef1.current) {
-        audioRef1.current.volume = 1
-    }
+    playAudio("/Sound/Sound fx/Scene BEFAST.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+  }, []);
 
-}, []);
+//   const audioRef1 = useRef<HTMLAudioElement>(null);
+
+//   useEffect(() => {
+//     // ตั้งค่า volume หลังจาก component mount
+//     if (audioRef1.current) {
+//         audioRef1.current.volume = 1
+//     }
+
+// }, []);
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative">
-        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
+        {/* <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop /> */}
       <div className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/image/body_befast.png')" }}>
         {buttonPositions.map((pos, index) => (
           !buttonsClicked.has(index) && (

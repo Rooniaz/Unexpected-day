@@ -9,10 +9,11 @@ const Aboutme: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { playAudio, pauseAudio } = useAudio();
+
   useEffect(() => {
-     playAudio();
-     return () => pauseAudio();
-   }, []);
+    playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+  }, []);
  
 
   const text = `ผลงานชิ้นนี้เกิดขึ้นเพื่อให้ผู้เล่นทุกคนได้เรียนรู้และตระหนักถึงภัยเงียบที่ไม่อาจคาดคิดโดยเป็นเรื่องราวเกี่ยวกับโรคหลอดเลือดสมองที่สามารถเกิดได้กับทุกคนแม้แต่ในคนอายุน้อยแต่หากได้ทราบวิธีสังเกตอาการของโรคนี้ก็จะเป็นประโยชน์ทั้งต่อตัวเองและคนรอบข้าง

@@ -65,7 +65,7 @@ const AfterBefast = () => {
         setShowMessage(true);
         setTimeout(() => {
           navigate("/TimeToCall");
-        }, 3000);
+        }, 5000);
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -172,11 +172,11 @@ const AfterBefast = () => {
             </div>
           </motion.div>
         )}
-        <div className="bg-opacity-80 absolute top-[67%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center" >
+        <div className="bg-opacity-80 absolute top-[67%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse" >
         เร็วเข้า!
           {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
         </div>
-        <div className="bg-opacity-80 absolute top-[71%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center" >
+        <div className="bg-opacity-80 absolute top-[71%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse" >
         รีบเลื่อนรถเพื่อส่งโรงพยาบาล!
           {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
         </div>

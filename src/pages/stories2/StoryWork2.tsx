@@ -83,7 +83,7 @@ const StoryWork2: React.FC = () => {
 
   // กำหนดการตั้งค่าเสียงเมื่อโหลด
   if (audioRef2.current) {
-    audioRef2.current.volume = 1.0;
+    audioRef2.current.volume = 0.5;
     audioRef2.current.playbackRate = 1;
 
     setTimeout(() => {
@@ -100,6 +100,10 @@ const StoryWork2: React.FC = () => {
 
     if (audioRef3.current) {
       audioRef3.current.volume = 0.5;
+    }
+
+    if (audioRef4.current) {
+      audioRef4.current.volume = 0.5;
     }
   }
 
@@ -141,7 +145,7 @@ const StoryWork2: React.FC = () => {
         loop
       />
       <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
-      <audio ref={audioRef4} src="/Sound/Sound fx/Effect jane_and_friend.mp3" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
+      <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
 
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"

@@ -28,10 +28,10 @@ const Prechapter: React.FC = () => {
         //     audioRef1.current.volume = 0.2;
         // }
         if (audioRef2.current) {
-            audioRef2.current.volume = 1.0;
+            audioRef2.current.volume = 0.5;
         }
         if (audioRef3.current) {
-            audioRef3.current.volume = 1.0;
+            audioRef3.current.volume = 0.3;
         }
     }, []);
 

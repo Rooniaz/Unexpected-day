@@ -74,7 +74,7 @@ const FriendBrain: React.FC = () => {
   useEffect(() => {
     // ตั้งค่า volume หลังจาก component mount
     if (audioRef1.current) {
-        audioRef1.current.volume = 1
+        audioRef1.current.volume = 0.5
     }
 }, []);
 

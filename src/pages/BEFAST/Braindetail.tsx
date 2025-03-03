@@ -44,7 +44,7 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handlePicEnd}
-          className="absolute inset-0 w-[390px] h-[844px] object-cover"
+          className="absolute inset-0 w-[390px] h-[844px] "
         >
           <source src="/video/brain_video/fact.webm" type="video/webm" />
           <source src="/video/brain_video/fact.mp4" type="video/mp4" />

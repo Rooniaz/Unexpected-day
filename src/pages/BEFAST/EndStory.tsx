@@ -214,7 +214,7 @@ const UnexpectedDayForm: React.FC = () => {
       // คำนวณตำแหน่งกึ่งกลาง
       const centerX = (tempCanvas.width - receiptWidth) / 2;
       // ปรับตำแหน่งแนวตั้งให้อยู่บนมากขึ้น
-      const centerY = (tempCanvas.height - receiptHeight) / 2 - (tempCanvas.height * 0.05);
+      const centerY = (tempCanvas.height - receiptHeight) / 2 - (tempCanvas.height * 0.0005);
 
       tempCtx.drawImage(canvasRef.current, centerX, centerY, receiptWidth, receiptHeight);
 
@@ -282,7 +282,7 @@ const UnexpectedDayForm: React.FC = () => {
               <div className="flex flex-col items-center">
                 <button
                   onClick={(event) => { handleButtonClick(event); handleDownloadWithBackground(); }}
-                  className="relative w-10 h-10 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[##aeb6bf] transition-colors translate-y-[-4px] mb-2"
+                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] mb-2"
                   aria-label="Download with Background"
                 >
                   <span className="absolute inset- bg-green-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span>
@@ -294,7 +294,7 @@ const UnexpectedDayForm: React.FC = () => {
               <div className="flex flex-col items-center">
                 <button
                   onClick={(event) => { handleButtonClick(event); handleShareWithBackground(); }}
-                  className="relative w-10 h-10 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[##aeb6bf] transition-colors translate-y-[-4px] mb-2"
+                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] mb-2"
                   aria-label="Share with Background"
                 >
                   <span className="absolute inset- bg-blue-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span>

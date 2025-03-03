@@ -33,7 +33,7 @@ const SpreadScene = () => {
       setIsTransitionDone(true);
       setTimeout(() => {
         navigate("/AfterBefast");
-      },); // 2 วินาทีก่อนเปลี่ยนหน้า
+      }, 2000); // 2 วินาทีก่อนเปลี่ยนหน้า
     }, 6000);
 
     return () => clearTimeout(timer);
@@ -58,18 +58,22 @@ const SpreadScene = () => {
         >
           {/* บรรทัดแรก (สีแดง) */}
           <div className="flex flex-row text-red-500 text-2xl justify-center items-center text-center text-shadow-2xl font-bold break-words">
-            {text.split("").map((char, index) => (
+            {Array.from(text).map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}
               </motion.span>
             ))}
           </div>
 
-
           {/* บรรทัดที่สอง (สีแดง) */}
-          <motion.div className="mt-2 text-red-500 text-2xl font-bold break-words underline  " variants={letter}>
-            {redText}
+          <motion.div className="mt-2 text-red-500 text-2xl font-bold break-words underline" variants={letter}>
+            {Array.from(redText).map((char, index) => (
+              <motion.span key={index} variants={letter}>
+                {char}
+              </motion.span>
+            ))}
           </motion.div>
+
           <div className="w-[390px] h-[46px] bg-gray-400 my-4 bg-[#708090] absolute bottom-[34%]"></div>
         </motion.div>
       ) : (

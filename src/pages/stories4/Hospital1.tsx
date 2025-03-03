@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText2 } from "../../components/AnimatedText";
-import { useAudio } from "../../contexts/AudioProvider"; 
+// import { useAudio } from "../../contexts/AudioProvider"; 
 
 const Hospital1: React.FC = () => {
   const navigate = useNavigate();
@@ -67,12 +67,12 @@ const Hospital1: React.FC = () => {
           // }
       }, []);
 
-  const { playAudio, pauseAudio } = useAudio();
+  // const { playAudio, pauseAudio } = useAudio();
 
-  useEffect(() => {
-    playAudio("/Sound/Hospital Sound/Sound Bg Hospital.mp3", 1); // กำหนด volume ที่ 50%
-    return () => pauseAudio();
-  }, []);
+  // useEffect(() => {
+  //   playAudio("/Sound/Hospital Sound/Sound Bg Hospital.mp3", 1); // กำหนด volume ที่ 50%
+  //   return () => pauseAudio();
+  // }, []);
   
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">

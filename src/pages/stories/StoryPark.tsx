@@ -43,7 +43,7 @@ const StoryPark: React.FC = () => {
        setTimeout(() => {
          setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
          setIsChanging(false); // เปิดให้สามารถคลิกเพื่อเปลี่ยนข้อความได้อีก
-       }, 500); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
+       }, 3000); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
      }
    };
 

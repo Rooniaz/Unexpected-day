@@ -17,7 +17,7 @@ const StoryCanteen2: React.FC = () => {
     `${storedName} : อ.. เอ่ออ`, // สีเหลือง
     `เจน : ${storedName} จะไปหรือยัง`, // Show TextBox หลังจากนี้
     `${storedName} : อ..อะ %^&8#`, // สีเหลือง
-    "เจน : พูดอะไรอะ",
+    "เจน : พูดอะไรอ่ะ",
     "เจน : เห้ย!! ทำไมแกปากเบี้ยวอะ ไม่แกล้งดิ!",
     `${storedName} : อ..อะ อั่ก เหิกก..`,
   ];
@@ -56,19 +56,45 @@ const StoryCanteen2: React.FC = () => {
   };
 
   const nextText = () => {
-    if (!isClickable || showTextBox || isLocked) return;
+    if (showTextBox || isLocked) return;
   
+    // กรณีที่คลิกไปข้อความถัดไป
     if (index < texts.length - 1) {
       if (index === 2) {
         setShowTextBox(true);  // ตั้งค่าให้แสดง TextBox เมื่อ index = 2
       } else {
         setIndex((prev) => prev + 1);
       }
+  
+      // ตั้งค่าการล็อกคลิกหลังจากแสดงข้อความ
+      setIsLocked(true);
+  
+      // หลังจาก 3 วินาทีให้ปลดล็อกการคลิก
+      setTimeout(() => {
+        setIsLocked(false); // เปิดให้กดได้หลังจากหน่วงเวลา
+      }, 3000);
     } else {
       navigate("/StoryCanteen3");
     }
   };
   
+  useEffect(() => {
+    // เมื่อเริ่มข้อความใหม่ ให้หน่วงเวลา 3 วินาทีจากนั้นสามารถคลิกได้
+    if (index === 0) {
+      setIsLocked(true); // เริ่มล็อกคลิกตั้งแต่ข้อความแรก
+      setTimeout(() => {
+        setIsLocked(false); // เปิดให้กดไปข้อความถัดไปหลังจาก 3 วินาที
+      }, 3000);
+    } else if (index > 0 && !isLocked) {
+      setIsLocked(true);
+      setTimeout(() => {
+        setIsLocked(false); // เปิดให้กดไปข้อความถัดไปหลังจากหน่วงเวลา
+      }, 3000);
+    }
+  }, [index]);
+  
+
+
   const backgroundGif = () => {
     if (index >= 4) {
       return "/gif/26-27/canteen.gif";

@@ -264,8 +264,11 @@ const UnexpectedDayForm: React.FC = () => {
             <canvas
               ref={canvasRef}
               className="max-w-full"
-              style={{ display: isImageReady ? 'block' : 'none' }}
-            />
+              style={{ 
+                display: isImageReady ? 'block' : 'none',
+                marginTop: '90px', // ปรับตำแหน่งแนวตั้งให้เหมาะสม
+                transform: 'translateY(-10%)' // ปรับตำแหน่งแนวตั้งเพิ่มเติม
+              }}            />
             {!isImageReady && (
               <div className="flex items-center justify-center h-64 w-full">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>

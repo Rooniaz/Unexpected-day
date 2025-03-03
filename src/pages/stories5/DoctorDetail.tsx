@@ -30,7 +30,7 @@ const DoctorDetail: React.FC = () => {
             return prev;
             }
         });
-        }, 3000);
+        }, 4000);
     }
     return () => clearInterval(interval);
   }, [isLocked, index, showTextBox, navigate]);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ReactNode } from "react"; // เพิ่ม ReactNode
+import React, { useEffect, useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -16,6 +16,7 @@ const texts = [
 const AfterDoctor: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
+    const [isReady, setIsReady] = useState(false); // สถานะเพื่อตรวจสอบว่าผู้ใช้สามารถกดได้หรือไม่
     const { playAudio, pauseAudio } = useAudio();
 
     useEffect(() => {
@@ -23,22 +24,30 @@ const AfterDoctor: React.FC = () => {
         return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
     }, []);
 
+    useEffect(() => {
+        setIsReady(false); // เมื่อข้อความเปลี่ยน ให้ตั้งค่า isReady เป็น false
+        const timer = setTimeout(() => {
+            setIsReady(true); // หลังจาก 3 วินาที ให้ตั้งค่า isReady เป็น true
+        }, 3000); // ดีเลย์ 3 วินาที
+
+        return () => clearTimeout(timer); // เคลียร์ timer เมื่อ component unmount หรือ index เปลี่ยน
+    }, [index]);
+
     const nextText = () => {
-        if (index < texts.length - 1) {
-            setIndex(index + 1);
-        } else {
-            navigate('/EndStory');
+        if (isReady) { // ตรวจสอบว่า isReady เป็น true หรือไม่
+            if (index < texts.length - 1) {
+                setIndex(index + 1);
+            } else {
+                navigate('/EndStory');
+            }
         }
     };
 
-    // ฟังก์ชันสำหรับการแสดงข้อความที่มีการเน้นคำ
     const renderTextWithHighlight = (text: string): ReactNode => {
-        // แยกข้อความด้วย \n
         const lines = text.split("\n");
 
         return lines.map((line, lineIndex) => {
-            // ตรวจสอบว่าเป็นคำที่ต้องการเน้นหรือไม่
-            if (            
+            if (
                 line.includes("โรคหลอดเลือดสมองนั้น") ||
                 line.includes("เป็นได้เฉียบพลัน") ||
                 line.includes("เพียงแค่รู้วิธีการสังเกตตามหลัก") ||
@@ -55,7 +64,6 @@ const AfterDoctor: React.FC = () => {
         }).reduce<ReactNode[]>((prev, curr, currIndex) => {
             const result = [
                 ...prev,
-                // เพิ่ม <br /> สำหรับการขึ้นบรรทัดใหม่
                 currIndex > 0 ? <br key={`br-${currIndex}`} /> : null,
                 curr,
             ];
@@ -71,7 +79,7 @@ const AfterDoctor: React.FC = () => {
                 animate="animate"
                 exit="exit"
                 variants={fadeInOut(2, "easeInOut", 0)}
-                onClick={nextText}
+                onClick={nextText} // เมื่อผู้ใช้คลิก ให้เรียก nextText
             >
                 <div
                     className="absolute inset-0 w-full h-full bg-cover bg-center"
@@ -95,13 +103,16 @@ const AfterDoctor: React.FC = () => {
                     </AnimatePresence>
                 </div>
 
-                <motion.p
-                    className="absolute bottom-5 text-gray-500 text-sm"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                >
-                </motion.p>
+                {/* แสดงข้อความ "คลิกเพื่อดำเนินการต่อ" เมื่อ isReady เป็น true */}
+                {isReady && (
+                    <motion.p
+                        className="absolute bottom-5 text-gray-500 text-sm"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                    </motion.p>
+                )}
             </motion.div>
         </div>
     );

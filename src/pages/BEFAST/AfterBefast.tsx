@@ -103,10 +103,10 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[30%] left-1/2 transform -translate-x-1/2 text-center"
+            className="absolute top-[50%] left-1/2 transform -translate-x-1/2 text-center"
           >
-            <div className="bg-opacity-80 text-[#FFFFFF] text-4xl font-bold px-6 py-2 rounded-lg" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-              ส่งให้ทันภายใน 4.30 ชม.
+            <div className="bg-opacity-80 text-[#fa4901] text-2xl px-6 py-2 rounded-lg whitespace-nowrap" style={{ textShadow: '1px 0px 0px rgba(0, 0, 0, 0.5)' }}>
+            ส่งให้ทันภายใน 4.30 ชม.
             </div>
           </motion.div>
         )}

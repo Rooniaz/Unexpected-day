@@ -31,9 +31,7 @@ const FriendBrain: React.FC = () => {
   }, []);
 
   const handleClick = () => {
-    if (isClickable && visibleTexts.length === texts.length) {
       navigate("/GuideBefast");
-    }
   };
 
   useEffect(() => {

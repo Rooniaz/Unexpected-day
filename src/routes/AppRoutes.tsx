@@ -50,6 +50,7 @@ import Credit from "../pages/credit/Credit";
 import Credit1 from "../pages/credit/Credit1";
 import Allcredit from "../pages/credit/Allcredits";
 
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>

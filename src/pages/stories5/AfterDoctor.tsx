@@ -38,7 +38,9 @@ const AfterDoctor: React.FC = () => {
 
         return lines.map((line, lineIndex) => {
             // ตรวจสอบว่าเป็นคำที่ต้องการเน้นหรือไม่
-            if (
+            if (            
+                line.includes("โรคหลอดเลือดสมองนั้น") ||
+                line.includes("เป็นได้เฉียบพลัน") ||
                 line.includes("เพียงแค่รู้วิธีการสังเกตตามหลัก") ||
                 line.includes("BEFAST") ||
                 line.includes("ก็สามารถเพิ่มโอกาสรอดชีวิต")

@@ -38,7 +38,7 @@ const Hospital1: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextText();
-    }, 3000);
+    }, 5000);
 
     // ฟัง Event การแตะหน้าจอ
     window.addEventListener("touchstart", handleUserInteraction);

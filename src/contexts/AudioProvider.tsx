@@ -52,7 +52,7 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const pauseAudio = () => {
     if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime); // บันทึกเวลาปัจจุบันน
+      setCurrentTime(audioRef.current.currentTime); // บันทึกเวลาปัจจุบัน
       audioRef.current.pause();
     }
   };

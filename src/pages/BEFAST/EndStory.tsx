@@ -171,7 +171,7 @@ const UnexpectedDayForm: React.FC = () => {
       // คำนวณตำแหน่งกึ่งกลาง
       const centerX = (tempCanvas.width - receiptWidth) / 2;
       // ปรับตำแหน่งแนวตั้งให้อยู่บนมากขึ้น
-      const centerY = (tempCanvas.height - receiptHeight) / 2 - (tempCanvas.height * 0.05);
+      const centerY = (tempCanvas.height - receiptHeight) / 2 - (tempCanvas.height * 0.0005);
 
       tempCtx.drawImage(canvasRef.current, centerX, centerY, receiptWidth, receiptHeight);
 

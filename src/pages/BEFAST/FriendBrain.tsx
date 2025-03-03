@@ -59,7 +59,7 @@ const FriendBrain: React.FC = () => {
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className={`relative w-[390px] h-[844px] overflow-hidden ${isClickable ? "cursor-pointer" : ""}`}
         style={{ backgroundColor: bgColor }}
         onClick={handleClick}
       >

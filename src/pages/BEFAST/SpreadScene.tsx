@@ -11,6 +11,10 @@ const SpreadScene = () => {
   const text = "เมื่อพบอาการอย่างใดอย่างหนึ่ง ";
   const redText = "ให้รีบส่งโรงพยาบาลด่วน"; // คำที่ต้องการให้เป็นสีแดง
 
+  const segmentText = (text: string) => {
+    return [...new Intl.Segmenter("th", { granularity: "grapheme" }).segment(text)].map(seg => seg.segment);
+  };
+
   const container = {
     hidden: { opacity: 1 },
     show: {
@@ -58,7 +62,7 @@ const SpreadScene = () => {
         >
           {/* บรรทัดแรก (สีแดง) */}
           <div className="flex flex-row text-red-500 text-2xl justify-center items-center text-center text-shadow-2xl font-bold break-words">
-            {Array.from(text).map((char, index) => (
+            {segmentText(text).map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}
               </motion.span>
@@ -67,7 +71,7 @@ const SpreadScene = () => {
 
           {/* บรรทัดที่สอง (สีแดง) */}
           <motion.div className="mt-2 text-red-500 text-2xl font-bold break-words underline" variants={letter}>
-            {Array.from(redText).map((char, index) => (
+            {segmentText(redText).map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}
               </motion.span>

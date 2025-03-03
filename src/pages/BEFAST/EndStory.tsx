@@ -267,7 +267,7 @@ const UnexpectedDayForm: React.FC = () => {
               style={{ 
                 display: isImageReady ? 'block' : 'none',
                 marginTop: '90px', // ปรับตำแหน่งแนวตั้งให้เหมาะสม
-                transform: 'translateY(-10%)' // ปรับตำแหน่งแนวตั้งเพิ่มเติม
+                transform: 'translateY(-5%)' // ปรับตำแหน่งแนวตั้งเพิ่มเติม
               }}            />
             {!isImageReady && (
               <div className="flex items-center justify-center h-64 w-full">
@@ -277,7 +277,7 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
 
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-44 left-0 flex flex-col items-center space-y-6">
+          <div className="absolute w-full bottom-28 left-0 flex flex-col items-center space-y-6">
             <div className="flex justify-center items-center space-x-4">
               <div className="flex flex-col items-center">
                 <button

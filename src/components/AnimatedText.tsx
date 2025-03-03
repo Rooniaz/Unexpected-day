@@ -4,6 +4,7 @@ interface AnimatedTextProps {
     text: string;
     color?: string; 
     className?: string;
+    onComplete?: () => void; // เพิ่ม prop onComplete
 }
 
 export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = "" }) => {

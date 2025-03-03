@@ -2,18 +2,14 @@ import { motion } from "framer-motion";
 
 interface AnimatedTextProps {
     text: string;
-    onComplete?: () => void; // เพิ่ม prop นี้
-    color?: string; // เพิ่ม prop สำหรับสี
+    color?: string; 
     className?: string;
 }
 
 export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = "" }) => {
     const container = {
         hidden: { opacity: 1 },
-        show: {
-            opacity: 1,
-            transition: { staggerChildren: 0.08 },
-        },
+        show: { opacity: 1, transition: { staggerChildren: 0.08 } },
     };
 
     const letter = {
@@ -23,48 +19,44 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
 
     return (
         <motion.p
-            className={`text-lg text-center ${className}`} // 👈 ใช้ className ที่รับมา
+            className={`text-lg text-center ${className}`}
             variants={container}
             initial="hidden"
             animate="show"
+            style={{ unicodeBidi: "plaintext" }} // ✅ ป้องกันบัคภาษาไทย
         >
             {text.split(/(เพิ่มโอกาสรอดชีวิต)/).map((char, index) => (
                 char === "เพิ่มโอกาสรอดชีวิต" ? (
-                    <>
-                        <br /> 
-                        <motion.span 
-                            key={index} 
-                            className="text-[#e7d700] " 
-                            variants={letter} 
-                            style={{ textShadow: "1px 0px 0px black" ,
-                                     filter: "drop-shadow(2px 1px 1px rgba(0, 0, 0, 0.75))" // ✅ เพิ่ม drop-shadow หนา
-
-                            }}
-                        >
-                            {char}
-                        </motion.span>
-                    </>
+                    <motion.span 
+                        key={index} 
+                        className="text-[#e7d700]" 
+                        variants={letter} 
+                        style={{
+                            display: "inline-block",  // ✅ แก้ปัญหาสระลอย
+                            textShadow: "1px 0px 0px black",
+                            filter: "drop-shadow(2px 1px 1px rgba(0, 0, 0, 0.75))"
+                        }}
+                    >
+                        {char}
+                    </motion.span>
                 ) : (
-                    char.split("").map((c, i) => (
-                        <motion.span key={`${index}-${i}`} variants={letter}>
-                            {c}
-                        </motion.span>
-                    ))
+                    <motion.span 
+                        key={index} 
+                        variants={letter} 
+                        style={{ display: "inline-block" }} // ✅ ป้องกันตัวอักษรแยก
+                    >
+                        {char}
+                    </motion.span>
                 )
             ))}
         </motion.p>
     );
 };
 
-
-
 export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4901' }) => {
     const container = {
         hidden: { opacity: 1 },
-        show: {
-            opacity: 1,
-            transition: { staggerChildren: 0.08 },
-        },
+        show: { opacity: 1, transition: { staggerChildren: 0.08 } },
     };
 
     const letter = {
@@ -78,12 +70,16 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
             variants={container}
             initial="hidden"
             animate="show"
+            style={{ unicodeBidi: "plaintext" }} // ✅ ป้องกันบัคภาษาไทย
         >
-            {text.split("").map((char, index) => (
+            {text.split(/(canteen)/).map((char, index) => (
                 <motion.span 
                     key={index} 
                     variants={letter} 
-                    style={{ color: char === "canteen" ? 'yellow' : color }} // ใช้สีเหลืองเมื่อพบคำว่า "canteen"
+                    style={{
+                        display: "inline-block", // ✅ ป้องกันตัวอักษรแยก
+                        color: char === "canteen" ? "yellow" : color
+                    }}
                 >
                     {char}
                 </motion.span>
@@ -95,10 +91,7 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
 export const AnimatedText3: React.FC<AnimatedTextProps> = ({ text }) => {
     const container = {
         hidden: { opacity: 1 },
-        show: {
-            opacity: 1,
-            transition: { staggerChildren: 0.08 },
-        },
+        show: { opacity: 1, transition: { staggerChildren: 0.08 } },
     };
 
     const letter = {
@@ -112,13 +105,17 @@ export const AnimatedText3: React.FC<AnimatedTextProps> = ({ text }) => {
             variants={container}
             initial="hidden"
             animate="show"
+            style={{ unicodeBidi: "plaintext" }} // ✅ ป้องกันบัคภาษาไทย
         >
             {text.split("").map((char, index) => (
-                <motion.span key={index} variants={letter}>
+                <motion.span 
+                    key={index} 
+                    variants={letter} 
+                    style={{ display: "inline-block" }} // ✅ ป้องกันสระและวรรณยุกต์ลอย
+                >
                     {char}
                 </motion.span>
             ))}
         </motion.p>
     );
 };
-

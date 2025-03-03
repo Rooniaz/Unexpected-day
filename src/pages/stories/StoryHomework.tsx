@@ -13,7 +13,7 @@ const StoryHomework: React.FC = () => {
   // ข้อความที่ต้องการแสดงในลำดับ (แทนที่ {ชื่อที่กรอก} ด้วยค่าจริง)
   const texts = [
     `เจน : ${storedName} พรุ่งนี้วันหยุดไปเที่ยวกันไหมคิดว่าแกน่าจะชอบนะ`,
-    `${storedName} : ไม่อ่ะ ช่วงนี้ต้องปั่นงานใกล้จะไฟนอลแล้ว เครียด!`,
+    `${storedName} : ไม่อ่ะ ช่วงนี้ต้องปั่นงานใกล้จะ\nไฟนอลแล้ว เครียด!`,
     "เจน : ไม่เห็นเป็นไรเลยนานๆทีจะได้ไป ไปกันเหอะ",
   ];
 
@@ -76,14 +76,15 @@ const StoryHomework: React.FC = () => {
                      <AnimatedText 
                        key={index} 
                        text={texts[index]} 
-                       className="text-white break-words"
+                       className="text-white break-words whitespace-pre-line"
 
                      />
                    ) : (
                      <AnimatedText2 
                        key={index} 
                        text={texts[index]} 
-                       color="yellow"  // เปลี่ยนสีข้อความเป็นสีน้ำเงิน
+                       color="yellow" 
+                       className="whitespace-pre-line" // เปลี่ยนสีข้อความเป็นสีน้ำเงิน
                      />
                    )}
                  </div>

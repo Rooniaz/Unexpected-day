@@ -14,7 +14,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
 
     const letter = {
         hidden: { opacity: 0, y: 10 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.1 } },
+        show: { opacity: 1, y: 0, transition: { duration: 1.5 } },
     };
 
     return (
@@ -53,7 +53,11 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
     );
 };
 
-export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4901' }) => {
+export const AnimatedText2: React.FC<AnimatedTextProps & { className?: string }> = ({ 
+    text, 
+    color = '#FA4901', 
+    className = "" 
+}) => {
     const container = {
         hidden: { opacity: 1 },
         show: { opacity: 1, transition: { staggerChildren: 0.08 } },
@@ -61,12 +65,12 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
 
     const letter = {
         hidden: { opacity: 0, y: 10 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.1 } },
+        show: { opacity: 1, y: 0, transition: { duration: 1.5 } },
     };
 
     return (
         <motion.p
-            className="text-lg text-white font-custom text-center"
+            className={`text-lg text-white font-custom text-center ${className}`}
             variants={container}
             initial="hidden"
             animate="show"
@@ -87,6 +91,7 @@ export const AnimatedText2: React.FC<AnimatedTextProps> = ({ text, color = '#FA4
         </motion.p>
     );
 };
+
 
 export const AnimatedText3: React.FC<AnimatedTextProps> = ({ text }) => {
     const container = {

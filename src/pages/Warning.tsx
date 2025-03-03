@@ -75,13 +75,13 @@ const Warning: React.FC = () => {
         {/* ✅ คำเตือนและข้อมูล */}
         <div className="w-full max-w-lg">
         <div className="w-full flex justify-center">
-          <p className="text-2xl font-custom mb-4 bg-yellow-300 text-black p-2 rounded-2xl w-64 text-center">
+          <p className="text-xl font-custom mb-4 bg-yellow-300 text-black p-2 rounded-2xl w-64 text-center">
             Trigger Warning!
           </p>
         </div>
-          <p className="text-base font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
-          <p className="text-base font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
-          <p className="text-base font-custom mb-8">
+          <p className="text-sm font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
+          <p className="text-sm font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
+          <p className="text-sm font-custom mb-8">
             ขอให้<span className="text-orange-500">ทุกคนโชคดีและมีสุขภาพที่แข็งแรงนะคะ</span> :)
           </p>
           <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">

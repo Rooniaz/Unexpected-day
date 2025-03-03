@@ -10,7 +10,8 @@ const texts = [
     "ขึ้นอยู่กับคุณว่าจะรู้วิธีการสังเกตแบบ BEFAST ",
     "และขอความช่วยเหลือได้ทัน",
     "สุดท้ายนี้",
-    "เราอยากให้คุณรู้ว่า",
+    "เรามีบางสิ่งที่จะมอบให้คุณ",
+    "นั่นก็คือ",
 ];
 
 const AfterDoctor: React.FC = () => {
@@ -69,7 +70,7 @@ useEffect(() => {
     ></div>
 
     {/* Overlay เพื่อให้ข้อความอ่านได้ง่ายขึ้น */}
-    <div className="absolute inset-0 bg-black/50"></div>
+    <div className="absolute inset-0"></div>
 
     {/* กล่องข้อความ */}
     <div className="absolute inset-0 flex justify-center items-center z-10 px-4">

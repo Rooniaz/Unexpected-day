@@ -51,40 +51,50 @@ const SpreadScene = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black">
+    <div className="w-full min-h-screen flex justify-center items-center bg-black relative">
       {!isTransitionDone ? (
         <motion.div
           initial="hidden"
           animate="show"
           exit="hidden"
           variants={container}
-          className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-gradient-to-b from-gray-500 via-white to-gray-500 text-white text-2xl px-6 py-2"
+          className="w-[390px] h-[844px] flex flex-col justify-center items-center 
+                     bg-gradient-to-b from-gray-500 via-white to-gray-500 
+                     text-white text-2xl px-6 py-2 relative"
         >
           {/* บรรทัดแรก (สีแดง) */}
-          <div className="flex flex-row text-red-500 text-2xl justify-center items-center text-center text-shadow-2xl font-bold break-words">
+          <div className="flex flex-row text-red-500 text-2xl justify-center 
+                          items-center text-center text-shadow-2xl font-bold 
+                          break-words relative z-10 mt-6">
             {segmentText(text).map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}
               </motion.span>
             ))}
           </div>
-
+  
           {/* บรรทัดที่สอง (สีแดง) */}
-          <motion.div className="mt-2 text-red-500 text-2xl font-bold break-words underline" variants={letter}>
+          <motion.div
+            className="mt-2 text-red-500 text-2xl font-bold break-words underline 
+                       relative z-10"
+            variants={letter}
+          >
             {segmentText(redText).map((char, index) => (
               <motion.span key={index} variants={letter}>
                 {char}
               </motion.span>
             ))}
           </motion.div>
-
-          <div className="w-[390px] h-[46px] bg-gray-400 my-4 bg-[#708090] absolute bottom-[34%]"></div>
+  
+          {/* เส้นสีเทา (ลด bottom) */}
+          <div className="w-[390px] h-[46px] bg-[#708090] absolute bottom-[35%] z-0"></div>
         </motion.div>
       ) : (
         <AfterBefast />
       )}
     </div>
   );
+  
 };
 
 export default SpreadScene;

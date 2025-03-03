@@ -19,7 +19,7 @@ const UnexpectedDayForm: React.FC = () => {
   useEffect(() => {
     const savedName = localStorage.getItem('userName') || '';
     const savedAge = localStorage.getItem('userAge') || '';
-    const savedDream = localStorage.getItem('userDream') || '';
+    const savedDream = `“${localStorage.getItem('userDream') || ''}”`;
     
     setFormData({
       name: savedName,
@@ -45,9 +45,9 @@ const UnexpectedDayForm: React.FC = () => {
   
 
   const getFontSize = (text: string) => {
-    if (text.length <= 9) return "250px";
-    if (text.length <= 50) return "140px";
-    return "100px";
+    if (text.length <= 9) return "300px";
+    if (text.length <= 50) return "180px";
+    return "120px";
   };
 
   const renderCanvas = () => {
@@ -66,7 +66,7 @@ const UnexpectedDayForm: React.FC = () => {
     ctx.font = "300 140px Sarabun-Light";
     ctx.fillStyle = "black";
 
-    const nameX = 1320;
+    const nameX = 1340;
     const nameY = 2400;
     ctx.fillText(formData.name, nameX, nameY);
 

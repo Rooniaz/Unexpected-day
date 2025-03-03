@@ -6,42 +6,46 @@ import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า u
 
 const SpreadScene = () => {
   const [isTransitionDone, setIsTransitionDone] = useState(false);
+  const [showFirstText, setShowFirstText] = useState(false); // สถานะเพื่อควบคุมการแสดงข้อความบรรทัดแรก
+  const [showSecondText, setShowSecondText] = useState(false); // สถานะเพื่อควบคุมการแสดงข้อความบรรทัดที่สอง
   const navigate = useNavigate();
 
   const text = "เมื่อพบอาการอย่างใดอย่างหนึ่ง ";
   const redText = "ให้รีบส่งโรงพยาบาลด่วน"; // คำที่ต้องการให้เป็นสีแดง
 
-  const segmentText = (text: string) => {
-    return [...new Intl.Segmenter("th", { granularity: "grapheme" }).segment(text)].map(seg => seg.segment);
-  };
-
   const container = {
-    hidden: { opacity: 1 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const letter = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 20 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.1 },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsTransitionDone(true);
-      setTimeout(() => {
-        navigate("/AfterBefast");
-      }, 2000); // 2 วินาทีก่อนเปลี่ยนหน้า
-    }, 6000);
+    // รอ 3 วินาทีก่อนแสดงข้อความบรรทัดแรก
+    const firstTextTimer = setTimeout(() => {
+      setShowFirstText(true);
+    }, 3000);
 
-    return () => clearTimeout(timer);
-  }, [navigate]);
+    // รอ 4 วินาที (3 + 1) ก่อนแสดงข้อความบรรทัดที่สอง
+    const secondTextTimer = setTimeout(() => {
+      setShowSecondText(true);
+    }, 4000);
+
+    return () => {
+      clearTimeout(firstTextTimer);
+      clearTimeout(secondTextTimer);
+    };
+  }, []);
+
+  // ฟังก์ชันสำหรับการคลิกหรือแตะหน้าจอ
+  const handleClick = () => {
+    setIsTransitionDone(true);
+    setTimeout(() => {
+      navigate("/AfterBefast");
+    },); // รอ 0.5 วินาทีก่อนเปลี่ยนหน้าเพื่อให้มี animation สมูท
+  };
 
   const { playAudio, pauseAudio } = useAudio();
 
@@ -51,41 +55,43 @@ const SpreadScene = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black relative">
+    <div
+      className="w-full min-h-screen flex justify-center items-center bg-black relative"
+      onClick={handleClick} // เพิ่ม event listener สำหรับการคลิกหรือแตะหน้าจอ
+      style={{ cursor: "pointer" }} // เปลี่ยน cursor เป็น pointer เพื่อให้รู้ว่าสามารถคลิกได้
+    >
       {!isTransitionDone ? (
         <motion.div
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          variants={container}
           className="w-[390px] h-[844px] flex flex-col justify-center items-center 
                      bg-gradient-to-b from-gray-500 via-white to-gray-500 
                      text-white text-2xl px-6 py-2 relative"
         >
           {/* บรรทัดแรก (สีแดง) */}
-          <div className="flex flex-row text-red-500 text-2xl justify-center 
-                          items-center text-center text-shadow-2xl font-bold 
-                          break-words relative z-10 mt-6">
-            {segmentText(text).map((char, index) => (
-              <motion.span key={index} variants={letter}>
-                {char}
-              </motion.span>
-            ))}
-          </div>
-  
+          {showFirstText && ( // แสดงข้อความบรรทัดแรกเมื่อ showFirstText เป็น true
+            <motion.div
+              className="text-red-500 text-2xl text-center text-shadow-2xl font-bold 
+                          break-words relative z-10 mt-6"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              {text}
+            </motion.div>
+          )}
+
           {/* บรรทัดที่สอง (สีแดง) */}
-          <motion.div
-            className="mt-2 text-red-500 text-2xl font-bold break-words underline 
-                       relative z-10"
-            variants={letter}
-          >
-            {segmentText(redText).map((char, index) => (
-              <motion.span key={index} variants={letter}>
-                {char}
-              </motion.span>
-            ))}
-          </motion.div>
-  
+          {showSecondText && ( // แสดงข้อความบรรทัดที่สองเมื่อ showSecondText เป็น true
+            <motion.div
+              className="mt-2 text-red-500 text-2xl font-bold break-words underline 
+                        relative z-10"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              {redText}
+            </motion.div>
+          )}
+
           {/* เส้นสีเทา (ลด bottom) */}
           <div className="w-[390px] h-[46px] bg-[#708090] absolute bottom-[35%] z-0"></div>
         </motion.div>
@@ -94,7 +100,6 @@ const SpreadScene = () => {
       )}
     </div>
   );
-  
 };
 
 export default SpreadScene;

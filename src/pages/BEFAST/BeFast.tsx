@@ -103,9 +103,11 @@ const handleImageLoad = () => {
 // }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center relative">
         {/* <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop /> */}
-      <div className="relative w-[390px] h-[844px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/image/body_befast.png')" }}>
+      <div className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/image/body_befast.png')" }}>
         {buttonPositions.map((pos, index) => (
           !buttonsClicked.has(index) && (
             <button

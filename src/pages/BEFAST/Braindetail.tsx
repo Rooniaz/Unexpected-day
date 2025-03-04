@@ -63,7 +63,7 @@ const Braindetail = () => {
           Your browser does not support the video tag.
         </video>
 
-        {/* วิดีโอที่สอง (ซ่อนไว้ก่อน) */}
+        {/* วิดีโอที่สอง (ซ่อนไว้ก่อนน) */}
         <video
           ref={secondVideoRef}
           muted

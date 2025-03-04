@@ -32,13 +32,16 @@ useEffect(() => {
   // ];
   
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative">
-      <div 
-        className="relative w-[390px] h-[844px] max-h-screen overflow-y-auto bg-black no-scrollbar brightness-25 opacity-80"
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center relative">
+<div className="
+        relative flex justify-center items-center 
+        w-full h-screen overflow-y-auto bg-black no-scrollbar
+        sm:w-[390px] sm:h-[844px]"
         style={{
           backgroundImage: "url('/image/bgbefast.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
 

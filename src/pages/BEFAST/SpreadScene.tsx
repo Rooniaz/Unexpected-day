@@ -62,7 +62,9 @@ const SpreadScene = () => {
     >
       {!isTransitionDone ? (
         <motion.div
-          className="w-[390px] h-[844px] flex flex-col justify-center items-center 
+          className="relative flex justify-center items-center 
+        w-full h-screen overflow-y-auto bg-black no-scrollbar
+        sm:w-[390px] sm:h-[844px] flex flex-col justify-center items-center 
                      bg-gradient-to-b from-gray-500 via-white to-gray-500 
                      text-white text-2xl px-6 py-2 relative"
         >
@@ -93,7 +95,7 @@ const SpreadScene = () => {
           )}
 
           {/* เส้นสีเทา (ลด bottom) */}
-          <div className="w-[390px] h-[46px] bg-[#708090] absolute bottom-[35%] z-0"></div>
+          <div className="w-full sm:w-[390px] h-[46px] bg-[#708090] absolute bottom-[35%] z-0"></div>
         </motion.div>
       ) : (
         <AfterBefast />

@@ -82,7 +82,9 @@ const Hospital1: React.FC = () => {
   {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
                                   
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className=" relative justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         style={{ backgroundColor: bgColor }}
         initial="initial"
         animate="animate"

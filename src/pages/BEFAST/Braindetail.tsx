@@ -1,14 +1,13 @@
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useAudio } from "../../contexts/AudioProvider";
 
 const Braindetail = () => {
   const navigate = useNavigate();
-  const [animationComplete, setAnimationComplete] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
-  const videoRef = useRef(null);
+  const [isSecondVideoPlaying, setIsSecondVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const secondVideoRef = useRef<HTMLVideoElement>(null);
   const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
@@ -17,35 +16,45 @@ const Braindetail = () => {
   }, []);
 
   const handlePicEnd = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = videoRef.current.duration;
+    }
     setVideoEnded(true);
   };
 
+  const handleSecondPicEnd = () => {
+    navigate("/Friendbrain");
+  };
+
   const handleClick = () => {
-    if (videoEnded && animationComplete) {
-      setIsExiting(true); // เริ่มทำแอนิเมชันจางหาย
+    if (videoEnded && !isSecondVideoPlaying && secondVideoRef.current) {
+      setIsSecondVideoPlaying(true);
+
+      // ทำให้วิดีโอแรกจางลงอย่างนุ่มนวล
+
+
+      // รอให้วิดีโอแรกหายไป แล้วค่อยแสดงวิดีโอที่สอง
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.style.visibility = "hidden";
+        }
+        if (secondVideoRef.current) {
+          secondVideoRef.current.style.visibility = "visible";
+          secondVideoRef.current.style.opacity = "1";
+          secondVideoRef.current.play();
+        }
+      }, 500); // 500ms เท่ากับเวลา transition
     }
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <motion.div
-        className="relative flex justify-center items-center 
+    <div className="w-full min-h-screen flex justify-center items-center bg-black" onClick={handleClick}>
+      <div className=" relative justify-center items-center 
         w-full h-screen 
-        sm:w-[390px] sm:h-[844px] overflow-hidden"
-        initial="initial"
-        animate={isExiting ? "exit" : "animate"}
-        exit="exit"
-        variants={{
-          initial: { opacity: 1 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0, transition: { duration: 3 } }, // ค่อย ๆ จางหายไป
-        }}
-        onAnimationComplete={() => {
-          if (isExiting) navigate("/Friendbrain");
-        }}
-        onClick={handleClick}
-      >
-        {/* วิดีโอพื้นหลังแบบเต็มขนาด */}
+        sm:w-[390px] sm:h-[844px] overflow-hidden">
+
+        {/* วิดีโอแรก */}
         <video
           ref={videoRef}
           autoPlay
@@ -53,9 +62,9 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handlePicEnd}
-          className="relative flex justify-center items-center 
+          className="absolute inset-0 
         w-full h-screen 
-        sm:w-[390px] sm:h-[844px]"
+        sm:w-[390px] sm:h-[844px] "
         >
           <source src="/video/brain_video/fact.webm" type="video/webm" />
           <source src="/video/brain_video/fact.mp4" type="video/mp4" />
@@ -63,15 +72,22 @@ const Braindetail = () => {
           Your browser does not support the video tag.
         </video>
 
-        <motion.div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80%] z-20"
-          initial="hidden"
-          animate="visible"
-          onAnimationComplete={() => setAnimationComplete(true)}
+        {/* วิดีโอที่สอง (ซ่อนไว้ก่อน) */}
+        <video
+          ref={secondVideoRef}
+          muted
+          playsInline
+          preload="auto"
+          onEnded={handleSecondPicEnd}
+          className="absolute inset-0   w-full h-screen 
+        sm:w-[390px] sm:h-[844px] invisible "
         >
-          {/* ...เนื้อหาอื่นๆ... */}
-        </motion.div>
-      </motion.div>
+          <source src="/video/brain_video/factclose.webm" type="video/webm" />
+          <source src="/video/brain_video/factclose.mp4" type="video/mp4" />
+          <source src="/video/brain_video/factclose.mov" type="video/quicktime" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   );
 };

@@ -42,7 +42,8 @@ const TimeToCall = () => {
         animate="show"
         exit="hidden"
         variants={container}
-        className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-[#DCDCDC] text-[#fa4901] text-6xl px-6 py-2 text-center"
+        className=" relative justify-center items-center 
+        w-full h-screen sm:w-[390px] sm:h-[844px] flex flex-col justify-center items-center bg-[#DCDCDC] text-[#fa4901] text-6xl px-6 py-2 text-center"
       >
         {/* ข้อความ B E F A S T */}
         <div className="font-bold mt-40 text-[3.5rem]">

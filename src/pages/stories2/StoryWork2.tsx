@@ -74,7 +74,7 @@ const StoryWork2: React.FC = () => {
         setIsLocked(false); // เปิดให้กดได้หลังจากหน่วงเวลา
       }, 3000);
     } else {
-      navigate("/StoryCanteen3");
+      navigate("/StoryWork3");
     }
   };
   

@@ -133,7 +133,7 @@ const StoryWork2: React.FC = () => {
       audioRef4.current.volume = 0.5;
     }
     if (audioRef5.current) {
-      audioRef5.current.volume = 0.5;
+      audioRef5.current.volume = 0.3;
     }
   }
 

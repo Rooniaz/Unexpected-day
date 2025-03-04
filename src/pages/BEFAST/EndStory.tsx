@@ -250,7 +250,9 @@ const UnexpectedDayForm: React.FC = () => {
     <div className="w-full min-h-screen bg-black flex flex-col justify-center items-center">
       <audio ref={audioRef} src="/Sound/Sound End/Peaceful_Ambient_Piano_full.mp3" autoPlay loop />
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="  relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"

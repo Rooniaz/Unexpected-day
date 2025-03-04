@@ -102,8 +102,8 @@ useEffect(() => {
                     if (value.length === 1 && value === "0") {
                       value = ""; // ถ้าเลขแรกเป็น 0 ให้ลบออก
                     }
-                    if (value.length > 3) {
-                      value = value.slice(0, 3); // จำกัดจำนวนหลักสูงสุดที่ 3 หลัก
+                    if (value.length > 2) {
+                      value = value.slice(0, 2); // จำกัดจำนวนหลักสูงสุดที่ 3 หลัก
                     }
 
                     setFormData({ ...formData, age: value });

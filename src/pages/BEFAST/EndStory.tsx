@@ -222,7 +222,7 @@ const UnexpectedDayForm: React.FC = () => {
         tempCanvas.toBlob(resolve, 'image/png')
       );
       if (blob) {
-        const file = new File([blob], 'ใบเสร็จพร้อมพื้นหลัง.png', { type: 'image/png' });
+        const file = new File([blob], 'Unexpected day receipt.png', { type: 'image/png' });
         if (navigator.canShare({ files: [file] })) {
           await navigator.share({ files: [file], title: 'ใบเสร็จพร้อมพื้นหลัง' });
         } else {

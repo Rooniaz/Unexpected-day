@@ -50,7 +50,10 @@ const Braindetail = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black" onClick={handleClick}>
-      <div className="relative w-[390px] h-[844px] overflow-hidden">
+      <div className=" relative justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden">
+
         {/* วิดีโอแรก */}
         <video
           ref={videoRef}
@@ -59,7 +62,9 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handlePicEnd}
-          className="absolute inset-0 w-[390px] h-[844px]  "
+          className="absolute inset-0 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] "
         >
           <source src="/video/brain_video/fact.webm" type="video/webm" />
           <source src="/video/brain_video/fact.mp4" type="video/mp4" />
@@ -74,7 +79,8 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handleSecondPicEnd}
-          className="absolute inset-0 w-[390px] h-[844px] invisible "
+          className="absolute inset-0   w-full h-screen 
+        sm:w-[390px] sm:h-[844px] invisible "
         >
           <source src="/video/brain_video/factclose.webm" type="video/webm" />
           <source src="/video/brain_video/factclose.mp4" type="video/mp4" />

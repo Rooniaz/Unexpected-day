@@ -6,9 +6,9 @@ import { useAudio } from "../../contexts/AudioProvider";
 
 const Braindetail = () => {
   const navigate = useNavigate();
-  const [animationComplete, setAnimationComplete] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const secondVideoRef = useRef<HTMLVideoElement>(null);
   const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
@@ -17,26 +17,37 @@ const Braindetail = () => {
   }, []);
 
   const handlePicEnd = () => {
+    if (videoRef.current) {
+      videoRef.current.pause(); // หยุดวิดีโอแรก
+      videoRef.current.currentTime = videoRef.current.duration; // ค้างเฟรมสุดท้าย
+    }
     setVideoEnded(true);
   };
 
+  const handleSecondPicEnd = () => {
+    navigate("/Friendbrain"); // เปลี่ยนหน้าเมื่อวิดีโอที่สองจบ
+  };
+
   const handleClick = () => {
-    if (videoEnded && animationComplete) {
-      navigate("/Friendbrain");
+    if (videoEnded && secondVideoRef.current) {
+      if (videoRef.current) {
+        videoRef.current.style.display = "none"; // ซ่อนวิดีโอแรก
+      }
+      secondVideoRef.current.style.display = "block"; // แสดงวิดีโอที่สอง
+      secondVideoRef.current.play(); // เล่นวิดีโอที่สอง
     }
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black">
+    <div className="w-full min-h-screen flex justify-center items-center bg-black" onClick={handleClick}>
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={handleClick}
       >
-        {/* วิดีโอพื้นหลังแบบเต็มขนาด */}
+        {/* วิดีโอแรก */}
         <video
           ref={videoRef}
           autoPlay
@@ -44,7 +55,7 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handlePicEnd}
-          className="absolute inset-0 w-[390px] h-[844px] "
+          className="absolute inset-0 w-[390px] h-[844px]"
         >
           <source src="/video/brain_video/fact.webm" type="video/webm" />
           <source src="/video/brain_video/fact.mp4" type="video/mp4" />
@@ -52,14 +63,21 @@ const Braindetail = () => {
           Your browser does not support the video tag.
         </video>
 
-        <motion.div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80%] z-20"
-          initial="hidden"
-          animate="visible"
-          onAnimationComplete={() => setAnimationComplete(true)}
+        {/* วิดีโอที่สอง (ซ่อนไว้ก่อน) */}
+        <video
+          ref={secondVideoRef}
+          muted
+          playsInline
+          preload="auto"
+          onEnded={handleSecondPicEnd}
+          className="absolute inset-0 w-[390px] h-[844px]"
+          style={{ display: "none" }} // ซ่อนวิดีโอที่สองก่อน
         >
-          {/* ...เนื้อหาอื่นๆ... */}
-        </motion.div>
+          <source src="/video/blurStudy.webm" type="video/webm" />
+          <source src="/video/blurStudy.mp4" type="video/mp4" />
+          <source src="/video/blurStudy.mov" type="video/quicktime" />
+          Your browser does not support the video tag.
+        </video>
       </motion.div>
     </div>
   );

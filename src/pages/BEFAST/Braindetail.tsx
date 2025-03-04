@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { fadeInOut } from "../../components/fadeInOut";
 import { useEffect, useRef, useState } from "react";
 import { useAudio } from "../../contexts/AudioProvider";
 
 const Braindetail = () => {
   const navigate = useNavigate();
+  const [animationComplete, setAnimationComplete] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const secondVideoRef = useRef<HTMLVideoElement>(null);
+  const [isExiting, setIsExiting] = useState(false);
+  const videoRef = useRef(null);
   const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
@@ -17,37 +17,33 @@ const Braindetail = () => {
   }, []);
 
   const handlePicEnd = () => {
-    if (videoRef.current) {
-      videoRef.current.pause(); // หยุดวิดีโอแรก
-      videoRef.current.currentTime = videoRef.current.duration; // ค้างเฟรมสุดท้าย
-    }
     setVideoEnded(true);
   };
 
-  const handleSecondPicEnd = () => {
-    navigate("/Friendbrain"); // เปลี่ยนหน้าเมื่อวิดีโอที่สองจบ
-  };
-
   const handleClick = () => {
-    if (videoEnded && secondVideoRef.current) {
-      if (videoRef.current) {
-        videoRef.current.style.display = "none"; // ซ่อนวิดีโอแรก
-      }
-      secondVideoRef.current.style.display = "block"; // แสดงวิดีโอที่สอง
-      secondVideoRef.current.play(); // เล่นวิดีโอที่สอง
+    if (videoEnded && animationComplete) {
+      setIsExiting(true); // เริ่มทำแอนิเมชันจางหาย
     }
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black" onClick={handleClick}>
+    <div className="w-full min-h-screen flex justify-center items-center bg-black">
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"
-        animate="animate"
+        animate={isExiting ? "exit" : "animate"}
         exit="exit"
-        variants={fadeInOut(2, "easeInOut", 0)}
+        variants={{
+          initial: { opacity: 1 },
+          animate: { opacity: 1 },
+          exit: { opacity: 0, transition: { duration: 3 } }, // ค่อย ๆ จางหายไป
+        }}
+        onAnimationComplete={() => {
+          if (isExiting) navigate("/Friendbrain");
+        }}
+        onClick={handleClick}
       >
-        {/* วิดีโอแรก */}
+        {/* วิดีโอพื้นหลังแบบเต็มขนาด */}
         <video
           ref={videoRef}
           autoPlay
@@ -63,21 +59,14 @@ const Braindetail = () => {
           Your browser does not support the video tag.
         </video>
 
-        {/* วิดีโอที่สอง (ซ่อนไว้ก่อนน) */}
-        <video
-          ref={secondVideoRef}
-          muted
-          playsInline
-          preload="auto"
-          onEnded={handleSecondPicEnd}
-          className="absolute inset-0 w-[390px] h-[844px]"
-          style={{ display: "none" }} // ซ่อนวิดีโอที่สองก่อน
+        <motion.div
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80%] z-20"
+          initial="hidden"
+          animate="visible"
+          onAnimationComplete={() => setAnimationComplete(true)}
         >
-          <source src="/video/brain_video/factclose.webm" type="video/webm" />
-          <source src="/video/brain_video/factclose.mp4" type="video/mp4" />
-          <source src="/video/brain_video/factclose.mov" type="video/quicktime" />
-          Your browser does not support the video tag.
-        </video>
+          {/* ...เนื้อหาอื่นๆ... */}
+        </motion.div>
       </motion.div>
     </div>
   );

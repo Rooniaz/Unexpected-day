@@ -50,7 +50,7 @@ const StoryHomework2: React.FC = () => {
       setShowTextBox(false); // ปิด Textbox
       setIsLocked(true); // ล็อกคลิก
       setIndex((prev) => prev + 1); // ไปข้อความถัดไป
-    }, 5000); // 2 วินาที
+    }, 6000); // 2 วินาที
 
     setTypingTimeout(newTimeout);
   };

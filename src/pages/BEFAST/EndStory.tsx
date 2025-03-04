@@ -177,7 +177,7 @@ const UnexpectedDayForm: React.FC = () => {
 
       // บันทึกภาพจาก Canvas ชั่วคราว
       const link = document.createElement('a');
-      link.download = 'ใบเสร็จของฉัน.png';
+      link.download = 'Unexpected day receipt.png';
       link.href = tempCanvas.toDataURL('image/png');
       document.body.appendChild(link);
       link.click();

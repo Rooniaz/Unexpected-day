@@ -42,7 +42,7 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     if (audioRef.current) {
       if (currentTrack !== track) {
         setCurrentTrack(track);
-        setCurrentTime(0); // รีเซ็ตเวลาเมื่อเปลี่ยนเพลง
+        setCurrentTime(0); // รีเซ็ตเวลาเมื่อเปลี่ยนเพลงง
       } else {
         audioRef.current.play();
       }

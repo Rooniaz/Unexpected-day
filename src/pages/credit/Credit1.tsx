@@ -97,7 +97,7 @@ useEffect(() => {
 
 
               <p className="absolute bottom-[10%] text-xs mt-4 text-[#ffffff] drop-shadow-lg">
-                Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองแบบเฉียบพลัน
+              Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน
               </p>
 
               </div>

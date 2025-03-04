@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -46,11 +46,17 @@ const StoryHomework: React.FC = () => {
       }, 3000); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
     }
   };
-  
+
+  // Preload Image and Audio
+  useEffect(() => {
+    const preloadImage = new Image();
+    preloadImage.src = "/gif/15-17/class_15-17.gif";
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       {/* เพิ่มเพลงในหน้า */}
-      <audio ref={audioRef1} src="/Sound/Scene Study/Scene Studying.mp3" autoPlay loop />
+      <audio ref={audioRef1} src="/Sound/Scene Study/Scene Studying.mp3" preload="auto" autoPlay loop />
       
       {/* Mobile-sized container */}
       <motion.div
@@ -70,25 +76,24 @@ const StoryHomework: React.FC = () => {
 
         {/* Dialog text container */}
         <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-                 <div className="px-6 py-4 bg-black/50 rounded-lg">
-                   {/* กำหนดว่าจะใช้ AnimatedText หรือ AnimatedText2 */}
-                   {index % 2 === 0 ? (
-                     <AnimatedText 
-                       key={index} 
-                       text={texts[index]} 
-                       className="text-white break-words whitespace-pre-line"
-
-                     />
-                   ) : (
-                     <AnimatedText2 
-                       key={index} 
-                       text={texts[index]} 
-                       color="yellow" 
-                       className="whitespace-pre-line" // เปลี่ยนสีข้อความเป็นสีน้ำเงิน
-                     />
-                   )}
-                 </div>
-               </div>
+          <div className="px-6 py-4 bg-black/50 rounded-lg">
+            {/* กำหนดว่าจะใช้ AnimatedText หรือ AnimatedText2 */}
+            {index % 2 === 0 ? (
+              <AnimatedText 
+                key={index} 
+                text={texts[index]} 
+                className="text-white break-words whitespace-pre-line"
+              />
+            ) : (
+              <AnimatedText2 
+                key={index} 
+                text={texts[index]} 
+                color="yellow" 
+                className="whitespace-pre-line" // เปลี่ยนสีข้อความเป็นสีน้ำเงิน
+              />
+            )}
+          </div>
+        </div>
 
         {/* Continue Button - Bottom right */}
         <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl cursor-pointer hover:text-white/100 z-20">

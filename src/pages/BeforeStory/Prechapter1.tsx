@@ -95,7 +95,7 @@ const Prechapter: React.FC = () => {
 
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
-            <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
+            {/* <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop /> */}
             <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
             <motion.div 
                 className="relative w-[390px] h-[844px] overflow-hidden"

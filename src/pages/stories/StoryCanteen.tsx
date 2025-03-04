@@ -43,9 +43,15 @@ const StoryCanteen: React.FC = () => {
     }
   };
 
+  // Preload Image and Audio
+  useEffect(() => {
+    const preloadImage = new Image();
+    preloadImage.src = "/gif/15-17/canteen_15-17.gif";
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-      <audio ref={audioRef1} src="/Sound/Scene Eating/Scene Eating.mp3" autoPlay loop />
+      <audio ref={audioRef1} src="/Sound/Scene Eating/Scene Eating.mp3" preload="auto" autoPlay loop />
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"

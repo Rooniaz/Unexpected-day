@@ -54,6 +54,10 @@ const StoryWork: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
+      {/* Preload the background image and audio */}
+      <link rel="preload" href="/gif/15-17/office_15-17.gif" as="image" />
+      <link rel="preload" href="/Sound/Scene Working/Scene Working.mp3" as="audio" />
+      
       {/* เพิ่มเพลงในหน้า */}
       <audio ref={audioRef1} src="/Sound/Scene Working/Scene Working.mp3" autoPlay loop />
       

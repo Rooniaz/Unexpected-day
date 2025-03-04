@@ -1,3 +1,4 @@
+// PlaceHomework.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,6 +15,27 @@ const PlaceHomework: React.FC = () => {
     if (audioRef1.current) {
       audioRef1.current.volume = 0.5;
     }
+
+    // Preload assets
+    const preloadAssets = () => {
+      const images = [
+        "/gif/22-25/Class-blink.gif",
+        "/gif/Place/class.png",
+      ];
+      const audio = ["/Sound/Scene Study/Scene Studying.mp3"];
+
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+
+      audio.forEach((src) => {
+        const audio = new Audio(src);
+        audio.preload = "auto";
+      });
+    };
+
+    preloadAssets();
   }, []);
 
   const goToNext = () => {
@@ -23,13 +45,13 @@ const PlaceHomework: React.FC = () => {
 
     setTimeout(() => {
       navigate("/story/homework");
-    }, 2000); // ปรับให้พอดีกับ GIF
+    }, 2000);
   };
 
-    return (
-      <div className="w-full min-h-screen bg-black flex justify-center items-center">
-              <audio ref={audioRef1} src="/Sound/Scene Study/Scene Studying.mp3" autoPlay loop />
-              <motion.div
+  return (
+    <div className="w-full min-h-screen bg-black flex justify-center items-center">
+      <audio ref={audioRef1} src="/Sound/Scene Study/Scene Studying.mp3" autoPlay loop />
+      <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
@@ -39,7 +61,6 @@ const PlaceHomework: React.FC = () => {
       >
         <AnimatePresence mode="wait">
           {showNextScene ? (
-            // GIF Transition (ซ้อนทับแบบ smooth)
             <motion.img
               key="gif"
               src="/gif/22-25/Class-blink.gif"
@@ -63,27 +84,25 @@ const PlaceHomework: React.FC = () => {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               />
               <div className="absolute inset-0 bg-black/20"></div>
-
               <div className="absolute inset-0 flex justify-center items-center z-10">
                 <div className="px-6 py-4 rounded-lg">
-                  <AnimatedText text="ตอนนี้คุณกำลังเรียนอยู่กับเจน" className="text-white "/>
+                  <AnimatedText text="ตอนนี้คุณกำลังเรียนอยู่กับเจน" className="text-white " />
                 </div>
               </div>
             </>
           )}
         </AnimatePresence>
 
-        {/* ป้องกันการคลิกซ้ำระหว่าง transition*/}
         {!showNextScene && (
-        <motion.div
+          <motion.div
             className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 3 }} // หน่วงเวลา 1.5 วินาทีก่อนขึ้น
+            transition={{ duration: 0.5, delay: 3 }}
           >
             <div className="text-white text-xl animate-pulse">กดเพื่อไปต่อ</div>
           </motion.div>
-          )}
+        )}
       </motion.div>
     </div>
   );

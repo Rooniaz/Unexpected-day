@@ -14,6 +14,26 @@ const PlaceCanteen: React.FC = () => {
     if (audioRef1.current) {
       audioRef1.current.volume = 0.5;
     }
+
+    // **Preload GIF และเสียง**
+    const preloadAssets = () => {
+      const images = ["/gif/22-25/EAT-blink.gif", "/gif/Place/canteen.png"];
+      const audioFiles = ["/Sound/Scene Eating/Scene Eating.mp3"];
+
+      // โหลดภาพล่วงหน้า
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+
+      // โหลดเสียงล่วงหน้า
+      audioFiles.forEach((src) => {
+        const audio = new Audio(src);
+        audio.preload = "auto";
+      });
+    };
+
+    preloadAssets();
   }, []);
 
   const goToNext = () => {
@@ -40,7 +60,6 @@ const PlaceCanteen: React.FC = () => {
       >
         <AnimatePresence mode="wait">
           {showNextScene ? (
-            // GIF Transition (ซ้อนทับแบบ smooth)
             <motion.img
               key="gif"
               src="/gif/22-25/EAT-blink.gif"
@@ -74,17 +93,16 @@ const PlaceCanteen: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* ป้องกันการคลิกซ้ำระหว่าง transition */}
         {!showNextScene && (
-        <motion.div
+          <motion.div
             className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 3 }} // หน่วงเวลา 1.5 วินาทีก่อนขึ้น
+            transition={{ duration: 0.5, delay: 3 }}
           >
             <div className="text-white text-xl animate-pulse">กดเพื่อไปต่อ</div>
           </motion.div>
-          )}
+        )}
       </motion.div>
     </div>
   );

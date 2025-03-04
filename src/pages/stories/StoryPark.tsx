@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
@@ -17,40 +17,50 @@ const StoryPark: React.FC = () => {
     "เจน : งั้นรีบไปกันเถอะ ก่อนแสงจะหมด"
   ];
 
-   const [index, setIndex] = useState(0);
-   const [isChanging, setIsChanging] = useState(false); // ใช้ track การเปลี่ยนข้อความ
- 
-   const audioRef1 = useRef<HTMLAudioElement>(null);
- 
-   useEffect(() => {
-     if (audioRef1.current) {
-       audioRef1.current.volume = 0.5;
-     }
-   }, []);
- 
-   useEffect(() => {
-     if (index === texts.length - 1) {
-       // เพิ่มดีเลย์ก่อนที่จะนำทางไปหน้าถัดไป
-       setTimeout(() => {
-         navigate('/story/park2');
-       }, 4000); // ดีเลย์ 1 วินาทีเพื่อให้ข้อความสุดท้ายแสดง
-     }
-   }, [index, navigate]);
- 
-   const nextText = () => {
-     if (!isChanging) { // ตรวจสอบว่าไม่ได้เปลี่ยนข้อความอยู่
-       setIsChanging(true);
-       setTimeout(() => {
-         setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
-         setIsChanging(false); // เปิดให้สามารถคลิกเพื่อเปลี่ยนข้อความได้อีก
-       }, 3000); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
-     }
-   };
+  const [index, setIndex] = useState(0);
+  const [isChanging, setIsChanging] = useState(false); // ใช้ track การเปลี่ยนข้อความ
+
+  const audioRef1 = useRef<HTMLAudioElement>(null);
+
+  // Preload audio and background image in useEffect
+  useEffect(() => {
+    // Preload audio
+    const audio = new Audio("/Sound/Scene in park/Park Ambience Sound.mp3");
+    audio.load();
+
+    // Preload background image
+    const img = new Image();
+    img.src = "/gif/15-17/park_15-17.gif";
+
+    // Set volume for the audio
+    if (audioRef1.current) {
+      audioRef1.current.volume = 0.5;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (index === texts.length - 1) {
+      // เพิ่มดีเลย์ก่อนที่จะนำทางไปหน้าถัดไป
+      setTimeout(() => {
+        navigate('/story/park2');
+      }, 4000); // ดีเลย์ 1 วินาทีเพื่อให้ข้อความสุดท้ายแสดง
+    }
+  }, [index, navigate]);
+
+  const nextText = () => {
+    if (!isChanging) { // ตรวจสอบว่าไม่ได้เปลี่ยนข้อความอยู่
+      setIsChanging(true);
+      setTimeout(() => {
+        setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
+        setIsChanging(false); // เปิดให้สามารถคลิกเพื่อเปลี่ยนข้อความได้อีก
+      }, 3000); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
+    }
+  };
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-            {/* เพิ่มเพลงในหน้า */}
-            <audio ref={audioRef1} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
+      {/* เพิ่มเพลงในหน้า */}
+      <audio ref={audioRef1} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
       {/* Mobile-sized container */}
       <motion.div
         className="relative w-[390px] h-[844px] overflow-hidden"
@@ -76,7 +86,6 @@ const StoryPark: React.FC = () => {
                 key={index} 
                 text={texts[index]} 
                 className="text-white break-words"
-
               />
             ) : (
               <AnimatedText2 

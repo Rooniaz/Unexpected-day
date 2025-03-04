@@ -82,7 +82,9 @@ const StoryPark3: React.FC = () => {
       <audio ref={audioRef2} src="/Sound/Sound fx/Effect jane_and_friend2.m4a" autoPlay />
       <audio ref={audioRef3} src="/Sound/Sound fx/Effect-ear-down.mp3" autoPlay />
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
         onClick={handleContinue} // ฟังก์ชันเมื่อผู้ใช้คลิกหรือแตะหน้าจอ
       >

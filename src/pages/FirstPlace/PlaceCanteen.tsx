@@ -51,7 +51,9 @@ const PlaceCanteen: React.FC = () => {
       <audio ref={audioRef1} src="/Sound/Scene Eating/Scene Eating.mp3" autoPlay loop />
 
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className=" relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"        
         initial="initial"
         animate="animate"
         exit="exit"

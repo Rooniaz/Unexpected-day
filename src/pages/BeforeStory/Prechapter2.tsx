@@ -26,8 +26,9 @@ const Prechapter2: React.FC = () => {
     return (
         <div className="w-full min-h-screen bg-white flex justify-center items-center">
         <motion.div 
-            className="relative w-[390px] h-[844px] overflow-hidden"
-            // initial="initial"
+            className=" relative flex justify-center items-center 
+            w-full h-screen 
+            sm:w-[390px] sm:h-[844px]"            // initial="initial"
             // animate="animate"
             // exit="exit"
             // variants={fadeInOut(2, "easeInOut", 0)}

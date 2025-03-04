@@ -60,7 +60,9 @@ const StoryHomework: React.FC = () => {
       
       {/* Mobile-sized container */}
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"

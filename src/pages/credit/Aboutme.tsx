@@ -153,7 +153,7 @@ const Aboutme: React.FC = () => {
                 ขอบคุณทีมงานทุกคนที่มีส่วนร่วมในผลงานนี้
               </p>
 
-              <p className="text-[0.68rem] mt-4 text-[#ffffff] drop-shadow-lg">
+              <p className="text-[0.6rem] mt-4 text-[#ffffff] drop-shadow-lg">
                 Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน
               </p>
 

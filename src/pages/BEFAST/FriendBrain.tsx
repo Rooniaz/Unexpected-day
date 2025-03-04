@@ -57,8 +57,14 @@ const FriendBrain: React.FC = () => {
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
       <div
-        className={`relative w-[390px] h-[844px] overflow-hidden ${isClickable ? "cursor-pointer" : ""}`}
-        style={{ backgroundColor: bgColor }}
+        className={`relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden ${isClickable ? "cursor-pointer" : ""}`}
+        style={{ backgroundColor: bgColor ,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
         onClick={handleClick}
       >
         <img

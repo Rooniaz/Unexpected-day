@@ -15,7 +15,9 @@ const Prologue2: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
-<div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "#000000" }}>        
+<div className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]" style={{ backgroundColor: "#000000" }}>        
   <motion.div
           className="w-full max-w-lg text-center"
           initial="initial"

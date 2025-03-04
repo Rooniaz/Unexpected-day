@@ -30,7 +30,9 @@ const GuideBefast: React.FC = () => {
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
               {/* <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop /> */}
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         onClick={handleClick}
       >
         {/* 🔹 ใช้ GIF เป็นพื้นหลัง */}

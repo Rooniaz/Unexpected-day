@@ -96,7 +96,9 @@ const AfterBefast = () => {
       className="w-full min-h-screen flex justify-center items-center bg-black"
     >
         <audio ref={audioRef1} src="/Sound/Sound fx/Effect Rush-Time-BEFAST.mp3" autoPlay loop />
-      <motion.div className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">
+      <motion.div className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">
         
         {showMessage && (
           <motion.div

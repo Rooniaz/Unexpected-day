@@ -16,7 +16,7 @@ const Preface: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex justify-center items-center p-4 relative">
+    <div className="min-h-screen bg-black flex justify-center items-center relative">
       
       <div
         className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4"

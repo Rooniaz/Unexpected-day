@@ -306,7 +306,7 @@ const UnexpectedDayForm: React.FC = () => {
 
             <div className="w-cover text-center bg-[#b5b4b4] pr-4 pl-2 flex justify-center items-center rounded-xl">
               <p className="text-black mr-2 inline-block text-xs ">
-                อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิ๊ก
+                อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิก
               </p>
               <a
                 href="https://www.youtube.com"

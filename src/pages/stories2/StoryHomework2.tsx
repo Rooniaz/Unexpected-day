@@ -106,6 +106,7 @@ const StoryHomework2: React.FC = () => {
   const audioRef2 = useRef<HTMLAudioElement>(null);
   const audioRef3 = useRef<HTMLAudioElement>(null);
   const audioRef4 = useRef<HTMLAudioElement>(null);
+  const audioRef5 = useRef<HTMLAudioElement>(null);
 
   if (audioRef2.current) {
     audioRef2.current.volume = 0.5;
@@ -130,33 +131,44 @@ const StoryHomework2: React.FC = () => {
     if (audioRef4.current) {
       audioRef4.current.volume = 0.5;
     }
+    if (audioRef5.current) {
+      audioRef5.current.volume = 0.5;
+    }
   }
     // การเล่นเพลงใหม่เมื่อถึงข้อความที่ต้องการ
-    useEffect(() => {
-      if (index === 0) {
-        // หยุดเสียง 4 ทันทีที่เริ่มข้อความแรก
-        if (audioRef4.current) {
-          audioRef4.current.pause();
-          audioRef4.current.currentTime = 0; // รีเซ็ตเสียงกลับไปจุดเริ่มต้น
-        }
-      }
-    
-      if (index === 3) { // เมื่อถึงข้อความ "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!"
-        if (audioRef2.current) {
-          audioRef2.current.pause();
-        }
-        if (audioRef3.current) {
-          audioRef3.current.pause();
-        }
-    
-        // เล่นเสียงใหม่
-        if (audioRef4.current) {
-          audioRef4.current.play().catch((error) => {
-            console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
-          });
-        }
-      }
-    }, [index]);
+       useEffect(() => {
+         if (index === 0) {
+           // หยุดเสียง 4 ทันทีที่เริ่มข้อความแรก
+           if (audioRef4.current) {
+             audioRef4.current.pause();
+             audioRef4.current.currentTime = 0;
+           }
+         }
+       
+         if (index === 3) { // เมื่อถึงข้อความ "เจน : เห้ย!! ทำไมแกปากเบี้ยวอะ ไม่แกล้งดิ!"
+           if (audioRef2.current) {
+             audioRef2.current.pause();
+           }
+           if (audioRef3.current) {
+             audioRef3.current.pause();
+           }
+           if (audioRef4.current) {
+             audioRef4.current.play().catch((error) => {
+               console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
+             });
+           }
+         }
+       
+         if (index === 3 || index === 6) { // เล่นเสียงใหม่ที่บรรทัด 4 และ 7
+           if (audioRef5.current) {
+             audioRef5.current.play().catch((error) => {
+               console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
+             });
+           }
+         }
+       
+       }, [index]);
+       
     
 
   return (
@@ -169,6 +181,7 @@ const StoryHomework2: React.FC = () => {
       />
       <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
       <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
+      <audio ref={audioRef5} src="/Sound/Sound fx/EEFECT-STROKE-HELP.mp3"  />
       <div
         className="relative w-[390px] h-[844px] overflow-hidden"
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined}

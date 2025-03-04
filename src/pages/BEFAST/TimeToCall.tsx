@@ -45,7 +45,7 @@ const TimeToCall = () => {
         className="w-[390px] h-[844px] flex flex-col justify-center items-center bg-[#DCDCDC] text-[#fa4901] text-6xl px-6 py-2 text-center"
       >
         {/* ข้อความ B E F A S T */}
-        <div className="font-bold mt-40 text-xl">
+        <div className="font-bold mt-40 text-6xl">
           {text.split("").map((char, index) => (
             <motion.span key={index} variants={letter} className="tracking-wider">
               {char}

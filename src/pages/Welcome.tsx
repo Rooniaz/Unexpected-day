@@ -47,7 +47,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center">
       {/* เพิ่มพื้นหลังเป็น GIF */}
       <motion.div 
         initial="initial"

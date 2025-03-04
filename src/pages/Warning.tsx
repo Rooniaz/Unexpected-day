@@ -16,7 +16,7 @@ const Warning: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen bg-black flex justify-center items-center p-4 relative"
+      className="min-h-screen bg-black flex justify-center items-center relative"
       onClick={() => navigate("/welcome")} // ✅ กดที่หน้าจอเพื่อไปต่อ
     >
       {/* ✅ เนื้อหาหลัก */}
@@ -79,7 +79,7 @@ const Warning: React.FC = () => {
             Trigger Warning!
           </p>
         </div>
-          <p className="text-sm font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
+          <p className="text-sm font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟ็กต์ที่ละเอียดอ่อน</p>
           <p className="text-sm font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
           <p className="text-sm font-custom mb-8">
             ขอให้<span className="text-orange-500">ทุกคนโชคดีและมีสุขภาพที่แข็งแรงนะคะ</span> :)

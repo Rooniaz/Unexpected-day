@@ -12,7 +12,7 @@ const StoryHomework3: React.FC = () => {
 
   const texts = [
     `เจน : ${storedName}!!!`,
-    `เจน : ${storedName}!!!*&$`,
+    `เจน : ${storedName}!!!`,
   ];
 
   const nextText = () => {

@@ -64,12 +64,14 @@ const Preface: React.FC = () => {
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-  <img 
-    src="/image/button/Start_button.png"
-    alt="เริ่มต้น"
-    onClick={() => navigate("/warning")}
-    className="absolute bottom-1 inset-x-0 w-84 mx-auto cursor-pointer hover:opacity-75"
-  />
+        <button
+          onClick={() => navigate("/warning")}
+          className="absolute bottom-44 inset-x-0 w-40 h-12 mx-auto cursor-pointer hover:opacity-80 bg-[#b7bdc2] opacity-85 text-white text-xl  rounded-3xl drop-shadow-xl"
+        >
+          เริ่มต้น
+        </button>
+
+
 </div>
 
       </div>

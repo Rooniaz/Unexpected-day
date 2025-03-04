@@ -32,10 +32,7 @@ const Braindetail = () => {
       setIsSecondVideoPlaying(true);
 
       // ทำให้วิดีโอแรกจางลงอย่างนุ่มนวล
-      if (videoRef.current) {
-        videoRef.current.style.transition = "opacity 0.5s ease-out";
-        videoRef.current.style.opacity = "0";
-      }
+
 
       // รอให้วิดีโอแรกหายไป แล้วค่อยแสดงวิดีโอที่สอง
       setTimeout(() => {

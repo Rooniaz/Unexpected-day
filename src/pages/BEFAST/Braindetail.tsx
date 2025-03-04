@@ -73,9 +73,9 @@ const Braindetail = () => {
           className="absolute inset-0 w-[390px] h-[844px]"
           style={{ display: "none" }} // ซ่อนวิดีโอที่สองก่อน
         >
-          <source src="/video/blurStudy.webm" type="video/webm" />
-          <source src="/video/blurStudy.mp4" type="video/mp4" />
-          <source src="/video/blurStudy.mov" type="video/quicktime" />
+          <source src="/video/brain_video/factclose.webm" type="video/webm" />
+          <source src="/video/brain_video/factclose.mp4" type="video/mp4" />
+          <source src="/video/brain_video/factclose.mov" type="video/quicktime" />
           Your browser does not support the video tag.
         </video>
       </motion.div>

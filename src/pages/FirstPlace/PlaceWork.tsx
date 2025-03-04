@@ -37,7 +37,9 @@ const PlaceWork: React.FC = () => {
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
       <audio ref={audioRef1} src="/Sound/Scene Working/Scene Working.mp3" autoPlay loop preload="auto" />
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"

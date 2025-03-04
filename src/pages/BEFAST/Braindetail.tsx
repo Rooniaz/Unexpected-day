@@ -29,7 +29,9 @@ const Braindetail = () => {
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate={isExiting ? "exit" : "animate"}
         exit="exit"
@@ -51,7 +53,9 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handlePicEnd}
-          className="absolute inset-0 w-[390px] h-[844px]"
+          className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         >
           <source src="/video/brain_video/fact.webm" type="video/webm" />
           <source src="/video/brain_video/fact.mp4" type="video/mp4" />

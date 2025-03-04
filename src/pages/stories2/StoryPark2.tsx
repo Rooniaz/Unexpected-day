@@ -50,7 +50,7 @@ const StoryPark2: React.FC = () => {
       setShowTextBox(false); // ปิด Textbox
       setIsLocked(true); // ล็อกคลิก
       setIndex((prev) => prev + 1); // ไปข้อความถัดไป
-    }, 500); // 2 วินาที
+    }, 5000); // 2 วินาที
 
     setTypingTimeout(newTimeout);
   };
@@ -183,7 +183,9 @@ const StoryPark2: React.FC = () => {
       <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
       <audio ref={audioRef5} src="/Sound/Sound fx/EEFECT-STROKE-HELP.mp3"  />
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"        
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined}
       >
         <img

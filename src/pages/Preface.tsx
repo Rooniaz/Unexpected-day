@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../contexts/AudioProvider";
@@ -18,15 +17,19 @@ const Preface: React.FC = () => {
   return (
     <div className="min-h-screen bg-black flex justify-center items-center relative">
       
-      <div
-        className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4"
+      <div className="
+        relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         style={{
-          backgroundImage: "url('/image/cover.gif')", // ใช้ GIF แทน PNG
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundImage: "url('/image/cover.gif')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >        
+      >
+
+   
         {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
           className="absolute top-4 left-4 text-black text-3xl"
@@ -61,15 +64,11 @@ const Preface: React.FC = () => {
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-                {/* <h1 className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Unexpected</h1>
-          <p className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Day</p>
-          <p className="text-2xl mt-14 text-white font-custom">การเผชิญกับโรคหลอด</p>
-          <p className="text-2xl mb-8 text-white font-custom" >เลือดสมองแบบเฉียบพลัน</p> */}
           <img 
             src="/image/button/Start_button.png"
             alt="เริ่มต้น"
             onClick={() => navigate("/warning")}
-            className="absolute bottom-2 inset-x-0 w-84 mx-auto cursor-pointer hover:opacity-350"
+            className="absolute bottom-2 inset-x-0 w-84 mx-auto cursor-pointer hover:opacity-75"
           />
         </div>
       </div>

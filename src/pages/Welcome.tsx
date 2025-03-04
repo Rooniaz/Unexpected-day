@@ -54,13 +54,18 @@ useEffect(() => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className=" relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         style={{
           backgroundImage: "url('/image/bgbefast.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >        {/* เพิ่มโลโก้ */}
+      >     
+      
+         {/* เพิ่มโลโก้ */}
       {/* <div className="absolute top-14 left-1/2 transform -translate-x-1/2">
         <img 
           src="/image/LOGO .png" // เปลี่ยนเป็น path ของโลโก้ของคุณ

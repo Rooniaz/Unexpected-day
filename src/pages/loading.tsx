@@ -6,16 +6,14 @@ const Preloader: React.FC = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [assets, setAssets] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null); // เก็บข้อผิดพลาด
-  const [failedAssets, setFailedAssets] = useState<string[]>([]); // เก็บชื่อไฟล์ที่โหลดไม่ได้
+  const [error, setError] = useState<string | null>(null);
+  const [failedAssets, setFailedAssets] = useState<string[]>([]);
 
-  // ฟังก์ชันจัดการข้อผิดพลาด
   const handleError = (src: string, event: string | Event): void => {
-    setFailedAssets((prevFailedAssets) => [...prevFailedAssets, src]); // บันทึกไฟล์ที่โหลดไม่ได้
+    setFailedAssets((prevFailedAssets) => [...prevFailedAssets, src]);
     console.error("Error loading asset:", src, event);
   };
 
-  // ใช้ useEffect เพื่อดึงข้อมูลจาก assets.json
   useEffect(() => {
     const fetchAssets = async () => {
       try {
@@ -32,13 +30,11 @@ const Preloader: React.FC = () => {
     fetchAssets();
   }, []);
 
-  // ใช้ useEffect เพื่อเริ่มการโหลด assets และคำนวณเปอร์เซ็นต์
   useEffect(() => {
     if (assets.length === 0) return;
 
     let loadedCount = 0;
 
-    // ฟังก์ชันการโหลด asset
     const loadAsset = (src: string) => {
       return new Promise<void>((resolve, reject) => {
         if (/\.(mp4|webm|mov)$/i.test(src)) {
@@ -50,7 +46,7 @@ const Preloader: React.FC = () => {
             resolve();
           };
           video.onerror = (event) => {
-            handleError(src, event); // บันทึกชื่อไฟล์ที่เกิดข้อผิดพลาด
+            handleError(src, event);
             reject();
           };
         } else if (/\.(mp3|wav)$/i.test(src)) {
@@ -61,7 +57,7 @@ const Preloader: React.FC = () => {
             resolve();
           };
           audio.onerror = (event) => {
-            handleError(src, event); // บันทึกชื่อไฟล์ที่เกิดข้อผิดพลาด
+            handleError(src, event);
             reject();
           };
         } else {
@@ -73,17 +69,16 @@ const Preloader: React.FC = () => {
             resolve();
           };
           img.onerror = (event) => {
-            handleError(src, event); // บันทึกชื่อไฟล์ที่เกิดข้อผิดพลาด
+            handleError(src, event);
             reject();
           };
         }
       });
     };
 
-    // เรียกใช้ loadAsset สำหรับทุกไฟล์
     Promise.all(assets.map(loadAsset)).then(() => {
       setTimeout(() => {
-        navigate("/home"); // เปลี่ยนหน้าไปที่ /story/start
+        navigate("/home");
       }, 1000);
     }).catch(() => {
       setError("ไม่สามารถโหลด asset ทั้งหมดได้");
@@ -106,7 +101,33 @@ const Preloader: React.FC = () => {
         กำลังโหลด...
       </motion.div>
 
-      {/* แสดงข้อความข้อผิดพลาดหากมี */}
+      {/* ไอคอนแครอทหมุน 3D */}
+      <motion.div
+        className="w-24 h-24 flex justify-center items-center mb-4"
+        animate={{
+          rotate: 360,
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 2,
+          ease: "linear",
+        }}
+      >
+        <motion.img
+          src="https://cdn-icons-png.flaticon.com/512/882/882998.png" // ไอคอนแครอท
+          alt="Carrot"
+          className="w-16 h-16"
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 3,
+            ease: "linear",
+          }}
+        />
+      </motion.div>
+
       {error && (
         <motion.div
           className="text-red-500 mt-4"
@@ -117,11 +138,8 @@ const Preloader: React.FC = () => {
         </motion.div>
       )}
 
-      {/* แสดงรายชื่อไฟล์ที่โหลดไม่ได้ */}
       {failedAssets.length > 0 && (
-        <motion.div
-          className="text-red-500 mt-4"
-        >
+        <motion.div className="text-red-500 mt-4">
           <div>ไม่สามารถโหลดไฟล์เหล่านี้ได้:</div>
           <ul>
             {failedAssets.map((asset, index) => (
@@ -144,7 +162,7 @@ const Preloader: React.FC = () => {
         />
       </motion.div>
 
-      <div className="mt-2 text-lg">{progress.toFixed(0)}%</div>
+      <div className="mt-2 text-4xl">{progress.toFixed(0)}%</div>
     </motion.div>
   );
 };

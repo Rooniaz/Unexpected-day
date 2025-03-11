@@ -67,7 +67,7 @@ useEffect(() => {
               transition={{ duration: 0.3 }}
             >
               <ul>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/")}>หน้าหลัก</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/home")}>หน้าหลัก</li>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>เกี่ยวกับงาน & เครดิต</li>
               </ul>
             </motion.div>

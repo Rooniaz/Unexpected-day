@@ -86,84 +86,98 @@ const Preloader: React.FC = () => {
   }, [assets, navigate]);
 
   return (
-    <motion.div
-      className="w-full h-screen flex flex-col justify-center items-center bg-black text-white"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
-    >
-      <motion.div
-        className="text-2xl mb-4"
-        animate={{ opacity: [0, 1, 0], scale: [0.9, 1, 0.9] }}
-        transition={{ repeat: Infinity, duration: 1.5 }}
-      >
-        กำลังโหลด...
-      </motion.div>
-
-      {/* ไอคอนแครอทหมุน 3D */}
-      <motion.div
-        className="w-24 h-24 flex justify-center items-center mb-4"
-        animate={{
-          rotate: 360,
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 2,
-          ease: "linear",
+    <div className="min-h-screen bg-black flex justify-center items-center relative">
+      <div
+        className="relative flex justify-center items-center w-full h-screen sm:w-[390px] sm:h-[844px]"
+        style={{
+          backgroundImage: "url('/image/cover.gif')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
-        <motion.img
-          src="https://cdn-icons-png.flaticon.com/512/882/882998.png" // ไอคอนแครอท
-          alt="Carrot"
-          className="w-16 h-16"
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 3,
-            ease: "linear",
-          }}
-        />
-      </motion.div>
-
-      {error && (
         <motion.div
-          className="text-red-500 mt-4"
-          animate={{ opacity: [0, 1, 0], scale: [0.9, 1, 0.9] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="w-full h-full flex flex-col justify-center items-center bg-black text-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
         >
-          {error}
+          <motion.div
+            className="text-2xl mb-4"
+            animate={{ opacity: [0, 1, 0], scale: [0.9, 1, 0.9] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            กำลังโหลด...
+          </motion.div>
+
+          {/* ไอคอนแครอทหมุน 3D */}
+          <motion.div
+            className="w-24 h-24 flex justify-center items-center mb-4"
+            animate={{
+              rotate: 360,
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              ease: "linear",
+            }}
+          >
+            <motion.img
+              src="https://cdn-icons-png.flaticon.com/512/882/882998.png" // ไอคอนแครอท
+              alt="Carrot"
+              className="w-16 h-16"
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                ease: "linear",
+              }}
+            />
+          </motion.div>
+
+          {error && (
+            <motion.div
+              className="text-red-500 mt-4"
+              animate={{ opacity: [0, 1, 0], scale: [0.9, 1, 0.9] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              {error}
+            </motion.div>
+          )}
+
+          {failedAssets.length > 0 && (
+            <motion.div className="text-red-500 mt-4">
+              <div>ไม่สามารถโหลดไฟล์เหล่านี้ได้:</div>
+              <ul>
+                {failedAssets.map((asset, index) => (
+                  <li key={index}>{asset}</li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+
+          <motion.div
+            className="w-64 h-4 bg-gray-700 rounded-full overflow-hidden"
+            initial={{ width: "0%" }}
+            animate={{ width: `${progress}%` }}
+          >
+            <motion.div
+              className="h-full bg-blue-500"
+              initial={{ width: "0%" }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5 }}
+            />
+          </motion.div>
+
+          <div className="mt-2 text-lg">
+            <span>{progress.toFixed(0)}%</span>
+          </div>
         </motion.div>
-      )}
-
-      {failedAssets.length > 0 && (
-        <motion.div className="text-red-500 mt-4">
-          <div>ไม่สามารถโหลดไฟล์เหล่านี้ได้:</div>
-          <ul>
-            {failedAssets.map((asset, index) => (
-              <li key={index}>{asset}</li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
-
-      <motion.div
-        className="w-64 h-4 bg-gray-700 rounded-full overflow-hidden"
-        initial={{ width: "0%" }}
-        animate={{ width: `${progress}%` }}
-      >
-        <motion.div
-          className="h-full bg-blue-500"
-          initial={{ width: "0%" }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5 }}
-        />
-      </motion.div>
-
-      <div className="mt-2 text-4xl">{progress.toFixed(0)}%</div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

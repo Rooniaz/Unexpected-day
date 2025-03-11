@@ -34,20 +34,10 @@
     ],
     "videos": [
 
-      "/video/brain_video/fact.webm",
 
-      "/video/brain_video/factclose.webm",
-
-      "/video/blurCanteen.webm",
-
-      "/video/blurPark.webm",
-
-      "/video/blurStudy.webm",
-
-      "/video/blurWork.webm"
     ],
     "audio": [
-        "/Sound/Scene Eating/Scene Eating.mp3"
+
     ]
   }
   

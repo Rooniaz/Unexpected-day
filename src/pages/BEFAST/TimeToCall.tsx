@@ -31,7 +31,7 @@ const TimeToCall = () => {
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 2, delay: 4 }, // เริ่มหลังสุดท้ายของ B E F A S T + 3 วิ
+      transition: { duration: 2, delay: 4 }, // เริ่มหลังสุดท้ายของ B E F A S T + 3 วิ นะ
     },
   };
 

@@ -33,7 +33,7 @@ const Prechapter: React.FC = () => {
             setIsClickable(false); // ไม่ให้คลิกตอนแรก
             const timer = setTimeout(() => {
                 setIsClickable(true); // เปิดให้คลิกหลังจาก 3 วินาที
-            }, 3000); // หน่วงเวลา 3 วินาที
+            }, 1500); // หน่วงเวลา 3 วินาที
 
             return () => clearTimeout(timer);
         }

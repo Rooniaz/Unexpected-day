@@ -72,7 +72,7 @@ const StoryWork2: React.FC = () => {
       // หลังจาก 3 วินาทีให้ปลดล็อกการคลิก
       setTimeout(() => {
         setIsLocked(false); // เปิดให้กดได้หลังจากหน่วงเวลา
-      }, 3000);
+      }, 1500);
     } else {
       navigate("/StoryWork3");
     }

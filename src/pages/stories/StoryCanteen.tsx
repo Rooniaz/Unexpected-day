@@ -39,7 +39,7 @@ const StoryCanteen: React.FC = () => {
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
         setIsChanging(false);
-      }, 3000); // เพิ่มการหน่วงเวลา 3 วินาที
+      }, 1500); // เพิ่มการหน่วงเวลา 3 วินาที
     }
   };
 

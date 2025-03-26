@@ -50,7 +50,7 @@ const StoryPark2: React.FC = () => {
       setShowTextBox(false); // ปิด Textbox
       setIsLocked(true); // ล็อกคลิก
       setIndex((prev) => prev + 1); // ไปข้อความถัดไป
-    }, 6000); // 2 วินาที
+    }, 4000); // 2 วินาที
 
     setTypingTimeout(newTimeout);
   };

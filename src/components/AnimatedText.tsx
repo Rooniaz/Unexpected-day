@@ -30,12 +30,11 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
                 char === "เพิ่มโอกาสรอดชีวิต" ? (
                     <motion.span 
                         key={index} 
-                        className="text-[#e7d700]" 
+                        className="text-[#fa4901]" 
                         variants={letter} 
                         style={{
                             display: "inline-block",  // ✅ แก้ปัญหาสระลอย
-                            textShadow: "1px 0px 0px black",
-                            filter: "drop-shadow(2px 1px 1px rgba(0, 0, 0, 0.75))"
+                            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)"
                         }}
                     >
                         {char}

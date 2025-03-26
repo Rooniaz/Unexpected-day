@@ -92,7 +92,7 @@ const Warning: React.FC = () => {
           </p>
         </div>
 
-          <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">
+          <div className="absolute inset-x-0 bottom-64 flex justify-center items-center mb-4">
           <div className="text-[#817c7c] text-xl animate-pulse">กดเพื่อไปต่อ</div>
         </div>
         </div>

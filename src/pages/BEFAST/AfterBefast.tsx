@@ -11,6 +11,8 @@ const AfterBefast = () => {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [trackWidth, setTrackWidth] = useState(0);
   const navigate = useNavigate();
+  const [isAutoMoveComplete, setIsAutoMoveComplete] = useState(false);
+
 
   const handleDragEnd = () => {
     if (sliderValue < maxSliderValue) {
@@ -42,6 +44,7 @@ const AfterBefast = () => {
         setSliderValue((prevValue) => {
           if (prevValue >= maxSliderValue) {
             clearInterval(autoMove);
+            setIsAutoMoveComplete(true); // เพิ่มบรรทัดนี้
             return maxSliderValue;
           }
           return prevValue + 5; // เปลี่ยนจาก 100 เป็น 5 เพื่อให้เลื่อนช้าลง
@@ -124,14 +127,49 @@ const AfterBefast = () => {
           />
         )}
 
-        {/* เพิ่มความกว้างของ track จาก 450px เป็น 550px */}
-        <div ref={trackRef} className="absolute top-[60%] w-[550px] h-12 bg-[#708090] rounded"></div>
+<div 
+  ref={trackRef} 
+  className="absolute top-[60%] w-[550px] h-12 bg-[#565656] rounded flex items-center pb-3"
+>
+<motion.div
+    className={`absolute left-[10%] text-[#9aa0a6] text-5xl px-6 py-2 rounded-lg z-20 ${
+      sliderValue >= 100 || isAutoMoveComplete  ? "hidden" : ""
+    }`}
+    animate={{ x: 60, opacity: 0 }}
+    initial={{ x: 0, opacity: 1 }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    {" >> "}
+  </motion.div>
+  
+  <motion.div
+    className={`absolute left-[60%] text-[#9aa0a6] text-5xl px-6 py-2 rounded-lg z-20 ${
+      sliderValue >= 100 || isAutoMoveComplete  ? "hidden" : ""
+    }`}
+    animate={{ x: 60, opacity: 0 }}
+    initial={{ x: 0, opacity: 1 }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    {" >> "}
+  </motion.div>
+
+  <motion.div
+    className={`absolute left-[40%] text-[#9aa0a6] text-5xl px-6 py-2 rounded-lg z-20 ${
+      sliderValue >= 100 || isAutoMoveComplete  ? "hidden" : ""
+    }`}
+    animate={{ x: 60, opacity: 0 }}
+    initial={{ x: 0, opacity: 1 }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    {" >> "}
+  </motion.div>
+</div>
 
         {trackWidth > 0 && (
           <motion.img
             src="/image/hostpitalcar.gif"
             alt="ambulance"
-            className="absolute top-[55%] cursor-pointer z-10"             
+            className="absolute top-[55%] cursor-pointer z-20"             
             drag="x"
             dragConstraints={{ left: 0, right: trackWidth - 100 }}
             onDrag={(_event, info) => {
@@ -174,13 +212,18 @@ const AfterBefast = () => {
             </div>
           </motion.div>
         )}
-        <div className="bg-opacity-80 absolute top-[67%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse" >
-        เร็วเข้า!
-          {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
-        </div>
-        <div className="bg-opacity-80 absolute top-[71%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse" >
-        รีบเลื่อนรถเพื่อส่งโรงพยาบาล!
-          {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
+        {!showMessage && (
+          <>
+            <div className="bg-opacity-80 absolute top-[46%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse">
+              เร็วเข้า!
+            </div>
+            <div className="bg-opacity-80 absolute top-[50%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse">
+            “เลื่อนรถ” เพื่อส่งโรงพยาบาล            
+            </div>
+          </>
+        )}
+        <div className="relative w-full h-[200px]">
+
         </div>
         {sliderValue < maxSliderValue && (
           <div className="absolute top-[20%] text-white text-4xl font-bold">

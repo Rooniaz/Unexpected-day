@@ -53,10 +53,13 @@ const Preface: React.FC = () => {
             >
               <ul className="text-left">
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>
-                  เกี่ยวกับงาน & เครดิต
+                  About Us
                 </li>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>
-                  ดูผลงานอื่นๆเพิ่มเติม
+                  Lab Stroke
+                </li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/IntroDuction")}>
+                  Introduction
                 </li>
               </ul>
             </motion.div>

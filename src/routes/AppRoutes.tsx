@@ -46,6 +46,7 @@ import UnexpectedDayForm from "../pages/BEFAST/EndStory";
 
 import Aboutme from "../pages/credit/Aboutme";
 import Allcredit from "../pages/credit/Allcredits";
+import Introduction from "../pages/credit/Introduction";
 import Preloader from "../pages/loading";
 
 const AppRoutes: React.FC = () => {
@@ -116,6 +117,8 @@ const AppRoutes: React.FC = () => {
       {/*credit */}
       <Route path="/Aboutme" element={<Aboutme />} />
       <Route path="/Allcredit" element={<Allcredit />} />
+      <Route path="/Introduction" element={<Introduction />} />
+
 
 
 

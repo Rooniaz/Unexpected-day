@@ -19,17 +19,6 @@ useEffect(() => {
   return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
 }, []);
 
-  // const socialLinks = [
-  //   { href: "https://www.instagram.com", img: "/image/icons/iconig.png" ,description: "instagram" },
-  //   { href: "https://www.facebook.com", img: "/image/icons/iconfb.png" ,description: "facebook"},
-  //   { href: "https://www.youtube.com", img: "/image/icons/iconyt.png" ,description: "youtube"},
-  // ];
-  // const imageSlides = [
-  //   "/image/Slidimg/tiger.jpg",
-  //   "/image/Slidimg/bird.jpg",
-  //   "/image/Slidimg/tiger.jpg",
-  //   "/image/Slidimg/bird.jpg",
-  // ];
   
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative">
@@ -68,7 +57,8 @@ useEffect(() => {
             >
               <ul>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/home")}>หน้าหลัก</li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>เกี่ยวกับงาน & เครดิต</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>Aboutme</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Introduction")}>Introduction</li>
               </ul>
             </motion.div>
           )}
@@ -77,61 +67,54 @@ useEffect(() => {
         <div className="absolute top-0 left-0 w-full h-auto flex flex-col items-center justify-center p-6 space-y-6">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg">
           {/* <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" /> */}
-          <h2 className="text-4xl font-bold mb-3 mt-10 text-[#fa4901] drop-shadow-xl">Lab Stroke</h2>
-            <p className="text-xl mt-5 text-[#fa4901] mb-5">อายุน้อยก็เป็นได้</p>
-            <div className="w-full flex justify-center">
+          <h2 className="text-4xl font-bold mt-8 text-[#fa4901] drop-shadow-xl">Lab Stroke</h2>
+          <div className="wrap">
+          <p className="text-white p-4 text-sm relative before:content-['•'] before:absolute before:-left-4 before:text-white before:text-3xl before:pl-3">
+            Motion Graphic Video for Communicating Information About
+          </p>
+            </div>
+            <div className="flex justify-center gap-4 bg-blue-500 mb-3">
+              <button className="border border-white text-white rounded-full px-4 py-2 text-[0.8rem]">
+                โรคหลอดเลือดสมอง
+              </button>
+              <button className="border border-white text-white rounded-full px-4 py-2 text-[0.8rem]">
+                อายุน้อยก็เป็นได้
+              </button>
+            </div>
+            <div className="border-l-4 border-blue-500 text-black p-4 pl-2 pb-0 pt-0 w-fit text-[0.7rem] whitespace-pre-line">
+              <p>
+              เรื่องราวของหนุ่มออฟฟิศที่ต้องมาพบเข้ากับ
+              </p>
+              <p>
+              เหตุการณ์แปลกประหลาด เมื่อจู่ ๆ ก็มีเสียงปริศนา
+              </p>
+              <p>
+              ของใครคนหนึ่ง ที่จะพาเขาไปพบความจริงบางอย่าง
+              </p>
+              <p>
+              ใน "Lab Stroke" ห้องทดลองที่จะเล่าข้อเท็จจริงเกี่ยว
+              </p>
+              <p>
+              กับโรคหลอดเลือดสมองพร้อมภาพจำลองอนาคตที่              
+              </p>
+              <p>
+              ทำให้ชายหนุ่มต้องกลับมาตระหนักถึง
+              </p>
+              <p>
+              การใช้ชีวิตของเขาในปัจจุบัน              
+              </p>
+            </div>
+            <div className="w-full flex justify-center mt-6 border-3">
             <iframe
                 width="350"
                 height="200"
                 src="https://www.youtube.com/embed/Onyd7v5DWc4"
                 title="YouTube video player"
-                className="rounded"
+                className="rounded-xl w-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             ></iframe>
             </div>
-            <div className="text-center">
-              <p className="text-sm mt-5 text-[#fa4901]">
-                อีกสื่อ Motion Graphic ที่ถ่ายทอดข้อมูลเกี่ยวกับ 
-              </p>
-              <p className="text-sm mb-4 text-[#fa4901]">
-                “โรคหลอดเลือดสมอง” และ “อายุน้อยก็เป็นได้”
-              </p>
-            </div>
-            <div className="text-sm leading-relaxed text-justify indent-6 w-full break-words">
-              <p>
-                เป็นเรื่องราวของหนุ่มออฟฟิศที่ต้องมาพบเข้ากับเหตุการณ์แปลกประหลาด 
-                เมื่อจู่ๆ ก็มีเสียงปริศนาจากของใครคนหนึ่งที่จะพาเขาไปพบความจริงบางอย่าง 
-                ใน “Lab Stroke” ห้องทดลองที่จะเล่าข้อเท็จจริงเกี่ยวกับโรคหลอดเลือดสมอง 
-                พร้อมภาพจำลองอนาคตที่ทำให้ชายหนุ่มต้องกลับมาตระหนักถึงการใช้ชีวิตของเขาในปัจจุบัน
-              </p>
-            </div>
-
-
-            {/* <p className="text-sm mt-5">ทั้งนี้พวกเราขอขอบคุณผู้เล่นทุกคนที่เข้ามาเล่นเกม</p>
-            <p className="text-sm">เว็บไซต์ของพวกเรา ขอให้ผู้เล่นได้ใช้เวลาในการเล่น</p>
-            <p className="text-sm">เกมเว็บไซต์นี้ให้คุ้มค่า เพื่อรับประโยชน์ผ่าน</p>
-            <p className="text-sm">ประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง</p> */}
-
-            {/* ✅ เพิ่ม Swiper สำหรับเลื่อนรูปภาพ */}
-            {/* <Swiper
-              modules={[Pagination, Navigation]}
-              pagination={{ clickable: true }}
-              navigation
-              loop={true}
-              className="w-full h-[250px] rounded-lg overflow-hidden mt-6"
-            >
-              {imageSlides.map((src, index) => (
-                <SwiperSlide key={index}>
-                  <img src={src} alt={`Slide ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
-                </SwiperSlide>
-              ))}
-            </Swiper> */}
-
-            {/* <p className="text-base mt-8 text-[#fa4901] drop-shadow-xl">ดูผลงานของเราเพิ่มเติมได้ที่</p> */}
-            {/* <div className="flex justify-start mt-4 space-x-4">
-
-            </div> */}
 
             <footer className="text-[0.67rem] mt-8 text-[#ffffff] drop-shadow-md" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}>
             Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน

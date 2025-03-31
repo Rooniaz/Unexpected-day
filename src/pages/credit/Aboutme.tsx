@@ -16,16 +16,12 @@ const Aboutme: React.FC = () => {
   }, []);
  
 
-  const text = `ผลงานชิ้นนี้เกิดขึ้นเพื่อให้ผู้เล่นทุกคนได้เรียนรู้และตระหนักถึงภัยเงียบที่ไม่อาจคาดคิดโดยเป็นเรื่องราวเกี่ยวกับโรคหลอดเลือดสมองที่สามารถเกิดได้กับทุกคนแม้แต่ในคนอายุน้อยแต่หากได้ทราบวิธีสังเกตอาการของโรคนี้ก็จะเป็นประโยชน์ทั้งต่อตัวเองและคนรอบข้าง
+  const text = `ผลงานนี้เป็นผลงานนวัตกรรมสื่อสารนิพนธ์ จัดทำโดย
+                ชญานิน สุรขจร , ปัทมาพร ประทุมถิ่น ,
+                วรัญญา ตันติเฉลิม และ ฐปนัท เดชประมวลพล
+                นิสิตจากวิทยาลัยนวัตกรรมสื่อสารสังคม 
+                เอกการสื่อสารเพื่อสุขภาพ มหาวิทยาลัยศรีนครินทรวิโรฒ`;
 
-ทั้งนี้พวกเราขอขอบคุณผู้เล่นทุกคนที่เข้ามาเล่นเกมเว็บไซต์ของพวกเรา ขอให้ผู้เล่นได้ใช้เวลาในการเล่นเกมเว็บไซต์นี้ให้คุ้มค่า เพื่อรับประโยชน์ผ่านประสบการณ์การเรียนรู้เกี่ยวกับโรคหลอดเลือดสมอง`;
-
-
-  const socialLinks = [
-    { href: "https://www.instagram.com", img: "/image/icons/iconig.png" },
-    { href: "https://www.facebook.com", img: "/image/icons/iconfb.png" },
-    { href: "https://www.youtube.com", img: "/image/icons/iconyt.png" },
-  ];
   
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative">
@@ -63,7 +59,8 @@ const Aboutme: React.FC = () => {
             >
               <ul>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/home")}>หน้าหลัก</li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>ดูผลงานอื่นๆเพิ่มเติม</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>Lab Stroke</li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Introduction")}>Introduction</li>
               </ul>
             </motion.div>
           )}
@@ -72,48 +69,13 @@ const Aboutme: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-auto flex flex-col items-center justify-center p-6 space-y-6">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-100 rounded-lg">
             {/* <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" /> */}
-            <h2 className="text-3xl mb-3 mt-16 text-[#fa4901] drop-shadow-xl">เกี่ยวกับงาน</h2>
+            <h2 className="text-3xl mb-3 mt-6 text-[#fa4901] font-bold drop-shadow-xl">About us            </h2>
             <p
-              className="text-base mt-5 font-light"
+              className="text-[0.77rem] mt-4 font-light border-b-2 border-white pb-3"
               dangerouslySetInnerHTML={{ __html: text.replaceAll("\n", "<br />") }}
             ></p>
-
-            <p className="text-base mt-10 text-[#fa4901] ">ดูผลงานของเราเพิ่มเติมได้ที่</p>
-            <div className="flex justify-start mt-2 ">
-              {socialLinks.map((link, index) => (
-                <a key={index} href={link.href} target="_blank" rel="noopener noreferrer">
-                  <img src={link.img} alt="Social Icon" width="60" height="30" />
-                </a>
-              ))}
-            </div>
+            <div className="wrap-underline "></div>
             <div>
-              <h2 className="text-3xl mb-3 text-[#fa4901] mt-6">เครดิต</h2>
-            <p className="text-lg mt-3 ">ผลงานนวัตกรรมสื่อสารนิพนธ์ของ</p>
-
-            <div className="mt-1 text-left text-base">
-            <div className="flex">
-              <p className="w-1/4 text-left text-base">ชญานิน</p>
-              <p className="w-1/2 text-left pl-8">สุรขจร</p>
-            </div>
-            <div className="flex">
-              <p className="w-1/4 text-left text-base ">ปัทมาพร</p>
-              <p className="w-1/2 text-left pl-8">ประทุมถิ่น</p>
-            </div>
-            <div className="flex">
-              <p className="w-1/4 text-left text-base">ฐปนัท</p>
-              <p className="w-1/2 text-left pl-8">เดชประมวลพล</p>
-            </div>
-            <div className="flex">
-              <p className="w-1/4 text-left text-base">วรัญญา</p>
-              <p className="w-1/2 text-left pl-8">ตันติเฉลิม</p>
-            </div>
-          </div>
-
-            <p className="text-base mt-2">นิสิตจาก</p>
-            <p className="text-base">วิทยาลัยนวัตกรรมสื่อสารสังคม </p>
-            <p className="text-base">เอกการสื่อสารเพื่อสุขภาพ มหาวิทยาลัยศรีนครินทรวิโรฒ </p>
-
-
             <div className="grid grid-cols-2 gap-4 mt-6">
                 <div>
                   <p className=" text-[#fa4901]">โครงเรื่อง</p>
@@ -134,7 +96,7 @@ const Aboutme: React.FC = () => {
             </div>
 
 
-              <p className=" text-sm">
+              <p className=" text-[0.6rem]">
                 (ขอบคุณเสียงประกอบจาก envato.co )
               </p>
 
@@ -149,9 +111,18 @@ const Aboutme: React.FC = () => {
             </div>
 
 
-              <p className="text-sm  text-[#fa4901] mt-6">
-                ขอบคุณทีมงานทุกคนที่มีส่วนร่วมในผลงานนี้
+              <p className="text-[0.87rem]  text-[#fa4901] mt-6">
+              ขอขอบคุณหน่วยงานที่ให้ความอนุเคราะห์ข้อมูล
               </p>
+              <p className="text-[0.87rem]  text-[#fa4901] ">
+              พญ.ศรัญญา ยุทธโกวิท จาก สถาบันประสาทวิทยา              
+              </p>
+              <div className="flex justify-center items-center space-x-4 mt-6 border-red-500 border-2">
+                {/* รูปที่ 1 (กว้างกว่า) */}
+                <img src="https://via.placeholder.com/300x150" alt="รูปที่ 1" className="w-64 h-20 rounded-lg shadow-lg" />
+                {/* รูปที่ 2 (สั้นกว่า) */}
+                <img src="https://via.placeholder.com/150x150" alt="รูปที่ 2" className="w-40 h-20 rounded-lg shadow-lg" />
+              </div>
 
               <p className="text-[0.6rem] mt-4 text-[#ffffff] drop-shadow-lg">
                 Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน

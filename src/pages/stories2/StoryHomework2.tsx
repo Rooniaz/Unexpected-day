@@ -180,7 +180,7 @@ const StoryHomework2: React.FC = () => {
         loop
       />
       <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
-      <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่นน */}
+      <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
       <audio ref={audioRef5} src="/Sound/Sound fx/EEFECT-STROKE-HELP.mp3"  />
       <div
         className="relative flex justify-center items-center 

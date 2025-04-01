@@ -77,17 +77,17 @@ const UnexpectedDayForm: React.FC = () => {
     ctx.fillStyle = "black";
 
     const nameX = 1340;
-    const nameY = 2400;
+    const nameY = 2550;
     ctx.fillText(formData.name, nameX, nameY);
 
     const ageX = 2900;
-    const ageY = 2400;
+    const ageY = 2550;
     ctx.fillText(formData.age, ageX, ageY);
 
-    const dreamBoxX = 860;
-    const dreamBoxY = 2610;
+    const dreamBoxX = 864;
+    const dreamBoxY = 2750;
     const dreamBoxWidth = 2700;
-    const dreamBoxHeight = 960;
+    const dreamBoxHeight = 955;
     const paddingTop = 170; // Padding ด้านบน
     const paddingBottom = 12; // Padding ด้านล่าง
     const paddingLeftRight = 120; // Padding ซ้าย-ขวา

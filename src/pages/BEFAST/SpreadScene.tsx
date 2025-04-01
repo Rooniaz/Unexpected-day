@@ -71,7 +71,7 @@ const SpreadScene = () => {
           {/* บรรทัดแรก (สีแดง) */}
           {showFirstText && ( // แสดงข้อความบรรทัดแรกเมื่อ showFirstText เป็น true
             <motion.div
-              className="text-red-500 text-2xl text-center text-shadow-2xl font-bold 
+              className="text-[#fa4901] text-2xl text-center text-shadow-2xl font-bold 
                           break-words relative z-10 mt-6"
               variants={container}
               initial="hidden"
@@ -84,7 +84,7 @@ const SpreadScene = () => {
           {/* บรรทัดที่สอง (สีแดง) */}
           {showSecondText && ( // แสดงข้อความบรรทัดที่สองเมื่อ showSecondText เป็น true
             <motion.div
-              className="mt-2 text-red-500 text-2xl font-bold break-words underline 
+              className="mt-2 text-[#fa4901] text-2xl font-bold break-words underline 
                         relative z-10"
               variants={container}
               initial="hidden"
@@ -95,7 +95,7 @@ const SpreadScene = () => {
           )}
 
           {/* เส้นสีเทา (ลด bottom) */}
-          <div className="w-full sm:w-[390px] h-[46px] bg-[#708090] absolute bottom-[35%] z-0"></div>
+          <div className="w-full sm:w-[390px] h-[46px] bg-[#565656] absolute bottom-[35%] z-0"></div>
         </motion.div>
       ) : (
         <AfterBefast />

@@ -22,7 +22,7 @@ const Preface: React.FC = () => {
         w-full h-screen 
         sm:w-[390px] sm:h-[844px]"
         style={{
-          backgroundImage: "url('/image/cover.gif')",
+          backgroundImage: "url('/image/cover/cover.gif')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -68,16 +68,16 @@ const Preface: React.FC = () => {
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-        <button
-          onClick={() => navigate("/warning")}
-          className="absolute bottom-44 inset-x-0 w-40 h-12 mx-auto cursor-pointer hover:opacity-80 bg-[#b7bdc2] opacity-85 text-white text-xl  rounded-3xl drop-shadow-xl"
-        >
-          เริ่มต้น
-        </button>
-
-
-</div>
-
+          <img src="/image/cover/top.png" className="absolute top-[-10px] right-2 w-32 h-24" />
+          <img src="/image/cover/header.png" className="absolute top-[-25px] w-full" />
+          <button
+            onClick={() => navigate("/warning")}
+            className="absolute bottom-80 left-40 right-10 transform translate-x-10 inset-x-0 w-40 h-12 mx-auto cursor-pointer hover:opacity-80 bg-[#b7bdc2] rounded-3xl drop-shadow-xl"
+            style={{ backgroundColor: 'rgba(183, 189, 194, 0.55)' }}  // ใช้ backgroundColor เพื่อแยก opacity
+          >
+            <p className="text-white text-xl">เริ่มต้น</p>
+          </button>
+        </div>
       </div>
     </div>
   );

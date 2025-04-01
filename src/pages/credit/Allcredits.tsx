@@ -22,12 +22,17 @@ useEffect(() => {
   
 return (
   <div className="min-h-screen flex flex-col items-center justify-center relative bg-black">
-    <div
-      className="
-      relative flex justify-center items-center 
-      w-full h-screen overflow-y-auto no-scrollbar 
-      sm:w-[390px] sm:h-[844px]  bg-gradient-to-b from-[#0549ab] to-black"
-    >
+<div className="
+        relative flex justify-center items-center 
+        w-full h-screen overflow-y-auto bg-black no-scrollbar
+        sm:w-[390px] sm:h-[844px]"
+        style={{
+            backgroundImage: "url('/image/bg/blue2.JPG')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+        }}
+        >
       {/* ✅ ปุ่ม Hamburger Menu */}
       <motion.button
         className="absolute top-4 left-4 text-white text-3xl z-10"
@@ -78,7 +83,7 @@ return (
           </div>
 
           {/* 🔹 ข้อความ */}
-          <div className="border-l-2 border-blue-500 text-white p-4 pl-2 pb-0 pt-0 w-fit text-[0.7rem] ">
+          <div className="border-l border-white text-white p-4 pl-2 pb-0 pt-0 w-fit text-[0.7rem] ">
             <p>เรื่องราวของหนุ่มออฟฟิศที่ต้องมาพบเข้ากับ</p>
             <p>เหตุการณ์แปลกประหลาด เมื่อจู่ ๆ ก็มีเสียงปริศนา</p>
             <p>ของใครคนหนึ่ง ที่จะพาเขาไปพบความจริงบางอย่าง</p>

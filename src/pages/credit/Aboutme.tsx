@@ -25,12 +25,17 @@ const Aboutme: React.FC = () => {
   
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative">
-  <div
-      className="
-      relative flex justify-center items-center 
-      w-full h-screen overflow-y-auto no-scrollbar 
-      sm:w-[390px] sm:h-[844px]  bg-gradient-to-b from-[#000000] to-[#4a1908]"
-    >
+<div className="
+        relative flex justify-center items-center 
+        w-full h-screen overflow-y-auto bg-black no-scrollbar
+        sm:w-[390px] sm:h-[844px]"
+        style={{
+            backgroundImage: "url('/image/bg/black2.JPG')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+        }}
+        >
         {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
           className="absolute top-4 left-4 text-black text-3xl z-10 text-white"
@@ -66,7 +71,7 @@ const Aboutme: React.FC = () => {
             {/* <img src="/image/LOGO .png" alt="SVG Icon" width="50" height="30" className="absolute top-7 right-6" /> */}
             <h2 className="text-3xl mb-3 mt-6 text-[#fa4901] font-bold drop-shadow-xl">About us            </h2>
             <p
-              className="text-[0.77rem] mt-4 font-light border-b-2 border-white pb-3 text-white"
+              className="text-[0.77rem] mt-4 font-light border-b border-white pb-3 text-white"
               dangerouslySetInnerHTML={{ __html: text.replaceAll("\n", "<br />") }}
             ></p>
             <div className="wrap-underline "></div>

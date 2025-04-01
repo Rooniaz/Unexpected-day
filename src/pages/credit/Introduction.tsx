@@ -32,7 +32,7 @@ return (
         w-full h-screen overflow-y-auto bg-black no-scrollbar
         sm:w-[390px] sm:h-[844px]"
         style={{
-            backgroundImage: "url('/image/bgbefast.png')",
+            backgroundImage: "url('/image/bg/black2.JPG')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -41,7 +41,7 @@ return (
 
         {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
-            className="absolute top-4 left-4 text-black text-3xl z-10"
+            className="absolute top-4 left-4 text-black text-3xl z-10 text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             whileTap={{ scale: 0.9 }}
             animate={{ rotate: isMenuOpen ? 90 : 0 }}
@@ -89,8 +89,8 @@ return (
         </div>
             
         <div className="wrap">
-        <p className="text-white p-4 text-[0.78rem] border-b-2 border-black w-3/4 pl-0 pb-1 mt-3">
-        ทำความรู้จักกับพวกเราเพิ่มเติมได้ที่        
+        <p className="text-white p-4 text-[0.78rem] border-b border-white inline-block pl-0 pb-1 mt-3">
+        ทำความรู้จักกับพวกเราเพิ่มเติมได้ที่
         </p>
             </div>
             <div className="flex justify-center mt-2 gap-8 mt-4">
@@ -100,6 +100,7 @@ return (
                 </a>
               ))}
             </div>
+            
 
 
             <footer className="text-[0.67rem] mt-8 text-[#ffffff] drop-shadow-md" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}>

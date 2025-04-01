@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '../../components/fadeInOut';
 import { FaDownload, FaYoutube, FaShare } from 'react-icons/fa';
@@ -16,6 +16,7 @@ const UnexpectedDayForm: React.FC = () => {
   const bgImageRef = useRef<HTMLImageElement | null>(null);
   const [isImageReady, setIsImageReady] = useState(false);
   const [isBgImageReady, setIsBgImageReady] = useState(false);
+  const navigate = useNavigate();
 
   // โหลดข้อมูลจาก localStorage เมื่อคอมโพเนนต์ถูกโหลด
   useEffect(() => {
@@ -246,6 +247,11 @@ const UnexpectedDayForm: React.FC = () => {
     event.stopPropagation();
   };
 
+  const handleScreenClick = () => {
+    navigate('/home');  // เปลี่ยนเส้นทางไปหน้าแรก
+  };
+  
+
   return (
     <div className="w-full min-h-screen bg-black flex flex-col justify-center items-center">
       <audio ref={audioRef} src="/Sound/Sound End/Peaceful_Ambient_Piano_full.mp3" autoPlay loop />
@@ -257,7 +263,7 @@ const UnexpectedDayForm: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        // onClick={goToNext}
+        onClick={handleScreenClick}
       >
         <div className="w-full min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/image/Endstory/bg-card.png')" }}>
 

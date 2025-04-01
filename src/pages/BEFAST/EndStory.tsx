@@ -92,7 +92,7 @@ const UnexpectedDayForm: React.FC = () => {
     const paddingBottom = 12; // Padding ด้านล่าง
     const paddingLeftRight = 120; // Padding ซ้าย-ขวา
 
-    ctx.strokeStyle = "#FA4901";
+    ctx.strokeStyle = "transparent";
     ctx.lineWidth = 3;
     ctx.strokeRect(dreamBoxX, dreamBoxY, dreamBoxWidth, dreamBoxHeight);
 
@@ -258,7 +258,8 @@ const UnexpectedDayForm: React.FC = () => {
       <motion.div
         className="  relative flex justify-center items-center 
         w-full h-screen 
-        sm:w-[390px] sm:h-[844px] overflow-hidden"
+        sm:w-[390px] sm:h-[844px] 
+        md:max-w-[768px] md:mx-auto "
         initial="initial"
         animate="animate"
         exit="exit"
@@ -285,12 +286,12 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
 
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-28 left-0 flex flex-col items-center space-y-6">
+          <div className="fixed w-full bottom-[6%] left-0 flex flex-col items-center space-y-6 pb-[calc(20px+env(safe-area-inset-bottom))]">
             <div className="flex justify-center items-center space-x-4">
               <div className="flex flex-col items-center">
                 <button
                   onClick={(event) => { handleButtonClick(event); handleDownloadWithBackground(); }}
-                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] mb-2"
+                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] "
                   aria-label="Download with Background"
                 >
                   <span className="absolute inset- bg-green-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span>
@@ -302,7 +303,7 @@ const UnexpectedDayForm: React.FC = () => {
               <div className="flex flex-col items-center">
                 <button
                   onClick={(event) => { handleButtonClick(event); handleShareWithBackground(); }}
-                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] mb-2"
+                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px]"
                   aria-label="Share with Background"
                 >
                   <span className="absolute inset- bg-blue-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span>
@@ -313,7 +314,7 @@ const UnexpectedDayForm: React.FC = () => {
             </div>
 
             <div className="w-cover text-center bg-[#b5b4b4] pr-4 pl-2 flex justify-center items-center rounded-xl">
-              <p className="text-black mr-2 inline-block text-xs ">
+              <p className="text-black mr-2 inline-block text-xs">
                 อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิก
               </p>
               <a

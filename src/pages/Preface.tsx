@@ -72,10 +72,10 @@ const Preface: React.FC = () => {
           <img src="/image/cover/header.png" className="absolute top-[-25px] w-full" />
           <button
             onClick={() => navigate("/warning")}
-            className="absolute bottom-80 left-40 right-10 transform translate-x-10 inset-x-0 w-40 h-12 mx-auto cursor-pointer hover:opacity-80 bg-[#b7bdc2] rounded-3xl drop-shadow-xl"
-            style={{ backgroundColor: 'rgba(183, 189, 194, 0.55)' }}  // ใช้ backgroundColor เพื่อแยก opacity
+            className="absolute right-4 sm:right-10 top-[52%] sm:top-[25%] h-12 w-36 sm:w-40 h-10 sm:h-12 cursor-pointer hover:opacity-80 bg-[#b7bdc2] rounded-3xl drop-shadow-xl"
+            style={{ backgroundColor: 'rgba(183, 189, 194, 0.55)' }}
           >
-            <p className="text-white text-xl">เริ่มต้น</p>
+            <p className="text-white text-lg sm:text-xl">เริ่มต้น</p>
           </button>
         </div>
       </div>

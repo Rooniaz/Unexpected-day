@@ -98,7 +98,7 @@ return (
             <iframe
               width="350"
               height="200"
-              src="https://www.youtube.com/embed/Onyd7v5DWc4"
+              src="https://www.youtube.com/embed/kdGTw25V8vY"
               title="YouTube video player"
               className="rounded-xl w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

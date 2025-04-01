@@ -93,10 +93,10 @@ return (
         ทำความรู้จักกับพวกเราเพิ่มเติมได้ที่
         </p>
             </div>
-            <div className="flex justify-center mt-2 gap-8 mt-4">
+            <div className="flex justify-center mt-2 gap-8 mt-4 ">
               {socialLinks.map((link, index) => (
                 <a key={index} href={link.href} target="_blank" rel="noopener noreferrer">
-                  <img src={link.img} alt="Social Icon" width="60" height="30" />
+                  <img src={link.img} alt="Social Icon" width="80" height="40" />
                 </a>
               ))}
             </div>

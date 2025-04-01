@@ -55,12 +55,13 @@ const Preface: React.FC = () => {
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>
                   About Us
                 </li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>
-                  Lab Stroke
-                </li>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/IntroDuction")}>
                   Introduction
                 </li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>
+                  Lab Stroke
+                </li>
+
               </ul>
             </motion.div>
           )}

@@ -32,7 +32,7 @@ const Preface: React.FC = () => {
    
         {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
-          className="absolute top-4 left-4 text-black text-3xl"
+          className="absolute top-4 left-4 text-black text-3xl z-50"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           whileTap={{ scale: 0.9 }}
           animate={{ rotate: isMenuOpen ? 90 : 0 }}

@@ -66,9 +66,9 @@ const Braindetail = () => {
         w-full h-screen 
         sm:w-[390px] sm:h-[844px] "
         >
-          <source src="/video/brain_video/fact.webm" type="video/webm" />
-          <source src="/video/brain_video/fact.mp4" type="video/mp4" />
-          <source src="/video/brain_video/fact.mov" type="video/quicktime" />
+          <source src="/video/brain_video/Factopen.webm" type="video/webm" />
+          <source src="/video/brain_video/Factopen.mp4" type="video/mp4" />
+          <source src="/video/brain_video/Factopen.mov" type="video/quicktime" />
           Your browser does not support the video tag.
         </video>
 
@@ -82,9 +82,9 @@ const Braindetail = () => {
           className="absolute inset-0   w-full h-screen 
         sm:w-[390px] sm:h-[844px] invisible "
         >
-          <source src="/video/brain_video/factclose.webm" type="video/webm" />
-          <source src="/video/brain_video/factclose.mp4" type="video/mp4" />
-          <source src="/video/brain_video/factclose.mov" type="video/quicktime" />
+          <source src="/video/brain_video/Factcloses.webm" type="video/webm" />
+          <source src="/video/brain_video/Factcloses.mp4" type="video/mp4" />
+          <source src="/video/brain_video/Factcloses.mov" type="video/quicktime" />
           Your browser does not support the video tag.
         </video>
       </div>

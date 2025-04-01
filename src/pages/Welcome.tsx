@@ -66,12 +66,12 @@ useEffect(() => {
       >     
       
          {/* เพิ่มโลโก้ */}
-      {/* <div className="absolute top-14 left-1/2 transform -translate-x-1/2">
+      <div className="absolute top-14 left-1/2 transform -translate-x-1/2">
         <img 
-          src="/image/LOGO .png" // เปลี่ยนเป็น path ของโลโก้ของคุณ
-          className="w-32 h-33" // ปรับขนาดตามต้องการ
+          src="/image/cover/top.png" // เปลี่ยนเป็น path ของโลโก้ของคุณ
+          className="w-42 h-36" // ปรับขนาดตามต้องการ
         />
-      </div> */}
+      </div>
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
           <div className="w-full max-w-lg px-6 py-4 bg-opacity-70 rounded-lg ">
             <form onSubmit={handleSubmit} className="space-y-6">

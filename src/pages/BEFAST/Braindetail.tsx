@@ -44,7 +44,7 @@ const Braindetail = () => {
           secondVideoRef.current.style.opacity = "1";
           secondVideoRef.current.play();
         }
-      }, 500); // 500ms เท่ากับเวลา transition
+      }, 500); // 500ms เท่ากับเวลา transitionn
     }
   };
 

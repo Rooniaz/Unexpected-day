@@ -34,7 +34,7 @@ const Braindetail = () => {
       // ทำให้วิดีโอแรกจางลงอย่างนุ่มนวล
 
 
-      // รอให้วิดีโอแรกหายไป แล้วค่อยแสดงวิดีโอที่สอง
+      // รอให้วิดีโอแรกหายไป แล้วค่อยแสดงวิดีโอที่สองง
       setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.style.visibility = "hidden";

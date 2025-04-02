@@ -175,7 +175,7 @@ const AfterBefast = () => {
           <motion.img
             src="/image/hostpitalcar.gif"
             alt="ambulance"
-            className="absolute top-[55%] cursor-pointer z-20"             
+            className="absolute top-[54%] cursor-pointer z-20"             
             drag="x"
             dragConstraints={{ left: 0, right: trackWidth - 100 }}
             onDrag={(_event, info) => {
@@ -210,9 +210,9 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[62.5%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            className="absolute top-[63%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           >
-            <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg">
+            <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg pb-2">
               <span className="text-[#fa4901]">T</span>ime to Call{" "}
               <span className="text-[#fa4901]">1669</span>
             </div>

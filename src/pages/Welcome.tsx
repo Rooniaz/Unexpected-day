@@ -41,30 +41,35 @@ const Welcome: React.FC = () => {
 
   const { playAudio, pauseAudio } = useAudio();
 
-  useEffect(() => {
-    playAudio(); // เล่นเพลงต่อจากหน้า Warning
-    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-  }, []);
+useEffect(() => {
+  playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+  return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+}, []);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center">
       {/* เพิ่มพื้นหลังเป็น GIF */}
       <motion.div 
         initial="initial"
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className=" relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         style={{
           backgroundImage: "url('/image/bgbefast.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >        {/* เพิ่มโลโก้ */}
-      <div className="absolute top-14 left-1/2 transform -translate-x-1/2">
+      >     
+      
+         {/* เพิ่มโลโก้ */}
+      <div className="absolute top-12 left-1/2 transform -translate-x-1/2">
         <img 
-          src="/image/LOGO .png" // เปลี่ยนเป็น path ของโลโก้ของคุณ
-          className="w-32 h-33" // ปรับขนาดตามต้องการ
+          src="/image/cover/top.png" // เปลี่ยนเป็น path ของโลโก้ของคุณณ
+          className="w-60 h-50" // ปรับขนาดตามต้องการ
         />
       </div>
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
@@ -102,8 +107,8 @@ const Welcome: React.FC = () => {
                     if (value.length === 1 && value === "0") {
                       value = ""; // ถ้าเลขแรกเป็น 0 ให้ลบออก
                     }
-                    if (value.length > 3) {
-                      value = value.slice(0, 3); // จำกัดจำนวนหลักสูงสุดที่ 3 หลัก
+                    if (value.length > 2) {
+                      value = value.slice(0, 2); // จำกัดจำนวนหลักสูงสุดที่ 3 หลัก
                     }
 
                     setFormData({ ...formData, age: value });

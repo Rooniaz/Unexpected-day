@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-// import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-// import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText } from "../../components/AnimatedText";
 
 const StoryHomework3: React.FC = () => {
   const navigate = useNavigate();
   const storedName = localStorage.getItem("userName") || "???";
-  const videoRef = useRef<HTMLVideoElement>(null); // ใช้ ref เพื่อควบคุมวิดีโอ
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [index, setIndex] = useState(0);
+  const [bgColor, setBgColor] = useState("transparent");
+  const [showContinueText, setShowContinueText] = useState(false);
 
   const texts = [
     `เจน : ${storedName}!!!`,
-    `เจน : ${storedName}!!!*&$`,
+    `เจน : ${storedName}!!!`,
   ];
-
-  const [index, setIndex] = useState(0);
-  const [bgColor, setBgColor] = useState("transparent");
 
   const nextText = () => {
     setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
@@ -23,88 +21,101 @@ const StoryHomework3: React.FC = () => {
 
   const handlePicEnd = useCallback(() => {
     setBgColor("black");
-    nextText();
-    
-    // ✅ สั่นมือถือเมื่อวิดีโอจบ
-    if ("vibrate" in navigator) {
-      navigator.vibrate([200, 100, 200]); // สั่น 200ms หยุด 100ms สั่น 200ms
-    }
-  
-    setTimeout(() => navigate("/story/hospital"), 1000);
-  }, [navigate]);
-  
+    setShowContinueText(true); // แสดงข้อความ "แตะเพื่อไปต่อ"
+  }, []);
 
-  // ฟังก์ชันเริ่มเล่นวิดีโอเมื่อผู้ใช้แตะหน้าจอ
   const handleUserInteraction = () => {
     if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play().catch((err) => console.error("เล่นวิดีโอไม่สำเร็จ:", err));
     }
   };
 
-  const audioRef2 = useRef<HTMLAudioElement>(null); // heartbeat audio ref
-  
-  if (audioRef2.current) {
-      audioRef2.current.volume = 0.5;
-      audioRef2.current.playbackRate = 1; // เริ่มด้วยความเร็วปกติ
-
-      // หลัง 3 วินาที เพิ่มความเร็วเป็น 2 เท่า
-      setTimeout(() => {
-        if (audioRef2.current) {
-          audioRef2.current.playbackRate = 2;
-        }
-      }, 3000);
-
-      // หลังจากนั้นอีก 3 วินาที (รวม 6 วินาที) เพิ่มเป็น 3 เท่า
-      setTimeout(() => {
-        if (audioRef2.current) {
-          audioRef2.current.playbackRate = 3;
-        }
-      }, 4000);
+  const handleContinue = () => {
+    if (showContinueText) {
+      navigate("/story/hospital");
     }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      nextText();
+      if (bgColor !== "black") { // เรียก nextText เฉพาะเมื่อ bgColor ไม่ใช่สีดำ
+        nextText();
+      }
     }, 3000);
 
-    // ฟัง Event การแตะหน้าจอ
     window.addEventListener("touchstart", handleUserInteraction);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(interval); // ล้าง interval เมื่อ component unmount
       window.removeEventListener("touchstart", handleUserInteraction);
     };
-  }, []);
+  }, [bgColor]); // เพิ่ม bgColor เป็น dependency
 
+   const audioRef2 = useRef<HTMLAudioElement>(null);
+   const audioRef3 = useRef<HTMLAudioElement>(null);
+ 
+   if (audioRef2.current) {
+     audioRef2.current.volume = 0.5;
+     audioRef2.current.playbackRate = 1;
+ 
+     setTimeout(() => {
+       if (audioRef2.current) {
+         audioRef2.current.playbackRate = 1;
+       }
+     }, 3000);
+ 
+     setTimeout(() => {
+       if (audioRef2.current) {
+         audioRef2.current.playbackRate = 1;
+       }
+     }, 4000);
+ 
+     if (audioRef3.current) {
+       audioRef3.current.play().catch((error) => {
+         console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
+       });
+     }
+   }
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-                      {/* เพิ่มเพลงในหน้า */}
-                      <audio ref={audioRef2} src="/Sound/Sound fx/heart-beat-fast.mp3" autoPlay loop />
-
+      <audio ref={audioRef2} src="/Sound/Sound fx/Effect jane_and_friend2.m4a" autoPlay />
+      <audio ref={audioRef3} src="/Sound/Sound fx/Effect-ear-down.mp3" autoPlay />
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
-        // initial="initial"
-        // animate="animate"
-        // exit="exit"
-        // variants={fadeInOut(2, "easeInOut", 0)}
+        onClick={handleContinue} // ฟังก์ชันเมื่อผู้ใช้คลิกหรือแตะหน้าจอ
       >
-        <video
-          ref={videoRef} // อ้างอิงวิดีโอ
-          src="/video/blurStudy.mp4"
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          onEnded={handlePicEnd}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        />
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        onEnded={handlePicEnd}
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      >
+        <source src="/video/blurStudy.webm" type="video/webm" />
+        <source src="/video/blurStudy.mp4" type="video/mp4" />
+        <source src="/video/blurStudy.mov" type="video/quicktime" />
+        Your browser does not support the video tag.
+      </video>
 
-        <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-          <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <AnimatedText key={index} text={texts[index]} />
+        {/* ซ่อนข้อความเมื่อ bgColor เป็น "black" */}
+        {bgColor !== "black" && (
+          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+            <div className="px-6 py-4 bg-black/50 rounded-lg">
+              <AnimatedText key={index} text={texts[index]} className="text-white break-words"/>
+            </div>
           </div>
-        </div>
+        )}
+
+        {showContinueText && (
+          <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">
+            <div className="text-white text-xl animate-pulse">กดเพื่อไปต่อ</div>
+          </div>
+        )}
       </div>
     </div>
   );

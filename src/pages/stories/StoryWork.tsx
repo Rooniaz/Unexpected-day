@@ -13,7 +13,7 @@ const StoryWork: React.FC = () => {
   // ข้อความที่ต้องการแสดงในลำดับ (แทนที่ {ชื่อที่กรอก} ด้วยค่าจริง)
   const texts = [
     `เจน : ${storedName} ช่วงนี้ว่างมั้ย ไปฟิตเนสกัน`,
-    `${storedName} : ไม่อ่ะ ไม่ชอบเหงื่อเยอะ`,
+    `${storedName} : ไม่อะ ไม่ชอบเหงื่อเยอะ`,
     "เจน : หาเวลาออกกำลังกายบ้างเถอะเดี๋ยวป่วยนะ"
   ];
 
@@ -28,7 +28,7 @@ const StoryWork: React.FC = () => {
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
         setIsChanging(false); // เปิดให้สามารถคลิกเพื่อเปลี่ยนข้อความได้อีก
-      }, 500); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
+      }, 1500); // เพิ่มดีเลย์ที่ 500ms ก่อนจะเปลี่ยนข้อความ
     }
   };
 
@@ -54,12 +54,18 @@ const StoryWork: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
+      {/* Preload the background image and audio */}
+      <link rel="preload" href="/gif/15-17/office_15-17.gif" as="image" />
+      <link rel="preload" href="/Sound/Scene Working/Scene Working.mp3" as="audio" />
+      
       {/* เพิ่มเพลงในหน้า */}
       <audio ref={audioRef1} src="/Sound/Scene Working/Scene Working.mp3" autoPlay loop />
       
       {/* Mobile-sized container */}
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"
@@ -81,6 +87,7 @@ const StoryWork: React.FC = () => {
               <AnimatedText 
                 key={index} 
                 text={texts[index]} 
+                className="text-white break-words"
               />
             ) : (
               <AnimatedText2 

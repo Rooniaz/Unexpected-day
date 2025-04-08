@@ -39,15 +39,23 @@ const StoryCanteen: React.FC = () => {
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
         setIsChanging(false);
-      }, 500);
+      }, 1500); // เพิ่มการหน่วงเวลา 3 วินาที
     }
   };
 
+  // Preload Image and Audio
+  useEffect(() => {
+    const preloadImage = new Image();
+    preloadImage.src = "/gif/15-17/canteen_15-17.gif";
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-      <audio ref={audioRef1} src="/Sound/Scene Eating/Scene Eating.mp3" autoPlay loop />
+      <audio ref={audioRef1} src="/Sound/Scene Eating/Scene Eating.mp3" preload="auto" autoPlay loop />
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"
@@ -67,6 +75,7 @@ const StoryCanteen: React.FC = () => {
               <AnimatedText 
                 key={index} 
                 text={texts[index]} 
+                className="text-white break-words"
               />
             ) : (
               <AnimatedText2 

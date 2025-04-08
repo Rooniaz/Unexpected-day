@@ -10,65 +10,44 @@ const Warning: React.FC = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิด-ปิดเมนู
 
   useEffect(() => {
-    playAudio();
-    return () => pauseAudio();
+    playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
   }, []);
 
   return (
     <div
-      className="min-h-screen bg-black flex justify-center items-center p-4 relative"
+      className="min-h-screen bg-black flex justify-center items-center relative"
       onClick={() => navigate("/welcome")} // ✅ กดที่หน้าจอเพื่อไปต่อ
     >
       {/* ✅ เนื้อหาหลัก */}
-      <div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4 bg-white">
-        {/* ✅ ปุ่ม Hamburger Menu */}
-        {/* <motion.button
-          className="absolute top-4 left-4 text-black text-3xl"
-          onClick={(e) => {
-            e.stopPropagation(); // ป้องกันการคลิกที่ปุ่มแล้วไปหน้ายถัดไป
-            setIsMenuOpen(!isMenuOpen);
-          }}
-          whileTap={{ scale: 0.9 }}
-          animate={{ rotate: isMenuOpen ? 90 : 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        >
-          {isMenuOpen ? <FiX /> : <FiMenu />}
-        </motion.button> */}
-
-        {/* ✅ เมนูแสดงเมื่อกด Hamburger */}
-        {/* <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="absolute top-16 left-4 bg-gray-800 bg-opacity-80 text-white rounded-lg shadow-lg p-4 w-40 z-10"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()} // ป้องกันการกดเมนูแล้วไปหน้ายถัดไป
-            >
-              <ul className="text-left">
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>
-                  เกี่ยวกับ
-                </li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit")}>
-                  เครดิต
-                </li>
-                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Credit1")}>
-                  เครดิต1
-                </li>
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
-
+      <div className="
+        relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
+            style={{
+              backgroundImage: "url('/image/bgbefast.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >    
         {/* ✅ คำเตือนและข้อมูล */}
         <div className="w-full max-w-lg">
-          <p className="text-2xl font-custom mb-4 bg-yellow-300 text-black p-2">Trigger Warning!</p>
-          <p className="text-lg font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟคที่ละเอียดอ่อน </p>
-          <p className="text-lg font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
-          <p className="text-lg font-custom mb-8">
+              {/* ✅ คำเตือนและข้อมูล */}
+              <div className="w-full max-w-lg flex flex-col items-center text-center mb-16">
+          <p className="text-xl font-custom mb-4 bg-yellow-300 text-black p-2 rounded-2xl w-64">
+            Trigger Warning!
+          </p>
+          <p className="text-sm font-custom mb-4">เว็บไซต์นี้มีเสียงและเอฟเฟ็กต์ที่ละเอียดอ่อน</p>
+          <p className="text-sm font-custom mb-4">โปรดใช้วิจารณญาณในการเล่นเกมเว็บไซต์ของพวกเรา</p>
+          <p className="text-sm font-custom mb-8">
             ขอให้<span className="text-orange-500">ทุกคนโชคดีและมีสุขภาพที่แข็งแรงนะคะ</span> :)
           </p>
+        </div>
+
+          <div className="absolute inset-x-0 bottom-20% flex justify-center items-center">
+          <div className="text-[#817c7c] text-xl animate-pulse">กดเพื่อไปต่อ</div>
+        </div>
         </div>
       </div>
     </div>

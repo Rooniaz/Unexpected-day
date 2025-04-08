@@ -3,15 +3,16 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInOut } from "../../components/fadeInOut";
 import { AnimatedText2 } from "../../components/AnimatedText";
+// import { useAudio } from "../../contexts/AudioProvider"; 
 
 const Hospital1: React.FC = () => {
   const navigate = useNavigate();
-  const storedName = localStorage.getItem("userName") || "???";
+  // const storedName = localStorage.getItem("userName") || "???";
   const videoRef = useRef<HTMLVideoElement>(null); // ใช้ ref เพื่อควบคุมวิดีโอ
 
   const texts = [
-    `${storedName} : นี่เราร่างกายรู้สึกไม่ดีเลย`,
-    `${storedName} : มันเกิดอะไรขึ้น ทำไมเราถึงเป็นแบบนี้`,
+    `ตอนนี้คุณอยู่ที่โรงพยาบาล`,
+    `"คุณสัมผัสได้ถึงความผิดปกติในร่างกายของตัวเอง”`,
   ];
 
   const [index, setIndex] = useState(0);
@@ -37,7 +38,7 @@ const Hospital1: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextText();
-    }, 3000);
+    }, 5000);
 
     // ฟัง Event การแตะหน้าจอ
     window.addEventListener("touchstart", handleUserInteraction);
@@ -66,15 +67,24 @@ const Hospital1: React.FC = () => {
           // }
       }, []);
 
+  // const { playAudio, pauseAudio } = useAudio();
+
+  // useEffect(() => {
+  //   playAudio("/Sound/Hospital Sound/Sound Bg Hospital.mp3", 1); // กำหนด volume ที่ 50%
+  //   return () => pauseAudio();
+  // }, []);
+  
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
                                   {/* เพิ่มเพลงในหน้า */}
   <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Ambience.mp3" autoPlay loop />
-  <audio ref={audioRef2} src="/Sound/Hospital Sound/Sound Bg Hospital.mp3" autoPlay loop />
+  {/* <audio ref={audioRef2} src="/Sound/Hospital Sound/Sound Bg Hospital.mp3" autoPlay loop /> */}
   {/* <audio ref={audioRef3} src="/Sound/Hospital Sound/Hospital Busy Ambience Loop.mp3" autoPlay loop /> */}
                                   
       <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className=" relative justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         style={{ backgroundColor: bgColor }}
         initial="initial"
         animate="animate"
@@ -92,9 +102,9 @@ const Hospital1: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 
-        <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-          <div className="px-6 py-4 bg-black/50 rounded-lg">
-            <AnimatedText2 key={index} text={texts[index]} color="yellow"/>
+        <div className="absolute top-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+          <div className="px-6 py-4 rounded-lg break-words" >
+            <AnimatedText2 key={index} text={texts[index]} color="black"/>
           </div>
         </div>
       </motion.div>

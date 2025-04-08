@@ -45,16 +45,19 @@ import Afterdoctor from "../pages/stories5/AfterDoctor";
 import UnexpectedDayForm from "../pages/BEFAST/EndStory";
 
 import Aboutme from "../pages/credit/Aboutme";
-import Credit from "../pages/credit/Credit";
-// import Credit1 from "../pages/credit/credit1";
-import Credit1 from "../pages/credit/Credit1";
 import Allcredit from "../pages/credit/Allcredits";
+import Introduction from "../pages/credit/Introduction";
+import Preloader from "../pages/loading";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
 
-      <Route path="/" element={<Preface />} />
+      <Route path="/" element={<Preloader />} />
+      <Route path="/home" element={<Preface />} />
+
+      {/* <Route path="/" element={<Preface />} /> */}
+
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/warning" element={<Warning />} />
       <Route path="/prologue2" element={<Prologue2 />} />
@@ -113,9 +116,10 @@ const AppRoutes: React.FC = () => {
 
       {/*credit */}
       <Route path="/Aboutme" element={<Aboutme />} />
-      <Route path="/Credit" element={<Credit />} />
-      <Route path="/Credit1" element={<Credit1 />} />
       <Route path="/Allcredit" element={<Allcredit />} />
+      <Route path="/Introduction" element={<Introduction />} />
+
+
 
 
       <Route path="/UnexpectedDayForm" element={<UnexpectedDayForm />} />

@@ -14,6 +14,16 @@ const PlacePark: React.FC = () => {
     if (audioRef1.current) {
       audioRef1.current.volume = 0.5;
     }
+
+    // Preload images
+    const images = [
+      "/gif/22-25/Chill-blink.gif",
+      "/gif/Place/park.png"
+    ];
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
   const goToNext = () => {
@@ -23,14 +33,16 @@ const PlacePark: React.FC = () => {
 
     setTimeout(() => {
       navigate("/story/park");
-    }, 2000); // ปรับให้พอดีกับ GIF
+    }, 2000);
   };
 
   return (
     <div className="w-full min-h-screen bg-black flex justify-center items-center">
-            <audio ref={audioRef1} src="/Sound/Scene in park/Park Ambience.mp3" autoPlay loop />
-            <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+      <audio ref={audioRef1} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop preload="auto" />
+      <motion.div
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         initial="initial"
         animate="animate"
         exit="exit"
@@ -39,7 +51,6 @@ const PlacePark: React.FC = () => {
       >
         <AnimatePresence mode="wait">
           {showNextScene ? (
-            // GIF Transition (ซ้อนทับแบบ smooth)
             <motion.img
               key="gif"
               src="/gif/22-25/Chill-blink.gif"
@@ -63,26 +74,28 @@ const PlacePark: React.FC = () => {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               />
               <div className="absolute inset-0 bg-black/20"></div>
-
               <div className="absolute inset-0 flex justify-center items-center z-10">
                 <div className="px-6 py-4 rounded-lg">
-                  <AnimatedText text="ตอนนี้ฉันกำลังกินข้าวอยู่กับเจน" />
+                  <AnimatedText text="ตอนนี้คุณกำลังนั่งเล่นอยู่กับเจน" className="text-white "/>
                 </div>
               </div>
             </>
           )}
         </AnimatePresence>
 
-        {/* ป้องกันการคลิกซ้ำระหว่าง transition */}
         {!showNextScene && (
-          <div className="absolute bottom-[8%] right-6 text-white/80 text-2xl z-20">
-            {/* {'>>'} */}
-          </div>
+          <motion.div
+            className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 3 }}
+          >
+            <div className="text-white text-xl animate-pulse">กดเพื่อไปต่อ</div>
+          </motion.div>
         )}
       </motion.div>
     </div>
   );
 };
-
 
 export default PlacePark;

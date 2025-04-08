@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInOut } from "../../components/fadeInOut";
+import { useAudio } from "../../contexts/AudioProvider"; // ใช้ AudioProvider2
 
 const texts = [
-    "คุณกับเพื่อนคุยเรื่องราวอนาคต\nและสิ่งต่างๆที่อยากจะทำ",
-    "เจน : เรามีอะไรที่อยากจะทำเต็ม\nไปหมดเลยเนอะ",
+    "คุณกับเพื่อน คุยเรื่องราวอนาคต\nและสิ่งต่าง ๆ ที่อยากจะทำ",
+    "เจน : เรามีอะไรที่อยากจะทำ\nเต็มไปหมดเลยเนอะ",
     "เจน : เคยคิดไหมว่า ถ้าวันหนึ่งโอกาส\nในการทำสิ่งที่อยากทำหมดลงไป\nแกจะรู้สึกเสียดายไหม?",
     "คุณ :  . . . . . . . . . . . .",
     "ฉันจึงกลับมาคิดเรื่องนี้\nหลังจากจบบทสนทนาลง"
@@ -14,28 +15,33 @@ const texts = [
 const Prechapter: React.FC = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
+    const [isClickable, setIsClickable] = useState(false); // เพิ่มตัวแปร isClickable สำหรับการควบคุมการคลิก
     const [showNextPage, setShowNextPage] = useState(false);
-    const audioRef = useRef<HTMLAudioElement>(null); // อ้างอิงไปยัง audio element
-
-    // สร้าง ref สำหรับ audio element
-    // const audioRef1 = useRef<HTMLAudioElement>(null);
     const audioRef2 = useRef<HTMLAudioElement>(null);
     const audioRef3 = useRef<HTMLAudioElement>(null);
 
+    if (audioRef2.current) {
+        audioRef2.current.volume = 0.5;
+    }
+    if (audioRef3.current) {
+        audioRef3.current.volume = 0.3;
+    }
+
     useEffect(() => {
-        // ตั้งค่า volume หลังจาก component mount
-        // if (audioRef1.current) {
-        //     audioRef1.current.volume = 0.2;
-        // }
-        if (audioRef2.current) {
-            audioRef2.current.volume = 1.0;
+        // ตั้งเวลาให้คลิกได้หลังจาก 3 วินาที
+        if (index < texts.length) {
+            setIsClickable(false); // ไม่ให้คลิกตอนแรก
+            const timer = setTimeout(() => {
+                setIsClickable(true); // เปิดให้คลิกหลังจาก 3 วินาที
+            }, 1500); // หน่วงเวลา 3 วินาที
+
+            return () => clearTimeout(timer);
         }
-        if (audioRef3.current) {
-            audioRef3.current.volume = 1.0;
-        }
-    }, []);
+    }, [index]);
 
     const nextText = () => {
+        if (!isClickable) return; // หากยังคลิกไม่ได้ ให้หยุดการทำงาน
+
         if (index < texts.length - 1) {
             setIndex(index + 1);
         } else {
@@ -45,9 +51,9 @@ const Prechapter: React.FC = () => {
 
     const backgroundGif = () => {
         switch (texts[index]) {
-            case "คุณกับเพื่อนคุยเรื่องราวอนาคต\nและสิ่งต่างๆที่อยากจะทำ":
+            case "คุณกับเพื่อน คุยเรื่องราวอนาคต\nและสิ่งต่าง ๆ ที่อยากจะทำ":
                 return "/gif/8.gif";
-            case "เจน : เรามีอะไรที่อยากจะทำเต็ม\nไปหมดเลยเนอะ":
+            case "เจน : เรามีอะไรที่อยากจะทำ\nเต็มไปหมดเลยเนอะ":
                 return "/gif/9.gif";
             case "เจน : เคยคิดไหมว่า ถ้าวันหนึ่งโอกาส\nในการทำสิ่งที่อยากทำหมดลงไป\nแกจะรู้สึกเสียดายไหม?":
                 return "/gif/10.gif";
@@ -68,29 +74,39 @@ const Prechapter: React.FC = () => {
 
     useEffect(() => {
         // เริ่มเล่นเสียงเมื่อหน้าโหลด
-        if (audioRef.current) {
-            audioRef.current.play().catch((error) => {
+        if (audioRef2.current) {
+            audioRef2.current.play().catch((error) => {
+                console.log("ไม่สามารถเล่นเสียงได้:", error);
+            });
+        }
+        if (audioRef3.current) {
+            audioRef3.current.play().catch((error) => {
                 console.log("ไม่สามารถเล่นเสียงได้:", error);
             });
         }
     }, []);
 
+    const { playAudio, pauseAudio } = useAudio();
+
+    useEffect(() => {
+        playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+        return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
+    }, []);
+
     return (
         <div className="w-full min-h-screen bg-black flex justify-center items-center">
-          {/* เพิ่มเพลงในหน้า พร้อม ref สำหรับการตั้งค่า volume */}
-          {/* <audio ref={audioRef1} src="/Sound/Scene Start/Group of People walking.mp3" autoPlay loop /> */}
-          <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop />
-          <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
+            {/* <audio ref={audioRef2} src="/Sound/Scene Start/Start & End.mp3" autoPlay loop /> */}
+            <audio ref={audioRef3} src="/Sound/Scene in park/Park Ambience Sound.mp3" autoPlay loop />
             <motion.div 
-                className="relative w-[390px] h-[844px] overflow-hidden"
+                className=" relative flex justify-center items-center 
+                w-full h-screen 
+                sm:w-[390px] sm:h-[844px]"                
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                variants={fadeInOut(2, "easeInOut", 0)}
+                variants={fadeInOut(3, "easeInOut", 0)}
                 onClick={showNextPage ? undefined : nextText}
             >
-                {/* <audio ref={audioRef} src="/Sound/Scene Start/Park Ambience.mp3" loop autoPlay />  */}
-
                 {showNextPage ? (
                     <motion.div 
                         className="absolute inset-0 flex justify-center items-center bg-gradient-to-b from-gray-300 to-white"
@@ -102,7 +118,7 @@ const Prechapter: React.FC = () => {
                             className="text-2xl text-[#fa4901] "
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.0 }}
                         >
                             วันต่อมา
                         </motion.p>
@@ -117,7 +133,7 @@ const Prechapter: React.FC = () => {
 
                 <div className="absolute inset-0 bg-black/30"></div>
 
-                <div className="absolute inset-0 flex flex-col justify-start items-center z-10 px-4 pt-36 ">
+                <div className="absolute inset-0 flex flex-col justify-start items-center z-10 px-4 pt-36">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
@@ -126,7 +142,8 @@ const Prechapter: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.8 }}
-                            style={{ display: showNextPage ? 'none' : 'block', whiteSpace: 'pre-line' }}                        >
+                            style={{ display: showNextPage ? 'none' : 'block', whiteSpace: 'pre-line' }}
+                        >
                             {texts[index]}
                         </motion.p>
                     </AnimatePresence>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { AnimatedText, AnimatedText3 } from "../../components/AnimatedText";
-// import { useAudio } from "../../contexts/AudioProvider";
+import { motion, AnimatePresence } from "framer-motion";
+import { useAudio } from "../../contexts/AudioProvider";
 
 const FriendBrain: React.FC = () => {
   const navigate = useNavigate();
 
   const texts = [
-    `ซึ่งเพื่อนคุณสังเกตอาการ`,
-    `ของโรคหลอดเลือดสมองจาก...`,
+    "ซึ่งเพื่อนคุณสังเกตอาการ",
+    "ของโรคหลอดเลือดสมองจาก",
   ];
 
   const [visibleTexts, setVisibleTexts] = useState<string[]>([]);
@@ -19,33 +19,19 @@ const FriendBrain: React.FC = () => {
     if (visibleTexts.length < texts.length) {
       setTimeout(() => {
         setVisibleTexts((prev) => [...prev, texts[prev.length]]);
-      }, 500 * visibleTexts.length);
+      }, 1000); // กำหนดเวลา 3 วินาทีสำหรับแต่ละข้อความ
     }
   }, [visibleTexts.length, texts]);
-
-  // แยกข้อความปกติและข้อความที่ต้องเน้น
-  const splitText = (text: string) => {
-    const parts = text.split(/(สังเกตอาการ|โรคหลอดเลือด)/g); // แยกคำที่ต้องการเน้น
-    return parts.map((part, index) =>
-      part.match(/สังเกตอาการ|โรคหลอดเลือด/) ? (
-        <AnimatedText3 key={index} text={part} />
-      ) : (
-        <AnimatedText key={index} text={part} />
-      )
-    );
-  };
 
   const handleVideoEnd = useCallback(() => {
     setBgColor("black");
     setTimeout(() => {
       setIsClickable(true);
-    }, 2000);
+    }, 1000);
   }, []);
 
   const handleClick = () => {
-    if (isClickable && visibleTexts.length === texts.length) {
       navigate("/GuideBefast");
-    }
   };
 
   useEffect(() => {
@@ -56,34 +42,29 @@ const FriendBrain: React.FC = () => {
         clearInterval(interval);
         handleVideoEnd();
       }
-    }, 3000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [visibleTexts.length, showNextText, handleVideoEnd]);
 
-  // const { playAudio, pauseAudio } = useAudio();
-
-  // useEffect(() => {
-  //   playAudio();
-  //   return () => pauseAudio();
-  // }, []);
-
-  const audioRef1 = useRef<HTMLAudioElement>(null);
-
+  const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    // ตั้งค่า volume หลังจาก component mount
-    if (audioRef1.current) {
-        audioRef1.current.volume = 1
-    }
-}, []);
+    playAudio("/Sound/Sound fx/Scene BEFAST.mp3", 0.2);
+    return () => pauseAudio();
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
-        style={{ backgroundColor: bgColor }}
+        className={`relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden ${isClickable ? "cursor-pointer" : ""}`}
+        style={{ backgroundColor: bgColor ,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
         onClick={handleClick}
       >
         <img
@@ -94,11 +75,20 @@ const FriendBrain: React.FC = () => {
 
         <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
           <div className="rounded-lg flex flex-col items-center space-y-6">
-            {visibleTexts.map((text, index) => (
-              <div key={index} className="flex flex-wrap justify-center">
-                {splitText(text)}
-              </div>
-            ))}
+            <AnimatePresence>
+              {visibleTexts.map((text, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5, delay: index * 0.5 }}
+                  className="flex flex-wrap justify-center text-white text-2xl"
+                >
+                  {text}
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </div>

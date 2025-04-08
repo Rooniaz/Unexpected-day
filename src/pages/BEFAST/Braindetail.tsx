@@ -1,126 +1,93 @@
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { fadeInOut } from "../../components/fadeInOut";
-import { useEffect, useState, useRef } from "react";
-// import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
+import { useEffect, useRef, useState } from "react";
+import { useAudio } from "../../contexts/AudioProvider";
 
 const Braindetail = () => {
   const navigate = useNavigate();
-  const [animationComplete, setAnimationComplete] = useState(false);
-
-  // const { playAudio, pauseAudio } = useAudio();
-
-  // useEffect(() => {
-  //   playAudio(); // เล่นเพลงต่อจากหน้า Warning
-  //   return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
-  // }, []);
-
-  // เริ่มนับถอยหลังหลังจากแอนิเมชันเสร็จสิ้น
-  useEffect(() => {
-    if (animationComplete) {
-      const timer = setTimeout(() => {
-        navigate("/Friendbrain");
-      }, 5000); // 5 วินาทีหลังจากข้อความแสดงเสร็จ
-
-      return () => clearTimeout(timer);
-    }
-  }, [animationComplete, navigate]);
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.5,  // ให้ข้อความตัวแดงขึ้นก่อน
-        duration: 0.8,
-      },
-    },
-  };
-
-  const subtitleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1,  // ให้ข้อความสีขาวขึ้นหลังจากตัวแดง
-        duration: 0.8,
-      },
-    },
-  };
-
-  // สร้าง ref สำหรับ audio element
-  const audioRef1 = useRef<HTMLAudioElement>(null);
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [isSecondVideoPlaying, setIsSecondVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const secondVideoRef = useRef<HTMLVideoElement>(null);
+  const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    // ตั้งค่า volume หลังจาก component mount
-    if (audioRef1.current) {
-        audioRef1.current.volume = 1
+    playAudio("/Sound/Sound fx/Scene BEFAST.mp3", 0.2);
+    return () => pauseAudio();
+  }, []);
+
+  const handlePicEnd = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = videoRef.current.duration;
     }
-}, []);
+    setVideoEnded(true);
+  };
+
+  const handleSecondPicEnd = () => {
+    navigate("/Friendbrain");
+  };
+
+  const handleClick = () => {
+    if (videoEnded && !isSecondVideoPlaying && secondVideoRef.current) {
+      setIsSecondVideoPlaying(true);
+
+      // ทำให้วิดีโอแรกจางลงอย่างนุ่มนวล
+
+
+      // รอให้วิดีโอแรกหายไป แล้วค่อยแสดงวิดีโอที่สองง
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.style.visibility = "hidden";
+        }
+        if (secondVideoRef.current) {
+          secondVideoRef.current.style.visibility = "visible";
+          secondVideoRef.current.style.opacity = "1";
+          secondVideoRef.current.play();
+        }
+      }, 500); // 500ms เท่ากับเวลา transitionn
+    }
+  };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black">
-        <audio ref={audioRef1} src="/Sound/Sound fx/Scene BEFAST.mp3" autoPlay loop />
-      <motion.div
-        className="relative w-[390px] h-[844px] overflow-hidden"
-        style={{ backgroundColor: 'black' }}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={fadeInOut(2, "easeInOut", 0)}
-      >
-        <img
-          src="/gif/43-45/brain.png"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+    <div className="w-full min-h-screen flex justify-center items-center bg-black" onClick={handleClick}>
+      <div className=" relative justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden">
 
-        <motion.div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80%] z-20"
-          initial="hidden"
-          animate="visible"
-          onAnimationComplete={() => setAnimationComplete(true)} // ตรวจจับเมื่อแอนิเมชันจบ
+        {/* วิดีโอแรก */}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          onEnded={handlePicEnd}
+          className="absolute inset-0 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] "
         >
-          <motion.h1
-            className="font-custom font-bold text-[#FF4500] text-4xl text-left mb-1.5"
-            variants={titleVariants}
-          >
-            โรค<br />
-            หลอดเลือดสมอง<br />
-            เฉียบพลัน
-          </motion.h1>
+          <source src="/video/brain_video/Factopen.webm" type="video/webm" />
+          <source src="/video/brain_video/Factopen.mp4" type="video/mp4" />
+          <source src="/video/brain_video/Factopen.mov" type="video/quicktime" />
+          Your browser does not support the video tag.
+        </video>
 
-          <motion.p
-            className="font-light text-white text-lg text-left mt-8"
-            variants={subtitleVariants}
-          >
-            <div className="flex flex-col-reverse ...">
-              <span className="font-bold">
-                คือ ภาวะที่เกิดจากการที่สมองขาดเลือด <br />
-                หรือออกซิเจนอย่างเฉียบพลัน
-              </span>
-            </div>
-
-            {/* ใช้ flex และ align-items: stretch เพื่อให้เส้นยาวเท่ากับข้อความ */}
-            <div className="flex pt-3">
-              <div className="border-l-4 border-[#FF4500] mr-3"></div>
-              <div>
-                ประเทศไทยมีจำนวนผู้ป่วยโรคหลอด
-                เลือดสมองมากขึ้นทุกปี และคร่าชีวิต
-                ประชากรไทยมากถึง 50,000 คนต่อปี
-                หรือเฉลี่ยชั่วโมงละ 6 คน
-              </div>
-            </div>
-
-            <div className="pt-3">
-              เป็นสาเหตุหลักของการเสียชีวิตอันดับ
-              ต้นๆ ในประเทศไทย
-            </div>
-          </motion.p>
-        </motion.div>
-      </motion.div>
+        {/* วิดีโอที่สอง (ซ่อนไว้ก่อน) */}
+        <video
+          ref={secondVideoRef}
+          muted
+          playsInline
+          preload="auto"
+          onEnded={handleSecondPicEnd}
+          className="absolute inset-0   w-full h-screen 
+        sm:w-[390px] sm:h-[844px] invisible "
+        >
+          <source src="/video/brain_video/Factcloses.webm" type="video/webm" />
+          <source src="/video/brain_video/Factcloses.mp4" type="video/mp4" />
+          <source src="/video/brain_video/Factcloses.mov" type="video/quicktime" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   );
 };

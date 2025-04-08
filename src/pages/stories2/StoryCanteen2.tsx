@@ -17,9 +17,9 @@ const StoryCanteen2: React.FC = () => {
     `${storedName} : อ.. เอ่ออ`, // สีเหลือง
     `เจน : ${storedName} จะไปหรือยัง`, // Show TextBox หลังจากนี้
     `${storedName} : อ..อะ %^&8#`, // สีเหลือง
-    "เจน : พูดอะไรอ่ะ",
-    "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!",
-    "เจน : อะ อึกอ่วย อะอ้ำพเึพ้อร",
+    "เจน : พูดอะไรอะ",
+    "เจน : เห้ย!! ทำไมแกปากเบี้ยวอะ ไม่แกล้งดิ!",
+    `${storedName} : อ..อะ อั่ก เหิกก..`,
   ];
 
   useEffect(() => {
@@ -50,25 +50,51 @@ const StoryCanteen2: React.FC = () => {
       setShowTextBox(false); // ปิด Textbox
       setIsLocked(true); // ล็อกคลิก
       setIndex((prev) => prev + 1); // ไปข้อความถัดไป
-    }, 500); // 2 วินาที
+    }, 4000); // 2 วินาที
 
     setTypingTimeout(newTimeout);
   };
 
   const nextText = () => {
-    if (!isClickable || showTextBox || isLocked) return;
+    if (showTextBox || isLocked) return;
   
+    // กรณีที่คลิกไปข้อความถัดไป
     if (index < texts.length - 1) {
       if (index === 2) {
         setShowTextBox(true);  // ตั้งค่าให้แสดง TextBox เมื่อ index = 2
       } else {
         setIndex((prev) => prev + 1);
       }
+  
+      // ตั้งค่าการล็อกคลิกหลังจากแสดงข้อความ
+      setIsLocked(true);
+  
+      // หลังจาก 3 วินาทีให้ปลดล็อกการคลิก
+      setTimeout(() => {
+        setIsLocked(false); // เปิดให้กดได้หลังจากหน่วงเวลา
+      }, 1500);
     } else {
       navigate("/StoryCanteen3");
     }
   };
   
+  useEffect(() => {
+    // เมื่อเริ่มข้อความใหม่ ให้หน่วงเวลา 3 วินาทีจากนั้นสามารถคลิกได้
+    if (index === 0) {
+      setIsLocked(true); // เริ่มล็อกคลิกตั้งแต่ข้อความแรก
+      setTimeout(() => {
+        setIsLocked(false); // เปิดให้กดไปข้อความถัดไปหลังจาก 3 วินาที
+      }, 3000);
+    } else if (index > 0 && !isLocked) {
+      setIsLocked(true);
+      setTimeout(() => {
+        setIsLocked(false); // เปิดให้กดไปข้อความถัดไปหลังจากหน่วงเวลา
+      }, 3000);
+    }
+  }, [index]);
+  
+
+
   const backgroundGif = () => {
     if (index >= 4) {
       return "/gif/26-27/canteen.gif";
@@ -79,6 +105,8 @@ const StoryCanteen2: React.FC = () => {
   const audioRef2 = useRef<HTMLAudioElement>(null);
   const audioRef3 = useRef<HTMLAudioElement>(null);
   const audioRef4 = useRef<HTMLAudioElement>(null);
+  const audioRef5 = useRef<HTMLAudioElement>(null); // เพิ่มเสียงใหม่
+
 
 
 
@@ -101,34 +129,50 @@ const StoryCanteen2: React.FC = () => {
     if (audioRef3.current) {
       audioRef3.current.volume = 0.5;
     }
+
+    if (audioRef4.current) {
+      audioRef4.current.volume = 0.5;
+    }
+    if (audioRef5.current) {
+      audioRef5.current.volume = 0.3;
+    }
   }
 
     // การเล่นเพลงใหม่เมื่อถึงข้อความที่ต้องการ
+
     useEffect(() => {
       if (index === 0) {
         // หยุดเสียง 4 ทันทีที่เริ่มข้อความแรก
         if (audioRef4.current) {
           audioRef4.current.pause();
-          audioRef4.current.currentTime = 0; // รีเซ็ตเสียงกลับไปจุดเริ่มต้น
+          audioRef4.current.currentTime = 0;
         }
       }
     
-      if (index === 3) { // เมื่อถึงข้อความ "เจน : เห้ย!! ทำไมแกปากเบี้ยวอ่ะ ไม่แกล้งดิ!"
+      if (index === 3) { // เมื่อถึงข้อความ "เจน : เห้ย!! ทำไมแกปากเบี้ยวอะ ไม่แกล้งดิ!"
         if (audioRef2.current) {
           audioRef2.current.pause();
         }
         if (audioRef3.current) {
           audioRef3.current.pause();
         }
-    
-        // เล่นเสียงใหม่
         if (audioRef4.current) {
           audioRef4.current.play().catch((error) => {
             console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
           });
         }
       }
+    
+      if (index === 3 || index === 6) { // เล่นเสียงใหม่ที่บรรทัด 4 และ 7
+        if (audioRef5.current) {
+          audioRef5.current.play().catch((error) => {
+            console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
+          });
+        }
+      }
+    
     }, [index]);
+    
     
 
   return (
@@ -140,9 +184,12 @@ const StoryCanteen2: React.FC = () => {
         loop
       />
       <audio ref={audioRef3} src="/Sound/Sound fx/heart-beat-nol.mp3" autoPlay loop />
-      <audio ref={audioRef4} src="/Sound/Sound fx/Effect jane_and_friend.mp3" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
+      <audio ref={audioRef4} src="/Sound/Sound fx/heart-beat-friend.m4a" autoPlay loop /> {/* เพลงใหม่ที่ต้องการเล่น */}
+      <audio ref={audioRef5} src="/Sound/Sound fx/EEFECT-STROKE-HELP.mp3"  />
       <div
-        className="relative w-[390px] h-[844px] overflow-hidden"
+        className="relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
         onClick={!showTextBox && isClickable && !isLocked ? nextText : undefined}
       >
         <img
@@ -162,7 +209,8 @@ const StoryCanteen2: React.FC = () => {
           // แสดงข้อความปกติ
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
-              <AnimatedText key={index} text={texts[index]} />
+              <AnimatedText key={index} text={texts[index]} className="text-white break-words"
+ />
             </div>
           </div>
         )) : (

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../contexts/AudioProvider";
@@ -8,25 +7,36 @@ import { motion, AnimatePresence } from "framer-motion"; // เพิ่ม anim
 const Preface: React.FC = () => {
   const navigate = useNavigate();
   const { playAudio, pauseAudio } = useAudio();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // สถานะเปิด-ปิดเมนู
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    playAudio();
+    playAudio("/Sound/Scene Start/Start & End.mp3", 0.2);
     return () => pauseAudio();
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex justify-center items-center p-4 relative">
+    <div className="min-h-screen bg-black flex justify-center items-center relative">
       
-      {/* ✅ เนื้อหาหลัก */}
-      <div className="relative w-[390px] h-[844px] flex justify-center items-center text-center p-4" style={{ backgroundColor: "black" }}>
+      <div className="
+        relative flex justify-center items-center 
+        w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
+        style={{
+          backgroundImage: "url('/image/cover/cover.gif')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+
+   
         {/* ✅ ปุ่ม Hamburger Menu */}
         <motion.button
-          className="absolute top-4 left-4 text-white text-3xl"
+          className="absolute top-4 left-4 text-black text-3xl z-50"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          whileTap={{ scale: 0.9 }} // คลิกแล้วมีเอฟเฟกต์หดลงเล็กน้อย
-          animate={{ rotate: isMenuOpen ? 90 : 0 }} // หมุนตอนเปลี่ยนไอคอน
-          transition={{ type: "spring", stiffness: 260, damping: 20 }} // ให้มีความเด้งสมูท
+          whileTap={{ scale: 0.9 }}
+          animate={{ rotate: isMenuOpen ? 90 : 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
         >
           {isMenuOpen ? <FiX /> : <FiMenu />}
         </motion.button>
@@ -35,34 +45,37 @@ const Preface: React.FC = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-            className="absolute top-12 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-41 z-10"
-            initial={{ opacity: 0, x: -50 }} // เริ่มจากความโปร่งใส 0 และขยับมาจากซ้าย
-              animate={{ opacity: 1, x: 0 }} // แสดงเมนูด้วย fade-in และ slide-in
-              exit={{ opacity: 0, x: -50 }} // ซ่อนเมนูกลับไปทางซ้าย
-              transition={{ duration: 0.3 }} // ตั้งเวลาการเปลี่ยนแปลง
+              className="absolute top-12 left-4 bg-gray-800 bg-opacity-70 text-white rounded-lg shadow-lg p-4 w-41 z-10"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
             >
               <ul className="text-left">
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Aboutme")}>
-                  เกี่ยวกับงาน & เครดิต
+                  About Us
+                </li>
+                <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/IntroDuction")}>
+                  Introduction
                 </li>
                 <li className="py-2 cursor-pointer hover:bg-gray-700 rounded px-2" onClick={() => navigate("/Allcredit")}>
-                ดูผลงานอื่นๆเพิ่มเติม
+                  Lab Stroke
                 </li>
+
               </ul>
             </motion.div>
           )}
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-          <h1 className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Unexpected</h1>
-          <p className="text-5xl font-bold mb-4 text-[#fa4901] font-custom">Day</p>
-          <p className="text-2xl mt-14 text-white font-custom">การเผชิญกับโรคหลอด</p>
-          <p className="text-2xl mb-8 text-white font-custom" >เลือดสมองแบบเฉียบพลัน</p>
+          <img src="/image/cover/top.png" className="absolute top-[-40px] right-2 w-32 h-36" />
+          <img src="/image/cover/header.png" className="absolute top-[-25px] w-full" />
           <button
             onClick={() => navigate("/warning")}
-            className="mt-8 px-6 py-2 bg-black text-white rounded hover:bg-gray-800 font-custom"
+            className="absolute right-4  sm:right-4 top-[55%] sm:top-[56%] h-12 w-36 sm:w-40 sm:h-12 cursor-pointer hover:opacity-80 bg-[#b7bdc2] rounded-3xl drop-shadow-xl"
+            style={{ backgroundColor: 'rgba(183, 189, 194, 0.55)' }}
           >
-            ถัดไป {'>>'}
+            <p className="text-white text-lg sm:text-xl">เริ่มต้น</p>
           </button>
         </div>
       </div>

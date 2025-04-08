@@ -1,49 +1,64 @@
 import React, { createContext, useContext, useEffect, useRef, useState, ReactNode } from 'react';
 
 interface AudioContextType {
-  playAudio: () => void;
+  playAudio: (track: string, volume?: number) => void; // เพิ่ม volume เป็น optional
   pauseAudio: () => void;
   isPlaying: boolean;
   currentTime: number;
   setCurrentTime: (time: number) => void;
+  currentTrack: string;
 }
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const audioRef = useRef<HTMLAudioElement>(new Audio('/Sound/Scene Start/Start & End.mp3'));
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState<string | null>(null);
+  const [currentVolume, setCurrentVolume] = useState(0.3); // เริ่มต้นที่ 30%
 
   useEffect(() => {
-    const audio = audioRef.current;
-    audio.volume = 0.2;
-    audio.loop = true;
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.volume = currentVolume;
+      audioRef.current.loop = true;
 
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-
-    return () => {
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-    };
+      audioRef.current.addEventListener('play', () => setIsPlaying(true));
+      audioRef.current.addEventListener('pause', () => setIsPlaying(false));
+    }
   }, []);
 
   useEffect(() => {
-    audioRef.current.currentTime = currentTime; // เล่นต่อจากเวลาที่ค้างไว้
-  }, [currentTime]);
+    if (audioRef.current && currentTrack) {
+      audioRef.current.src = currentTrack;
+      audioRef.current.currentTime = currentTime;
+      audioRef.current.volume = currentVolume; // ตั้งค่า volume ตามค่าที่กำหนด
+      audioRef.current.play();
+    }
+  }, [currentTrack, currentVolume]);
 
-  const playAudio = () => audioRef.current.play();
+  const playAudio = (track: string, volume: number = 0.3) => {
+    if (audioRef.current) {
+      if (currentTrack !== track) {
+        setCurrentTrack(track);
+        setCurrentTime(0); // รีเซ็ตเวลาเมื่อเปลี่ยนเพลงง
+      } else {
+        audioRef.current.play();
+      }
+      setCurrentVolume(volume); // อัปเดต volume ใหม่
+    }
+  };
+
   const pauseAudio = () => {
-    setCurrentTime(audioRef.current.currentTime); // เก็บเวลาปัจจุบันก่อนหยุด
-    audioRef.current.pause();
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime); // บันทึกเวลาปัจจุบันน
+      audioRef.current.pause();
+    }
   };
 
   return (
-    <AudioContext.Provider value={{ playAudio, pauseAudio, isPlaying, currentTime, setCurrentTime }}>
+    <AudioContext.Provider value={{ playAudio, pauseAudio, isPlaying, currentTime, setCurrentTime, currentTrack: currentTrack || '' }}>
       {children}
     </AudioContext.Provider>
   );

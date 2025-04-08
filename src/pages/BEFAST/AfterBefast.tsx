@@ -11,6 +11,8 @@ const AfterBefast = () => {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [trackWidth, setTrackWidth] = useState(0);
   const navigate = useNavigate();
+  const [isAutoMoveComplete, setIsAutoMoveComplete] = useState(false);
+
 
   const handleDragEnd = () => {
     if (sliderValue < maxSliderValue) {
@@ -42,6 +44,7 @@ const AfterBefast = () => {
         setSliderValue((prevValue) => {
           if (prevValue >= maxSliderValue) {
             clearInterval(autoMove);
+            setIsAutoMoveComplete(true); // เพิ่มบรรทัดนี้
             return maxSliderValue;
           }
           return prevValue + 5; // เปลี่ยนจาก 100 เป็น 5 เพื่อให้เลื่อนช้าลง
@@ -65,7 +68,7 @@ const AfterBefast = () => {
         setShowMessage(true);
         setTimeout(() => {
           navigate("/TimeToCall");
-        }, 3000);
+        }, 5000);
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -96,17 +99,25 @@ const AfterBefast = () => {
       className="w-full min-h-screen flex justify-center items-center bg-black"
     >
         <audio ref={audioRef1} src="/Sound/Sound fx/Effect Rush-Time-BEFAST.mp3" autoPlay loop />
-      <motion.div className="relative w-[390px] h-[844px] bg-gray-300 overflow-hidden flex flex-col justify-center items-center">
+        <motion.div
+  className="relative flex justify-center items-center w-full h-screen 
+             sm:w-[390px] sm:h-[844px] overflow-hidden flex-col"
+  style={{
+    backgroundImage: "url('/image/BgAfterbefast.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
         
         {showMessage && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[30%] left-1/2 transform -translate-x-1/2 text-center"
+            className="absolute top-[50%] left-1/2 transform -translate-x-1/2 text-center"
           >
-            <div className="bg-opacity-80 text-[#FFFFFF] text-4xl font-bold px-6 py-2 rounded-lg" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-              ส่งให้ทันภายใน 4.30 ชม.
+            <div className="bg-opacity-80 text-[#fa4901] text-2xl px-6 py-2 rounded-lg whitespace-nowrap" style={{ textShadow: '1px 0px 0px rgba(0, 0, 0, 0.5)' }}>
+            ส่งให้ทันภายใน 4.30 ชม.
             </div>
           </motion.div>
         )}
@@ -122,14 +133,49 @@ const AfterBefast = () => {
           />
         )}
 
-        {/* เพิ่มความกว้างของ track จาก 450px เป็น 550px */}
-        <div ref={trackRef} className="absolute top-[60%] w-[550px] h-12 bg-[#708090] rounded"></div>
+<div 
+  ref={trackRef} 
+  className="absolute top-[60%] w-[550px] h-12 bg-[#565656] rounded flex items-center pb-3"
+>
+<motion.div
+    className={`absolute left-[10%] text-[#9aa0a6] text-5xl px-6 py-2 rounded-lg z-20 ${
+      sliderValue >= 100 || isAutoMoveComplete  ? "hidden" : ""
+    }`}
+    animate={{ x: 60, opacity: 0 }}
+    initial={{ x: 0, opacity: 1 }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    {" >> "}
+  </motion.div>
+  
+  <motion.div
+    className={`absolute left-[60%] text-[#9aa0a6] text-5xl px-6 py-2 rounded-lg z-20 ${
+      sliderValue >= 100 || isAutoMoveComplete  ? "hidden" : ""
+    }`}
+    animate={{ x: 60, opacity: 0 }}
+    initial={{ x: 0, opacity: 1 }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    {" >> "}
+  </motion.div>
+
+  <motion.div
+    className={`absolute left-[40%] text-[#9aa0a6] text-5xl px-6 py-2 rounded-lg z-20 ${
+      sliderValue >= 100 || isAutoMoveComplete  ? "hidden" : ""
+    }`}
+    animate={{ x: 60, opacity: 0 }}
+    initial={{ x: 0, opacity: 1 }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+  >
+    {" >> "}
+  </motion.div>
+</div>
 
         {trackWidth > 0 && (
           <motion.img
             src="/image/hostpitalcar.gif"
             alt="ambulance"
-            className="absolute top-[55%] cursor-pointer z-10"             
+            className="absolute top-[54%] cursor-pointer z-20"             
             drag="x"
             dragConstraints={{ left: 0, right: trackWidth - 100 }}
             onDrag={(_event, info) => {
@@ -164,21 +210,26 @@ const AfterBefast = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute top-[62.5%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            className="absolute top-[63%] left-[50%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           >
-            <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg">
+            <div className="bg-opacity-50 text-white text-3xl font-bold px-6 py-2 rounded-lg pb-2">
               <span className="text-[#fa4901]">T</span>ime to Call{" "}
               <span className="text-[#fa4901]">1669</span>
             </div>
           </motion.div>
         )}
-        <div className="bg-opacity-80 absolute top-[67%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center" >
-        เร็วเข้า!
-          {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
-        </div>
-        <div className="bg-opacity-80 absolute top-[71%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center" >
-        รีบเลื่อนรถเพื่อส่งโรงพยาบาล!
-          {/* <img src="" alt="GIF" className="ml-2 w-8 h-8" /> */}
+        {!showMessage && (
+          <>
+            <div className="bg-opacity-80 absolute top-[46%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse">
+              เร็วเข้า!
+            </div>
+            <div className="bg-opacity-80 absolute top-[50%] text-[#fa4901] text-xl px-6 py-2 rounded-lg flex items-center animate-pulse">
+            “เลื่อนรถ” เพื่อส่งโรงพยาบาล            
+            </div>
+          </>
+        )}
+        <div className="relative w-full h-[200px]">
+
         </div>
         {sliderValue < maxSliderValue && (
           <div className="absolute top-[20%] text-white text-4xl font-bold">

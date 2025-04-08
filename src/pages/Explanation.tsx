@@ -10,8 +10,8 @@ const Explanation: React.FC = () => {
   const { playAudio, pauseAudio } = useAudio();
 
   useEffect(() => {
-    playAudio(); // เล่นเพลงต่อจากหน้า Warning
-    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า (แต่เก็บเวลาไว้)
+    playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
+    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
   }, []);
 
   return (

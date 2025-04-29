@@ -124,8 +124,8 @@ const Aboutme: React.FC = () => {
                 <img src="/image/health-com-logo.png" alt="รูปที่ 2" className="w-32 h-16 " />
               </div>
 
-              <p className="text-[0.6rem] mt-8 text-[#ffffff] drop-shadow-lg text-center">
-                Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน
+              <p className="text-[0.6rem] mt-8 text-[#ffffff] drop-shadow-lg text-center opacity-70">
+                Unexpected Day | วันที่ชีวิตพลิกผัน
               </p>
 
               </div>

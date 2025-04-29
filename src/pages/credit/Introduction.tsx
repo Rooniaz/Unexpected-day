@@ -103,8 +103,8 @@ return (
             
 
 
-            <footer className="text-[0.67rem] mt-8 text-[#ffffff] drop-shadow-md" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}>
-            Unexpected Day | การเผชิญกับโรคหลอดเลือดสมองเฉียบพลัน
+            <footer className="text-[0.67rem] mt-8 text-[#ffffff] drop-shadow-md text-center opacity-70" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}>
+            Unexpected Day | วันที่ชีวิตพลิกผัน
         </footer>          
         </div>
         </div>

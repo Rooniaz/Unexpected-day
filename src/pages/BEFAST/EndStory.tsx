@@ -76,17 +76,17 @@ const UnexpectedDayForm: React.FC = () => {
     ctx.font = "300 140px Sarabun-Light";
     ctx.fillStyle = "black";
 
-    const nameX = 1340;
-    const nameY = 2550;
+    const nameX = 1040;
+    const nameY = 2000;
     ctx.fillText(formData.name, nameX, nameY);
 
-    const ageX = 2900;
-    const ageY = 2550;
+    const ageX = 2500;
+    const ageY = 2000;
     ctx.fillText(formData.age, ageX, ageY);
 
     const dreamBoxX = 864;
-    const dreamBoxY = 2750;
-    const dreamBoxWidth = 2700;
+    const dreamBoxY = 2250;
+    const dreamBoxWidth = 2000;
     const dreamBoxHeight = 955;
     const paddingTop = 170; // Padding ด้านบน
     const paddingBottom = 12; // Padding ด้านล่าง
@@ -247,9 +247,9 @@ const UnexpectedDayForm: React.FC = () => {
     event.stopPropagation();
   };
 
-  const handleScreenClick = () => {
-    navigate('/home');  // เปลี่ยนเส้นทางไปหน้าแรก
-  };
+  // const handleScreenClick = () => {
+  //   navigate('/home');  // เปลี่ยนเส้นทางไปหน้าแรก
+  // };
   
 
   return (
@@ -263,9 +263,15 @@ const UnexpectedDayForm: React.FC = () => {
         animate="animate"
         exit="exit"
         variants={fadeInOut(2, "easeInOut", 0)}
-        onClick={handleScreenClick}
+        // onClick={handleScreenClick}
       >
         <div className="w-full min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/image/Endstory/bg-card.png')" }}>
+        <button
+          onClick={() => navigate('/home')}
+          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 transition"
+        >
+          กลับสู่หน้าหลัก
+        </button>
 
           {/* Canvas สำหรับแสดงรูปภาพและข้อมูล */}
           <div className="w-full flex justify-center mb-32 " >
@@ -285,7 +291,7 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
 
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-[5%] left-0 flex flex-col items-center space-y-6">
+          <div className="absolute w-full bottom-[8%] left-0 flex flex-col items-center space-y-6">
             <div className="flex justify-center items-center space-x-4">
               <div className="flex flex-col items-center">
                 <button

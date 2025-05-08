@@ -16,64 +16,85 @@ const Hospital1: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
   const [videoStarted, setVideoStarted] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false); // <--- เพิ่มตัวนี้
   const [videoError, setVideoError] = useState(false);
   const [showFallbackMessage, setShowFallbackMessage] = useState(false);
+  const [isReadyToProceed, setIsReadyToProceed] = useState(false);
 
   const nextText = () => {
-    setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
+    setIndex((prevIndex) =>
+      prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex
+    );
+  };
+
+  const handleProceed = () => {
+    if (isReadyToProceed) {
+      navigate("/story/hospital2");
+    }
   };
 
   const handleVideoEnd = useCallback(() => {
-    console.log(" วิดีโอจบแล้ว");
+    console.log("วิดีโอจบแล้ว");
+    setVideoEnded(true); // <--- ตั้งค่าไว้ว่าเล่นจบแล้ว
     setBgColor("black");
     nextText();
-    setTimeout(() => navigate("/story/hospital2"), 6000);
-  }, [navigate]);
-
-  const handleUserInteraction = () => {
-    if (videoRef.current && videoRef.current.paused) {
-      videoRef.current
-        .play()
-        .then(() => setVideoStarted(true))
-        .catch((err) => {
-          console.error(" เล่นวิดีโอไม่สำเร็จ:", err);
-          setVideoError(true);
-        });
-    }
-  };
+    setIsReadyToProceed(true);
+  }, []);
 
   useEffect(() => {
-    // ลองเริ่มวิดีโออัตโนมัติ
-    if (videoRef.current) {
-      videoRef.current
-        .play()
-        .then(() => {
-          console.log("✅ วิดีโอเริ่มเล่นอัตโนมัติ");
-          setVideoStarted(true);
-        })
-        .catch((err) => {
-          console.warn(" วิดีโอรอการโต้ตอบจากผู้ใช้" , err);
-        });
-    }
+    const tryPlayVideo = () => {
+      if (videoRef.current) {
+        videoRef.current
+          .play()
+          .then(() => {
+            console.log(" วิดีโอเริ่มเล่นอัตโนมัติ");
+            setVideoStarted(true);
+          })
+          .catch((err) => {
+            console.warn("วิดีโอรอการโต้ตอบจากผู้ใช้", err);
+          });
+      }
+    };
 
-    // fallback ถ้าวิดีโอไม่เริ่มใน 5 วินาที
+    tryPlayVideo();
+
     const timeout = setTimeout(() => {
       if (!videoStarted) {
-        console.warn(" fallback: วิดีโอไม่เล่นภายใน 5 วิ");
+        console.warn("fallback: วิดีโอไม่เล่นภายใน 5 วิ");
         setShowFallbackMessage(true);
         setBgColor("black");
         nextText();
-        setTimeout(() => navigate("/story/hospital2"), 6000);
+        setIsReadyToProceed(true);
       }
-    }, 5000);
+    }, 6000);
+
+    const handleUserInteraction = () => {
+      if (isReadyToProceed) {
+        handleProceed();
+      } else if (
+        videoRef.current &&
+        videoRef.current.paused &&
+        !videoEnded // <--- ห้ามเล่นซ้ำถ้าจบแล้ว
+      ) {
+        videoRef.current
+          .play()
+          .then(() => setVideoStarted(true))
+          .catch((err) => {
+            console.error("เล่นวิดีโอไม่สำเร็จ:", err);
+            setVideoError(true);
+          });
+      }
+    };
 
     window.addEventListener("touchstart", handleUserInteraction);
+    window.addEventListener("click", handleUserInteraction);
 
     return () => {
       clearTimeout(timeout);
       window.removeEventListener("touchstart", handleUserInteraction);
+      window.removeEventListener("click", handleUserInteraction);
     };
-  }, [videoStarted, navigate]);
+  }, [isReadyToProceed, videoStarted, videoEnded]);
 
   // เพิ่มเสียง ambience
   const audioRef1 = useRef<HTMLAudioElement>(null);
@@ -86,7 +107,12 @@ const Hospital1: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <audio ref={audioRef1} src="/Sound/Hospital Sound/Hospital Ambience.mp3" autoPlay loop />
+      <audio
+        ref={audioRef1}
+        src="/Sound/Hospital Sound/Hospital Ambience.mp3"
+        autoPlay
+        loop
+      />
 
       <motion.div
         className="relative justify-center items-center w-full h-screen sm:w-[390px] sm:h-[844px]"
@@ -106,12 +132,12 @@ const Hospital1: React.FC = () => {
           preload="auto"
           onEnded={handleVideoEnd}
           onError={() => {
-            console.error(" โหลดวิดีโอไม่สำเร็จ");
+            console.error("โหลดวิดีโอไม่สำเร็จ");
             setVideoError(true);
             setShowFallbackMessage(true);
             setBgColor("black");
             nextText();
-            setTimeout(() => navigate("/story/hospital2"), 6000);
+            setIsReadyToProceed(true);
           }}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
@@ -127,8 +153,8 @@ const Hospital1: React.FC = () => {
 
         {/* fallback: ถ้า video error */}
         {videoError && (
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white text-sm bg-red-600 px-3 py-1 rounded">
-             ไม่สามารถโหลดวิดีโอได้
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 text-white text-sm bg-red-600 px-3 py-1 rounded">
+            ไม่สามารถโหลดวิดีโอได้
           </div>
         )}
       </motion.div>

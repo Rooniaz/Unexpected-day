@@ -12,6 +12,24 @@ const Braindetail = () => {
 
   useEffect(() => {
     playAudio("/Sound/Sound fx/Scene BEFAST.mp3", 0.2);
+
+    const tryPlay = () => {
+      if (videoRef.current) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log(" วิดีโอแรกเริ่มเล่นอัตโนมัติ");
+            })
+            .catch((err) => {
+              console.warn(" วิดีโอแรกถูกบล็อก autoplay:", err);
+            });
+        }
+      }
+    };
+
+    tryPlay();
+
     return () => pauseAudio();
   }, []);
 
@@ -31,10 +49,6 @@ const Braindetail = () => {
     if (videoEnded && !isSecondVideoPlaying && secondVideoRef.current) {
       setIsSecondVideoPlaying(true);
 
-      // ทำให้วิดีโอแรกจางลงอย่างนุ่มนวล
-
-
-      // รอให้วิดีโอแรกหายไป แล้วค่อยแสดงวิดีโอที่สองง
       setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.style.visibility = "hidden";
@@ -42,18 +56,24 @@ const Braindetail = () => {
         if (secondVideoRef.current) {
           secondVideoRef.current.style.visibility = "visible";
           secondVideoRef.current.style.opacity = "1";
-          secondVideoRef.current.play();
+          secondVideoRef.current.play().catch((err) =>
+            console.warn(" เล่นวิดีโอที่สองไม่สำเร็จ", err)
+          );
         }
-      }, 500); // 500ms เท่ากับเวลา transitionn
+      }, 500);
     }
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black" onClick={handleClick}>
-      <div className=" relative justify-center items-center 
+    <div
+      className="w-full min-h-screen flex justify-center items-center bg-black"
+      onClick={handleClick}
+    >
+      <div
+        className="relative justify-center items-center 
         w-full h-screen 
-        sm:w-[390px] sm:h-[844px] overflow-hidden">
-
+        sm:w-[390px] sm:h-[844px] overflow-hidden"
+      >
         {/* วิดีโอแรก */}
         <video
           ref={videoRef}
@@ -62,9 +82,20 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handlePicEnd}
+          onLoadedData={() => {
+            if (videoRef.current?.paused) {
+              videoRef.current
+                .play()
+                .then(() => console.log("🎥 เล่นอัตโนมัติหลังโหลดสำเร็จ"))
+                .catch((err) =>
+                  console.warn(" play หลัง onLoadedData ไม่สำเร็จ", err)
+                );
+            }
+          }}
+          style={{ visibility: "visible" }}
           className="absolute inset-0 
         w-full h-screen 
-        sm:w-[390px] sm:h-[844px] "
+        sm:w-[390px] sm:h-[844px]"
         >
           <source src="/video/brain_video/Factopen.webm" type="video/webm" />
           <source src="/video/brain_video/Factopen.mp4" type="video/mp4" />
@@ -79,8 +110,9 @@ const Braindetail = () => {
           playsInline
           preload="auto"
           onEnded={handleSecondPicEnd}
-          className="absolute inset-0   w-full h-screen 
-        sm:w-[390px] sm:h-[844px] invisible "
+          style={{ visibility: "hidden", opacity: 0, transition: "opacity 0.5s" }}
+          className="absolute inset-0 w-full h-screen 
+        sm:w-[390px] sm:h-[844px]"
         >
           <source src="/video/brain_video/Factcloses.webm" type="video/webm" />
           <source src="/video/brain_video/Factcloses.mp4" type="video/mp4" />

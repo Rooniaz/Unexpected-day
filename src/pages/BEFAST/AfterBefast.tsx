@@ -116,7 +116,7 @@ const AfterBefast = () => {
             transition={{ duration: 0.5 }}
             className="absolute top-[50%] left-1/2 transform -translate-x-1/2 text-center"
           >
-            <div className="bg-opacity-80 text-[#fa4901] text-2xl px-6 py-2 rounded-lg whitespace-nowrap" style={{ textShadow: '1px 0px 0px rgba(0, 0, 0, 0.5)' }}>
+            <div className="bg-opacity-80 text-[#fa4901] text-2xl px-6 py-2 rounded-lg whitespace-nowrap" >
             ส่งให้ทันภายใน 4.30 ชม.
             </div>
           </motion.div>

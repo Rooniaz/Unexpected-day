@@ -68,7 +68,7 @@ const Preface: React.FC = () => {
         </AnimatePresence>
 
         <div className="w-full max-w-lg">
-          <img src="/image/cover/top.png" className="absolute top-[-40px] right-2 w-32 h-36" />
+          <img src="/image/cover/top.png" className="absolute top-[-36px] right-2 w-26 h-32 opacity-70" />
           <img src="/image/cover/header.png" className="absolute top-[-25px] w-full" />
           <button
             onClick={() => navigate("/warning")}

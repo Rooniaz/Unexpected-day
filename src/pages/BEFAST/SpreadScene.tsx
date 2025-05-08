@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import AfterBefast from "./AfterBefast";
-import { useAudio } from "../../contexts/AudioProvider"; // นำเข้า useAudio
 
 const SpreadScene = () => {
   const [isTransitionDone, setIsTransitionDone] = useState(false);
@@ -47,12 +46,15 @@ const SpreadScene = () => {
     },); // รอ 0.5 วินาทีก่อนเปลี่ยนหน้าเพื่อให้มี animation สมูท
   };
 
-  const { playAudio, pauseAudio } = useAudio();
-
-  useEffect(() => {
-    playAudio("/Sound/Scene Start/Start & End.mp3", 0.2); // เล่นเพลงเฉพาะหน้านี้
-    return () => pauseAudio(); // หยุดเพลงเมื่อออกจากหน้า
-  }, []);
+    const audioRef1 = useRef<HTMLAudioElement>(null);
+  
+    useEffect(() => {
+      // ตั้งค่า volume หลังจาก component mount
+      if (audioRef1.current) {
+          audioRef1.current.volume = 1  
+      }
+  
+    }, []);
 
   return (
     <div
@@ -68,6 +70,7 @@ const SpreadScene = () => {
                      bg-gradient-to-b from-gray-500 via-white to-gray-500 
                      text-white text-2xl px-6 py-2 relative"
         >
+        <audio ref={audioRef1} src="/Sound/Sound fx/Effect Rush-Time-BEFAST.mp3" autoPlay loop />
           {/* บรรทัดแรก (สีแดง) */}
           {showFirstText && ( // แสดงข้อความบรรทัดแรกเมื่อ showFirstText เป็น true
             <motion.div

@@ -60,7 +60,7 @@ const SpreadScene = () => {
     <div
       className="w-full min-h-screen flex justify-center items-center bg-black relative"
       onClick={handleClick} // เพิ่ม event listener สำหรับการคลิกหรือแตะหน้าจอ
-      style={{ cursor: "pointer" }} // เปลี่ยน cursor เป็น pointer เพื่อให้รู้ว่าสามารถคลิกได้
+      style={{ cursor: "pointer" }} // เปลี่ยน cursor เป็น pointer เพื่อให้รู้ว่าสามารถคลิกได้.
     >
       {!isTransitionDone ? (
         <motion.div

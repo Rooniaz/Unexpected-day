@@ -32,7 +32,7 @@ const UnexpectedDayForm: React.FC = () => {
 
     // โหลดรูปภาพของใบเสร็จ
     const receiptImage = new Image();
-    receiptImage.src = 'image/Endstory/End_Story.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
+    receiptImage.src = 'image/Endstory/cardUn.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
     receiptImage.onload = () => {
       receiptImageRef.current = receiptImage;
       setIsImageReady(true);
@@ -76,24 +76,24 @@ const UnexpectedDayForm: React.FC = () => {
     ctx.font = "300 140px Sarabun-Light";
     ctx.fillStyle = "black";
 
-    const nameX = 1040;
-    const nameY = 2000;
+    const nameX = 1220;
+    const nameY = 2220;
     ctx.fillText(formData.name, nameX, nameY);
 
-    const ageX = 2500;
-    const ageY = 2000;
+    const ageX = 2600;
+    const ageY = 2220;
     ctx.fillText(formData.age, ageX, ageY);
 
-    const dreamBoxX = 864;
-    const dreamBoxY = 2250;
-    const dreamBoxWidth = 2000;
-    const dreamBoxHeight = 955;
-    const paddingTop = 170; // Padding ด้านบน
+    const dreamBoxX = 844;
+    const dreamBoxY = 2350;
+    const dreamBoxWidth = 2740;
+    const dreamBoxHeight = 1340;
+    const paddingTop = 190; // Padding ด้านบน
     const paddingBottom = 12; // Padding ด้านล่าง
     const paddingLeftRight = 120; // Padding ซ้าย-ขวา
 
-    ctx.strokeStyle = "transparent";
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#FA4901";
+    ctx.lineWidth = 4;
     ctx.strokeRect(dreamBoxX, dreamBoxY, dreamBoxWidth, dreamBoxHeight);
 
     let fontSize = parseInt(getFontSize(formData.dream));
@@ -268,7 +268,7 @@ const UnexpectedDayForm: React.FC = () => {
         <div className="w-full min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/image/Endstory/bg-card.png')" }}>
         <button
           onClick={() => navigate('/home')}
-          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-black/25 hover:text-white transition"
+          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-black/30 hover:text-white transition"
           >
           กลับสู่หน้าหลัก
         </button>
@@ -291,7 +291,7 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
 
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-[8%] left-0 flex flex-col items-center space-y-6">
+          <div className="absolute w-full bottom-[16%] left-0 flex flex-col items-center space-y-6">
             <div className="flex justify-center items-center space-x-4">
               <div className="flex flex-col items-center">
                 <button

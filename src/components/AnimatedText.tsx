@@ -30,7 +30,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
                 char === "เพิ่มโอกาสรอดชีวิต" ? (
                     <motion.span 
                         key={index} 
-                        className="text-xl font-custom mb-4 mt-2A bg-yellow-300 text-black  rounded-2xl w-52" 
+                        className="text-xl font-custom mb-4 mt-2A bg-yellow-300 text-black  rounded-lg w-52" 
                         variants={letter} 
                         style={{
                             display: "inline-block",  // ✅ แก้ปัญหาสระลอย

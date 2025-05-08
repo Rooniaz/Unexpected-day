@@ -14,7 +14,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
 const socialLinks = [
     { href: "https://www.instagram.com/brainstorm_thesis?igsh=ZmU1aDM5bDY0aThx&utm_source=qr", img: "/image/icons/iconig.png" },
     { href: "https://www.facebook.com/profile.php?id=61574627171973", img: "/image/icons/iconfb.png" },
-    { href: "https://www.youtube.com/watch?v=gtiytEG--T0", img: "/image/icons/iconyt.png" },
+    { href: "https://www.youtube.com/@brainstormthesis", img: "/image/icons/iconyt.png" },
 ];
 
 

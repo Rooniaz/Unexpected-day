@@ -32,7 +32,7 @@ const UnexpectedDayForm: React.FC = () => {
 
     // โหลดรูปภาพของใบเสร็จ
     const receiptImage = new Image();
-    receiptImage.src = 'image/Endstory/End_Story.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
+    receiptImage.src = 'image/Endstory/cardUn.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
     receiptImage.onload = () => {
       receiptImageRef.current = receiptImage;
       setIsImageReady(true);
@@ -268,7 +268,7 @@ const UnexpectedDayForm: React.FC = () => {
         <div className="w-full min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/image/Endstory/bg-card.png')" }}>
         <button
           onClick={() => navigate('/home')}
-          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-black/25 hover:text-white transition"
+          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-black/22 hover:text-white transition"
           >
           กลับสู่หน้าหลัก
         </button>

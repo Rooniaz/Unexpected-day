@@ -32,7 +32,7 @@ const UnexpectedDayForm: React.FC = () => {
 
     // โหลดรูปภาพของใบเสร็จ
     const receiptImage = new Image();
-    receiptImage.src = 'image/Endstory/cardUn.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
+    receiptImage.src = 'image/Endstory/cardUnex.png'; // ตำแหน่งที่เก็บรูปภาพใบเสร็จของคุณ
     receiptImage.onload = () => {
       receiptImageRef.current = receiptImage;
       setIsImageReady(true);
@@ -76,16 +76,16 @@ const UnexpectedDayForm: React.FC = () => {
     ctx.font = "300 140px Sarabun-Light";
     ctx.fillStyle = "black";
 
-    const nameX = 1220;
-    const nameY = 2220;
+    const nameX = 1280;
+    const nameY = 2332;
     ctx.fillText(formData.name, nameX, nameY);
 
-    const ageX = 2600;
-    const ageY = 2220;
+    const ageX = 3100;
+    const ageY = 2330;
     ctx.fillText(formData.age, ageX, ageY);
 
-    const dreamBoxX = 844;
-    const dreamBoxY = 2350;
+    const dreamBoxX = 869;
+    const dreamBoxY = 2445;
     const dreamBoxWidth = 2740;
     const dreamBoxHeight = 1340;
     const paddingTop = 190; // Padding ด้านบน
@@ -93,7 +93,7 @@ const UnexpectedDayForm: React.FC = () => {
     const paddingLeftRight = 120; // Padding ซ้าย-ขวา
 
     ctx.strokeStyle = "#FA4901";
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 10;
     ctx.strokeRect(dreamBoxX, dreamBoxY, dreamBoxWidth, dreamBoxHeight);
 
     let fontSize = parseInt(getFontSize(formData.dream));
@@ -291,12 +291,12 @@ const UnexpectedDayForm: React.FC = () => {
           </div>
 
           {/* ปุ่มควบคุม */}
-          <div className="absolute w-full bottom-[16%] left-0 flex flex-col items-center space-y-6">
+          <div className="absolute w-full bottom-[14%] left-0 flex flex-col items-center space-y-6">
             <div className="flex justify-center items-center space-x-4">
               <div className="flex flex-col items-center">
                 <button
                   onClick={(event) => { handleButtonClick(event); handleDownloadWithBackground(); }}
-                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] mb-2"
+                  className="relative w-11 h-11 bg-[#ffffff] text-[#FA4901] rounded-lg flex items-center justify-center shadow-md hover:bg-[#e7e9eb] transition-colors translate-y-[-4px] mb-2"
                   aria-label="Download with Background"
                 >
                   <span className="absolute inset- bg-green-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span>
@@ -308,7 +308,7 @@ const UnexpectedDayForm: React.FC = () => {
               <div className="flex flex-col items-center">
                 <button
                   onClick={(event) => { handleButtonClick(event); handleShareWithBackground(); }}
-                  className="relative w-11 h-11 bg-[#85929e] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#5d6d7e] transition-colors translate-y-[-4px] mb-2"
+                  className="relative w-11 h-11 bg-[#ffffff] text-[#FA4901] rounded-lg flex items-center justify-center shadow-md hover:bg-[#e7e9eb] transition-colors translate-y-[-4px] mb-2"
                   aria-label="Share with Background"
                 >
                   <span className="absolute inset- bg-blue-600 rounded-lg opacity-50 translate-x-1 translate-y-1"></span>
@@ -318,7 +318,7 @@ const UnexpectedDayForm: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-cover text-center bg-[#b5b4b4] pr-4 pl-2 flex justify-center items-center rounded-xl">
+            <div className="w-cover text-center bg-[#ffffff] opacity-70 pr-4 pl-4 flex justify-center items-center rounded-xl -translate-y-4">
               <p className="text-black mr-2 inline-block text-xs ">
                 อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิก
               </p>

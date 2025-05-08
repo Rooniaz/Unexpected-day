@@ -9,6 +9,7 @@ const StoryPark3: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
   const [showContinueText, setShowContinueText] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false); // <- เพิ่ม state นี้
 
   const texts = [
     `เจน : ${storedName}!!!`,
@@ -16,29 +17,34 @@ const StoryPark3: React.FC = () => {
   ];
 
   const nextText = () => {
-    setIndex((prevIndex) => (prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex));
+    setIndex((prevIndex) =>
+      prevIndex < texts.length - 1 ? prevIndex + 1 : prevIndex
+    );
   };
 
   const handlePicEnd = useCallback(() => {
     setBgColor("black");
-    setShowContinueText(true); // แสดงข้อความ "แตะเพื่อไปต่อ"
+    setShowContinueText(true);
   }, []);
 
   const handleUserInteraction = () => {
     if (videoRef.current && videoRef.current.paused) {
-      videoRef.current.play().catch((err) => console.error("เล่นวิดีโอไม่สำเร็จ:", err));
+      videoRef.current.play().catch((err) =>
+        console.error("เล่นวิดีโอไม่สำเร็จ:", err)
+      );
     }
   };
 
   const handleContinue = () => {
     if (showContinueText) {
+      setIsNavigating(true); // ซ่อนวิดีโอก่อน
       navigate("/story/hospital");
     }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (bgColor !== "black") { // เรียก nextText เฉพาะเมื่อ bgColor ไม่ใช่สีดำ
+      if (bgColor !== "black") {
         nextText();
       }
     }, 3000);
@@ -46,68 +52,80 @@ const StoryPark3: React.FC = () => {
     window.addEventListener("touchstart", handleUserInteraction);
 
     return () => {
-      clearInterval(interval); // ล้าง interval เมื่อ component unmount
+      clearInterval(interval);
       window.removeEventListener("touchstart", handleUserInteraction);
     };
-  }, [bgColor]); // เพิ่ม bgColor เป็น dependency
+  }, [bgColor]);
 
-   const audioRef2 = useRef<HTMLAudioElement>(null);
-   const audioRef3 = useRef<HTMLAudioElement>(null);
- 
-   if (audioRef2.current) {
-     audioRef2.current.volume = 0.5;
-     audioRef2.current.playbackRate = 1;
- 
-     setTimeout(() => {
-       if (audioRef2.current) {
-         audioRef2.current.playbackRate = 1;
-       }
-     }, 3000);
- 
-     setTimeout(() => {
-       if (audioRef2.current) {
-         audioRef2.current.playbackRate = 1;
-       }
-     }, 4000);
- 
-     if (audioRef3.current) {
-       audioRef3.current.play().catch((error) => {
-         console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
-       });
-     }
-   }
+  const audioRef2 = useRef<HTMLAudioElement>(null);
+  const audioRef3 = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (audioRef2.current) {
+      audioRef2.current.volume = 0.5;
+      audioRef2.current.playbackRate = 1;
+
+      setTimeout(() => {
+        if (audioRef2.current) {
+          audioRef2.current.playbackRate = 1;
+        }
+      }, 3000);
+
+      setTimeout(() => {
+        if (audioRef2.current) {
+          audioRef2.current.playbackRate = 1;
+        }
+      }, 4000);
+    }
+
+    if (audioRef3.current) {
+      audioRef3.current.play().catch((error) => {
+        console.log("ไม่สามารถเล่นเสียงใหม่ได้:", error);
+      });
+    }
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
-      <audio ref={audioRef2} src="/Sound/Sound fx/Effect jane_and_friend2.m4a" autoPlay />
+      <audio
+        ref={audioRef2}
+        src="/Sound/Sound fx/Effect jane_and_friend2.m4a"
+        autoPlay
+      />
       <audio ref={audioRef3} src="/Sound/Sound fx/Effect-ear-down.mp3" autoPlay />
+
       <div
         className="relative flex justify-center items-center 
         w-full h-screen 
-        sm:w-[390px] sm:h-[844px] overflow-hidden"
+        sm:w-[390px] sm:h-[844px] h-[844px] overflow-hidden"
         style={{ backgroundColor: bgColor }}
-        onClick={handleContinue} // ฟังก์ชันเมื่อผู้ใช้คลิกหรือแตะหน้าจอ
+        onClick={handleContinue}
       >
-        <video
-        ref={videoRef}
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        onEnded={handlePicEnd}
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-      >
+        {!isNavigating && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onEnded={handlePicEnd}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          >
         <source src="/video/blurPark.webm" type="video/webm" />
         <source src="/video/blurPark.mp4" type="video/mp4" />
         <source src="/video/blurPark.mov" type="video/quicktime" />
-        Your browser does not support the video tag.
-      </video>
+            Your browser does not support the video tag.
+          </video>
+        )}
 
-        {/* ซ่อนข้อความเมื่อ bgColor เป็น "black" */}
         {bgColor !== "black" && (
           <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
             <div className="px-6 py-4 bg-black/50 rounded-lg">
-              <AnimatedText key={index} text={texts[index]}className="text-white break-words" />
+              <AnimatedText
+                key={index}
+                text={texts[index]}
+                className="text-white break-words"
+              />
             </div>
           </div>
         )}

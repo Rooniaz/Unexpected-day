@@ -62,12 +62,16 @@ const SpreadScene = () => {
     >
       {!isTransitionDone ? (
         <motion.div
-          className="relative flex justify-center items-center 
-        w-full h-screen overflow-y-auto bg-black no-scrollbar
-        sm:w-[390px] sm:h-[844px] flex flex-col justify-center items-center 
-                     bg-gradient-to-b from-gray-500 via-white to-gray-500 
-                     text-white text-2xl px-6 py-2 relative"
-        >
+        className="relative flex flex-col justify-center items-center 
+                   w-full h-screen overflow-y-auto no-scrollbar 
+                   sm:w-[390px] sm:h-[844px] 
+                   text-white text-2xl px-6 py-2"
+        style={{
+          backgroundImage: "url('/image/BgAfterbefast.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
           {/* บรรทัดแรก (สีแดง) */}
           {showFirstText && ( // แสดงข้อความบรรทัดแรกเมื่อ showFirstText เป็น true
             <motion.div

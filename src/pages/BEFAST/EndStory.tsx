@@ -268,8 +268,8 @@ const UnexpectedDayForm: React.FC = () => {
         <div className="w-full min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/image/Endstory/bg-card.png')" }}>
         <button
           onClick={() => navigate('/home')}
-          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 transition"
-        >
+          className="absolute z-50 top-4 right-4 bg-black/20 text-white px-4 py-2 rounded-md shadow-md hover:bg-black/25 hover:text-white transition"
+          >
           กลับสู่หน้าหลัก
         </button>
 
@@ -323,7 +323,7 @@ const UnexpectedDayForm: React.FC = () => {
                 อยากรู้เกี่ยวกับโรคหลอดเลือดสมองเพิ่มเติม คลิก
               </p>
               <a
-                href="https://www.youtube.com"
+                href="https://www.youtube.com/@brainstormthesis"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-3xl text-red-600 hover:text-red-700 transition-colors"

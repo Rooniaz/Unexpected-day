@@ -2,9 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatedText } from "../../components/AnimatedText";
 
-const StoryHomework3: React.FC = () => {
+const StateHospital: React.FC = () => {
   const navigate = useNavigate();
-  const storedName = localStorage.getItem("userName") || "???";
   const videoRef = useRef<HTMLVideoElement>(null);
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
@@ -12,8 +11,8 @@ const StoryHomework3: React.FC = () => {
   const [isNavigating, setIsNavigating] = useState(false); // <- เพิ่ม state นี้
 
   const texts = [
-    `เจน : ${storedName}!!!`,
-    `เจน : ${storedName}!!!`,
+    `ตอนนี้คุณอยู่ที่โรงพยาบาล`,
+    `"คุณสัมผัสได้ถึงความผิดปกติในร่างกายของตัวเอง”`,
   ];
 
   const nextText = () => {
@@ -38,7 +37,7 @@ const StoryHomework3: React.FC = () => {
   const handleContinue = () => {
     if (showContinueText) {
       setIsNavigating(true); // ซ่อนวิดีโอก่อน
-      navigate("/StateHospital");
+      navigate("/story/hospital2");
     }
   };
 
@@ -89,7 +88,7 @@ const StoryHomework3: React.FC = () => {
     <div className="w-full min-h-screen flex justify-center items-center bg-black">
       <audio
         ref={audioRef2}
-        src="/Sound/Sound fx/Effect jane_and_friend2.m4a"
+        src="/Sound/Hospital Sound/Hospital Ambience.mp3"
         autoPlay
       />
       <audio ref={audioRef3} src="/Sound/Sound fx/Effect-ear-down.mp3" autoPlay />
@@ -111,20 +110,20 @@ const StoryHomework3: React.FC = () => {
             onEnded={handlePicEnd}
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           >
-        <source src="/video/blurStudy.webm" type="video/webm" />
-        <source src="/video/blurStudy.mp4" type="video/mp4" />
-        <source src="/video/blurStudy.mov" type="video/quicktime" />
+            <source src="/gif/34-36/awakeUp.mp4" type="video/webm" />
+            <source src="/gif/34-36/34-wakeup.mp4" type="video/mp4" />
+            {/* <source src="/video/blurWork.mov" type="video/quicktime" /> */}
             Your browser does not support the video tag.
           </video>
         )}
 
         {bgColor !== "black" && (
-          <div className="absolute bottom-20 my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
-            <div className="px-6 py-4 bg-black/50 rounded-lg">
+          <div className="absolute top-[10%] my-20 left-1/2 -translate-x-1/2 w-[90%] z-10">
+            <div className="px-6 py-4 rounded-lg">
               <AnimatedText
                 key={index}
                 text={texts[index]}
-                className="text-white break-words"
+                className="text-black break-words"
               />
             </div>
           </div>
@@ -132,7 +131,7 @@ const StoryHomework3: React.FC = () => {
 
         {showContinueText && (
           <div className="absolute inset-x-0 bottom-40 flex justify-center items-center mb-4">
-            <div className="text-white text-xl animate-pulse">กดเพื่อไปต่อ</div>
+            <div className="text-balck text-xl animate-pulse">กดเพื่อไปต่อ</div>
           </div>
         )}
       </div>
@@ -140,4 +139,4 @@ const StoryHomework3: React.FC = () => {
   );
 };
 
-export default StoryHomework3;
+export default StateHospital;

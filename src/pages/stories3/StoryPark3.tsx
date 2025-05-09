@@ -38,7 +38,7 @@ const StoryPark3: React.FC = () => {
   const handleContinue = () => {
     if (showContinueText) {
       setIsNavigating(true); // ซ่อนวิดีโอก่อน
-      navigate("/story/hospital");
+      navigate("/StateHospital");
     }
   };
 

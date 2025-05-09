@@ -49,9 +49,15 @@ import Allcredit from "../pages/credit/Allcredits";
 import Introduction from "../pages/credit/Introduction";
 import Preloader from "../pages/loading";
 
+import StateHospital from "../pages/stories4/StateHospital";
+
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
+
+      <Route path="/StateHospital" element={<StateHospital />} />
+
 
       <Route path="/" element={<Preloader />} />
       <Route path="/home" element={<Preface />} />

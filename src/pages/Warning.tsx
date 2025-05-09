@@ -31,7 +31,7 @@ const Warning: React.FC = () => {
               backgroundRepeat: "no-repeat",
             }}
           >    
-        {/* ✅ คำเตือนและข้อมูล */}
+        {/* ✅ คำเตือนและข้อมูล. */}
         <div className="w-full max-w-lg">
               {/* ✅ คำเตือนและข้อมูล */}
               <div className="w-full max-w-lg flex flex-col items-center text-center mb-16">

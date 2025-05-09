@@ -110,7 +110,7 @@ const StateHospital: React.FC = () => {
             onEnded={handlePicEnd}
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           >
-            <source src="/gif/34-36/awakeUp.mp4" type="video/webm" />
+            <source src="/gif/34-36/awakeUp.webm" type="video/webm" />
             <source src="/gif/34-36/34-wakeup.mp4" type="video/mp4" />
             {/* <source src="/video/blurWork.mov" type="video/quicktime" /> */}
             Your browser does not support the video tag.

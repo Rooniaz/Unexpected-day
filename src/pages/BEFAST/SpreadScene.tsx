@@ -51,7 +51,7 @@ const SpreadScene = () => {
     useEffect(() => {
       // ตั้งค่า volume หลังจาก component mount
       if (audioRef1.current) {
-          audioRef1.current.volume = 1  
+          audioRef1.current.volume = 1
       }
   
     }, []);
@@ -60,7 +60,7 @@ const SpreadScene = () => {
     <div
       className="w-full min-h-screen flex justify-center items-center bg-black relative"
       onClick={handleClick} // เพิ่ม event listener สำหรับการคลิกหรือแตะหน้าจอ
-      style={{ cursor: "pointer" }} // เปลี่ยน cursor เป็น pointer เพื่อให้รู้ว่าสามารถคลิกได้.
+      style={{ cursor: "pointer" }} // เปลี่ยน cursor เป็น pointer เพื่อให้รู้ว่าสามารถคลิกได้
     >
       {!isTransitionDone ? (
         <motion.div
@@ -74,6 +74,7 @@ const SpreadScene = () => {
           backgroundPosition: "center",
         }}
       >
+        <audio ref={audioRef1} src="/Sound/Sound fx/Effect Rush-Time-BEFAST.mp3" autoPlay loop />
           {/* บรรทัดแรก (สีแดง) */}
           {showFirstText && ( // แสดงข้อความบรรทัดแรกเมื่อ showFirstText เป็น true
             <motion.div

@@ -107,7 +107,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/story/hospital2" element={<StoryHospital2 />} />
 
       {/* BEFAST */}
-      <Route path="/Braindetail" element={<BrainDetail />} />
+      <Route path="/StrokeDetail" element={<BrainDetail />} />
       <Route path="/FriendBrain" element={<Friendbrain />} />
       <Route path="/AfterBefast" element={<AfterBefast />} />
       <Route path="/TimeToCall" element={<TimeToCall />} />

@@ -36,7 +36,7 @@ const Hospital2: React.FC = () => {
     if (index < texts.length - 1) {
       nextText();
     } else {
-      navigate("/Braindetail");
+      navigate("/StrokeDetail");
     }
   };
 

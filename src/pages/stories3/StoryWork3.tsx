@@ -9,7 +9,7 @@ const StoryWork3: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
   const [showContinueText, setShowContinueText] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false); // <- เพิ่ม state นี้
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const texts = [
     `เจน : ${storedName}!!!`,
@@ -36,11 +36,32 @@ const StoryWork3: React.FC = () => {
   };
 
   const handleContinue = () => {
-    if (showContinueText) {
-      setIsNavigating(true); // ซ่อนวิดีโอก่อน
-      navigate("/StateHospital");
+    if (showContinueText && !isNavigating) {
+      setIsNavigating(true);
+      setBgColor("black");
+      setShowContinueText(false);
+      
+      // หยุดวิดีโอและเสียง
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      if (audioRef2.current) {
+        audioRef2.current.pause();
+      }
+      if (audioRef3.current) {
+        audioRef3.current.pause();
+      }
     }
   };
+
+  useEffect(() => {
+    if (isNavigating) {
+      const timer = setTimeout(() => {
+        navigate("/StateHospital");
+      }, 100); // รอ 100ms เพื่อให้ UI อัพเดทก่อน navigate
+      return () => clearTimeout(timer);
+    }
+  }, [isNavigating, navigate]);
 
   useEffect(() => {
     const interval = setInterval(() => {

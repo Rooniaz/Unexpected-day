@@ -9,7 +9,7 @@ const StoryCanteen3: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [bgColor, setBgColor] = useState("transparent");
   const [showContinueText, setShowContinueText] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false); // <- เพิ่ม state นี้
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const texts = [
     `เจน : ${storedName}!!!`,
@@ -36,11 +36,32 @@ const StoryCanteen3: React.FC = () => {
   };
 
   const handleContinue = () => {
-    if (showContinueText) {
-      setIsNavigating(true); // ซ่อนวิดีโอก่อน
-      navigate("/StateHospital");
+    if (showContinueText && !isNavigating) {
+      setIsNavigating(true);
+      setBgColor("black");
+      setShowContinueText(false);
+      
+      // หยุดวิดีโอและเสียง
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      if (audioRef2.current) {
+        audioRef2.current.pause();
+      }
+      if (audioRef3.current) {
+        audioRef3.current.pause();
+      }
     }
   };
+
+  useEffect(() => {
+    if (isNavigating) {
+      const timer = setTimeout(() => {
+        navigate("/StateHospital");
+      }, 100); // รอ 100ms เพื่อให้ UI อัพเดทก่อน navigate
+      return () => clearTimeout(timer);
+    }
+  }, [isNavigating, navigate]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,9 +132,9 @@ const StoryCanteen3: React.FC = () => {
             onEnded={handlePicEnd}
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           >
-        <source src="/video/blurCanteen.webm" type="video/webm" />
-        <source src="/video/blurCanteen.mp4" type="video/mp4" />
-        <source src="/video/blurCanteen.mov" type="video/quicktime" />
+            <source src="/video/blurCanteen.webm" type="video/webm" />
+            <source src="/video/blurCanteen.mp4" type="video/mp4" />
+            <source src="/video/blurCanteen.mov" type="video/quicktime" />
             Your browser does not support the video tag.
           </video>
         )}
